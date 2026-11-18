@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DANESH SPIN | Ultimate Table Tennis Experience</title>
+<meta name="description" content="DANESH SPIN - The ultimate table tennis experience. Tips, techniques, gear reviews, and more!">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏓</text></svg>">
+<style>
+/* ==================== CSS VARIABLES ==================== */
+:root {
+  --bg-primary: #0a0e27;
+  --bg-secondary: #131a3a;
+  --bg-card: rgba(255,255,255,0.05);
+  --accent: #ff006e;
+  --accent-2: #00f5d4;
+  --accent-3: #fee440;
+  --text: #ffffff;
+  --text-dim: #a0a8c0;
+  --gradient: linear-gradient(135deg, #ff006e 0%, #8338ec 50%, #00f5d4 100%);
+  --gradient-2: linear-gradient(135deg, #00f5d4 0%, #fee440 100%);
+  --shadow: 0 10px 40px rgba(255,0,110,0.3);
+  --radius: 20px;
+  --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+[data-theme="light"] {
+  --bg-primary: #f0f2f8;
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(0,0,0,0.04);
+  --text: #0a0e27;
+  --text-dim: #555b75;
+}
+
+/* ==================== RESET ==================== */
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text);
+  overflow-x: hidden;
+  transition: var(--transition);
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; }
+button { font-family: inherit; cursor: pointer; border: none; }
+
+/* ==================== PRELOADER ==================== */
+#preloader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg-primary);
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.6s, visibility 0.6s;
+}
+#preloader.hidden { opacity: 0; visibility: hidden; }
+.loader-ball {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff, #ff006e);
+  animation: bounce 0.8s infinite alternate;
+  box-shadow: 0 0 30px var(--accent);
+}
+@keyframes bounce { to { transform: translateY(-40px) scale(0.9); } }
+
+/* ==================== CURSOR ==================== */
+.cursor {
+  position: fixed; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--accent); pointer-events: none; z-index: 9998;
+  transition: transform 0.1s; mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed; width: 40px; height: 40px; border-radius: 50%;
+  border: 2px solid var(--accent-2); pointer-events: none; z-index: 9997;
+  transition: transform 0.15s ease-out, width 0.3s, height 0.3s;
+}
+
+/* ==================== SCROLL PROGRESS ==================== */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; height: 4px;
+  background: var(--gradient); z-index: 1000; width: 0%;
+  box-shadow: 0 0 15px var(--accent);
+}
+
+/* ==================== NAVBAR ==================== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  padding: 18px 5%; display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(20px); background: rgba(10,14,39,0.7);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: var(--transition);
+}
+[data-theme="light"] nav { background: rgba(240,242,248,0.8); }
+nav.scrolled { padding: 12px 5%; box-shadow: 0 5px 30px rgba(0,0,0,0.3); }
+.logo {
+  font-size: 1.6rem; font-weight: 900; letter-spacing: 2px;
+  background: var(--gradient); -webkit-background-clip: text;
+  background-clip: text; color: transparent; cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+}
+.logo span { font-size: 1.8rem; -webkit-text-fill-color: initial; }
+.nav-links { display: flex; gap: 30px; align-items: center; }
+.nav-links a {
+  font-weight: 600; font-size: 0.95rem; position: relative;
+  transition: var(--transition);
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
+  background: var(--gradient); transition: width 0.3s;
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-links a:hover { color: var(--accent-2); }
+.nav-actions { display: flex; gap: 12px; align-items: center; }
+.icon-btn {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; transition: var(--transition); color: var(--text);
+}
+.icon-btn:hover { background: var(--accent); transform: scale(1.1) rotate(15deg); }
+
+/* ==================== HERO ==================== */
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 120px 5% 60px; position: relative; overflow: hidden; text-align: center;
+}
+.hero-content { position: relative; z-index: 2; max-width: 900px; }
+.hero-badge {
+  display: inline-block; padding: 8px 20px; border-radius: 50px;
+  background: rgba(255,0,110,0.15); border: 1px solid var(--accent);
+  color: var(--accent); font-size: 0.85rem; font-weight: 700;
+  margin-bottom: 25px; letter-spacing: 1px;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,0,110,0.5); } 50% { box-shadow: 0 0 0 15px rgba(255,0,110,0); } }
+.hero h1 {
+  font-size: clamp(2.5rem, 8vw, 6rem); font-weight: 900; line-height: 1.1;
+  margin-bottom: 20px; letter-spacing: -2px;
+}
+.hero h1 .gradient-text {
+  background: var(--gradient); -webkit-background-clip: text;
+  background-clip: text; color: transparent;
+}
+.hero p {
+  font-size: clamp(1rem, 2vw, 1.3rem); color: var(--text-dim);
+  margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;
+}
+.hero-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  padding: 16px 40px; border-radius: 50px; font-weight: 700; font-size: 1rem;
+  transition: var(--transition); display: inline-flex; align-items: center; gap: 10px;
+  position: relative; overflow: hidden;
+}
+.btn-primary {
+  background: var(--gradient); color: #fff; box-shadow: 0 10px 30px rgba(255,0,110,0.4);
+}
+.btn-primary:hover { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(255,0,110,0.6); }
+.btn-outline {
+  background: transparent; border: 2px solid var(--accent-2); color: var(--accent-2);
+}
+.btn-outline:hover { background: var(--accent-2); color: var(--bg-primary); transform: translateY(-4px); }
+.floating-ball {
+  position: absolute; font-size: 6rem; opacity: 0.1; animation: float 6s ease-in-out infinite;
+  user-select: none; pointer-events: none;
+}
+.floating-ball:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; }
+.floating-ball:nth-child(2) { top: 60%; right: 10%; animation-delay: 1.5s; font-size: 8rem; }
+.floating-ball:nth-child(3) { bottom: 10%; left: 15%; animation-delay: 3s; font-size: 5rem; }
+@keyframes float {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-40px) rotate(20deg); }
+}
+
+/* ==================== SECTIONS ==================== */
+section { padding: 100px 5%; position: relative; }
+.section-header { text-align: center; margin-bottom: 60px; }
+.section-header h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900;
+  margin-bottom: 15px; letter-spacing: -1px;
+}
+.section-header .subtitle {
+  color: var(--text-dim); font-size: 1.1rem; max-width: 600px; margin: 0 auto;
+}
+.section-tag {
+  display: inline-block; padding: 6px 18px; border-radius: 50px;
+  background: rgba(0,245,212,0.15); color: var(--accent-2);
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 2px;
+  margin-bottom: 15px; text-transform: uppercase;
+}
+
+/* ==================== FEATURES GRID ==================== */
+.features-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px; max-width: 1400px; margin: 0 auto;
+}
+.feature-card {
+  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius); padding: 35px 30px;
+  transition: var(--transition); position: relative; overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+.feature-card::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+  background: var(--gradient); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s;
+}
+.feature-card:hover::before { transform: scaleX(1); }
+.feature-card:hover {
+  transform: translateY(-10px); border-color: rgba(255,0,110,0.4);
+  box-shadow: var(--shadow);
+}
+.feature-icon {
+  font-size: 3rem; margin-bottom: 20px; display: block;
+  transition: transform 0.3s;
+}
+.feature-card:hover .feature-icon { transform: scale(1.2) rotate(-10deg); }
+.feature-card h3 { font-size: 1.4rem; margin-bottom: 12px; font-weight: 800; }
+.feature-card p { color: var(--text-dim); font-size: 0.95rem; }
+
+/* ==================== STATS ==================== */
+.stats-section {
+  background: var(--gradient); padding: 80px 5%; position: relative; overflow: hidden;
+}
+.stats-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+}
+.stats-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2;
+  text-align: center;
+}
+.stat-item h3 {
+  font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; color: #fff;
+  margin-bottom: 10px;
+}
+.stat-item p { color: rgba(255,255,255,0.9); font-weight: 600; letter-spacing: 1px; }
+
+/* ==================== TECHNIQUES ==================== */
+.techniques-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px; max-width: 1400px; margin: 0 auto;
+}
+.technique-card {
+  background: var(--bg-secondary); border-radius: var(--radius);
+  overflow: hidden; transition: var(--transition);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.technique-card:hover { transform: scale(1.03); box-shadow: var(--shadow); }
+.technique-visual {
+  height: 180px; background: var(--gradient);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 5rem; position: relative; overflow: hidden;
+}
+.technique-visual::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.3));
+}
+.technique-body { padding: 25px; }
+.technique-body h3 { font-size: 1.3rem; margin-bottom: 10px; }
+.technique-body p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 15px; }
+.difficulty {
+  display: inline-flex; gap: 4px; align-items: center;
+}
+.difficulty .dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--text-dim); opacity: 0.3;
+}
+.difficulty .dot.active { background: var(--accent-3); opacity: 1; }
+
+/* ==================== INTERACTIVE SCOREBOARD ==================== */
+.scoreboard {
+  max-width: 800px; margin: 0 auto; background: var(--bg-secondary);
+  border-radius: var(--radius); padding: 40px; border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: var(--shadow);
+}
+.score-display {
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px;
+  align-items: center; margin-bottom: 30px;
+}
+.player-score {
+  text-align: center; padding: 25px; border-radius: 15px;
+  background: var(--bg-card); transition: var(--transition);
+}
+.player-score.winner { background: rgba(0,245,212,0.15); border: 2px solid var(--accent-2); }
+.player-score h3 { font-size: 1rem; color: var(--text-dim); margin-bottom: 10px; }
+.player-score .score {
+  font-size: 4rem; font-weight: 900;
+  background: var(--gradient); -webkit-background-clip: text;
+  background-clip: text; color: transparent;
+}
+.vs { font-size: 1.5rem; font-weight: 900; color: var(--accent); }
+.score-btns { display: flex; gap: 10px; justify-content: center; margin-top: 15px; }
+.score-btns button {
+  width: 45px; height: 45px; border-radius: 50%;
+  background: var(--gradient); color: #fff; font-size: 1.3rem; font-weight: 900;
+  transition: var(--transition);
+}
+.score-btns button:hover { transform: scale(1.15); }
+.score-btns button.minus { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.2); }
+.reset-btn {
+  display: block; margin: 25px auto 0; padding: 12px 30px;
+  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.2);
+  color: var(--text); border-radius: 50px; font-weight: 700;
+  transition: var(--transition);
+}
+.reset-btn:hover { background: var(--accent); border-color: var(--accent); }
+
+/* ==================== GEAR SHOP ==================== */
+.gear-filters {
+  display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.filter-btn {
+  padding: 10px 25px; border-radius: 50px; background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.1); color: var(--text);
+  font-weight: 600; transition: var(--transition);
+}
+.filter-btn.active, .filter-btn:hover {
+  background: var(--gradient); border-color: transparent;
+}
+.gear-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px; max-width: 1400px; margin: 0 auto;
+}
+.gear-card {
+  background: var(--bg-secondary); border-radius: var(--radius);
+  padding: 25px; text-align: center; border: 1px solid rgba(255,255,255,0.08);
+  transition: var(--transition); position: relative;
+}
+.gear-card:hover { transform: translateY(-8px); box-shadow: var(--shadow); }
+.gear-emoji { font-size: 4rem; margin-bottom: 15px; display: block; }
+.gear-card h4 { font-size: 1.1rem; margin-bottom: 8px; }
+.gear-card .price {
+  font-size: 1.5rem; font-weight: 900; color: var(--accent-2);
+  margin-bottom: 15px;
+}
+.gear-card .rating { color: var(--accent-3); margin-bottom: 15px; }
+.buy-btn {
+  width: 100%; padding: 12px; border-radius: 12px;
+  background: var(--gradient); color: #fff; font-weight: 700;
+  transition: var(--transition);
+}
+.buy-btn:hover { transform: scale(1.05); }
+
+/* ==================== QUIZ ==================== */
+.quiz-container {
+  max-width: 700px; margin: 0 auto; background: var(--bg-secondary);
+  border-radius: var(--radius); padding: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.quiz-question { font-size: 1.3rem; font-weight: 700; margin-bottom: 25px; }
+.quiz-options { display: flex; flex-direction: column; gap: 12px; }
+.quiz-option {
+  padding: 16px 20px; background: var(--bg-card); border-radius: 12px;
+  border: 2px solid rgba(255,255,255,0.1); cursor: pointer;
+  transition: var(--transition); font-weight: 600; text-align: left;
+  color: var(--text); font-size: 1rem;
+}
+.quiz-option:hover { border-color: var(--accent-2); transform: translateX(5px); }
+.quiz-option.correct { background: rgba(0,245,212,0.2); border-color: var(--accent-2); }
+.quiz-option.wrong { background: rgba(255,0,110,0.2); border-color: var(--accent); }
+.quiz-progress {
+  height: 6px; background: var(--bg-card); border-radius: 10px;
+  margin-bottom: 25px; overflow: hidden;
+}
+.quiz-progress-bar {
+  height: 100%; background: var(--gradient); width: 0%;
+  transition: width 0.4s; border-radius: 10px;
+}
+.quiz-result { text-align: center; font-size: 1.5rem; font-weight: 800; }
+
+/* ==================== TIMER ==================== */
+.timer-widget {
+  max-width: 500px; margin: 0 auto; background: var(--bg-secondary);
+  border-radius: var(--radius); padding: 40px; text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.timer-display {
+  font-size: 5rem; font-weight: 900;
+  background: var(--gradient); -webkit-background-clip: text;
+  background-clip: text; color: transparent; font-variant-numeric: tabular-nums;
+  margin-bottom: 20px;
+}
+.timer-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.timer-btns button {
+  padding: 14px 30px; border-radius: 50px; font-weight: 700;
+  background: var(--gradient); color: #fff; transition: var(--transition);
+}
+.timer-btns button.outline {
+  background: transparent; border: 2px solid var(--accent-2); color: var(--accent-2);
+}
+.timer-btns button:hover { transform: scale(1.08); }
+
+/* ==================== TESTIMONIALS ==================== */
+.testimonials-slider {
+  max-width: 900px; margin: 0 auto; position: relative; overflow: hidden;
+}
+.testimonial-track {
+  display: flex; transition: transform 0.5s ease;
+}
+.testimonial-card {
+  min-width: 100%; padding: 40px; background: var(--bg-secondary);
+  border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+}
+.testimonial-card .quote { font-size: 3rem; color: var(--accent); margin-bottom: 15px; }
+.testimonial-card p { font-size: 1.15rem; font-style: italic; margin-bottom: 20px; color: var(--text-dim); }
+.testimonial-card .author { font-weight: 800; }
+.testimonial-card .author span { display: block; font-size: 0.85rem; color: var(--text-dim); font-weight: 500; }
+.slider-nav { display: flex; justify-content: center; gap: 15px; margin-top: 25px; }
+.slider-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--bg-card); border: 2px solid var(--text-dim);
+  cursor: pointer; transition: var(--transition);
+}
+.slider-dot.active { background: var(--accent); border-color: var(--accent); transform: scale(1.3); }
+
+/* ==================== FAQ ==================== */
+.faq-list { max-width: 800px; margin: 0 auto; }
+.faq-item {
+  background: var(--bg-secondary); border-radius: 15px; margin-bottom: 15px;
+  border: 1px solid rgba(255,255,255,0.08); overflow: hidden;
+}
+.faq-question {
+  padding: 22px 25px; display: flex; justify-content: space-between;
+  align-items: center; cursor: pointer; font-weight: 700; transition: var(--transition);
+}
+.faq-question:hover { background: var(--bg-card); }
+.faq-question .icon { transition: transform 0.3s; font-size: 1.5rem; color: var(--accent); }
+.faq-item.active .faq-question .icon { transform: rotate(45deg); }
+.faq-answer {
+  max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+  padding: 0 25px; color: var(--text-dim);
+}
+.faq-item.active .faq-answer { max-height: 300px; padding: 0 25px 22px; }
+
+/* ==================== NEWSLETTER ==================== */
+.newsletter-box {
+  max-width: 600px; margin: 0 auto; text-align: center;
+  background: var(--gradient); padding: 60px 40px; border-radius: var(--radius);
+  position: relative; overflow: hidden;
+}
+.newsletter-box::before {
+  content: '🏓'; position: absolute; font-size: 15rem; opacity: 0.1;
+  top: -40px; right: -40px; transform: rotate(-20deg);
+}
+.newsletter-box h2 { font-size: 2rem; margin-bottom: 15px; position: relative; }
+.newsletter-box p { margin-bottom: 30px; opacity: 0.9; position: relative; }
+.newsletter-form {
+  display: flex; gap: 10px; max-width: 450px; margin: 0 auto; position: relative;
+}
+.newsletter-form input {
+  flex: 1; padding: 16px 20px; border-radius: 50px; border: none;
+  font-size: 1rem; font-family: inherit; outline: none;
+}
+.newsletter-form button {
+  padding: 16px 30px; border-radius: 50px; background: var(--bg-primary);
+  color: var(--text); font-weight: 700; transition: var(--transition);
+}
+.newsletter-form button:hover { transform: scale(1.05); }
+
+/* ==================== FOOTER ==================== */
+footer {
+  background: var(--bg-secondary); padding: 60px 5% 30px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+  max-width: 1400px; margin: 0 auto 40px;
+}
+.footer-brand h3 {
+  font-size: 1.8rem; background: var(--gradient);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  margin-bottom: 15px; font-weight: 900;
+}
+.footer-brand p { color: var(--text-dim); font-size: 0.95rem; max-width: 300px; }
+.footer-col h4 { margin-bottom: 20px; font-size: 1.1rem; }
+.footer-col a {
+  display: block; color: var(--text-dim); margin-bottom: 12px;
+  transition: var(--transition); font-size: 0.95rem;
+}
+.footer-col a:hover { color: var(--accent-2); transform: translateX(5px); }
+.social-links { display: flex; gap: 12px; margin-top: 20px; }
+.social-links a {
+  width: 42px; height: 42px; border-radius: 50%; background: var(--bg-card);
+  display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+  transition: var(--transition);
+}
+.social-links a:hover { background: var(--accent); transform: translateY(-5px); }
+.footer-bottom {
+  text-align: center; padding-top: 30px;
+  border-top: 1px solid rgba(255,255,255,0.08); color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+/* ==================== BACK TO TOP ==================== */
+#back-to-top {
+  position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px;
+  border-radius: 50%; background: var(--gradient); color: #fff;
+  font-size: 1.5rem; display: flex; align-items: center; justify-content: center;
+  z-index: 998; opacity: 0; visibility: hidden; transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+#back-to-top.show { opacity: 1; visibility: visible; }
+#back-to-top:hover { transform: translateY(-5px) scale(1.1); }
+
+/* ==================== MUSIC TOGGLE ==================== */
+#music-toggle {
+  position: fixed; bottom: 30px; left: 30px; width: 55px; height: 55px;
+  border-radius: 50%; background: var(--bg-secondary); color: var(--text);
+  border: 2px solid var(--accent-2); font-size: 1.3rem;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 998; transition: var(--transition);
+}
+#music-toggle.playing { background: var(--accent-2); color: var(--bg-primary); animation: spin 3s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ==================== TOAST ==================== */
+#toast {
+  position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(100px);
+  background: var(--gradient); color: #fff; padding: 15px 30px;
+  border-radius: 50px; font-weight: 700; z-index: 9999;
+  opacity: 0; transition: var(--transition); pointer-events: none;
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ==================== SNOW / PARTICLES ==================== */
+#particles {
+  position: fixed; inset: 0; pointer-events: none; z-index: 1;
+}
+.particle {
+  position: absolute; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--accent-2); opacity: 0.3;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  to { transform: translateY(100vh) rotate(360deg); }
+}
+
+/* ==================== REVEAL ANIMATION ==================== */
+.reveal {
+  opacity: 0; transform: translateY(40px); transition: all 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .cursor, .cursor-ring { display: none; }
+}
+@media (max-width: 600px) {
+  .footer-grid { grid-template-columns: 1fr; text-align: center; }
+  .footer-brand p { margin: 0 auto; }
+  .social-links { justify-content: center; }
+  .score-display { grid-template-columns: 1fr; }
+  .vs { display: none; }
+  .newsletter-form { flex-direction: column; }
+  .newsletter-form button { width: 100%; }
+}
+
+/* ==================== MOBILE MENU ==================== */
+#mobile-menu {
+  position: fixed; inset: 0; background: var(--bg-primary);
+  z-index: 1001; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 30px;
+  opacity: 0; visibility: hidden; transition: var(--transition);
+}
+#mobile-menu.open { opacity: 1; visibility: visible; }
+#mobile-menu a { font-size: 1.8rem; font-weight: 800; }
+#mobile-menu a:hover { color: var(--accent); }
+#close-menu {
+  position: absolute; top: 30px; right: 30px; font-size: 2rem;
+  background: none; color: var(--text);
+}
+
+/* ==================== NUMBER TICKER ==================== */
+.ticker { display: inline-block; }
+</style>
+</head>
+<body>
+
+<!-- ==================== PRELOADER ==================== -->
+<div id="preloader"><div class="loader-ball"></div></div>
+
+<!-- ==================== CURSOR ==================== -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- ==================== SCROLL PROGRESS ==================== -->
+<div id="scroll-progress"></div>
+
+<!-- ==================== PARTICLES ==================== -->
+<div id="particles"></div>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav id="navbar">
+  <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <span>🏓</span> DANESH SPIN
+  </div>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#techniques">Techniques</a>
+    <a href="#scoreboard">Scoreboard</a>
+    <a href="#gear">Gear</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <div class="nav-actions">
+    <button class="icon-btn" id="theme-toggle" title="Toggle Theme">🌙</button>
+    <button class="icon-btn" id="search-btn" title="Search">🔍</button>
+    <button class="icon-btn" id="menu-btn" title="Menu">☰</button>
+  </div>
+</nav>
+
+<!-- ==================== MOBILE MENU ==================== -->
+<div id="mobile-menu">
+  <button id="close-menu">✕</button>
+  <a href="#features" onclick="closeMenu()">Features</a>
+  <a href="#techniques" onclick="closeMenu()">Techniques</a>
+  <a href="#scoreboard" onclick="closeMenu()">Scoreboard</a>
+  <a href="#gear" onclick="closeMenu()">Gear</a>
+  <a href="#quiz" onclick="closeMenu()">Quiz</a>
+  <a href="#faq" onclick="closeMenu()">FAQ</a>
+</div>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero" id="home">
+  <div class="floating-ball">🏓</div>
+  <div class="floating-ball">🏓</div>
+  <div class="floating-ball">🏓</div>
+  <div class="hero-content">
+    <div class="hero-badge">⚡ #1 TABLE TENNIS EXPERIENCE</div>
+    <h1>Master The Art Of <span class="gradient-text">DANESH SPIN</span></h1>
+    <p>Unleash your potential with world-class techniques, interactive tools, expert gear reviews, and a community of champions. Your journey to table tennis greatness starts here.</p>
+    <div class="hero-btns">
+      <a href="#techniques" class="btn btn-primary">Explore Techniques →</a>
+      <a href="#scoreboard" class="btn btn-outline">Try Scoreboard 🏓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== STATS ==================== -->
+<section class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-item reveal">
+      <h3 data-count="50000">0</h3>
+      <p>ACTIVE PLAYERS</p>
+    </div>
+    <div class="stat-item reveal">
+      <h3 data-count="120">0</h3>
+      <p>TECHNIQUES TAUGHT</p>
+    </div>
+    <div class="stat-item reveal">
+      <h3 data-count="98">0</h3>
+      <p>SATISFACTION %</p>
+    </div>
+    <div class="stat-item reveal">
+      <h3 data-count="25">0</h3>
+      <p>WORLD CHAMPIONS</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FEATURES ==================== -->
+<section id="features">
+  <div class="section-header reveal">
+    <span class="section-tag">Why Choose Us</span>
+    <h2>Everything You Need To <span style="background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;">Dominate</span></h2>
+    <p class="subtitle">DANESH SPIN is packed with powerful features designed to elevate your game to the next level.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <span class="feature-icon">🎯</span>
+      <h3>Precision Training</h3>
+      <p>Advanced drills and techniques used by professional players to sharpen your accuracy and reflexes.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">📊</span>
+      <h3>Performance Analytics</h3>
+      <p>Track your progress with detailed statistics and improve your gameplay strategically.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🏆</span>
+      <h3>Tournament Ready</h3>
+      <p>Prepare for competitive play with tournament simulations and mental conditioning tools.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🎥</span>
+      <h3>Video Tutorials</h3>
+      <p>Learn from the best with high-quality video lessons covering every aspect of the game.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🤝</span>
+      <h3>Community Hub</h3>
+      <p>Connect with players worldwide, share tips, and participate in community challenges.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🧠</span>
+      <h3>Mental Coaching</h3>
+      <p>Master the psychological game with focus training and pressure management techniques.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TECHNIQUES ==================== -->
+<section id="techniques" style="background:var(--bg-secondary);">
+  <div class="section-header reveal">
+    <span class="section-tag">Learn & Master</span>
+    <h2>Core Techniques</h2>
+    <p class="subtitle">Master these fundamental and advanced techniques to become a complete player.</p>
+  </div>
+  <div class="techniques-grid">
+    <div class="technique-card reveal">
+      <div class="technique-visual">🔥</div>
+      <div class="technique-body">
+        <h3>The Forehand Smash</h3>
+        <p>The most powerful offensive shot in table tennis. Learn the footwork, timing, and power generation.</p>
+        <div class="difficulty">
+          <span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+          <span style="margin-left:8px;font-size:0.85rem;color:var(--text-dim);">Advanced</span>
+        </div>
+      </div>
+    </div>
+    <div class="technique-card reveal">
+      <div class="technique-visual" style="background:var(--gradient-2);">🎩</div>
+      <div class="technique-body">
+        <h3>The Spin Serve</h3>
+        <p>Master the art of deceptive serves with topspin, backspin, and sidespin variations.</p>
+        <div class="difficulty">
+          <span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span style="margin-left:8px;font-size:0.85rem;color:var(--text-dim);">Intermediate</span>
+        </div>
+      </div>
+    </div>
+    <div class="technique-card reveal">
+      <div class="technique-visual" style="background:linear-gradient(135deg,#8338ec,#ff006e);">🛡️</div>
+      <div class="technique-body">
+        <h3>The Block</h3>
+        <p>Defend effectively and turn defense into offense with the perfect blocking technique.</p>
+        <div class="difficulty">
+          <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span style="margin-left:8px;font-size:0.85rem;color:var(--text-dim);">Beginner</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SCOREBOARD ==================== -->
+<section id="scoreboard">
+  <div class="section-header reveal">
+    <span class="section-tag">Interactive Tool</span>
+    <h2>Live Scoreboard</h2>
+    <p class="subtitle">Keep track of your matches with this beautiful, easy-to-use scoreboard.</p>
+  </div>
+  <div class="scoreboard reveal">
+    <div class="score-display">
+      <div class="player-score" id="player1-card">
+        <h3>PLAYER 1</h3>
+        <div class="score" id="score1">0</div>
+        <div class="score-btns">
+          <button onclick="changeScore(1,-1)" class="minus">−</button>
+          <button onclick="changeScore(1,1)">+</button>
+        </div>
+      </div>
+      <div class="vs">VS</div>
+      <div class="player-score" id="player2-card">
+        <h3>PLAYER 2</h3>
+        <div class="score" id="score2">0</div>
+        <div class="score-btns">
+          <button onclick="changeScore(2,-1)" class="minus">−</button>
+          <button onclick="changeScore(2,1)">+</button>
+        </div>
+      </div>
+    </div>
+    <button class="reset-btn" onclick="resetScore()">🔄 Reset Match</button>
+  </div>
+</section>
+
+<!-- ==================== GEAR SHOP ==================== -->
+<section id="gear" style="background:var(--bg-secondary);">
+  <div class="section-header reveal">
+    <span class="section-tag">Pro Equipment</span>
+    <h2>Gear Shop</h2>
+    <p class="subtitle">Top-rated equipment trusted by professionals and enthusiasts worldwide.</p>
+  </div>
+  <div class="gear-filters reveal">
+    <button class="filter-btn active" onclick="filterGear('all',this)">All</button>
+    <button class="filter-btn" onclick="filterGear('rackets',this)">Rackets</button>
+    <button class="filter-btn" onclick="filterGear('balls',this)">Balls</button>
+    <button class="filter-btn" onclick="filterGear('shoes',this)">Shoes</button>
+  </div>
+  <div class="gear-grid" id="gear-grid">
+    <div class="gear-card reveal" data-cat="rackets">
+      <span class="gear-emoji">🏓</span>
+      <h4>DANESH Pro Racket</h4>
+      <div class="price">$149.99</div>
+      <div class="rating">★★★★★ (324)</div>
+      <button class="buy-btn" onclick="showToast('Added to cart! 🛒')">Add to Cart</button>
+    </div>
+    <div class="gear-card reveal" data-cat="balls">
+      <span class="gear-emoji">🟠</span>
+      <h4>Champion Balls (12-pack)</h4>
+      <div class="price">$19.99</div>
+      <div class="rating">★★★★☆ (189)</div>
+      <button class="buy-btn" onclick="showToast('Added to cart! 🛒')">Add to Cart</button>
+    </div>
+    <div class="gear-card reveal" data-cat="shoes">
+      <span class="gear-emoji">👟</span>
+      <h4>SPIN Pro Shoes</h4>
+      <div class="price">$89.99</div>
+      <div class="rating">★★★★★ (412)</div>
+      <button class="buy-btn" onclick="showToast('Added to cart! 🛒')">Add to Cart</button>
+    </div>
+    <div class="gear-card reveal" data-cat="rackets">
+      <span class="gear-emoji">🎯</span>
+      <h4>Carbon X Bat</h4>
+      <div class="price">$219.99</div>
+      <div class="rating">★★★★★ (267)</div>
+      <button class="buy-btn" onclick="showToast('Added to cart! 🛒')">Add to Cart</button>
+    </div>
+    <div class="gear-card reveal" data-cat="balls">
+      <span class="gear-emoji">🟡</span>
+      <h4>Training Balls (100-pack)</h4>
+      <div class="price">$49.99</div>
+      <div class="rating">★★★★☆ (98)</div>
+      <button class="buy-btn" onclick="showToast('Added to cart! 🛒')">Add to Cart</button>
+    </div>
+    <div class="gear-card reveal" data-cat="shoes">
+      <span class="gear-emoji">⚡</span>
+      <h4>SpeedForce Sneakers</h4>
+      <div class="price">$119.99</div>
+      <div class="rating">★★★★★ (156)</div>
+      <button class="buy-btn" onclick="showToast('Added to cart! 🛒')">Add to Cart</button>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== QUIZ ==================== -->
+<section id="quiz">
+  <div class="section-header reveal">
+    <span class="section-tag">Test Yourself</span>
+    <h2>Table Tennis Quiz</h2>
+    <p class="subtitle">How well do you know the game? Take this quick quiz to find out!</p>
+  </div>
+  <div class="quiz-container reveal">
+    <div class="quiz-progress"><div class="quiz-progress-bar" id="quiz-progress"></div></div>
+    <div id="quiz-content">
+      <div class="quiz-question" id="quiz-question">Loading...</div>
+      <div class="quiz-options" id="quiz-options"></div>
+    </div>
+    <div class="quiz-result" id="quiz-result" style="display:none;"></div>
+  </div>
+</section>
+
+<!-- ==================== TIMER ==================== -->
+<section style="background:var(--bg-secondary);">
+  <div class="section-header reveal">
+    <span class="section-tag">Match Timer</span>
+    <h2>Practice Timer</h2>
+    <p class="subtitle">Time your training sessions with precision.</p>
+  </div>
+  <div class="timer-widget reveal">
+    <div class="timer-display" id="timer-display">05:00</div>
+    <div class="timer-btns">
+      <button onclick="startTimer()">▶ Start</button>
+      <button class="outline" onclick="pauseTimer()">⏸ Pause</button>
+      <button class="outline" onclick="resetTimer()">🔄 Reset</button>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TESTIMONIALS ==================== -->
+<section id="testimonials">
+  <div class="section-header reveal">
+    <span class="section-tag">Community Love</span>
+    <h2>What Players Say</h2>
+  </div>
+  <div class="testimonials-slider reveal">
+    <div class="testimonial-track" id="testimonial-track">
+      <div class="testimonial-card">
+        <div class="quote">"</div>
+        <p>DANESH SPIN completely transformed my game. The techniques are explained so clearly that I improved within weeks!</p>
+        <div class="author">Alex Chen <span>Regional Champion</span></div>
+      </div>
+      <div class="testimonial-card">
+        <div class="quote">"</div>
+        <p>The best table tennis resource I've ever found. The interactive tools and community are absolutely incredible.</p>
+        <div class="author">Maria Rodriguez <span>Pro Player</span></div>
+      </div>
+      <div class="testimonial-card">
+        <div class="quote">"</div>
+        <p>From beginner to competitive player — DANESH SPIN was with me every step of the way. Highly recommended!</p>
+        <div class="author">James Kim <span>Club Captain</span></div>
+      </div>
+    </div>
+    <div class="slider-nav" id="slider-nav"></div>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section id="faq" style="background:var(--bg-secondary);">
+  <div class="section-header reveal">
+    <span class="section-tag">Questions</span>
+    <h2>Frequently Asked</h2>
+  </div>
+  <div class="faq-list reveal">
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Is DANESH SPIN suitable for beginners?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-answer"><p>Absolutely! DANESH SPIN is designed for all skill levels. We start from the very basics and progressively build up to advanced techniques, ensuring everyone has a clear learning path.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>How often should I practice?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-answer"><p>We recommend practicing 3-4 times per week for at least 45 minutes. Consistency is more important than duration. Use our practice timer to structure your sessions!</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>What equipment do I need to start?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-answer"><p>To get started, you only need a basic racket, a few balls, and a table. Check out our Gear Shop for our top recommendations at every price point.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Can I compete professionally?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-answer"><p>Yes! With dedication and our tournament-ready training program, many of our users have gone on to compete at regional and national levels.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Is the content free?</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="faq-answer"><p>The core content is completely free. We also offer premium features for serious players who want personalized coaching and advanced analytics.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== NEWSLETTER ==================== -->
+<section>
+  <div class="newsletter-box reveal">
+    <h2>Join The Spin Community</h2>
+    <p>Get weekly tips, exclusive content, and early access to new features.</p>
+    <form class="newsletter-form" onsubmit="subscribe(event)">
+      <input type="email" placeholder="Enter your email..." required>
+      <button type="submit">Subscribe 🚀</button>
+    </form>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>🏓 DANESH SPIN</h3>
+      <p>The ultimate table tennis experience. Master your game, join the community, and become a champion.</p>
+      <div class="social-links">
+        <a href="#" title="Instagram">📷</a>
+        <a href="#" title="Twitter">🐦</a>
+        <a href="#" title="YouTube">📺</a>
+        <a href="#" title="Discord">💬</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="#features">Features</a>
+      <a href="#techniques">Techniques</a>
+      <a href="#scoreboard">Scoreboard</a>
+      <a href="#quiz">Quiz</a>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <a href="#">Blog</a>
+      <a href="#">Tutorials</a>
+      <a href="#">Gear Guide</a>
+      <a href="#">Community</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#faq">FAQ</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 DANESH SPIN. All rights reserved. Made with 💖 for table tennis lovers.
+  </div>
+</footer>
+
+<!-- ==================== FLOATING BUTTONS ==================== -->
+<button id="back-to-top" title="Back to top">↑</button>
+<button id="music-toggle" title="Toggle Music">🎵</button>
+<div id="toast"></div>
+
+<script>
+/* ==================== PRELOADER ==================== */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('preloader').classList.add('hidden');
+  }, 800);
+});
+
+/* ==================== CUSTOM CURSOR ==================== */
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursor-ring');
+let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  cursor.style.left = mouseX - 6 + 'px';
+  cursor.style.top = mouseY - 6 + 'px';
+});
+
+function animateRing() {
+  ringX += (mouseX - ringX) * 0.15;
+  ringY += (mouseY - ringY) * 0.15;
+  cursorRing.style.left = ringX - 20 + 'px';
+  cursorRing.style.top = ringY - 20 + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => cursorRing.style.transform = 'scale(1.8)');
+  el.addEventListener('mouseleave', () => cursorRing.style.transform = 'scale(1)');
+});
+
+/* ==================== SCROLL PROGRESS & NAVBAR ==================== */
+const progress = document.getElementById('scroll-progress');
+const navbar = document.getElementById('navbar');
+const backToTop = document.getElementById('back-to-top');
+
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progress.style.width = (scrollTop / docHeight * 100) + '%';
+  navbar.classList.toggle('scrolled', scrollTop > 50);
+  backToTop.classList.toggle('show', scrollTop > 500);
+});
+
+backToTop.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+/* ==================== THEME TOGGLE ==================== */
+const themeToggle = document.getElementById('theme-toggle');
+let isLight = false;
+themeToggle.addEventListener('click', () => {
+  isLight = !isLight;
+  document.body.setAttribute('data-theme', isLight ? 'light' : 'dark');
+  themeToggle.textContent = isLight ? '☀️' : '🌙';
+  showToast(isLight ? 'Light mode ☀️' : 'Dark mode 🌙');
+});
+
+/* ==================== MOBILE MENU ==================== */
+const mobileMenu = document.getElementById('mobile-menu');
+document.getElementById('menu-btn').addEventListener('click', () => mobileMenu.classList.add('open'));
+document.getElementById('close-menu').addEventListener('click', () => mobileMenu.classList.remove('open'));
+function closeMenu() { mobileMenu.classList.remove('open'); }
+
+/* ==================== PARTICLES ==================== */
+const particlesContainer = document.getElementById('particles');
+for (let i = 0; i < 40; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.left = Math.random() * 100 + '%';
+  p.style.top = '-10px';
+  p.style.animationDuration = (Math.random() * 8 + 6) + 's';
+  p.style.animationDelay = Math.random() * 10 + 's';
+  p.style.background = Math.random() > 0.5 ? 'var(--accent)' : 'var(--accent-2)';
+  particlesContainer.appendChild(p);
+}
+
+/* ==================== REVEAL ON SCROLL ==================== */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ==================== COUNTER ANIMATION ==================== */
+const counterObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = +el.dataset.count;
+      let current = 0;
+      const step = target / 60;
+      const update = () => {
+        current += step;
+        if (current < target) {
+          el.textContent = Math.floor(current).toLocaleString();
+          requestAnimationFrame(update);
+        } else {
+          el.textContent = target.toLocaleString() + (target >= 1000 ? '+' : '');
+        }
+      };
+      update();
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+/* ==================== SCOREBOARD ==================== */
+let score1 = 0, score2 = 0;
+function changeScore(player, delta) {
+  if (player === 1) {
+    score1 = Math.max(0, score1 + delta);
+    document.getElementById('score1').textContent = score1;
+  } else {
+    score2 = Math.max(0, score2 + delta);
+    document.getElementById('score2').textContent = score2;
+  }
+  checkWinner();
+}
+function checkWinner() {
+  const c1 = document.getElementById('player1-card');
+  const c2 = document.getElementById('player2-card');
+  c1.classList.toggle('winner', score1 >= 11 && score1 - score2 >= 2);
+  c2.classList.toggle('winner', score2 >= 11 && score2 - score1 >= 2);
+  if (score1 >= 11 && score1 - score2 >= 2) showToast('🏆 Player 1 Wins!');
+  if (score2 >= 11 && score2 - score1 >= 2) showToast('🏆 Player 2 Wins!');
+}
+function resetScore() {
+  score1 = score2 = 0;
+  document.getElementById('score1').textContent = 0;
+  document.getElementById('score2').textContent = 0;
+  document.getElementById('player1-card').classList.remove('winner');
+  document.getElementById('player2-card').classList.remove('winner');
+  showToast('Score reset! 🔄');
+}
+
+/* ==================== GEAR FILTER ==================== */
+function filterGear(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.gear-card').forEach(card => {
+    const show = cat === 'all' || card.dataset.cat === cat;
+    card.style.display = show ? 'block' : 'none';
+  });
+}
+
+/* ==================== QUIZ ==================== */
+const quizData = [
+  { q: "What is the maximum score to win a standard game?", o: ["11", "15", "21", "10"], a: 0 },
+  { q: "How many serves does each player get before switching?", o: ["1", "2", "3", "5"], a: 1 },
+  { q: "What is the diameter of a standard table tennis ball?", o: ["38mm", "40mm", "42mm", "45mm"], a: 1 },
+  { q: "Which technique is used to counter heavy topspin?", o: ["Smash", "Block/Drive", "Chop", "Lob"], a: 1 },
+  { q: "What is the height of a standard table tennis net?", o: ["12.5cm", "15.25cm", "18cm", "10cm"], a: 1 }
+];
+let quizIndex = 0, quizScore = 0;
+
+function loadQuiz() {
+  if (quizIndex >= quizData.length) {
+    document.getElementById('quiz-content').style.display = 'none';
+    const result = document.getElementById('quiz-result');
+    result.style.display = 'block';
+    const pct = Math.round(quizScore / quizData.length * 100);
+    result.innerHTML = `🎉 You scored ${quizScore}/${quizData.length} (${pct}%)<br><br>
+      <button class="reset-btn" onclick="restartQuiz()">Try Again 🔄</button>`;
+    return;
+  }
+  const q = quizData[quizIndex];
+  document.getElementById('quiz-question').textContent = q.q;
+  const opts = document.getElementById('quiz-options');
+  opts.innerHTML = '';
+  q.o.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option';
+    btn.textContent = opt;
+    btn.onclick = () => answerQuiz(i, btn);
+    opts.appendChild(btn);
+  });
+  document.getElementById('quiz-progress').style.width = (quizIndex / quizData.length * 100) + '%';
+}
+
+function answerQuiz(i, btn) {
+  const q = quizData[quizIndex];
+  document.querySelectorAll('.quiz-option').forEach(b => b.disabled = true);
+  if (i === q.a) {
+    btn.classList.add('correct');
+    quizScore++;
+  } else {
+    btn.classList.add('wrong');
+    document.querySelectorAll('.quiz-option')[q.a].classList.add('correct');
+  }
+  setTimeout(() => { quizIndex++; loadQuiz(); }, 1200);
+}
+
+function restartQuiz() {
+  quizIndex = 0; quizScore = 0;
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('quiz-content').style.display = 'block';
+  loadQuiz();
+}
+loadQuiz();
+
+/* ==================== TIMER ==================== */
+let timerSeconds = 300, timerInterval = null, timerRunning = false;
+const timerDisplay = document.getElementById('timer-display');
+
+function updateTimerDisplay() {
+  const m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+  const s = (timerSeconds % 60).toString().padStart(2, '0');
+  timerDisplay.textContent = `${m}:${s}`;
+}
+function startTimer() {
+  if (timerRunning || timerSeconds === 0) return;
+  timerRunning = true;
+  timerInterval = setInterval(() => {
+    timerSeconds--;
+    updateTimerDisplay();
+    if (timerSeconds === 0) {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      showToast('⏰ Time\'s up!');
+    }
+  }, 1000);
+}
+function pauseTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+}
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerSeconds = 300;
+  updateTimerDisplay();
+}
+
+/* ==================== TESTIMONIALS SLIDER ==================== */
+let slideIndex = 0;
+const track = document.getElementById('testimonial-track');
+const totalSlides = track.children.length;
+const sliderNav = document.getElementById('slider-nav');
+
+for (let i = 0; i < totalSlides; i++) {
+  const dot = document.createElement('div');
+  dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+  dot.onclick = () => goToSlide(i);
+  sliderNav.appendChild(dot);
+}
+
+function goToSlide(i) {
+  slideIndex = i;
+  track.style.transform = `translateX(-${i * 100}%)`;
+  document.querySelectorAll('.slider-dot').forEach((d, idx) => d.classList.toggle('active', idx === i));
+}
+setInterval(() => { slideIndex = (slideIndex + 1) % totalSlides; goToSlide(slideIndex); }, 5000);
+
+/* ==================== FAQ ==================== */
+function toggleFaq(el) {
+  el.parentElement.classList.toggle('active');
+}
+
+/* ==================== NEWSLETTER ==================== */
+function subscribe(e) {
+  e.preventDefault();
+  showToast('🎉 Subscribed successfully!');
+  e.target.reset();
+}
+
+/* ==================== TOAST ==================== */
+let toastTimeout;
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+/* ==================== SEARCH ==================== */
+document.getElementById('search-btn').addEventListener('click', () => {
+  const term = prompt('🔍 Search DANESH SPIN:');
+  if (term) showToast(`Searching for "${term}"...`);
+});
+
+/* ==================== MUSIC TOGGLE (Web Audio) ==================== */
+const musicToggle = document.getElementById('music-toggle');
+let audioCtx = null, musicPlaying = false, musicOsc = null;
+
+musicToggle.addEventListener('click', () => {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (!musicPlaying) {
+    musicOsc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    musicOsc.type = 'sine';
+    musicOsc.frequency.value = 220;
+    gain.gain.value = 0.03;
+    musicOsc.connect(gain).connect(audioCtx.destination);
+    musicOsc.start();
+    musicPlaying = true;
+    musicToggle.classList.add('playing');
+    musicToggle.textContent = '⏸';
+    showToast('🎵 Ambient sound ON');
+  } else {
+    if (musicOsc) { musicOsc.stop(); musicOsc = null; }
+    musicPlaying = false;
+    musicToggle.classList.remove('playing');
+    musicToggle.textContent = '🎵';
+    showToast('🔇 Sound OFF');
+  }
+});
+
+/* ==================== RIPPLE EFFECT ON BUTTONS ==================== */
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('btn') || e.target.classList.contains('buy-btn')) {
+    const ripple = document.createElement('span');
+    const rect = e.target.getBoundingClientRect();
+    ripple.style.cssText = `
+      position:absolute; border-radius:50%; pointer-events:none;
+      width:10px; height:10px; background:rgba(255,255,255,0.6);
+      left:${e.clientX - rect.left}px; top:${e.clientY - rect.top}px;
+      transform:translate(-50%,-50%); animation:rippleAnim 0.6s ease-out;
+    `;
+    e.target.style.position = 'relative';
+    e.target.style.overflow = 'hidden';
+    e.target.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  }
+});
+
+const style = document.createElement('style');
+style.textContent = `@keyframes rippleAnim { to { width:300px; height:300px; opacity:0; } }`;
+document.head.appendChild(style);
+
+/* ==================== KEYBOARD SHORTCUTS ==================== */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeMenu();
+  if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+    e.preventDefault();
+    document.getElementById('search-btn').click();
+  }
+});
+
+/* ==================== CONSOLE EASTER EGG ==================== */
+console.log('%c🏓 DANESH SPIN', 'font-size:40px; font-weight:bold; background:linear-gradient(135deg,#ff006e,#00f5d4); -webkit-background-clip:text; color:transparent;');
+console.log('%cBuilt for champions. Play hard, spin harder! 🔥', 'font-size:16px; color:#00f5d4;');
+</script>
+</body>
+</html>
