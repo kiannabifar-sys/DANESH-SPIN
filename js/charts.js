@@ -199,4 +199,198 @@ const Charts = (() => {
       ctx.textAlign = 'center';
       data.forEach((v, i) => {
         const bh = (v / max) * ch * progress;
-        const x = pad.l + i * gap + (gap - bw) /
+        const x = pad.l + i * gap + (gap - bw) / 2;
+        const y = pad.t + ch - bh;
+        const grad = ctx.createLinearGradient(0, y, 0, pad.t + ch);
+        grad.addColorStop(0, color);
+        grad.addColorStop(1, color + '60');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        const r = Math.min(4, bw / 2);
+        ctx.moveTo(x + r, y);
+        ctx.lineTo(x + bw - r, y);
+        ctx.quadraticCurveTo(x + bw, y, x + bw, y + r);
+        ctx.lineTo(x + bw, pad.t + ch);
+        ctx.lineTo(x, pad.t + ch);
+        ctx.lineTo(x, y + r);
+        ctx.quadraticCurveTo(x, y, x + r, y);
+        ctx.closePath();
+        ctx.fill();
+
+        if (labels[i]) {
+          ctx.fillStyle = getColor('--ink-lo', '#55524D');
+          ctx.fillText(labels[i], x + bw / 2, h - 6);
+        }
+      });
+
+      if (progress < 1) {
+        progress = Math.min(1, (performance.now() - startTime) / 600);
+        requestAnimationFrame(draw);
+      }
+    }
+    draw();
+  }
+
+  /* ── Donut chart ── */
+  function donut(canvas, opts = {}) {
+    const {
+      data = [],
+      colors = ['#FF4D00', '#3B82F6', '#D4AF37', '#22C55E', '#A855F7'],
+      height = 200,
+      centerText = '',
+      centerSub = ''
+    } = opts;
+
+    const { ctx, w, h } = setup(canvas, height);
+    const cx = w / 2;
+    const cy = h / 2;
+    const radius = Math.min(w, h) / 2 - 20;
+    const innerR = radius * 0.62;
+    const total = data.reduce((s, v) => s + v, 0) || 1;
+
+    let progress = 0;
+    const startTime = performance.now();
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      let angle = -Math.PI / 2;
+
+      data.forEach((v, i) => {
+        const slice = (v / total) * Math.PI * 2 * progress;
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, angle, angle + slice);
+        ctx.arc(cx, cy, innerR, angle + slice, angle, true);
+        ctx.closePath();
+        ctx.fillStyle = colors[i % colors.length];
+        ctx.fill();
+        angle += slice;
+      });
+
+      if (progress >= 1) {
+        ctx.fillStyle = getColor('--ink-hi', '#F5F2ED');
+        ctx.font = '600 20px "Geist", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(centerText, cx, cy - 4);
+        if (centerSub) {
+          ctx.fillStyle = getColor('--ink-lo', '#55524D');
+          ctx.font = '500 9px "Geist Mono", monospace';
+          ctx.fillText(centerSub, cx, cy + 14);
+        }
+      }
+
+      if (progress < 1) {
+        progress = Math.min(1, (performance.now() - startTime) / 700);
+        requestAnimationFrame(draw);
+      }
+    }
+    draw();
+  }
+
+  /* ── Sparkline (mini) ── */
+  function spark(canvas, opts = {}) {
+    const { data = [], height = 40, color = getColor('--accent', '#FF4D00') } = opts;
+    const { ctx, w, h } = setup(canvas, height);
+    if (!data.length) return;
+    const min = Math.min(...data);
+    const max = Math.max(...data);
+    const range = max - min || 1;
+    const px = (i) => (i / (data.length - 1)) * w;
+    const py = (v) => h - ((v - min) / range) * (h - 4) - 2;
+
+    ctx.beginPath();
+    data.forEach((v, i) => {
+      if (i === 0) ctx.moveTo(px(i), py(v));
+      else ctx.lineTo(px(i), py(v));
+    });
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  }
+
+  /* ── Radar chart ── */
+  function radar(canvas, opts = {}) {
+    const {
+      values = [],
+      labels = [],
+      height = 260,
+      color = getColor('--accent', '#FF4D00')
+    } = opts;
+
+    const { ctx, w, h } = setup(canvas, height);
+    const cx = w / 2;
+    const cy = h / 2;
+    const radius = Math.min(w, h) / 2 - 40;
+    const n = values.length;
+
+    let progress = 0;
+    const startTime = performance.now();
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+
+      // Rings
+      ctx.strokeStyle = getColor('--line-subtle', 'rgba(255,255,255,0.06)');
+      ctx.lineWidth = 1;
+      for (let r = 1; r <= 4; r++) {
+        ctx.beginPath();
+        for (let i = 0; i <= n; i++) {
+          const angle = (i / n) * Math.PI * 2 - Math.PI / 2;
+          const x = cx + Math.cos(angle) * radius * (r / 4);
+          const y = cy + Math.sin(angle) * radius * (r / 4);
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.stroke();
+      }
+
+      // Axes
+      for (let i = 0; i < n; i++) {
+        const angle = (i / n) * Math.PI * 2 - Math.PI / 2;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius);
+        ctx.stroke();
+      }
+
+      // Data polygon
+      ctx.beginPath();
+      values.forEach((v, i) => {
+        const angle = (i / n) * Math.PI * 2 - Math.PI / 2;
+        const r = radius * (v / 100) * progress;
+        const x = cx + Math.cos(angle) * r;
+        const y = cy + Math.sin(angle) * r;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.closePath();
+      ctx.fillStyle = color + '30';
+      ctx.fill();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Labels
+      ctx.fillStyle = getColor('--ink-mid', '#8A8781');
+      ctx.font = '10px "Geist Mono", monospace';
+      ctx.textAlign = 'center';
+      labels.forEach((lbl, i) => {
+        const angle = (i / n) * Math.PI * 2 - Math.PI / 2;
+        const x = cx + Math.cos(angle) * (radius + 18);
+        const y = cy + Math.sin(angle) * (radius + 18) + 3;
+        ctx.fillText(lbl, x, y);
+      });
+
+      if (progress < 1) {
+        progress = Math.min(1, (performance.now() - startTime) / 700);
+        requestAnimationFrame(draw);
+      }
+    }
+    draw();
+  }
+
+  return { line, bar, donut, spark, radar };
+})();
+
+window.Charts = Charts;
