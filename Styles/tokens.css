@@ -1,0 +1,162 @@
+/* ═══════════════════════════════════════════════════════════
+   DANESH SPIN · DESIGN TOKENS
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Surfaces ── */
+  --bg-void:        #060607;
+  --bg-base:        #0A0A0C;
+  --bg-raised:      #0F0F13;
+  --bg-overlay:     #14141A;
+  --bg-elevated:    #1A1A22;
+  --bg-input:       #101015;
+
+  /* ── Borders ── */
+  --line-subtle:    rgba(255,255,255,0.06);
+  --line-default:   rgba(255,255,255,0.10);
+  --line-strong:    rgba(255,255,255,0.18);
+  --line-focus:     rgba(255,77,0,0.5);
+
+  /* ── Ink ── */
+  --ink-hi:         #F5F2ED;
+  --ink:            #D4D0CA;
+  --ink-mid:        #8A8781;
+  --ink-lo:         #55524D;
+  --ink-disabled:   #38352F;
+
+  /* ── Accent (brand) ── */
+  --accent:         #FF4D00;
+  --accent-hi:      #FF6B2C;
+  --accent-lo:      #CC3D00;
+  --accent-wash:    rgba(255,77,0,0.10);
+  --accent-glow:    rgba(255,77,0,0.35);
+
+  /* ── Semantics ── */
+  --success:        #22C55E;
+  --success-wash:   rgba(34,197,94,0.12);
+  --warn:           #F59E0B;
+  --warn-wash:      rgba(245,158,11,0.12);
+  --danger:         #EF4444;
+  --danger-wash:    rgba(239,68,68,0.12);
+  --info:           #3B82F6;
+  --info-wash:      rgba(59,130,246,0.12);
+  --gold:           #D4AF37;
+  --gold-wash:      rgba(212,175,55,0.12);
+
+  /* ── Data palette ── */
+  --data-1: #FF4D00;
+  --data-2: #3B82F6;
+  --data-3: #D4AF37;
+  --data-4: #22C55E;
+  --data-5: #A855F7;
+  --data-6: #EC4899;
+
+  /* ── Typography ── */
+  --font-sans:  'Geist', 'Vazirmatn', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Instrument Serif', 'Vazirmatn', Georgia, serif;
+  --font-mono:  'Geist Mono', 'Vazirmatn', ui-monospace, monospace;
+
+  --fs-2xs: 10px;
+  --fs-xs:  11px;
+  --fs-sm:  12px;
+  --fs-base:13px;
+  --fs-md:  14px;
+  --fs-lg:  16px;
+  --fs-xl:  20px;
+  --fs-2xl: 28px;
+  --fs-3xl: 40px;
+  --fs-4xl: 56px;
+  --fs-5xl: 76px;
+
+  --lh-tight: 1.05;
+  --lh-snug:  1.25;
+  --lh-base:  1.55;
+  --lh-loose: 1.75;
+
+  --ls-tight: -0.03em;
+  --ls-snug:  -0.015em;
+  --ls-base:  0;
+  --ls-wide:  0.04em;
+  --ls-wider: 0.10em;
+  --ls-widest:0.18em;
+
+  /* ── Radii ── */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-2xl:28px;
+  --r-pill:999px;
+
+  /* ── Spacing ── */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-7: 32px;
+  --sp-8: 40px;
+  --sp-9: 56px;
+  --sp-10:72px;
+  --sp-11:96px;
+
+  /* ── Elevation ── */
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.35);
+  --shadow-md: 0 6px 20px rgba(0,0,0,0.45);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.6);
+  --shadow-glow: 0 0 0 1px var(--line-default), 0 8px 40px -8px var(--accent-glow);
+
+  /* ── Motion ── */
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring:cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast:   140ms;
+  --dur-base:   220ms;
+  --dur-slow:   380ms;
+  --dur-xslow:  600ms;
+
+  /* ── Layout ── */
+  --sidebar-w:  248px;
+  --sidebar-w-collapsed: 68px;
+  --topbar-h:   56px;
+  --statusbar-h: 28px;
+}
+
+/* ═══════════ LIGHT THEME ═══════════ */
+[data-theme="light"] {
+  --bg-void:     #F0EEE9;
+  --bg-base:     #F7F5F0;
+  --bg-raised:   #FFFFFF;
+  --bg-overlay:  #FDFCFA;
+  --bg-elevated: #FFFFFF;
+  --bg-input:    #EFEDE8;
+
+  --line-subtle:  rgba(0,0,0,0.05);
+  --line-default: rgba(0,0,0,0.09);
+  --line-strong:  rgba(0,0,0,0.18);
+
+  --ink-hi:   #0A0A0C;
+  --ink:      #2A2823;
+  --ink-mid:  #6B6760;
+  --ink-lo:   #A39F97;
+
+  --shadow-md: 0 6px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+}
+
+/* ═══════════ RTL ADJUSTMENTS ═══════════ */
+[dir="rtl"] {
+  --ls-tight: 0;
+  --ls-snug: 0;
+  --ls-wide: 0;
+}
+
+/* ═══════════ HIGH CONTRAST ═══════════ */
+[data-contrast="high"] {
+  --line-default: rgba(255,255,255,0.24);
+  --line-strong:  rgba(255,255,255,0.40);
+  --ink-mid:      #B8B4AE;
+}
