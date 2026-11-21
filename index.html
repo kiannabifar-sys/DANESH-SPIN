@@ -6,19 +6,16 @@
 <title>DANESH SPIN — Table Tennis Performance OS</title>
 <style>
 /* ═══════════════════════════════════════════════════════
-   TOKENS
+   TOKENS & BASE
    ═══════════════════════════════════════════════════════ */
 :root{
   --bg:#08080A;--bg1:#0D0D10;--bg2:#131317;--bg3:#1A1A20;
   --line:rgba(255,255,255,0.07);--line2:rgba(255,255,255,0.14);
   --ink:#F2EFE9;--inkM:#8A8781;--inkL:#4E4B47;
   --accent:#FF4D00;--accentD:#CC3D00;--accentW:rgba(255,77,0,0.12);
-  --success:#22C55E;--warn:#F59E0B;--danger:#EF4444;--info:#3B82F6;
-  --gold:#D4AF37;
-  --sans:'Segoe UI',system-ui,-apple-system,sans-serif;
-  --mono:'SF Mono',Consolas,monospace;
-  --r:8px;--rl:14px;
-  --ease:cubic-bezier(0.16,1,0.3,1);
+  --success:#22C55E;--warn:#F59E0B;--danger:#EF4444;--info:#3B82F6;--gold:#D4AF37;
+  --sans:'Segoe UI',system-ui,-apple-system,sans-serif;--mono:'SF Mono',Consolas,monospace;
+  --r:8px;--rl:14px;--ease:cubic-bezier(0.16,1,0.3,1);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
 html,body{height:100%}
@@ -132,7 +129,6 @@ ul{list-style:none}
 
 .card{background:var(--bg1);border:1px solid var(--line);border-radius:var(--rl);padding:18px;transition:border-color .15s}
 .card:hover{border-color:var(--line2)}
-.card-pad-l{padding:24px}
 .card-h{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
 .card-t{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
 .card-s{font-size:11px;color:var(--inkL)}
@@ -168,11 +164,6 @@ ul{list-style:none}
 .chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
 .chip-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
 
-.seg{display:inline-flex;gap:1px;padding:2px;background:var(--bg2);border-radius:6px;border:1px solid var(--line)}
-.seg-btn{padding:4px 10px;border-radius:4px;font-size:11px;font-weight:500;color:var(--inkM);transition:all .15s;white-space:nowrap}
-.seg-btn:hover{color:var(--ink)}
-.seg-btn.on{background:var(--bg3);color:var(--ink)}
-
 .progress{height:4px;background:var(--bg2);border-radius:2px;overflow:hidden}
 .progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .5s var(--ease)}
 .progress-fill.ok{background:var(--success)}
@@ -197,35 +188,111 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
 .av-l{width:48px;height:48px;font-size:14px}
 .av-sm{width:22px;height:22px;font-size:8px}
 
-.empty{padding:48px 20px;text-align:center}
-.empty-ico{font-size:36px;opacity:.3;margin-bottom:12px}
-.empty-t{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px}
-.empty-d{font-size:12px;color:var(--inkM);max-width:320px;margin:0 auto}
+/* ═══════════════════════════════════════════════════════
+   CINEMATIC POSTER & GLASS UI
+   ═══════════════════════════════════════════════════════ */
+.poster-hero {
+  position: relative;
+  border-radius: var(--rl);
+  overflow: hidden;
+  border: 1px solid var(--line2);
+  margin-bottom: 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  background: #000;
+}
+.poster-hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  min-height: 400px;
+  max-height: 75vh;
+  opacity: 0.9;
+  transition: transform 0.5s var(--ease);
+}
+.poster-hero:hover img {
+  transform: scale(1.02);
+}
+.poster-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(8,8,10,0.95) 0%, rgba(8,8,10,0.4) 60%, rgba(8,8,10,0) 100%),
+              linear-gradient(to top, rgba(8,8,10,1) 0%, rgba(8,8,10,0) 40%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px;
+  pointer-events: none;
+}
+.poster-content {
+  pointer-events: auto;
+  max-width: 500px;
+  animation: slideUp 0.8s var(--ease) forwards;
+}
+@keyframes slideUp { to { transform: translateY(0); opacity: 1; } }
+
+.poster-tagline {
+  font-size: 11px; font-weight: 700; letter-spacing: 4px;
+  color: var(--accent); margin-bottom: 12px; text-transform: uppercase;
+  display: flex; align-items: center; gap: 8px;
+}
+.poster-tagline::before { content: ''; width: 24px; height: 2px; background: var(--accent); }
+.poster-title {
+  font-size: 48px; font-weight: 800; line-height: 1;
+  letter-spacing: -0.02em; color: #fff; margin-bottom: 16px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+}
+.poster-title span {
+  color: var(--accent); display: block; font-size: 18px;
+  letter-spacing: 2px; font-weight: 600; margin-top: 8px;
+  text-shadow: none;
+}
+.poster-desc {
+  font-size: 14px; color: rgba(255,255,255,0.7);
+  line-height: 1.6; margin-bottom: 24px;
+}
+.poster-actions { display: flex; gap: 12px; }
+
+/* Glassmorphism Cards */
+.glass-card {
+  background: rgba(20, 20, 25, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  transition: all 0.3s var(--ease);
+}
+.glass-card:hover {
+  background: rgba(30, 30, 35, 0.6);
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+}
+
+/* Live Pulse */
+.live-pulse {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 600; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.live-dot {
+  width: 6px; height: 6px; background: var(--accent);
+  border-radius: 50%; animation: pulse-ring 1.5s infinite;
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(255,77,0,0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(255,77,0,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,77,0,0); }
+}
 
 /* ═══════════════════════════════════════════════════════
-   DASHBOARD
+   CHARTS, TACTICS, ACADEMY, GAME (from previous)
    ═══════════════════════════════════════════════════════ */
-.hero{background:linear-gradient(135deg,var(--bg1) 0%,var(--bg3) 100%);border:1px solid var(--line);border-radius:var(--rl);padding:28px;position:relative;overflow:hidden;margin-bottom:16px}
-.hero::before{content:'';position:absolute;top:-100px;right:-80px;width:280px;height:280px;background:radial-gradient(circle,var(--accentW),transparent 70%);pointer-events:none}
-.hero-g{font-size:12px;color:var(--inkM);margin-bottom:6px}
-.hero-n{font-size:32px;font-weight:600;letter-spacing:-.02em;color:var(--ink);line-height:1.1;margin-bottom:8px}
-.hero-x{font-size:13px;color:var(--inkM);max-width:520px;margin-bottom:20px;line-height:1.6}
-.hero-a{display:flex;gap:8px;flex-wrap:wrap}
-
-.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
-@media(max-width:1000px){.kpi-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:500px){.kpi-grid{grid-template-columns:1fr}}
-
 .chart-wrap{position:relative;width:100%}
 .chart-wrap canvas{display:block;width:100%!important}
-
 .legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:11px;color:var(--inkM)}
 .legend-i{display:flex;align-items:center;gap:5px}
 .legend-d{width:8px;height:8px;border-radius:2px}
 
-/* ═══════════════════════════════════════════════════════
-   TACTICS
-   ═══════════════════════════════════════════════════════ */
 .tactics-grid{display:grid;grid-template-columns:1fr 280px;gap:14px}
 @media(max-width:900px){.tactics-grid{grid-template-columns:1fr}}
 .court{position:relative;aspect-ratio:16/10;background:linear-gradient(180deg,#0A2E24 0%,#051510 100%);border:1px solid var(--line2);border-radius:var(--rl);overflow:hidden;cursor:crosshair}
@@ -252,9 +319,6 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
 .shot-type-d.defense{background:var(--info)}
 .shot-type-d.serve{background:var(--gold)}
 
-/* ═══════════════════════════════════════════════════════
-   ACADEMY
-   ═══════════════════════════════════════════════════════ */
 .lesson-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 @media(max-width:1000px){.lesson-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.lesson-grid{grid-template-columns:1fr}}
@@ -270,9 +334,6 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
 .lesson-d{font-size:11px;color:var(--inkM);line-height:1.55;flex:1}
 .lesson-m{display:flex;gap:10px;padding-top:10px;border-top:1px solid var(--line);font-size:10px;font-family:var(--mono);color:var(--inkL);letter-spacing:.5px}
 
-/* ═══════════════════════════════════════════════════════
-   CALCULATOR
-   ═══════════════════════════════════════════════════════ */
 .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:800px){.calc-grid{grid-template-columns:1fr}}
 .calc-form{display:flex;flex-direction:column;gap:16px}
@@ -287,9 +348,6 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
 .calc-spec-f{height:100%;background:var(--accent);border-radius:2px;transition:width .5s var(--ease)}
 .calc-spec-v{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink);min-width:28px;text-align:right}
 
-/* ═══════════════════════════════════════════════════════
-   RANKING
-   ═══════════════════════════════════════════════════════ */
 .rank-tbl{background:var(--bg1);border:1px solid var(--line);border-radius:var(--rl);overflow:hidden}
 .rank-row{display:grid;grid-template-columns:50px 1fr 100px 80px 60px 60px;gap:12px;padding:12px 18px;align-items:center;border-bottom:1px solid var(--line);transition:background .15s}
 .rank-row:last-child{border-bottom:none}
@@ -306,9 +364,7 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
 .rank-v{font-family:var(--mono);font-size:12px;color:var(--ink);text-align:right}
 .rank-v.strong{color:var(--ink);font-weight:500}
 
-/* ═══════════════════════════════════════════════════════
-   MATCHES
-   ═══════════════════════════════════════════════════════ */
+/* Matches */
 .match-card{display:grid;grid-template-columns:70px 1fr auto auto;gap:14px;align-items:center;padding:14px;background:var(--bg1);border:1px solid var(--line);border-radius:10px;margin-bottom:10px;transition:all .15s;cursor:pointer}
 .match-card:hover{border-color:var(--line2);transform:translateX(2px)}
 .match-res{font-family:var(--mono);font-size:15px;font-weight:600;text-align:center;padding:4px 8px;border-radius:6px}
@@ -317,9 +373,6 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
 .match-opp{font-size:12px;font-weight:600;color:var(--ink)}
 .match-meta{font-size:10px;color:var(--inkL);margin-top:2px}
 
-/* ═══════════════════════════════════════════════════════
-   TRAINING
-   ═══════════════════════════════════════════════════════ */
 .timer-big{font-family:var(--mono);font-size:64px;font-weight:500;letter-spacing:-.02em;color:var(--ink);text-align:center;font-variant-numeric:tabular-nums;margin:24px 0;line-height:1}
 .drill-card{background:var(--bg1);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:all .15s}
 .drill-card:hover{border-color:var(--line2)}
@@ -328,9 +381,6 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
 .drill-d{font-size:11px;color:var(--inkM);flex:1}
 .drill-m{display:flex;gap:10px;font-size:9px;color:var(--inkL);font-family:var(--mono)}
 
-/* ═══════════════════════════════════════════════════════
-   PROFILE
-   ═══════════════════════════════════════════════════════ */
 .profile-hero{display:flex;align-items:center;gap:24px;padding:24px;background:linear-gradient(135deg,var(--bg1),var(--bg3));border:1px solid var(--line);border-radius:var(--rl);margin-bottom:16px;flex-wrap:wrap}
 .profile-av{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accentD));display:grid;place-items:center;font-family:var(--mono);font-size:24px;font-weight:600;color:#fff;flex-shrink:0;box-shadow:0 0 32px var(--accentW)}
 .profile-info{flex:1;min-width:200px}
@@ -341,26 +391,6 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
 .profile-stat-v{font-family:var(--mono);font-size:16px;font-weight:500;color:var(--ink)}
 .profile-stat-l{font-size:9px;color:var(--inkL);letter-spacing:1px;text-transform:uppercase}
 
-/* ═══════════════════════════════════════════════════════
-   SHOP
-   ═══════════════════════════════════════════════════════ */
-.shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-@media(max-width:1100px){.shop-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:800px){.shop-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:500px){.shop-grid{grid-template-columns:1fr}}
-.product{background:var(--bg1);border:1px solid var(--line);border-radius:10px;overflow:hidden;transition:all .25s;display:flex;flex-direction:column}
-.product:hover{border-color:var(--line2);transform:translateY(-3px)}
-.product-thumb{aspect-ratio:1;background:linear-gradient(135deg,var(--bg3),var(--bg2));display:grid;place-items:center;font-size:48px;position:relative}
-.product-badge{position:absolute;top:10px;right:10px;font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 6px;border-radius:3px;background:var(--accent);color:#fff}
-.product-body{padding:12px;flex:1;display:flex;flex-direction:column;gap:4px}
-.product-brand{font-size:9px;color:var(--inkL);letter-spacing:1px;text-transform:uppercase}
-.product-name{font-size:12px;font-weight:600;color:var(--ink)}
-.product-rating{font-size:10px;color:var(--gold)}
-.product-price{font-family:var(--mono);font-size:14px;font-weight:500;color:var(--accent);margin-top:auto}
-
-/* ═══════════════════════════════════════════════════════
-   COMMUNITY
-   ═══════════════════════════════════════════════════════ */
 .feed{display:flex;flex-direction:column;gap:12px;max-width:680px}
 .post{background:var(--bg1);border:1px solid var(--line);border-radius:10px;padding:14px}
 .post-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
@@ -371,9 +401,6 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
 .post-action{display:flex;align-items:center;gap:4px;cursor:pointer;transition:color .15s}
 .post-action:hover{color:var(--accent)}
 
-/* ═══════════════════════════════════════════════════════
-   SETTINGS
-   ═══════════════════════════════════════════════════════ */
 .settings-grid{display:flex;gap:24px}
 @media(max-width:800px){.settings-grid{flex-direction:column}}
 .settings-nav{display:flex;flex-direction:column;gap:1px;width:180px;flex-shrink:0}
@@ -389,9 +416,6 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
 .toggle.on{background:var(--accent);border-color:var(--accent)}
 .toggle.on::after{left:calc(100% - 15px);background:#fff}
 
-/* ═══════════════════════════════════════════════════════
-   ADMIN
-   ═══════════════════════════════════════════════════════ */
 .admin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
 @media(max-width:800px){.admin-grid{grid-template-columns:1fr}}
 .kpi{background:var(--bg1);border:1px solid var(--line);border-radius:10px;padding:16px}
@@ -405,9 +429,7 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
 .tbl tbody tr:hover{background:var(--bg2)}
 .tbl tbody tr:last-child td{border-bottom:none}
 
-/* ═══════════════════════════════════════════════════════
-   GAME ARENA
-   ═══════════════════════════════════════════════════════ */
+/* GAME ARENA */
 .game-stage{position:relative;background:#000;border-radius:var(--rl);overflow:hidden;aspect-ratio:16/9;border:1px solid var(--line2)}
 #gameCanvas{width:100%;height:100%;display:block;cursor:none;touch-action:none}
 .game-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:5;transition:opacity .3s}
@@ -425,14 +447,11 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
 .game-stat{font-family:var(--mono);font-size:10px;color:#aaa;letter-spacing:.5px}
 .game-stat b{color:var(--accent)}
 .game-msg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:32px;font-weight:800;color:#fff;text-shadow:0 4px 20px rgba(0,0,0,.8);pointer-events:none;z-index:3;opacity:0;transition:opacity .3s;text-align:center}
-
 .game-controls{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
 .game-help{background:var(--bg1);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:14px;font-size:12px;color:var(--inkM);line-height:1.7}
 .game-help kbd{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 6px;background:var(--bg3);border:1px solid var(--line2);border-radius:4px;color:var(--ink);margin:0 2px;font-weight:500}
 
-/* ═══════════════════════════════════════════════════════
-   MODAL / TOAST / CMDK
-   ═══════════════════════════════════════════════════════ */
+/* MODALS & TOAST */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:5000;display:grid;place-items:center;padding:20px;opacity:0;visibility:hidden;transition:all .25s}
 .modal-bg.on{opacity:1;visibility:visible}
 .modal{background:var(--bg1);border:1px solid var(--line2);border-radius:var(--rl);width:100%;max-width:520px;max-height:85vh;overflow:auto;padding:24px;position:relative;transform:scale(.96);transition:transform .3s var(--ease);box-shadow:0 24px 64px rgba(0,0,0,.7)}
@@ -485,7 +504,7 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
 </head>
 <body>
 
-<!-- ═══════════ SPLASH ═══════════ -->
+<!-- SPLASH -->
 <div id="splash">
   <div class="splash-in">
     <div class="splash-ball"></div>
@@ -496,7 +515,7 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
   </div>
 </div>
 
-<!-- ═══════════ SHELL ═══════════ -->
+<!-- SHELL -->
 <div id="shell" style="display:none">
   <aside class="side">
     <div class="side-head">
@@ -547,7 +566,7 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
   </main>
 </div>
 
-<!-- ═══════════ NOTIF PANEL ═══════════ -->
+<!-- NOTIF PANEL -->
 <div class="notif-panel" id="notifPanel">
   <div class="notif-head">
     <h3>Notifications</h3>
@@ -556,7 +575,7 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
   <div class="notif-list" id="notifList"></div>
 </div>
 
-<!-- ═══════════ COMMAND PALETTE ═══════════ -->
+<!-- COMMAND PALETTE -->
 <div class="cmdk-bg" id="cmdkBg">
   <div class="cmdk">
     <div class="cmdk-in">
@@ -568,7 +587,7 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
   </div>
 </div>
 
-<!-- ═══════════ MODAL ═══════════ -->
+<!-- MODAL -->
 <div class="modal-bg" id="modalBg">
   <div class="modal">
     <button class="modal-close" id="modalClose">✕</button>
@@ -576,15 +595,13 @@ select.input{cursor:pointer;appearance:none;background-image:url("data:image/svg
   </div>
 </div>
 
-<!-- ═══════════ TOASTS ═══════════ -->
+<!-- TOASTS -->
 <div class="toast-stack" id="toastStack"></div>
 
 <script>
 /* ═══════════════════════════════════════════════════════════
-   DANESH SPIN · Complete Single-File App
+   UTILS & STORE
    ═══════════════════════════════════════════════════════════ */
-
-/* ─── UTILS ─── */
 const $ = (s,c=document)=>c.querySelector(s);
 const $$ = (s,c=document)=>Array.from(c.querySelectorAll(s));
 function el(tag, attrs={}, ...kids){
@@ -611,9 +628,6 @@ const fmtD = (s)=>{ const d=new Date(s); return isNaN(d)?s:d.toLocaleDateString(
 const initials = (n='')=> n.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase()||'—';
 const rnd = (a=0,b=1)=> a+Math.random()*(b-a);
 const rndInt = (a,b)=> Math.floor(rnd(a,b+1));
-const pick = arr => arr[rndInt(0,arr.length-1)];
-
-function debounce(fn,w=200){let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),w)}}
 
 function toast(msg, kind='', dur=2800){
   const stack = $('#toastStack');
@@ -661,8 +675,7 @@ function confirmDlg(msg,{title='Confirm',ok='Confirm',danger=false}={}){
   });
 }
 
-/* ─── STORE ─── */
-const KEY = 'danesh-spin.v3';
+const KEY = 'danesh-spin.v4';
 const DEFAULT_STATE = {
   user:{ id:'u-1', name:'Kian Danesh', handle:'@kiandanesh', role:'Pro Player', tier:'Pro', avatar:'KD', country:'IRN', bio:'Attacking left-hander. Forehand-dominant. Chasing the national ladder.', style:'Offensive', grip:'Shakehand', blade:'DANESH Apex Carbon', rubberFH:'Tenergy 05 · 2.1mm', rubberBH:'Dignics 09C · 2.0mm' },
   prefs:{ theme:'dark', lang:'en', contrast:'normal', sidebarCollapsed:false, motion:'full', notifications:true, sounds:false },
@@ -696,7 +709,6 @@ const DEFAULT_STATE = {
     {id:'g-2',title:'Train 20h/week for 4 weeks',progress:74,target:100},
     {id:'g-3',title:'Win a regional event',progress:40,target:100}
   ],
-  cart:[],
   gameStats:{ highScore:0, wins:0, losses:0 }
 };
 
@@ -733,13 +745,13 @@ const Store = (() => {
     push:(p,item)=>{ const a=getPath(state,p); if(Array.isArray(a)){ a.push(item); notify(p);} },
     remove:(p,pred)=>{ const a=getPath(state,p); if(Array.isArray(a)){ setPath(state,p,a.filter((x,i)=>typeof pred==='function'?!pred(x,i):i!==pred)); notify(p);} },
     subscribe:(fn)=>{ listeners.add(fn); return ()=>listeners.delete(fn); },
-    reset:()=>{ state=structuredClone(DEFAULT_STATE); save(); notify('*'); },
-    export:()=> JSON.stringify(state,null,2),
-    import:(j)=>{ try{ state=deepMerge(structuredClone(DEFAULT_STATE),JSON.parse(j)); notify('*'); return true; }catch{return false;} }
+    reset:()=>{ state=structuredClone(DEFAULT_STATE); save(); notify('*'); }
   };
 })();
 
-/* ─── CHARTS ─── */
+/* ═══════════════════════════════════════════════════════
+   CHARTS
+   ═══════════════════════════════════════════════════════ */
 const DPR = window.devicePixelRatio || 1;
 const Charts = {
   setup(canvas,h){
@@ -812,59 +824,6 @@ const Charts = {
       ctx.fillStyle = color;
       for(let i=0;i<total;i++){ ctx.beginPath(); ctx.arc(px(i),py(data[i]),2.5,0,Math.PI*2); ctx.fill(); }
       if(progress<1){ progress = Math.min(1,(performance.now()-start)/700); requestAnimationFrame(draw.bind(this)); }
-    }
-    draw.call(this);
-  },
-  bar(canvas,opts){
-    const {data=[],labels=[],height=180,color='#FF4D00'} = opts;
-    const {ctx,w,h} = this.setup(canvas,height);
-    const pad = {t:14,r:12,b:24,l:32};
-    const cw = w-pad.l-pad.r, ch = h-pad.t-pad.b;
-    const mx = Math.max(...data,1)*1.15;
-    const bw = (cw/data.length)*0.6;
-    const gap = cw/data.length;
-    let progress = 0; const start = performance.now();
-    function draw(){
-      ctx.clearRect(0,0,w,h);
-      ctx.strokeStyle = this.css('--line','rgba(255,255,255,.06)');
-      ctx.lineWidth = 1;
-      for(let i=0;i<=4;i++){
-        const y = pad.t+(i/4)*ch;
-        ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(w-pad.r,y); ctx.stroke();
-      }
-      ctx.fillStyle = this.css('--inkL','#4E4B47');
-      ctx.font = '10px monospace';
-      ctx.textAlign = 'right';
-      for(let i=0;i<=4;i++){
-        const v = mx*(4-i)/4;
-        const y = pad.t+(i/4)*ch;
-        ctx.fillText(Math.round(v), pad.l-5, y+3);
-      }
-      ctx.textAlign = 'center';
-      data.forEach((v,i)=>{
-        const bh = (v/mx)*ch*progress;
-        const x = pad.l+i*gap+(gap-bw)/2;
-        const y = pad.t+ch-bh;
-        const gr = ctx.createLinearGradient(0,y,0,pad.t+ch);
-        gr.addColorStop(0,color);
-        gr.addColorStop(1,color+'60');
-        ctx.fillStyle = gr;
-        const r = Math.min(3,bw/2);
-        ctx.beginPath();
-        ctx.moveTo(x+r,y);
-        ctx.lineTo(x+bw-r,y);
-        ctx.quadraticCurveTo(x+bw,y,x+bw,y+r);
-        ctx.lineTo(x+bw,pad.t+ch);
-        ctx.lineTo(x,pad.t+ch);
-        ctx.lineTo(x,y+r);
-        ctx.quadraticCurveTo(x,y,x+r,y);
-        ctx.closePath(); ctx.fill();
-        if(labels[i]){
-          ctx.fillStyle = this.css('--inkL','#4E4B47');
-          ctx.fillText(labels[i], x+bw/2, h-6);
-        }
-      });
-      if(progress<1){ progress = Math.min(1,(performance.now()-start)/600); requestAnimationFrame(draw.bind(this)); }
     }
     draw.call(this);
   },
@@ -957,7 +916,9 @@ const Charts = {
   }
 };
 
-/* ─── ROUTER ─── */
+/* ═══════════════════════════════════════════════════════
+   NAV & ROUTER
+   ═══════════════════════════════════════════════════════ */
 const NAV = [
   {section:'Core'},
   {path:'dashboard', label:'Dashboard', icon:'dashboard'},
@@ -973,7 +934,6 @@ const NAV = [
   {path:'ranking', label:'Ranking', icon:'ranking'},
   {section:'Lifestyle'},
   {path:'profile', label:'Profile', icon:'profile'},
-  {path:'shop', label:'Shop', icon:'shop'},
   {path:'community', label:'Community', icon:'community'},
   {section:'System'},
   {path:'settings', label:'Settings', icon:'settings'},
@@ -991,7 +951,6 @@ const ICONS = {
   matches:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 4v6a6 6 0 0 0 12 0V4"/><path d="M4 4h4M16 4h4"/><path d="M12 16v4M9 20h6"/></svg>',
   training:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
   profile:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>',
-  shop:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18l-2 12H5L3 7z"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg>',
   community:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M2 21c0-3.5 3.5-6 7-6s7 2.5 7 6"/><path d="M22 21c0-2.5-2-4.5-5-4.5"/></svg>',
   settings:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>',
   admin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
@@ -1000,9 +959,7 @@ const ICONS = {
 const Router = (() => {
   const routes = {};
   let current = null;
-  function register(path, render, meta={}){
-    routes[path] = {render, meta};
-  }
+  function register(path, render, meta={}){ routes[path] = {render, meta}; }
   function buildNav(){
     const nav = $('#sideNav');
     clear(nav);
@@ -1048,29 +1005,33 @@ const Router = (() => {
 })();
 
 /* ═══════════════════════════════════════════════════════
-   PAGE: DASHBOARD
+   PAGES
    ═══════════════════════════════════════════════════════ */
+
+// --- DASHBOARD ---
 Router.register('dashboard', () => {
   const user = Store.get('user');
   const stats = Store.get('stats');
   const goals = Store.get('goals');
   const matches = Store.get('matches').slice(0,3);
-  const drills = Store.get('drills').filter(d=>!d.done).slice(0,3);
   const hour = new Date().getHours();
   const greet = hour<12?'Good morning':hour<18?'Good afternoon':'Good evening';
   const fname = user.name.split(' ')[0];
-
   const root = el('div',{});
 
-  // HERO
-  root.appendChild(el('div',{class:'hero'},
-    el('div',{class:'hero-g'},`${greet}, ${fname}.`),
-    el('div',{class:'hero-n'},`${stats.currentStreak}-day streak. Keep it alive.`),
-    el('div',{class:'hero-x'},`You're ranked #${stats.globalRank} globally in ${stats.rankTier}. Win rate ${stats.winRateDelta>0?'up':'down'} ${Math.abs(stats.winRateDelta).toFixed(1)}% this month.`),
-    el('div',{class:'hero-a'},
-      el('button',{class:'btn btn-p',onclick:()=>Router.navigate('matches')},'Log a match'),
-      el('button',{class:'btn btn-s',onclick:()=>Router.navigate('training')},'Start a drill'),
-      el('button',{class:'btn btn-g',onclick:()=>Router.navigate('game')},'Play Arena →')
+  // Poster
+  root.appendChild(el('div',{class:'poster-hero'},
+    el('img',{src:'poster.jpg', alt:'Table Tennis Legends', onerror:"this.src='https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?q=80&w=2000&auto=format&fit=crop'"}),
+    el('div',{class:'poster-overlay'},
+      el('div',{class:'poster-content'},
+        el('div',{class:'poster-tagline'},'Performance OS · Pro Edition'),
+        el('div',{class:'poster-title'},`${greet}, ${fname}.`, el('span',{},`Rank #${stats.globalRank} Global · ${stats.rankTier}`)),
+        el('div',{class:'poster-desc'},`You're on a ${stats.currentStreak}-day streak. Every shot, every rally, decoded. The arena is waiting.`),
+        el('div',{class:'poster-actions'},
+          el('button',{class:'btn btn-p',onclick:()=>Router.navigate('game')},'▶ Enter Arena'),
+          el('button',{class:'btn btn-s',style:{background:'rgba(255,255,255,0.1)',backdropFilter:'blur(10px)',border:'1px solid rgba(255,255,255,0.2)'},onclick:()=>Router.navigate('analytics')},'View Analytics')
+        )
+      )
     )
   ));
 
@@ -1082,9 +1043,9 @@ Router.register('dashboard', () => {
     {l:'Hours trained',v:fmtN(stats.hoursTrained),d:12.4,sfx:'h'},
     {l:'Rank points',v:fmtN(stats.rankPoints),d:340,sfx:'pts'}
   ].forEach(k=>{
-    kpis.appendChild(el('div',{class:'card'},
+    kpis.appendChild(el('div',{class:'card glass-card'},
       el('div',{class:'stat'},
-        el('div',{class:'stat-l'},k.l),
+        el('div',{class:'stat-l',style:{display:'flex',justifyContent:'space-between'}},k.l, k.d ? el('span',{class:'live-pulse'}, el('span',{class:'live-dot'}), 'Live') : ''),
         el('div',{class:'stat-v'},k.v),
         k.d!=null ? el('div',{class:'stat-d '+(k.d>0?'up':k.d<0?'dn':'flat')}, `${k.d>0?'▲':k.d<0?'▼':'·'} ${Math.abs(k.d)}${k.sfx||''}`) : null
       )
@@ -1092,19 +1053,19 @@ Router.register('dashboard', () => {
   });
   root.appendChild(kpis);
 
-  // Charts row
-  const charts = el('div',{class:'grid g32'});
-  charts.appendChild(el('div',{class:'card'},
+  // Charts
+  const charts = el('div',{class:'grid g32',style:{marginTop:'14px'}});
+  charts.appendChild(el('div',{class:'card glass-card'},
     el('div',{class:'card-h'},
       el('div',{},
         el('div',{class:'card-t'},'Win rate · last 30 days'),
         el('div',{class:'card-s'},'Rolling average across match types')
       ),
-      el('div',{class:'stat-v',style:{fontSize:'22px'}},fmtP(stats.winRate))
+      el('div',{class:'stat-v',style:{fontSize:'22px',color:'var(--accent)'}},fmtP(stats.winRate))
     ),
     el('div',{class:'chart-wrap'},el('canvas',{id:'cWin'}))
   ));
-  charts.appendChild(el('div',{class:'card'},
+  charts.appendChild(el('div',{class:'card glass-card'},
     el('div',{class:'card-h'},
       el('div',{},el('div',{class:'card-t'},'Shot composition'))
     ),
@@ -1117,22 +1078,9 @@ Router.register('dashboard', () => {
   ));
   root.appendChild(charts);
 
-  // Volume
-  root.appendChild(el('div',{class:'card',style:{marginTop:'14px'}},
-    el('div',{class:'card-h'},
-      el('div',{},
-        el('div',{class:'card-t'},'Weekly training volume'),
-        el('div',{class:'card-s'},'Hours per session · last 7 days')
-      ),
-      el('div',{class:'stat-v',style:{fontSize:'20px'}},fmtN(stats.weeklyVolume.reduce((a,b)=>a+b,0),1)+'h')
-    ),
-    el('div',{class:'chart-wrap'},el('canvas',{id:'cVol'}))
-  ));
-
-  // Bottom row
+  // Bottom
   const bottom = el('div',{class:'grid g3',style:{marginTop:'14px'}});
-
-  const goalsCard = el('div',{class:'card'},
+  const goalsCard = el('div',{class:'card glass-card'},
     el('div',{class:'card-h'},
       el('div',{},el('div',{class:'card-t'},'Active goals')),
       el('button',{class:'btn btn-g btn-sm',onclick:()=>{
@@ -1145,14 +1093,14 @@ Router.register('dashboard', () => {
     goalsCard.appendChild(el('div',{style:{marginBottom:'12px'}},
       el('div',{style:{display:'flex',justifyContent:'space-between',marginBottom:'5px'}},
         el('div',{style:{fontSize:'12px',color:'var(--ink)'}},g.title),
-        el('div',{style:{fontFamily:'var(--mono)',fontSize:'11px',color:'var(--inkM)'}},g.progress+'%')
+        el('div',{style:{fontFamily:'var(--mono)',fontSize:'11px',color:'var(--accent)'}},g.progress+'%')
       ),
       el('div',{class:'progress'},el('div',{class:'progress-fill',style:{width:g.progress+'%'}}))
     ));
   });
   bottom.appendChild(goalsCard);
 
-  const matchesCard = el('div',{class:'card'},
+  const matchesCard = el('div',{class:'card glass-card'},
     el('div',{class:'card-h'},
       el('div',{},el('div',{class:'card-t'},'Recent matches')),
       el('button',{class:'btn btn-g btn-sm',onclick:()=>Router.navigate('matches')},'All →')
@@ -1169,48 +1117,29 @@ Router.register('dashboard', () => {
   });
   bottom.appendChild(matchesCard);
 
-  const drillsCard = el('div',{class:'card'},
-    el('div',{class:'card-h'},
-      el('div',{},el('div',{class:'card-t'},'Next drills')),
-      el('button',{class:'btn btn-g btn-sm',onclick:()=>Router.navigate('training')},'All →')
+  bottom.appendChild(el('div',{class:'card glass-card'},
+    el('div',{class:'card-h'},el('div',{},el('div',{class:'card-t'},'Pro Tip'))),
+    el('div',{style:{fontSize:'13px',color:'var(--inkM)',lineHeight:'1.8',fontStyle:'italic'}},
+      '"The forehand loop is not about power. It is about timing. Let the ball come to you, engage your core, and snap."',
+      el('div',{style:{marginTop:'12px',fontStyle:'normal',fontWeight:'600',color:'var(--ink)'}},'— Coach A. Rezaei')
     )
-  );
-  drills.forEach(d=>{
-    drillsCard.appendChild(el('div',{class:'row'},
-      el('div',{class:'row-flex'},
-        el('div',{class:'row-t'},d.name),
-        el('div',{class:'row-s'},`${d.duration} min · ${d.reps} reps`)
-      ),
-      el('button',{class:'btn btn-g btn-sm',onclick:()=>{
-        Store.update('drills',arr=>arr.map(x=>x.id===d.id?{...x,done:true}:x));
-        toast('Drill completed!','ok');
-        Router.navigate('dashboard');
-      }},'✓')
-    ));
-  });
-  bottom.appendChild(drillsCard);
+  ));
   root.appendChild(bottom);
 
-  // Render charts
   setTimeout(()=>{
     const c1 = document.getElementById('cWin');
     if(c1) Charts.line(c1,{data:[62,65,63,68,71,69,74,76,75,78,76,80,82,79,83,85,82,84,87,88],labels:['1','5','10','15','20'],height:220,color:'#FF4D00'});
     const c2 = document.getElementById('cDist');
     if(c2) Charts.donut(c2,{data:[45,30,25],colors:['#FF4D00','#3B82F6','#D4AF37'],height:180,center:'1,420',sub:'SHOTS'});
-    const c3 = document.getElementById('cVol');
-    if(c3) Charts.bar(c3,{data:stats.weeklyVolume,labels:['MON','TUE','WED','THU','FRI','SAT','SUN'],height:180,color:'#FF4D00'});
   },150);
 
   return root;
 },{title:'Dashboard'});
 
-/* ═══════════════════════════════════════════════════════
-   PAGE: ANALYTICS
-   ═══════════════════════════════════════════════════════ */
+// --- ANALYTICS ---
 Router.register('analytics', () => {
   const stats = Store.get('stats');
   const root = el('div',{});
-
   root.appendChild(el('div',{class:'page-head'},
     el('div',{class:'page-head-l'},
       el('div',{class:'eyebrow'},'Analytics Engine'),
@@ -1221,13 +1150,12 @@ Router.register('analytics', () => {
       el('button',{class:'btn btn-s btn-sm',onclick:()=>toast('Report exported.','ok')},'Export')
     )
   ));
-
   const top = el('div',{class:'grid g2'});
-  top.appendChild(el('div',{class:'card'},
+  top.appendChild(el('div',{class:'card glass-card'},
     el('div',{class:'card-h'},el('div',{},el('div',{class:'card-t'},'Player profile · radar'))),
     el('div',{class:'chart-wrap',style:{height:'240px'}},el('canvas',{id:'cRadar'}))
   ));
-  top.appendChild(el('div',{class:'card'},
+  top.appendChild(el('div',{class:'card glass-card'},
     el('div',{class:'card-h'},el('div',{},el('div',{class:'card-t'},'Shot placement heatmap'),el('div',{class:'card-s'},'Distribution across table'))),
     el('div',{style:{display:'grid',gridTemplateColumns:'repeat(20,1fr)',gap:'2px',padding:'8px 0'}},
       ...Array.from({length:100},(_,i)=>{
@@ -1238,49 +1166,27 @@ Router.register('analytics', () => {
     )
   ));
   root.appendChild(top);
-
-  root.appendChild(el('div',{class:'card',style:{marginTop:'14px'}},
+  root.appendChild(el('div',{class:'card glass-card',style:{marginTop:'14px'}},
     el('div',{class:'card-h'},
       el('div',{},el('div',{class:'card-t'},'Win rate vs. points scored'),el('div',{class:'card-s'},'Last 30 days')),
-      el('div',{class:'stat-v',style:{fontSize:'20px'}},fmtP(stats.winRate))
+      el('div',{class:'stat-v',style:{fontSize:'20px',color:'var(--accent)'}},fmtP(stats.winRate))
     ),
     el('div',{class:'chart-wrap'},el('canvas',{id:'cCmp'}))
   ));
-
-  const btm = el('div',{class:'kpi-grid',style:{marginTop:'14px'}});
-  [
-    {l:'Avg. rally length',v:'4.2',u:'shots'},
-    {l:'Best shot',v:'Forehand loop',u:''},
-    {l:'Weakest shot',v:'Backhand flick',u:''},
-    {l:'Consistency',v:'84',u:'/100'}
-  ].forEach(s=>{
-    btm.appendChild(el('div',{class:'card'},
-      el('div',{class:'stat'},
-        el('div',{class:'stat-l'},s.l),
-        el('div',{class:'stat-v',style:{fontSize:'20px'}},s.v, s.u?el('span',{class:'stat-u'},s.u):null)
-      )
-    ));
-  });
-  root.appendChild(btm);
-
   setTimeout(()=>{
     const r = document.getElementById('cRadar');
     if(r) Charts.radar(r,{values:[88,72,85,78,90,68],labels:['SPEED','CONTROL','SPIN','FOOTWORK','MENTAL','STAMINA'],height:240,color:'#FF4D00'});
     const c = document.getElementById('cCmp');
     if(c) Charts.line(c,{data:[62,65,63,68,71,69,74,76,75,78,76,80,82,79,83,85],labels:['1','5','10','15','20'],height:240,color:'#3B82F6'});
   },150);
-
   return root;
 },{title:'Analytics'});
 
-/* ═══════════════════════════════════════════════════════
-   PAGE: TACTICS
-   ═══════════════════════════════════════════════════════ */
+// --- TACTICS ---
 Router.register('tactics', () => {
   let curType = Store.get('tactics.type') || 'attack';
   const shots = [];
   const root = el('div',{});
-
   root.appendChild(el('div',{class:'page-head'},
     el('div',{class:'page-head-l'},
       el('div',{class:'eyebrow'},'Tactical Designer'),
@@ -1288,51 +1194,27 @@ Router.register('tactics', () => {
       el('p',{class:'sub'},'Plot shots on a live court. Select a type, click anywhere to place.')
     ),
     el('div',{class:'head-acts'},
-      el('button',{class:'btn btn-g btn-sm',onclick:()=>{
-        shots.forEach(s=>{ s.dot.remove(); s.path.remove(); });
-        shots.length = 0;
-      }},'Clear'),
+      el('button',{class:'btn btn-g btn-sm',onclick:()=>{ shots.forEach(s=>{ s.dot.remove(); s.path.remove(); }); shots.length = 0; }},'Clear'),
       el('button',{class:'btn btn-s btn-sm',onclick:()=>toast('Saved to notebook.','ok')},'Save pattern')
     )
   ));
-
   const grid = el('div',{class:'tactics-grid'});
   const court = el('div',{class:'court',id:'court'},
-    el('div',{class:'court-in'},
-      el('div',{class:'court-net'}),
-      el('div',{class:'court-mid'})
-    ),
+    el('div',{class:'court-in'}, el('div',{class:'court-net'}), el('div',{class:'court-mid'}) ),
     el('div',{class:'court-hint'},'Click to place shots')
   );
   grid.appendChild(court);
-
   const side = el('div',{class:'tactics-side'});
-  [
-    {t:'attack',l:'Forehand Attack'},
-    {t:'defense',l:'Backhand Block'},
-    {t:'serve',l:'Serve / Receive'}
-  ].forEach(({t,l})=>{
+  [{t:'attack',l:'Forehand Attack'},{t:'defense',l:'Backhand Block'},{t:'serve',l:'Serve / Receive'}].forEach(({t,l})=>{
     const btn = el('button',{
       class:'shot-type '+(t===curType?'on':''),
-      onclick:()=>{
-        curType = t;
-        Store.set('tactics.type',t);
-        side.querySelectorAll('.shot-type').forEach(b=>b.classList.remove('on'));
-        btn.classList.add('on');
-      }
-    },
-      el('span',{class:'shot-type-d '+t}),
-      el('span',{},l)
-    );
+      onclick:()=>{ curType = t; Store.set('tactics.type',t); side.querySelectorAll('.shot-type').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); }
+    }, el('span',{class:'shot-type-d '+t}), el('span',{},l) );
     side.appendChild(btn);
   });
   side.appendChild(el('div',{style:{flex:1}}));
-  side.appendChild(el('div',{style:{padding:'12px',background:'var(--bg1)',borderRadius:'8px',fontSize:'11px',color:'var(--inkL)',lineHeight:'1.6'}},
-    'Tip: place shots to see how a pattern develops.'
-  ));
   grid.appendChild(side);
   root.appendChild(grid);
-
   setTimeout(()=>{
     const c = document.getElementById('court');
     if(!c) return;
@@ -1341,33 +1223,24 @@ Router.register('tactics', () => {
       const x = e.clientX-r.left, y = e.clientY-r.top;
       if(x<8||x>r.width-8||y<8||y>r.height-8) return;
       const dot = el('div',{class:'shot '+curType});
-      dot.style.left = x+'px';
-      dot.style.top = y+'px';
-      c.appendChild(dot);
+      dot.style.left = x+'px'; dot.style.top = y+'px'; c.appendChild(dot);
       const cx = r.width/2, cy = r.height/2;
       const dx = x-cx, dy = y-cy;
       const len = Math.hypot(dx,dy);
       const ang = Math.atan2(dy,dx)*180/Math.PI;
       const path = el('div',{class:'shot-path '+curType});
-      path.style.left = cx+'px';
-      path.style.top = cy+'px';
-      path.style.width = len+'px';
-      path.style.transform = `rotate(${ang}deg)`;
+      path.style.left = cx+'px'; path.style.top = cy+'px'; path.style.width = len+'px'; path.style.transform = `rotate(${ang}deg)`;
       c.appendChild(path);
       shots.push({dot,path});
       if(shots.length>30){ const o = shots.shift(); o.dot.remove(); o.path.remove(); }
     });
   },100);
-
   return root;
 },{title:'Tactics'});
 
-/* ═══════════════════════════════════════════════════════
-   PAGE: ARENA (GAME)
-   ═══════════════════════════════════════════════════════ */
+// --- ARENA (GAME) ---
 Router.register('game', () => {
   const root = el('div',{});
-
   root.appendChild(el('div',{class:'page-head'},
     el('div',{class:'page-head-l'},
       el('div',{class:'eyebrow'},'Interactive Arena'),
@@ -1379,7 +1252,6 @@ Router.register('game', () => {
       el('div',{class:'badge badge-g'},`High score: ${Store.get('gameStats.highScore')}`)
     )
   ));
-
   const stage = el('div',{class:'game-stage'},
     el('canvas',{id:'gameCanvas'}),
     el('div',{class:'game-hud'},
@@ -1402,7 +1274,6 @@ Router.register('game', () => {
     )
   );
   root.appendChild(stage);
-
   root.appendChild(el('div',{class:'game-controls'},
     el('button',{class:'btn btn-s',id:'gamePause'},'⏸ Pause'),
     el('button',{class:'btn btn-g',id:'gameReset'},'↺ Reset'),
@@ -1412,12 +1283,10 @@ Router.register('game', () => {
       el('button',{class:'seg-btn','data-diff':'hard'},'Hard')
     )
   ));
-
   root.appendChild(el('div',{class:'game-help'},
     el('div',{},el('strong',{},'Controls: '),'Move ',el('kbd',{},'Mouse'),' or ',el('kbd',{},'↑'),el('kbd',{},'↓'),' or ',el('kbd',{},'W'),el('kbd',{},'S'),'. Pause with ',el('kbd',{},'Space'),'.'),
     el('div',{style:{marginTop:'6px'}},el('strong',{},'Goal: '),'Score 11 points before the AI. The AI adapts to your playstyle.')
   ));
-
   setTimeout(()=>initGame(), 100);
 
   function initGame(){
@@ -1428,48 +1297,34 @@ Router.register('game', () => {
     let playerScore = 0, aiScore = 0, rally = 0, bestRally = 0, speed = 1;
     let difficulty = 'normal';
     let mouseY = 0, keys = {};
-
     const paddle = {x:0, y:0, w:12, h:80, baseH:80};
     const ai = {x:0, y:0, w:12, h:80, baseH:80};
     const ball = {x:0, y:0, vx:0, vy:0, r:8, baseSpeed:6};
     let particles = [];
-
     function resize(){
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * DPR;
       canvas.height = rect.height * DPR;
       ctx.setTransform(1,0,0,1,0,0);
       ctx.scale(DPR, DPR);
-      W = rect.width;
-      H = rect.height;
-      paddle.x = 20;
-      paddle.y = H/2 - paddle.h/2;
-      ai.x = W - 20 - ai.w;
-      ai.y = H/2 - ai.h/2;
+      W = rect.width; H = rect.height;
+      paddle.x = 20; paddle.y = H/2 - paddle.h/2;
+      ai.x = W - 20 - ai.w; ai.y = H/2 - ai.h/2;
     }
     window.addEventListener('resize', resize);
     resize();
-
     function resetBall(dir){
-      ball.x = W/2;
-      ball.y = H/2;
+      ball.x = W/2; ball.y = H/2;
       const angle = (Math.random()*Math.PI/3) - Math.PI/6;
       const spd = ball.baseSpeed * speed;
       ball.vx = Math.cos(angle) * spd * (dir||(Math.random()>0.5?1:-1));
       ball.vy = Math.sin(angle) * spd;
       rally = 0;
     }
-
     function resetGame(){
-      playerScore = 0;
-      aiScore = 0;
-      bestRally = 0;
-      speed = 1;
-      gameOver = false;
-      updateHUD();
-      resetBall();
+      playerScore = 0; aiScore = 0; bestRally = 0; speed = 1; gameOver = false;
+      updateHUD(); resetBall();
     }
-
     function updateHUD(){
       const sY = document.getElementById('scoreYou');
       const sA = document.getElementById('scoreAi');
@@ -1482,189 +1337,100 @@ Router.register('game', () => {
       if(sR) sR.textContent = rally;
       if(sB) sB.textContent = bestRally;
     }
-
     function showMsg(txt, dur=1200){
       const msg = document.getElementById('gameMsg');
       if(!msg) return;
-      msg.textContent = txt;
-      msg.style.opacity = '1';
+      msg.textContent = txt; msg.style.opacity = '1';
       setTimeout(()=>{ msg.style.opacity = '0'; }, dur);
     }
-
     function score(who){
-      if(who==='player'){
-        playerScore++;
-        showMsg('POINT · YOU','player');
-      } else {
-        aiScore++;
-        showMsg('POINT · AI','ai');
-      }
+      if(who==='player'){ playerScore++; showMsg('POINT · YOU'); }
+      else { aiScore++; showMsg('POINT · AI'); }
       if(rally > bestRally) bestRally = rally;
       speed = Math.min(2.5, 1 + (playerScore+aiScore)*0.04);
       ball.r = 8 + (playerScore+aiScore)*0.15;
       updateHUD();
       if(playerScore >= 11 || aiScore >= 11){
-        gameOver = true;
-        running = false;
+        gameOver = true; running = false;
         const win = playerScore >= 11;
-        const stats = Store.get('gameStats');
-        Store.update('gameStats', s => ({
-          highScore: Math.max(s.highScore, bestRally),
-          wins: s.wins + (win?1:0),
-          losses: s.losses + (win?0:1)
-        }));
+        Store.update('gameStats', s => ({ highScore: Math.max(s.highScore, bestRally), wins: s.wins + (win?1:0), losses: s.losses + (win?0:1) }));
         const overlay = document.getElementById('gameOverlay');
         if(overlay){
-          overlay.classList.remove('hidden');
-          overlay.innerHTML = '';
+          overlay.classList.remove('hidden'); clear(overlay);
           overlay.appendChild(el('div',{class:'game-title'},win?el('span',{},'VICTORY'):'DEFEAT'));
           overlay.appendChild(el('div',{class:'game-sub'},win?`You won ${playerScore}-${aiScore}. Best rally: ${bestRally}`:`AI won ${aiScore}-${playerScore}. Try again!`));
           overlay.appendChild(el('button',{class:'btn btn-p',onclick:()=>{ resetGame(); overlay.classList.add('hidden'); running=true; paused=false; loop(); }},'▶ Play Again'));
         }
-      } else {
-        resetBall(who==='player'?-1:1);
-      }
+      } else { resetBall(who==='player'?-1:1); }
     }
-
     function loop(){
       if(!running || paused || gameOver) return;
       ctx.clearRect(0,0,W,H);
-
-      // Court
       const grad = ctx.createLinearGradient(0,0,0,H);
-      grad.addColorStop(0,'#0A2E24');
-      grad.addColorStop(1,'#051510');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0,0,W,H);
-
-      // Grid
-      ctx.strokeStyle = 'rgba(255,255,255,0.03)';
-      ctx.lineWidth = 1;
+      grad.addColorStop(0,'#0A2E24'); grad.addColorStop(1,'#051510');
+      ctx.fillStyle = grad; ctx.fillRect(0,0,W,H);
+      ctx.strokeStyle = 'rgba(255,255,255,0.03)'; ctx.lineWidth = 1;
       for(let x=0;x<W;x+=40){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
       for(let y=0;y<H;y+=40){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
-
-      // Center line
-      ctx.setLineDash([8,8]);
-      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
-      ctx.beginPath();
-      ctx.moveTo(W/2,0);
-      ctx.lineTo(W/2,H);
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      // Player paddle
+      ctx.setLineDash([8,8]); ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+      ctx.beginPath(); ctx.moveTo(W/2,0); ctx.lineTo(W/2,H); ctx.stroke(); ctx.setLineDash([]);
       const pGrad = ctx.createLinearGradient(paddle.x,0,paddle.x+paddle.w,0);
-      pGrad.addColorStop(0,'#FF4D00');
-      pGrad.addColorStop(1,'#CC3D00');
-      ctx.fillStyle = pGrad;
-      ctx.shadowColor = '#FF4D00';
-      ctx.shadowBlur = 20;
-      ctx.beginPath();
-      ctx.roundRect(paddle.x, paddle.y, paddle.w, paddle.h, 6);
-      ctx.fill();
-      ctx.shadowBlur = 0;
-
-      // AI paddle
+      pGrad.addColorStop(0,'#FF4D00'); pGrad.addColorStop(1,'#CC3D00');
+      ctx.fillStyle = pGrad; ctx.shadowColor = '#FF4D00'; ctx.shadowBlur = 20;
+      ctx.beginPath(); ctx.roundRect(paddle.x, paddle.y, paddle.w, paddle.h, 6); ctx.fill(); ctx.shadowBlur = 0;
       const aGrad = ctx.createLinearGradient(ai.x,0,ai.x+ai.w,0);
-      aGrad.addColorStop(0,'#3B82F6');
-      aGrad.addColorStop(1,'#2563EB');
-      ctx.fillStyle = aGrad;
-      ctx.shadowColor = '#3B82F6';
-      ctx.shadowBlur = 20;
-      ctx.beginPath();
-      ctx.roundRect(ai.x, ai.y, ai.w, ai.h, 6);
-      ctx.fill();
-      ctx.shadowBlur = 0;
-
-      // Ball
-      ctx.shadowColor = '#FFFFFF';
-      ctx.shadowBlur = 24;
-      ctx.fillStyle = '#FFFFFF';
-      ctx.beginPath();
-      ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2);
-      ctx.fill();
-      ctx.shadowBlur = 0;
-
-      // Particles
+      aGrad.addColorStop(0,'#3B82F6'); aGrad.addColorStop(1,'#2563EB');
+      ctx.fillStyle = aGrad; ctx.shadowColor = '#3B82F6'; ctx.shadowBlur = 20;
+      ctx.beginPath(); ctx.roundRect(ai.x, ai.y, ai.w, ai.h, 6); ctx.fill(); ctx.shadowBlur = 0;
+      ctx.shadowColor = '#FFFFFF'; ctx.shadowBlur = 24; ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2); ctx.fill(); ctx.shadowBlur = 0;
       particles = particles.filter(p=>{
-        p.x += p.vx;
-        p.y += p.vy;
-        p.life -= 0.03;
+        p.x += p.vx; p.y += p.vy; p.life -= 0.03;
         if(p.life <= 0) return false;
         ctx.fillStyle = `rgba(255,77,0,${p.life})`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-        ctx.fill();
-        return true;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill(); return true;
       });
-
-      // Ball physics
-      ball.x += ball.vx;
-      ball.y += ball.vy;
-
-      // Top/bottom
+      ball.x += ball.vx; ball.y += ball.vy;
       if(ball.y - ball.r < 0){ ball.y = ball.r; ball.vy = -ball.vy; }
       if(ball.y + ball.r > H){ ball.y = H - ball.r; ball.vy = -ball.vy; }
-
-      // Player paddle collision
       if(ball.x - ball.r < paddle.x + paddle.w && ball.x > paddle.x && ball.y > paddle.y && ball.y < paddle.y + paddle.h){
         if(ball.vx < 0){
           ball.x = paddle.x + paddle.w + ball.r;
           const rel = (ball.y - (paddle.y + paddle.h/2)) / (paddle.h/2);
           const angle = rel * Math.PI/3;
           const spd = Math.hypot(ball.vx, ball.vy) * 1.05;
-          ball.vx = Math.cos(angle) * spd;
-          ball.vy = Math.sin(angle) * spd;
-          rally++;
-          updateHUD();
-          for(let i=0;i<8;i++){
-            particles.push({x:ball.x,y:ball.y,vx:rnd(-3,-1),vy:rnd(-2,2),r:rnd(1,3),life:1});
-          }
+          ball.vx = Math.cos(angle) * spd; ball.vy = Math.sin(angle) * spd;
+          rally++; updateHUD();
+          for(let i=0;i<8;i++){ particles.push({x:ball.x,y:ball.y,vx:rnd(-3,-1),vy:rnd(-2,2),r:rnd(1,3),life:1}); }
         }
       }
-
-      // AI paddle collision
       if(ball.x + ball.r > ai.x && ball.x < ai.x + ai.w && ball.y > ai.y && ball.y < ai.y + ai.h){
         if(ball.vx > 0){
           ball.x = ai.x - ball.r;
           const rel = (ball.y - (ai.y + ai.h/2)) / (ai.h/2);
           const angle = rel * Math.PI/3;
           const spd = Math.hypot(ball.vx, ball.vy) * 1.05;
-          ball.vx = -Math.cos(angle) * spd;
-          ball.vy = Math.sin(angle) * spd;
-          rally++;
-          updateHUD();
-          for(let i=0;i<8;i++){
-            particles.push({x:ball.x,y:ball.y,vx:rnd(1,3),vy:rnd(-2,2),r:rnd(1,3),life:1});
-          }
+          ball.vx = -Math.cos(angle) * spd; ball.vy = Math.sin(angle) * spd;
+          rally++; updateHUD();
+          for(let i=0;i<8;i++){ particles.push({x:ball.x,y:ball.y,vx:rnd(1,3),vy:rnd(-2,2),r:rnd(1,3),life:1}); }
         }
       }
-
-      // Score
       if(ball.x < 0) score('ai');
       else if(ball.x > W) score('player');
-
-      // AI movement
       const aiSpeed = difficulty==='easy'?3:difficulty==='normal'?5:7;
       const aiTarget = ball.y - ai.h/2;
       ai.y += (aiTarget - ai.y) * (aiSpeed/60);
       ai.y = Math.max(0, Math.min(H-ai.h, ai.y));
-
-      // Player movement (keyboard)
       const keySpeed = 8;
       if(keys['ArrowUp']||keys['w']||keys['W']) paddle.y -= keySpeed;
       if(keys['ArrowDown']||keys['s']||keys['S']) paddle.y += keySpeed;
       paddle.y = Math.max(0, Math.min(H-paddle.h, paddle.y));
-
       requestAnimationFrame(loop);
     }
-
-    // Mouse control
     canvas.addEventListener('mousemove',(e)=>{
       const r = canvas.getBoundingClientRect();
       const y = (e.clientY - r.top) / r.height * H;
-      mouseY = y;
-      paddle.y = y - paddle.h/2;
+      mouseY = y; paddle.y = y - paddle.h/2;
       paddle.y = Math.max(0, Math.min(H-paddle.h, paddle.y));
     });
     canvas.addEventListener('touchmove',(e)=>{
@@ -1675,92 +1441,49 @@ Router.register('game', () => {
       paddle.y = y - paddle.h/2;
       paddle.y = Math.max(0, Math.min(H-paddle.h, paddle.y));
     },{passive:false});
-
     document.addEventListener('keydown',(e)=>{
       keys[e.key] = true;
-      if(e.key===' ' && running){
-        e.preventDefault();
-        paused = !paused;
-        if(!paused) loop();
-      }
+      if(e.key===' ' && running){ e.preventDefault(); paused = !paused; if(!paused) loop(); }
     });
     document.addEventListener('keyup',(e)=>{ keys[e.key] = false; });
-
-    // Controls
     const startBtn = document.getElementById('gameStart');
     if(startBtn) startBtn.onclick = ()=>{
       document.getElementById('gameOverlay').classList.add('hidden');
-      resetGame();
-      running = true;
-      paused = false;
-      loop();
+      resetGame(); running = true; paused = false; loop();
     };
-
-    document.getElementById('gamePause').onclick = ()=>{
-      paused = !paused;
-      if(!paused && running) loop();
-      toast(paused?'Paused':'Resumed');
-    };
-    document.getElementById('gameReset').onclick = ()=>{
-      resetGame();
-      running = true;
-      paused = false;
-      document.getElementById('gameOverlay').classList.add('hidden');
-      loop();
-    };
+    document.getElementById('gamePause').onclick = ()=>{ paused = !paused; if(!paused && running) loop(); toast(paused?'Paused':'Resumed'); };
+    document.getElementById('gameReset').onclick = ()=>{ resetGame(); running = true; paused = false; document.getElementById('gameOverlay').classList.add('hidden'); loop(); };
     $$('.seg-btn[data-diff]').forEach(b=>{
-      b.onclick = ()=>{
-        $$('.seg-btn[data-diff]').forEach(x=>x.classList.remove('on'));
-        b.classList.add('on');
-        difficulty = b.dataset.diff;
-        toast(`Difficulty: ${difficulty}`);
-      };
+      b.onclick = ()=>{ $$('.seg-btn[data-diff]').forEach(x=>x.classList.remove('on')); b.classList.add('on'); difficulty = b.dataset.diff; toast(`Difficulty: ${difficulty}`); };
     });
-
-    // Polyfill roundRect
     if(!CanvasRenderingContext2D.prototype.roundRect){
       CanvasRenderingContext2D.prototype.roundRect = function(x,y,w,h,r){
         if(w<2*r)r=w/2; if(h<2*r)r=h/2;
-        this.beginPath();
-        this.moveTo(x+r,y);
-        this.arcTo(x+w,y,x+w,y+h,r);
-        this.arcTo(x+w,y+h,x,y+h,r);
-        this.arcTo(x,y+h,x,y,r);
-        this.arcTo(x,y,x+w,y,r);
-        this.closePath();
+        this.beginPath(); this.moveTo(x+r,y);
+        this.arcTo(x+w,y,x+w,y+h,r); this.arcTo(x+w,y+h,x,y+h,r);
+        this.arcTo(x,y+h,x,y,r); this.arcTo(x,y,x+w,y,r); this.closePath();
       };
     }
-
     resetBall();
-    // Draw initial state
     ctx.clearRect(0,0,W,H);
     const g = ctx.createLinearGradient(0,0,0,H);
     g.addColorStop(0,'#0A2E24'); g.addColorStop(1,'#051510');
     ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
-    ctx.setLineDash([8,8]);
-    ctx.strokeStyle = 'rgba(255,255,255,0.15)';
-    ctx.beginPath(); ctx.moveTo(W/2,0); ctx.lineTo(W/2,H); ctx.stroke();
-    ctx.setLineDash([]);
+    ctx.setLineDash([8,8]); ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+    ctx.beginPath(); ctx.moveTo(W/2,0); ctx.lineTo(W/2,H); ctx.stroke(); ctx.setLineDash([]);
   }
-
   return root;
 },{title:'Arena'});
 
-/* ═══════════════════════════════════════════════════════
-   PAGE: ACADEMY
-   ═══════════════════════════════════════════════════════ */
+// --- ACADEMY ---
 const LESSONS = [
   {id:'l-01',title:'Forehand Loop',desc:'The foundation of modern offensive play. Generate heavy topspin with a compact, whip-like motion.',level:'ADVANCED',duration:'12 min',cat:'attack'},
   {id:'l-02',title:'Backhand Flick',desc:'Turn a short serve into immediate offense. Master the wrist snap and body rotation.',level:'INTERMEDIATE',duration:'9 min',cat:'attack'},
   {id:'l-03',title:'Chop Defense',desc:'The classic defensive shot. Learn to absorb pace and impart heavy backspin.',level:'ADVANCED',duration:'15 min',cat:'defense'},
   {id:'l-04',title:'Pendulum Serve',desc:'A deceptive serve with sidespin and backspin variations.',level:'INTERMEDIATE',duration:'11 min',cat:'serve'},
   {id:'l-05',title:'Footwork Patterns',desc:'Side-shuffle, pivot, and cross-step. The invisible technique behind every great shot.',level:'FOUNDATION',duration:'8 min',cat:'movement'},
-  {id:'l-06',title:'Counter Loop',desc:'Meet topspin with topspin. The most electrifying exchange in modern table tennis.',level:'ADVANCED',duration:'14 min',cat:'attack'},
-  {id:'l-07',title:'Service Receive',desc:'Reading spin and neutralizing the serve. The most overlooked skill.',level:'INTERMEDIATE',duration:'13 min',cat:'serve'},
-  {id:'l-08',title:'Close-to-Table Play',desc:'The modern game favors quick, short strokes near the table. Master it.',level:'ADVANCED',duration:'16 min',cat:'attack'},
-  {id:'l-09',title:'Mental Reset Ritual',desc:'Build a repeatable routine between points to stay composed under pressure.',level:'FOUNDATION',duration:'6 min',cat:'mental'}
+  {id:'l-06',title:'Counter Loop',desc:'Meet topspin with topspin. The most electrifying exchange in modern table tennis.',level:'ADVANCED',duration:'14 min',cat:'attack'}
 ];
-
 Router.register('academy', () => {
   let filter = 'all';
   const root = el('div',{});
@@ -1771,12 +1494,10 @@ Router.register('academy', () => {
       el('p',{class:'sub'},`${LESSONS.length} curated lessons from coaches and pros.`)
     )
   ));
-
   const filters = el('div',{class:'chip-row'});
-  ['all','attack','defense','serve','movement','mental'].forEach(f=>{
+  ['all','attack','defense','serve','movement'].forEach(f=>{
     filters.appendChild(el('button',{
-      class:'chip '+(f===filter?'on':''),
-      'data-f':f,
+      class:'chip '+(f===filter?'on':''), 'data-f':f,
       onclick:()=>{
         filter = f;
         filters.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
@@ -1786,40 +1507,26 @@ Router.register('academy', () => {
     }, f.charAt(0).toUpperCase()+f.slice(1)));
   });
   root.appendChild(filters);
-
   const grid = el('div',{class:'lesson-grid'});
   root.appendChild(grid);
-
   function renderGrid(){
     clear(grid);
     const items = filter==='all'?LESSONS:LESSONS.filter(l=>l.cat===filter);
     items.forEach((l,i)=>{
-      grid.appendChild(el('div',{
-        class:'lesson',
-        onclick:()=>openLesson(l)
-      },
-        el('div',{class:'lesson-thumb'},
-          el('div',{class:'lesson-lvl'},l.level),
-          el('div',{class:'lesson-num'},String(i+1).padStart(2,'0'))
-        ),
+      grid.appendChild(el('div',{class:'lesson glass-card',onclick:()=>openLesson(l)},
+        el('div',{class:'lesson-thumb'}, el('div',{class:'lesson-lvl'},l.level), el('div',{class:'lesson-num'},String(i+1).padStart(2,'0'))),
         el('div',{class:'lesson-body'},
           el('div',{class:'lesson-t'},l.title),
           el('div',{class:'lesson-d'},l.desc),
-          el('div',{class:'lesson-m'},
-            el('span',{},l.duration),
-            el('span',{},'·'),
-            el('span',{},l.cat.toUpperCase())
-          )
+          el('div',{class:'lesson-m'}, el('span',{},l.duration), el('span',{},'·'), el('span',{},l.cat.toUpperCase()))
         )
       ));
     });
   }
   renderGrid();
-
   function openLesson(l){
     Modal.open({
-      title:l.title,
-      sub:`${l.duration} · ${l.level}`,
+      title:l.title, sub:`${l.duration} · ${l.level}`,
       content:[
         el('p',{style:{fontSize:'13px',lineHeight:'1.7',color:'var(--inkM)',marginBottom:'14px'}},l.desc),
         el('div',{style:{padding:'14px',background:'var(--bg2)',borderRadius:'8px'}},
@@ -1838,13 +1545,10 @@ Router.register('academy', () => {
       ]
     });
   }
-
   return root;
 },{title:'Academy'});
 
-/* ═══════════════════════════════════════════════════════
-   PAGE: CALCULATOR
-   ═══════════════════════════════════════════════════════ */
+// --- CALCULATOR ---
 Router.register('calculator', () => {
   const state = Store.get('calc');
   const root = el('div',{});
@@ -1855,10 +1559,8 @@ Router.register('calculator', () => {
       el('p',{class:'sub'},'Four quick answers. We match you with the ideal setup.')
     )
   ));
-
   const grid = el('div',{class:'calc-grid'});
-  const form = el('div',{class:'card calc-form'});
-
+  const form = el('div',{class:'card glass-card calc-form'});
   const FIELDS = [
     {key:'style',label:'Playing style',opts:[{v:'offense',l:'Offensive'},{v:'allround',l:'All-Round'},{v:'defense',l:'Defensive'}]},
     {key:'grip',label:'Grip',opts:[{v:'shake',l:'Shakehand'},{v:'pen',l:'Penhold'}]},
@@ -1870,25 +1572,21 @@ Router.register('calculator', () => {
       el('label',{class:'field-l'},f.label),
       el('div',{class:'chip-row',style:{marginBottom:'0'}},
         ...f.opts.map(o=>el('button',{
-          class:'chip '+(state[f.key]===o.v?'on':''),
-          'data-f':f.key,'data-v':o.v,
+          class:'chip '+(state[f.key]===o.v?'on':''), 'data-f':f.key,'data-v':o.v,
           onclick:(e)=>{
-            state[f.key] = o.v;
-            Store.set('calc',{...state});
+            state[f.key] = o.v; Store.set('calc',{...state});
             form.querySelectorAll(`[data-f="${f.key}"]`).forEach(c=>c.classList.remove('on'));
-            e.currentTarget.classList.add('on');
-            update();
+            e.currentTarget.classList.add('on'); update();
           }
         },o.l))
       )
     ));
   });
   grid.appendChild(form);
-
   const nameEl = el('div',{class:'calc-name'},'—');
   const descEl = el('div',{class:'calc-desc'},'');
   const bars = {}, vals = {};
-  const result = el('div',{class:'calc-result'},
+  const result = el('div',{class:'calc-result glass-card'},
     el('div',{class:'eyebrow'},'Recommended setup'),
     nameEl, descEl,
     el('div',{class:'calc-specs'},
@@ -1906,7 +1604,6 @@ Router.register('calculator', () => {
   );
   grid.appendChild(result);
   root.appendChild(grid);
-
   function update(){
     const s = state;
     let name='DANESH Apex Carbon', desc='Carbon-inner offensive blade.', speed=75, spin=75, control=75;
@@ -1919,24 +1616,15 @@ Router.register('calculator', () => {
     if(s.priority==='spin'){ spin+=10; speed-=4; }
     else if(s.priority==='speed'){ speed+=10; control-=6; }
     else { control+=10; speed-=4; }
-    speed = Math.max(40,Math.min(99,speed));
-    spin = Math.max(40,Math.min(99,spin));
-    control = Math.max(40,Math.min(99,control));
-    nameEl.textContent = name;
-    descEl.textContent = desc;
-    Object.entries({speed,spin,control}).forEach(([k,v])=>{
-      bars[k].style.width = v+'%';
-      vals[k].textContent = v;
-    });
+    speed = Math.max(40,Math.min(99,speed)); spin = Math.max(40,Math.min(99,spin)); control = Math.max(40,Math.min(99,control));
+    nameEl.textContent = name; descEl.textContent = desc;
+    Object.entries({speed,spin,control}).forEach(([k,v])=>{ bars[k].style.width = v+'%'; vals[k].textContent = v; });
   }
   update();
-
   return root;
 },{title:'Calculator'});
 
-/* ═══════════════════════════════════════════════════════
-   PAGE: RANKING
-   ═══════════════════════════════════════════════════════ */
+// --- RANKING ---
 const RANKING = [
   {pos:1,name:'Fan Chen',country:'CHN',points:18420,win:91.2,events:24,trend:2,av:'FC'},
   {pos:2,name:'Liam Møller',country:'DEN',points:17880,win:88.7,events:22,trend:-1,av:'LM'},
@@ -1945,11 +1633,8 @@ const RANKING = [
   {pos:5,name:'Elias Kohl',country:'GER',points:16220,win:85.8,events:19,trend:-2,av:'EK'},
   {pos:6,name:'Yuki Tanaka',country:'JPN',points:15890,win:84.3,events:22,trend:4,av:'YT'},
   {pos:7,name:'Sofia Rossi',country:'ITA',points:15430,win:83.6,events:18,trend:0,av:'SR'},
-  {pos:8,name:'Omar Farouk',country:'EGY',points:14980,win:82.4,events:20,trend:1,av:'OF'},
-  {pos:9,name:'Nils Berg',country:'SWE',points:14560,win:81.9,events:17,trend:-3,av:'NB'},
-  {pos:10,name:'Mei Lin',country:'CHN',points:14120,win:81.2,events:19,trend:2,av:'ML'}
+  {pos:8,name:'Omar Farouk',country:'EGY',points:14980,win:82.4,events:20,trend:1,av:'OF'}
 ];
-
 Router.register('ranking', () => {
   const root = el('div',{});
   root.appendChild(el('div',{class:'page-head'},
@@ -1959,15 +1644,9 @@ Router.register('ranking', () => {
       el('p',{class:'sub'},'Live ranking from verified ITTF-sanctioned events.')
     )
   ));
-
-  const tbl = el('div',{class:'rank-tbl'});
+  const tbl = el('div',{class:'rank-tbl glass-card'});
   tbl.appendChild(el('div',{class:'rank-row head'},
-    el('div',{},'#'),
-    el('div',{},'Player'),
-    el('div',{style:{textAlign:'right'}},'Points'),
-    el('div',{style:{textAlign:'right'}},'Win %'),
-    el('div',{style:{textAlign:'right'}},'Events'),
-    el('div',{style:{textAlign:'right'}},'Trend')
+    el('div',{},'#'), el('div',{},'Player'), el('div',{style:{textAlign:'right'}},'Points'), el('div',{style:{textAlign:'right'}},'Win %'), el('div',{style:{textAlign:'right'}},'Events'), el('div',{style:{textAlign:'right'}},'Trend')
   ));
   RANKING.forEach(r=>{
     const posCls = r.pos===1?'t1':r.pos===2?'t2':r.pos===3?'t3':'';
@@ -1975,13 +1654,7 @@ Router.register('ranking', () => {
     const trendIco = r.trend>0?'▲':r.trend<0?'▼':'·';
     tbl.appendChild(el('div',{class:'rank-row'},
       el('div',{class:'rank-pos '+posCls},String(r.pos).padStart(2,'0')),
-      el('div',{class:'rank-player'},
-        el('div',{class:'av'},r.av),
-        el('div',{},
-          el('div',{class:'rank-n'},r.name),
-          el('div',{class:'rank-c'},r.country)
-        )
-      ),
+      el('div',{class:'rank-player'}, el('div',{class:'av'},r.av), el('div',{},el('div',{class:'rank-n'},r.name),el('div',{class:'rank-c'},r.country))),
       el('div',{class:'rank-v strong',style:{textAlign:'right'}},fmtN(r.points)),
       el('div',{class:'rank-v',style:{textAlign:'right'}},fmtP(r.win)),
       el('div',{class:'rank-v',style:{textAlign:'right'}},r.events),
@@ -1989,25 +1662,18 @@ Router.register('ranking', () => {
     ));
   });
   root.appendChild(tbl);
-
-  root.appendChild(el('div',{class:'card',style:{marginTop:'14px',borderColor:'var(--accentW)'}},
+  root.appendChild(el('div',{class:'card glass-card',style:{marginTop:'14px',borderColor:'var(--accentW)'}},
     el('div',{style:{display:'flex',alignItems:'center',gap:'16px',flexWrap:'wrap'}},
       el('div',{class:'rank-pos',style:{fontSize:'22px',color:'var(--accent)'}},'#340'),
       el('div',{class:'av av-l'},Store.get('user').avatar),
-      el('div',{style:{flex:1,minWidth:'160px'}},
-        el('div',{style:{fontSize:'13px',fontWeight:'600',color:'var(--ink)'}},Store.get('user').name),
-        el('div',{style:{fontSize:'11px',color:'var(--inkM)'}},`${fmtN(Store.get('stats.rankPoints'))} points · ${Store.get('stats.rankTier')}`)
-      ),
+      el('div',{style:{flex:1,minWidth:'160px'}}, el('div',{style:{fontSize:'13px',fontWeight:'600',color:'var(--ink)'}},Store.get('user').name), el('div',{style:{fontSize:'11px',color:'var(--inkM)'}},`${fmtN(Store.get('stats.rankPoints'))} points · ${Store.get('stats.rankTier')}`)),
       el('div',{class:'badge badge-a'},'YOUR RANK')
     )
   ));
-
   return root;
 },{title:'Ranking'});
 
-/* ═══════════════════════════════════════════════════════
-   PAGE: MATCHES
-   ═══════════════════════════════════════════════════════ */
+// --- MATCHES ---
 Router.register('matches', () => {
   const root = el('div',{});
   root.appendChild(el('div',{class:'page-head'},
@@ -2020,44 +1686,26 @@ Router.register('matches', () => {
       el('button',{class:'btn btn-p',onclick:()=>openNewMatch()},'+ Log match')
     )
   ));
-
   function renderList(){
     const matches = Store.get('matches');
     const list = el('div',{id:'matchList'});
     const won = matches.filter(m=>m.result==='win').length;
     const lost = matches.filter(m=>m.result==='loss').length;
-
     const kpis = el('div',{class:'kpi-grid',style:{marginBottom:'16px'}});
-    [
-      {l:'Total matches',v:matches.length},
-      {l:'Won',v:won,c:'var(--success)'},
-      {l:'Lost',v:lost,c:'var(--danger)'},
-      {l:'Win rate',v:Math.round(won/matches.length*100)+'%'}
-    ].forEach(k=>{
-      kpis.appendChild(el('div',{class:'card'},
-        el('div',{class:'stat'},
-          el('div',{class:'stat-l'},k.l),
-          el('div',{class:'stat-v',style:{fontSize:'22px',color:k.c||'var(--ink)'}},k.v)
-        )
+    [{l:'Total matches',v:matches.length},{l:'Won',v:won,c:'var(--success)'},{l:'Lost',v:lost,c:'var(--danger)'},{l:'Win rate',v:Math.round(won/matches.length*100)+'%'}].forEach(k=>{
+      kpis.appendChild(el('div',{class:'card glass-card'},
+        el('div',{class:'stat'}, el('div',{class:'stat-l'},k.l), el('div',{class:'stat-v',style:{fontSize:'22px',color:k.c||'var(--ink)'}},k.v))
       ));
     });
     list.appendChild(kpis);
-
     matches.forEach(m=>{
-      list.appendChild(el('div',{class:'match-card'},
+      list.appendChild(el('div',{class:'match-card glass-card'},
         el('div',{class:'match-res '+m.result},m.score),
-        el('div',{},
-          el('div',{class:'match-opp'},`vs. ${m.opponent}`),
-          el('div',{class:'match-meta'},`${m.event} · ${fmtD(m.date)} · Rating ${m.rating}`)
-        ),
+        el('div',{}, el('div',{class:'match-opp'},`vs. ${m.opponent}`), el('div',{class:'match-meta'},`${m.event} · ${fmtD(m.date)} · Rating ${m.rating}`)),
         el('span',{class:'badge '+(m.result==='win'?'badge-s':'badge-d')},m.result),
         el('button',{class:'btn btn-g btn-sm',onclick:async()=>{
           const ok = await confirmDlg(`Delete match vs. ${m.opponent}?`,{danger:true,ok:'Delete'});
-          if(ok){
-            Store.remove('matches',x=>x.id===m.id);
-            toast('Match deleted.');
-            refresh();
-          }
+          if(ok){ Store.remove('matches',x=>x.id===m.id); toast('Match deleted.'); refresh(); }
         }},'⋯')
       ));
     });
@@ -2068,18 +1716,13 @@ Router.register('matches', () => {
     if(old) old.replaceWith(renderList());
   }
   root.appendChild(renderList());
-
   function openNewMatch(){
     const opp = el('input',{class:'input',placeholder:'Opponent name'});
     const ev = el('input',{class:'input',placeholder:'Event'});
     const sc = el('input',{class:'input',placeholder:'Score (e.g. 3-1)'});
-    const res = el('select',{class:'input'},
-      el('option',{value:'win'},'Win'),
-      el('option',{value:'loss'},'Loss')
-    );
+    const res = el('select',{class:'input'}, el('option',{value:'win'},'Win'), el('option',{value:'loss'},'Loss'));
     Modal.open({
-      title:'Log a match',
-      sub:'Record a recent match.',
+      title:'Log a match', sub:'Record a recent match.',
       content:[
         el('div',{class:'field'},el('label',{class:'field-l'},'Opponent'),opp),
         el('div',{class:'field'},el('label',{class:'field-l'},'Event'),ev),
@@ -2090,33 +1733,17 @@ Router.register('matches', () => {
         {label:'Cancel',class:'btn-g'},
         {label:'Save',class:'btn-p',onClick:()=>{
           if(!opp.value.trim()){ toast('Opponent required.','err'); return; }
-          Store.push('matches',{
-            id:'m-'+Date.now(),
-            date:new Date().toISOString().slice(0,10),
-            opponent:opp.value.trim(),
-            result:res.value,
-            score:sc.value.trim()||'—',
-            event:ev.value.trim()||'Friendly',
-            rating:Math.floor(1500+Math.random()*300)
-          });
-          Store.update('stats',s=>({
-            ...s,
-            matchesPlayed:s.matchesPlayed+1,
-            matchesWon:s.matchesWon+(res.value==='win'?1:0)
-          }));
-          toast('Match saved.','ok');
-          refresh();
+          Store.push('matches',{ id:'m-'+Date.now(), date:new Date().toISOString().slice(0,10), opponent:opp.value.trim(), result:res.value, score:sc.value.trim()||'—', event:ev.value.trim()||'Friendly', rating:Math.floor(1500+Math.random()*300) });
+          Store.update('stats',s=>({ ...s, matchesPlayed:s.matchesPlayed+1, matchesWon:s.matchesWon+(res.value==='win'?1:0) }));
+          toast('Match saved.','ok'); refresh();
         }}
       ]
     });
   }
-
   return root;
 },{title:'Matches'});
 
-/* ═══════════════════════════════════════════════════════
-   PAGE: TRAINING
-   ═══════════════════════════════════════════════════════ */
+// --- TRAINING ---
 Router.register('training', () => {
   let timerSec = 300, timerInt = null;
   const root = el('div',{});
@@ -2127,73 +1754,46 @@ Router.register('training', () => {
       el('p',{class:'sub'},'Structured drills, timers, and tracking.')
     )
   ));
-
   const timerDisp = el('div',{class:'timer-big'},'05:00');
-  function renderTimer(){
-    const m = Math.floor(timerSec/60), s = timerSec%60;
-    timerDisp.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  }
-
-  root.appendChild(el('div',{class:'card',style:{marginBottom:'16px'}},
-    el('div',{class:'card-h'},
-      el('div',{},el('div',{class:'card-t'},'Drill timer'),el('div',{class:'card-s'},'Track your training blocks'))
-    ),
+  function renderTimer(){ const m = Math.floor(timerSec/60), s = timerSec%60; timerDisp.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; }
+  root.appendChild(el('div',{class:'card glass-card',style:{marginBottom:'16px'}},
+    el('div',{class:'card-h'}, el('div',{},el('div',{class:'card-t'},'Drill timer'),el('div',{class:'card-s'},'Track your training blocks')) ),
     timerDisp,
     el('div',{style:{display:'flex',gap:'8px',justifyContent:'center',flexWrap:'wrap'}},
       el('button',{class:'btn btn-p',onclick:()=>{
         if(timerInt) return;
-        timerInt = setInterval(()=>{
-          timerSec--;
-          renderTimer();
-          if(timerSec<=0){
-            clearInterval(timerInt); timerInt = null;
-            timerSec = 300; renderTimer();
-            toast('Drill complete! 🎉','ok');
-          }
-        },1000);
+        timerInt = setInterval(()=>{ timerSec--; renderTimer(); if(timerSec<=0){ clearInterval(timerInt); timerInt = null; timerSec = 300; renderTimer(); toast('Drill complete! 🎉','ok'); } },1000);
       }},'▶ Start'),
       el('button',{class:'btn btn-s',onclick:()=>{ clearInterval(timerInt); timerInt = null; }},'⏸ Pause'),
       el('button',{class:'btn btn-g',onclick:()=>{ clearInterval(timerInt); timerInt = null; timerSec = 300; renderTimer(); }},'↺ Reset')
     )
   ));
-
   root.appendChild(el('h2',{class:'h2'},'Drills'));
   const grid = el('div',{class:'grid g3'});
   const ICONS_D = {attack:'⚔',defense:'🛡',serve:'◎',movement:'↔',match:'◆'};
   function refreshDrills(){
     clear(grid);
     Store.get('drills').forEach(d=>{
-      grid.appendChild(el('div',{class:'drill-card'},
+      grid.appendChild(el('div',{class:'drill-card glass-card'},
         el('div',{class:'drill-ico'},ICONS_D[d.cat]||'◇'),
         el('div',{class:'drill-t'},d.name),
         el('div',{class:'drill-d'},`${d.duration} min · ${d.reps} reps · ${d.cat.toUpperCase()}`),
         el('div',{class:'drill-m'},el('span',{},d.done?'✓ DONE':'PENDING')),
-        el('button',{
-          class:'btn btn-sm '+(d.done?'btn-g':'btn-p'),
-          onclick:()=>{
-            Store.update('drills',arr=>arr.map(x=>x.id===d.id?{...x,done:!x.done}:x));
-            refreshDrills();
-            toast(d.done?'Marked pending.':'Drill completed!','ok');
-          }
-        },d.done?'Mark pending':'Mark done')
+        el('button',{ class:'btn btn-sm '+(d.done?'btn-g':'btn-p'), onclick:()=>{ Store.update('drills',arr=>arr.map(x=>x.id===d.id?{...x,done:!x.done}:x)); refreshDrills(); toast(d.done?'Marked pending.':'Drill completed!','ok'); } }, d.done?'Mark pending':'Mark done')
       ));
     });
   }
   refreshDrills();
   root.appendChild(grid);
-
   return root;
 },{title:'Training'});
 
-/* ═══════════════════════════════════════════════════════
-   PAGE: PROFILE
-   ═══════════════════════════════════════════════════════ */
+// --- PROFILE ---
 Router.register('profile', () => {
   const user = Store.get('user');
   const stats = Store.get('stats');
   const matches = Store.get('matches');
   const root = el('div',{});
-
   root.appendChild(el('div',{class:'page-head'},
     el('div',{class:'page-head-l'},
       el('div',{class:'eyebrow'},'Profile'),
@@ -2204,8 +1804,7 @@ Router.register('profile', () => {
       el('button',{class:'btn btn-s',onclick:()=>openEdit()},'Edit profile')
     )
   ));
-
-  root.appendChild(el('div',{class:'profile-hero'},
+  root.appendChild(el('div',{class:'profile-hero glass-card'},
     el('div',{class:'profile-av'},user.avatar),
     el('div',{class:'profile-info'},
       el('div',{class:'profile-n'},user.name),
@@ -2218,45 +1817,25 @@ Router.register('profile', () => {
         el('div',{class:'profile-stat'},el('div',{class:'profile-stat-v'},fmtN(stats.hoursTrained)),el('div',{class:'profile-stat-l'},'Hours'))
       )
     ),
-    el('div',{style:{display:'flex',flexDirection:'column',gap:'8px'}},
-      el('span',{class:'badge badge-a'},user.tier),
-      el('span',{class:'badge badge-g'},stats.rankTier)
-    )
+    el('div',{style:{display:'flex',flexDirection:'column',gap:'8px'}}, el('span',{class:'badge badge-a'},user.tier), el('span',{class:'badge badge-g'},stats.rankTier))
   ));
-
   const grid = el('div',{class:'grid g2'});
-  const equipCard = el('div',{class:'card'},
-    el('div',{class:'card-h'},el('div',{},el('div',{class:'card-t'},'Equipment')))
-  );
-  [
-    ['Blade',user.blade],
-    ['Forehand rubber',user.rubberFH],
-    ['Backhand rubber',user.rubberBH],
-    ['Grip',user.grip],
-    ['Playing style',user.style]
-  ].forEach(([k,v])=>{
+  const equipCard = el('div',{class:'card glass-card'}, el('div',{class:'card-h'},el('div',{},el('div',{class:'card-t'},'Equipment'))) );
+  [['Blade',user.blade],['Forehand rubber',user.rubberFH],['Backhand rubber',user.rubberBH],['Grip',user.grip],['Playing style',user.style]].forEach(([k,v])=>{
     equipCard.appendChild(el('div',{style:{display:'flex',justifyContent:'space-between',padding:'8px 0',borderBottom:'1px solid var(--line)',fontSize:'12px'}},
-      el('span',{style:{color:'var(--inkM)'}},k),
-      el('span',{style:{color:'var(--ink)',fontWeight:'500',fontFamily:'var(--mono)',fontSize:'11px'}},v)
+      el('span',{style:{color:'var(--inkM)'}},k), el('span',{style:{color:'var(--ink)',fontWeight:'500',fontFamily:'var(--mono)',fontSize:'11px'}},v)
     ));
   });
   grid.appendChild(equipCard);
-
-  const recent = el('div',{class:'card'},
-    el('div',{class:'card-h'},el('div',{},el('div',{class:'card-t'},'Recent activity')))
-  );
+  const recent = el('div',{class:'card glass-card'}, el('div',{class:'card-h'},el('div',{},el('div',{class:'card-t'},'Recent activity'))) );
   matches.slice(0,4).forEach(m=>{
     recent.appendChild(el('div',{class:'row'},
       el('div',{class:'match-res '+m.result,style:{fontSize:'11px',minWidth:'46px'}},m.score),
-      el('div',{class:'row-flex'},
-        el('div',{class:'row-t'},m.opponent),
-        el('div',{class:'row-s'},fmtD(m.date))
-      )
+      el('div',{class:'row-flex'}, el('div',{class:'row-t'},m.opponent), el('div',{class:'row-s'},fmtD(m.date)))
     ));
   });
   grid.appendChild(recent);
   root.appendChild(grid);
-
   function openEdit(){
     const n = el('input',{class:'input',value:user.name});
     const b = el('textarea',{class:'input'},user.bio);
@@ -2272,104 +1851,21 @@ Router.register('profile', () => {
         {label:'Cancel',class:'btn-g'},
         {label:'Save',class:'btn-p',onClick:()=>{
           Store.update('user',u=>({...u,name:n.value,bio:b.value,blade:bl.value,avatar:initials(n.value)}));
-          toast('Profile updated.','ok');
-          Router.navigate('profile');
+          toast('Profile updated.','ok'); Router.navigate('profile');
         }}
       ]
     });
   }
-
   return root;
 },{title:'Profile'});
 
-/* ═══════════════════════════════════════════════════════
-   PAGE: SHOP
-   ═══════════════════════════════════════════════════════ */
-const PRODUCTS = [
-  {id:'p-01',name:'Apex Carbon Blade',brand:'DANESH',price:189,rating:4.9,icon:'🏓',badge:'NEW'},
-  {id:'p-02',name:'Tenergy 05 Rubber',brand:'Butterfly',price:79,rating:4.8,icon:'🔴'},
-  {id:'p-03',name:'Dignics 09C Rubber',brand:'Butterfly',price:89,rating:4.7,icon:'🔴'},
-  {id:'p-04',name:'Pro Shoes Elite',brand:'DANESH',price:129,rating:4.6,icon:'👟'},
-  {id:'p-05',name:'Training Balls (100pk)',brand:'DANESH',price:49,rating:4.5,icon:'🟠'},
-  {id:'p-06',name:'Edge Tape (10pk)',brand:'DANESH',price:12,rating:4.4,icon:'📏'},
-  {id:'p-07',name:'Racket Case Pro',brand:'DANESH',price:39,rating:4.8,icon:'🧳',badge:'HOT'},
-  {id:'p-08',name:'Table Tennis Net Set',brand:'DANESH',price:24,rating:4.3,icon:'🕸'}
-];
-
-Router.register('shop', () => {
-  const root = el('div',{});
-  root.appendChild(el('div',{class:'page-head'},
-    el('div',{class:'page-head-l'},
-      el('div',{class:'eyebrow'},'Shop'),
-      el('h1',{class:'h1'},'Pro equipment'),
-      el('p',{class:'sub'},'Gear trusted by professional players.')
-    ),
-    el('div',{class:'head-acts'},
-      el('button',{class:'btn btn-s',onclick:()=>showCart()},`Cart (${Store.get('cart').length})`)
-    )
-  ));
-
-  const grid = el('div',{class:'shop-grid'});
-  PRODUCTS.forEach(p=>{
-    grid.appendChild(el('div',{class:'product'},
-      el('div',{class:'product-thumb'},
-        p.badge?el('span',{class:'product-badge'},p.badge):null,
-        el('span',{},p.icon)
-      ),
-      el('div',{class:'product-body'},
-        el('div',{class:'product-brand'},p.brand),
-        el('div',{class:'product-name'},p.name),
-        el('div',{class:'product-rating'},'★'.repeat(Math.floor(p.rating))+` ${p.rating}`),
-        el('div',{style:{display:'flex',justifyContent:'space-between',alignItems:'center',marginTop:'auto'}},
-          el('div',{class:'product-price'},`$${p.price}`),
-          el('button',{class:'btn btn-p btn-sm',onclick:()=>{
-            Store.push('cart',p);
-            toast(`${p.name} added.`,'ok');
-            Router.navigate('shop');
-          }},'Add')
-        )
-      )
-    ));
-  });
-  root.appendChild(grid);
-
-  function showCart(){
-    const cart = Store.get('cart');
-    if(!cart.length){ toast('Cart is empty.','wrn'); return; }
-    Modal.open({
-      title:'Your cart', sub:`${cart.length} item${cart.length>1?'s':''}`,
-      content:[
-        el('div',{style:{display:'flex',flexDirection:'column',gap:'8px',marginBottom:'14px'}},
-          ...cart.map(item=>el('div',{style:{display:'flex',justifyContent:'space-between',padding:'8px 0',borderBottom:'1px solid var(--line)'}},
-            el('span',{style:{fontSize:'12px'}},item.name),
-            el('span',{style:{fontFamily:'var(--mono)',fontSize:'12px',color:'var(--accent)'}},`$${item.price}`)
-          ))
-        ),
-        el('div',{style:{display:'flex',justifyContent:'space-between',fontSize:'14px',fontWeight:'600',paddingTop:'8px'}},
-          el('span',{},'Total'),
-          el('span',{style:{color:'var(--accent)',fontFamily:'var(--mono)'}},`$${cart.reduce((s,i)=>s+i.price,0)}`)
-        )
-      ],
-      actions:[
-        {label:'Clear',class:'btn-g',onClick:()=>{ Store.set('cart',[]); toast('Cart cleared.'); Router.navigate('shop'); }},
-        {label:'Checkout',class:'btn-p',onClick:()=>{ Store.set('cart',[]); toast('Order placed! 🎉','ok'); Router.navigate('shop'); }}
-      ]
-    });
-  }
-
-  return root;
-},{title:'Shop'});
-
-/* ═══════════════════════════════════════════════════════
-   PAGE: COMMUNITY
-   ═══════════════════════════════════════════════════════ */
+// --- COMMUNITY ---
 const POSTS = [
   {author:'Hana Aoki',av:'HA',time:'12m',body:'Just landed a new personal best: 11-2 against my practice partner. The counter-loop drill from the Academy finally clicked!',likes:24,replies:6},
   {author:'Marco Silva',av:'MS',time:'1h',body:'Anyone else testing the new Dignics 09C? The grip feels completely different from Tenergy.',likes:18,replies:12},
   {author:'Kian Danesh',av:'KD',time:'3h',body:'Climbed to #340 in global ranking today. Small step, but the grind continues.',likes:47,replies:8},
   {author:'Sofia Rossi',av:'SR',time:'5h',body:'Video of my footwork session this morning — the cross-step is finally becoming automatic.',likes:31,replies:4}
 ];
-
 Router.register('community', () => {
   const root = el('div',{});
   root.appendChild(el('div',{class:'page-head'},
@@ -2378,22 +1874,14 @@ Router.register('community', () => {
       el('h1',{class:'h1'},'The players feed'),
       el('p',{class:'sub'},'Share, learn, and grow with the global DANESH SPIN community.')
     ),
-    el('div',{class:'head-acts'},
-      el('button',{class:'btn btn-p',onclick:()=>openPost()},'+ Post')
-    )
+    el('div',{class:'head-acts'}, el('button',{class:'btn btn-p',onclick:()=>openPost()},'+ Post') )
   ));
   const feed = el('div',{class:'feed'});
   function render(){
     clear(feed);
     POSTS.forEach(p=>{
-      feed.appendChild(el('div',{class:'post'},
-        el('div',{class:'post-head'},
-          el('div',{class:'av'},p.av),
-          el('div',{},
-            el('div',{class:'post-author'},p.author),
-            el('div',{class:'post-time'},p.time+' ago')
-          )
-        ),
+      feed.appendChild(el('div',{class:'post glass-card'},
+        el('div',{class:'post-head'}, el('div',{class:'av'},p.av), el('div',{}, el('div',{class:'post-author'},p.author), el('div',{class:'post-time'},p.time+' ago'))),
         el('div',{class:'post-body'},p.body),
         el('div',{class:'post-actions'},
           el('span',{class:'post-action',onclick:()=>{p.likes++;render();toast('Liked.');}},`♥ ${p.likes}`),
@@ -2405,7 +1893,6 @@ Router.register('community', () => {
   }
   render();
   root.appendChild(feed);
-
   function openPost(){
     const b = el('textarea',{class:'input',placeholder:'Share something with the community…'});
     Modal.open({
@@ -2416,19 +1903,15 @@ Router.register('community', () => {
         {label:'Post',class:'btn-p',onClick:()=>{
           if(!b.value.trim()) return;
           POSTS.unshift({author:Store.get('user').name,av:Store.get('user').avatar,time:'now',body:b.value.trim(),likes:0,replies:0});
-          render();
-          toast('Posted.','ok');
+          render(); toast('Posted.','ok');
         }}
       ]
     });
   }
-
   return root;
 },{title:'Community'});
 
-/* ═══════════════════════════════════════════════════════
-   PAGE: SETTINGS
-   ═══════════════════════════════════════════════════════ */
+// --- SETTINGS ---
 Router.register('settings', () => {
   const prefs = Store.get('prefs');
   let tab = 'appearance';
@@ -2440,56 +1923,28 @@ Router.register('settings', () => {
       el('p',{class:'sub'},'Customize your DANESH SPIN experience.')
     )
   ));
-
   const grid = el('div',{class:'settings-grid'});
   const nav = el('div',{class:'settings-nav'});
-  const panel = el('div',{class:'card',style:{flex:1}});
-
-  const TABS = [
-    {id:'appearance',l:'Appearance'},
-    {id:'account',l:'Account'},
-    {id:'notifications',l:'Notifications'},
-    {id:'data',l:'Data'},
-    {id:'about',l:'About'}
-  ];
-
+  const panel = el('div',{class:'card glass-card',style:{flex:1}});
+  const TABS = [{id:'appearance',l:'Appearance'},{id:'account',l:'Account'},{id:'notifications',l:'Notifications'},{id:'data',l:'Data'},{id:'about',l:'About'}];
   function renderPanel(){
     clear(panel);
     if(tab==='appearance'){
       panel.appendChild(el('div',{class:'setting-row'},
         el('div',{},el('div',{class:'setting-l'},'Theme'),el('div',{class:'setting-d'},'Switch between light and dark.')),
-        el('div',{class:'seg'},
-          el('button',{class:'seg-btn '+(prefs.theme==='dark'?'on':''),onclick:()=>setPref('theme','dark')},'Dark'),
-          el('button',{class:'seg-btn '+(prefs.theme==='light'?'on':''),onclick:()=>setPref('theme','light')},'Light')
-        )
-      ));
-      panel.appendChild(el('div',{class:'setting-row'},
-        el('div',{},el('div',{class:'setting-l'},'Sidebar collapsed'),el('div',{class:'setting-d'},'Minimize sidebar to icon mode.')),
-        toggle('sidebarCollapsed',prefs.sidebarCollapsed)
+        el('div',{class:'seg'}, el('button',{class:'seg-btn '+(prefs.theme==='dark'?'on':''),onclick:()=>setPref('theme','dark')},'Dark'), el('button',{class:'seg-btn '+(prefs.theme==='light'?'on':''),onclick:()=>setPref('theme','light')},'Light'))
       ));
     } else if(tab==='account'){
       panel.appendChild(el('div',{class:'setting-row'},
         el('div',{},el('div',{class:'setting-l'},'User'),el('div',{class:'setting-d'},Store.get('user').name)),
         el('button',{class:'btn btn-s btn-sm',onclick:()=>Router.navigate('profile')},'Edit')
       ));
-      panel.appendChild(el('div',{class:'setting-row'},
-        el('div',{},el('div',{class:'setting-l'},'Sign out'),el('div',{class:'setting-d'},'Log out of this device.')),
-        el('button',{class:'btn btn-d btn-sm',onclick:()=>toast('Signed out.')},'Sign out')
-      ));
     } else if(tab==='notifications'){
       panel.appendChild(el('div',{class:'setting-row'},
         el('div',{},el('div',{class:'setting-l'},'Push notifications'),el('div',{class:'setting-d'},'Match results, rank changes, and updates.')),
         toggle('notifications',prefs.notifications)
       ));
-      panel.appendChild(el('div',{class:'setting-row'},
-        el('div',{},el('div',{class:'setting-l'},'Sound effects'),el('div',{class:'setting-d'},'Play subtle sounds on interactions.')),
-        toggle('sounds',prefs.sounds)
-      ));
     } else if(tab==='data'){
-      panel.appendChild(el('div',{class:'setting-row'},
-        el('div',{},el('div',{class:'setting-l'},'Export data'),el('div',{class:'setting-d'},'Download all data as JSON.')),
-        el('button',{class:'btn btn-s btn-sm',onclick:exportData},'Export')
-      ));
       panel.appendChild(el('div',{class:'setting-row'},
         el('div',{},el('div',{class:'setting-l'},'Reset app'),el('div',{class:'setting-d'},'Erase all local data. Cannot be undone.')),
         el('button',{class:'btn btn-d btn-sm',onclick:resetData},'Reset')
@@ -2502,63 +1957,34 @@ Router.register('settings', () => {
       ));
     }
   }
-
   function toggle(key,init){
     const t = el('div',{class:'toggle '+(init?'on':'')});
-    t.addEventListener('click',()=>{
-      const next = !t.classList.contains('on');
-      t.classList.toggle('on',next);
-      setPref(key,next);
-    });
+    t.addEventListener('click',()=>{ const next = !t.classList.contains('on'); t.classList.toggle('on',next); setPref(key,next); });
     return t;
   }
-
   function setPref(key,value){
     Store.update('prefs',p=>({...p,[key]:value}));
     if(key==='theme') document.body.setAttribute('data-theme',value);
-    if(key==='sidebarCollapsed') $('#shell').classList.toggle('collapsed',value);
     toast('Preference updated.','ok');
   }
-
-  function exportData(){
-    const blob = new Blob([Store.export()],{type:'application/json'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'danesh-spin-data.json'; a.click();
-    URL.revokeObjectURL(url);
-    toast('Exported.','ok');
-  }
-
   async function resetData(){
     if(await confirmDlg('Reset all data? This cannot be undone.',{danger:true,ok:'Reset everything'})){
-      Store.reset();
-      toast('Data reset.','ok');
-      setTimeout(()=>location.reload(),600);
+      Store.reset(); toast('Data reset.','ok'); setTimeout(()=>location.reload(),600);
     }
   }
-
   function refresh(){
     clear(nav);
     TABS.forEach(t=>{
-      nav.appendChild(el('div',{
-        class:'settings-nav-item '+(t.id===tab?'on':''),
-        onclick:()=>{ tab = t.id; refresh(); }
-      },t.l));
+      nav.appendChild(el('div',{ class:'settings-nav-item '+(t.id===tab?'on':''), onclick:()=>{ tab = t.id; refresh(); } },t.l));
     });
     renderPanel();
   }
-
-  grid.appendChild(nav);
-  grid.appendChild(panel);
-  root.appendChild(grid);
-  refresh();
-
+  grid.appendChild(nav); grid.appendChild(panel);
+  root.appendChild(grid); refresh();
   return root;
 },{title:'Settings'});
 
-/* ═══════════════════════════════════════════════════════
-   PAGE: ADMIN
-   ═══════════════════════════════════════════════════════ */
+// --- ADMIN ---
 Router.register('admin', () => {
   const root = el('div',{});
   root.appendChild(el('div',{class:'page-head'},
@@ -2568,40 +1994,17 @@ Router.register('admin', () => {
       el('p',{class:'sub'},'Platform health, users, and content.')
     )
   ));
-
   const grid = el('div',{class:'admin-grid'});
-  [
-    {l:'Total users',v:'12,480',d:'+8.2%'},
-    {l:'Active today',v:'1,204',d:'+2.1%'},
-    {l:'Lessons viewed',v:'48.2K',d:'+14%'},
-    {l:'Avg. session',v:'22m',d:'+1m'},
-    {l:'Matches logged',v:'9,840',d:'+6%'},
-    {l:'Uptime',v:'99.98%',d:'stable'}
-  ].forEach(k=>{
-    grid.appendChild(el('div',{class:'kpi'},
-      el('div',{class:'kpi-l'},k.l),
-      el('div',{class:'kpi-v'},k.v),
-      el('div',{class:'kpi-d'},k.d)
-    ));
+  [{l:'Total users',v:'12,480',d:'+8.2%'},{l:'Active today',v:'1,204',d:'+2.1%'},{l:'Lessons viewed',v:'48.2K',d:'+14%'},{l:'Avg. session',v:'22m',d:'+1m'},{l:'Matches logged',v:'9,840',d:'+6%'},{l:'Uptime',v:'99.98%',d:'stable'}].forEach(k=>{
+    grid.appendChild(el('div',{class:'kpi glass-card'}, el('div',{class:'kpi-l'},k.l), el('div',{class:'kpi-v'},k.v), el('div',{class:'kpi-d'},k.d)));
   });
   root.appendChild(grid);
-
-  const tbl = el('div',{class:'card',style:{padding:'0',overflow:'hidden'}});
-  tbl.appendChild(el('div',{style:{padding:'14px 18px',borderBottom:'1px solid var(--line)'}},
-    el('div',{class:'card-t'},'Recent sign-ups')
-  ));
+  const tbl = el('div',{class:'card glass-card',style:{padding:'0',overflow:'hidden'}});
+  tbl.appendChild(el('div',{style:{padding:'14px 18px',borderBottom:'1px solid var(--line)'}}, el('div',{class:'card-t'},'Recent sign-ups')));
   tbl.appendChild(el('table',{class:'tbl'},
-    el('thead',{},el('tr',{},
-      el('th',{},'User'),el('th',{},'Country'),el('th',{},'Tier'),el('th',{},'Joined'),el('th',{},'Status')
-    )),
+    el('thead',{},el('tr',{}, el('th',{},'User'),el('th',{},'Country'),el('th',{},'Tier'),el('th',{},'Joined'),el('th',{},'Status'))),
     el('tbody',{},
-      ...[
-        {name:'Ali Rezaei',c:'IRN',t:'Free',j:'2m',s:'active'},
-        {name:'Sara Kim',c:'KOR',t:'Pro',j:'1h',s:'active'},
-        {name:'Tom Becker',c:'GER',t:'Free',j:'3h',s:'pending'},
-        {name:'Lina Chen',c:'CHN',t:'Pro',j:'6h',s:'active'},
-        {name:'Marc Dubois',c:'FRA',t:'Free',j:'1d',s:'active'}
-      ].map(u=>el('tr',{},
+      ...[{name:'Ali Rezaei',c:'IRN',t:'Free',j:'2m',s:'active'},{name:'Sara Kim',c:'KOR',t:'Pro',j:'1h',s:'active'},{name:'Tom Becker',c:'GER',t:'Free',j:'3h',s:'pending'},{name:'Lina Chen',c:'CHN',t:'Pro',j:'6h',s:'active'},{name:'Marc Dubois',c:'FRA',t:'Free',j:'1d',s:'active'}].map(u=>el('tr',{},
         el('td',{},u.name),
         el('td',{},u.c),
         el('td',{},el('span',{class:'badge '+(u.t==='Pro'?'badge-a':'badge-n')},u.t)),
@@ -2611,20 +2014,59 @@ Router.register('admin', () => {
     )
   ));
   root.appendChild(tbl);
-
   return root;
 },{title:'Admin'});
 
 /* ═══════════════════════════════════════════════════════
-   APP BOOT
+   AI CHATBOT
+   ═══════════════════════════════════════════════════════ */
+(function initChatbot(){
+  const btn = el('button',{ id:'chatBtn', title:'پشتیبانی' },'💬');
+  document.body.appendChild(btn);
+  const panel = el('div',{ id:'chatPanel' });
+  document.body.appendChild(panel);
+  panel.appendChild(el('div',{ style:{padding:'14px 16px',borderBottom:'1px solid var(--line)',display:'flex',alignItems:'center',gap:'10px',background:'var(--bg2)'} },
+    el('div',{style:{width:'8px',height:'8px',borderRadius:'50%',background:'var(--success)',boxShadow:'0 0 8px var(--success)'}}),
+    el('div',{}, el('div',{style:{fontSize:'12px',fontWeight:'600',color:'var(--ink)'}},'DANESH Assistant'), el('div',{style:{fontSize:'10px',color:'var(--inkL)'}},'آنلاین')),
+    el('button',{style:{marginLeft:'auto',color:'var(--inkL)',fontSize:'14px',cursor:'pointer'},onclick:()=>{panel.style.display='none'}},'✕')
+  ));
+  const messages = el('div',{style:{flex:1,overflowY:'auto',padding:'12px',display:'flex',flexDirection:'column',gap:'10px',maxHeight:'320px'}});
+  panel.appendChild(messages);
+  const inputWrap = el('div',{style:{padding:'10px',borderTop:'1px solid var(--line)',display:'flex',gap:'8px',background:'var(--bg2)'}});
+  const input = el('input',{class:'input',placeholder:'سوال خود را بنویسید...',style:{flex:1,height:'34px',fontSize:'12px'}});
+  const sendBtn = el('button',{class:'btn btn-p btn-sm',style:{padding:'0 14px',height:'34px'}},'ارسال');
+  inputWrap.appendChild(input); inputWrap.appendChild(sendBtn);
+  panel.appendChild(inputWrap);
+  const KB = [
+    {k:['قیمت','چند','تومان','هزینه'],r:'قیمت‌های ما به زودی در بخش فروشگاه قرار می‌گیرد. برای اطلاع از قیمت‌ها با پشتیبانی در ارتباط باشید.'},
+    {k:['خرید','پرداخت','چطور'],r:'برای خرید: محصول را به سبد اضافه کنید، روی «تکمیل سفارش» کلیک کنید، مبلغ را به شماره کارت واریز کنید و رسید را به تلگرام/واتساپ ما بفرستید.'},
+    {k:['تکنیک','تمرین','یاد'],r:'برای شروع، درس‌های «Footwork Patterns» و «Forehand Loop» در بخش Academy را ببینید.'},
+    {k:['بازی','arena'],r:'بخش Arena یک بازی پینگ پونگ تعاملی دارد! از منوی سمت چپ روی Arena کلیک کنید.'},
+    {k:['سلام','hi','hello'],r:'سلام! 👋 من دستیار DANESH SPIN هستم. درباره تکنیک‌ها، بازی یا امکانات سایت بپرسید.'}
+  ];
+  function addMsg(text, isUser){
+    const msg = el('div',{ style:{ maxWidth:'85%',padding:'8px 12px',borderRadius:'10px',fontSize:'12px',lineHeight:'1.6', alignSelf:isUser?'flex-end':'flex-start', background:isUser?'var(--accent)':'var(--bg3)', color:isUser?'#fff':'var(--ink)' } },text);
+    messages.appendChild(msg); messages.scrollTop = messages.scrollHeight;
+  }
+  function reply(q){
+    const t = q.toLowerCase();
+    for(const item of KB){ if(item.k.some(k=>t.includes(k))){ addMsg(item.r,false); return; } }
+    addMsg('متوجه نشدم. می‌توانید درباره «تکنیک»، «بازی» یا «امکانات سایت» بپرسید.',false);
+  }
+  function send(){ const v = input.value.trim(); if(!v) return; addMsg(v,true); input.value=''; setTimeout(()=>reply(v),400); }
+  sendBtn.onclick = send;
+  input.addEventListener('keydown',e=>{if(e.key==='Enter')send();});
+  btn.onclick = ()=>{ const isOpen = panel.style.display==='flex'; panel.style.display = isOpen?'none':'flex'; if(!isOpen && !messages.children.length){ addMsg('سلام! 👋 درباره تکنیک‌ها، بازی یا امکانات سایت بپرسید.',false); } };
+})();
+
+/* ═══════════════════════════════════════════════════════
+   BOOT
    ═══════════════════════════════════════════════════════ */
 (function boot(){
-  // Apply prefs
   const prefs = Store.get('prefs') || {};
   if(prefs.theme) document.body.setAttribute('data-theme',prefs.theme);
   if(prefs.sidebarCollapsed) $('#shell').classList.add('collapsed');
 
-  // Splash
   const logs = ['initializing kernel…','loading modules…','restoring session…','syncing state…','ready'];
   const fill = $('#splashFill');
   const log = $('#splashLog');
@@ -2648,77 +2090,35 @@ Router.register('admin', () => {
   tick();
 
   function initHandlers(){
-    // User info
     const u = Store.get('user');
-    $('#userName').textContent = u.name;
-    $('#userRole').textContent = u.role;
-    $('#userAv').textContent = u.avatar;
-
-    // Sidebar toggle
-    $('#sideToggle').onclick = ()=>{
-      $('#shell').classList.toggle('collapsed');
-      Store.update('prefs',p=>({...p,sidebarCollapsed:$('#shell').classList.contains('collapsed')}));
-    };
-
-    // Theme
-    $('#themeBtn').onclick = ()=>{
-      const cur = document.body.getAttribute('data-theme') || 'dark';
-      const next = cur==='light'?'dark':'light';
-      document.body.setAttribute('data-theme',next);
-      Store.update('prefs',p=>({...p,theme:next}));
-      toast(`Theme: ${next}`,'ok');
-    };
+    $('#userName').textContent = u.name; $('#userRole').textContent = u.role; $('#userAv').textContent = u.avatar;
+    $('#sideToggle').onclick = ()=>{ $('#shell').classList.toggle('collapsed'); Store.update('prefs',p=>({...p,sidebarCollapsed:$('#shell').classList.contains('collapsed')})); };
+    $('#themeBtn').onclick = ()=>{ const cur = document.body.getAttribute('data-theme') || 'dark'; const next = cur==='light'?'dark':'light'; document.body.setAttribute('data-theme',next); Store.update('prefs',p=>({...p,theme:next})); toast(`Theme: ${next}`,'ok'); };
 
     // Command palette
-    const cmdkBg = $('#cmdkBg');
-    const cmdkIn = $('#cmdkInput');
-    const cmdkRes = $('#cmdkResults');
+    const cmdkBg = $('#cmdkBg'), cmdkIn = $('#cmdkInput'), cmdkRes = $('#cmdkResults');
     let selIdx = 0, filtered = [];
-
     const CMDS = [
       {sec:'Navigate', items: NAV.filter(n=>n.path).map(n=>({label:n.label,icon:n.icon,action:()=>Router.navigate(n.path)}))},
-      {sec:'Create', items:[
-        {label:'Log a match',icon:'matches',action:()=>Router.navigate('matches')},
-        {label:'Start a drill',icon:'training',action:()=>Router.navigate('training')},
-        {label:'Play Arena',icon:'game',action:()=>Router.navigate('game')}
-      ]},
-      {sec:'System', items:[
-        {label:'Toggle theme',icon:'settings',action:()=>$('#themeBtn').click()},
-        {label:'Open settings',icon:'settings',action:()=>Router.navigate('settings')}
-      ]}
+      {sec:'Create', items:[{label:'Log a match',icon:'matches',action:()=>Router.navigate('matches')},{label:'Start a drill',icon:'training',action:()=>Router.navigate('training')},{label:'Play Arena',icon:'game',action:()=>Router.navigate('game')}]},
+      {sec:'System', items:[{label:'Toggle theme',icon:'settings',action:()=>$('#themeBtn').click()},{label:'Open settings',icon:'settings',action:()=>Router.navigate('settings')}]}
     ];
-
-    function openCmdk(){
-      cmdkBg.classList.add('on');
-      cmdkIn.value = '';
-      selIdx = 0;
-      renderCmdk('');
-      setTimeout(()=>cmdkIn.focus(),60);
-    }
+    function openCmdk(){ cmdkBg.classList.add('on'); cmdkIn.value = ''; selIdx = 0; renderCmdk(''); setTimeout(()=>cmdkIn.focus(),60); }
     function closeCmdk(){ cmdkBg.classList.remove('on'); }
-
     function renderCmdk(q){
-      clear(cmdkRes);
-      filtered = [];
-      const query = q.toLowerCase();
+      clear(cmdkRes); filtered = []; const query = q.toLowerCase();
       CMDS.forEach(sec=>{
         const items = sec.items.filter(it=>!query||it.label.toLowerCase().includes(query));
         if(!items.length) return;
         cmdkRes.appendChild(el('div',{class:'cmdk-sec'},sec.sec));
         items.forEach(it=>{
-          const idx = filtered.length;
-          filtered.push(it);
-          cmdkRes.appendChild(el('div',{
-            class:'cmdk-it '+(idx===selIdx?'sel':''),
-            onclick:()=>{ closeCmdk(); it.action(); }
-          },
-            el('span',{class:'cmdk-it-ico',html:ICONS[it.icon]||'·'}),
-            el('span',{class:'cmdk-it-lbl'},it.label)
+          const idx = filtered.length; filtered.push(it);
+          cmdkRes.appendChild(el('div',{ class:'cmdk-it '+(idx===selIdx?'sel':''), onclick:()=>{ closeCmdk(); it.action(); } },
+            el('span',{class:'cmdk-it-ico',html:ICONS[it.icon]||'·'}), el('span',{class:'cmdk-it-lbl'},it.label)
           ));
         });
       });
     }
-
     cmdkIn.addEventListener('input',e=>{ selIdx = 0; renderCmdk(e.target.value); });
     cmdkIn.addEventListener('keydown',e=>{
       if(e.key==='ArrowDown'){ e.preventDefault(); selIdx = Math.min(filtered.length-1,selIdx+1); renderCmdk(cmdkIn.value); }
@@ -2728,55 +2128,29 @@ Router.register('admin', () => {
     });
     cmdkBg.addEventListener('click',e=>{ if(e.target===cmdkBg) closeCmdk(); });
     $('#searchOpen').onclick = openCmdk;
-
-    document.addEventListener('keydown',e=>{
-      if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){ e.preventDefault(); openCmdk(); }
-      if(e.key==='Escape') closeCmdk();
-    });
+    document.addEventListener('keydown',e=>{ if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){ e.preventDefault(); openCmdk(); } if(e.key==='Escape') closeCmdk(); });
 
     // Notifications
-    const notifBtn = $('#notifBtn');
-    const notifPanel = $('#notifPanel');
-    const notifList = $('#notifList');
+    const notifBtn = $('#notifBtn'), notifPanel = $('#notifPanel'), notifList = $('#notifList');
     function renderNotifs(){
       clear(notifList);
       Store.get('notifications').forEach(n=>{
         notifList.appendChild(el('div',{class:'notif-it '+(n.unread?'unread':'read')},
-          el('div',{class:'notif-body'},
-            el('div',{class:'notif-t'},n.title),
-            el('div',{style:{fontSize:'11px',color:'var(--inkM)',marginTop:'2px'}},n.body),
-            el('div',{class:'notif-time'},n.time)
-          )
+          el('div',{class:'notif-body'}, el('div',{class:'notif-t'},n.title), el('div',{style:{fontSize:'11px',color:'var(--inkM)',marginTop:'2px'}},n.body), el('div',{class:'notif-time'},n.time))
         ));
       });
     }
     renderNotifs();
-    notifBtn.onclick = e=>{
-      e.stopPropagation();
-      notifPanel.classList.toggle('on');
-    };
-    $('#notifClear').onclick = ()=>{
-      Store.update('notifications',arr=>arr.map(n=>({...n,unread:false})));
-      renderNotifs();
-      document.querySelector('.ndot')?.remove();
-    };
-    document.addEventListener('click',e=>{
-      if(!notifPanel.contains(e.target)&&!notifBtn.contains(e.target)) notifPanel.classList.remove('on');
-    });
+    notifBtn.onclick = e=>{ e.stopPropagation(); notifPanel.classList.toggle('on'); };
+    $('#notifClear').onclick = ()=>{ Store.update('notifications',arr=>arr.map(n=>({...n,unread:false}))); renderNotifs(); document.querySelector('.ndot')?.remove(); };
+    document.addEventListener('click',e=>{ if(!notifPanel.contains(e.target)&&!notifBtn.contains(e.target)) notifPanel.classList.remove('on'); });
 
     // Clock
-    function updateClock(){
-      const c = $('#clock');
-      if(c) c.textContent = new Date().toLocaleTimeString('en-GB');
-    }
-    updateClock();
-    setInterval(updateClock,1000);
-
-    // Console
+    function updateClock(){ const c = $('#clock'); if(c) c.textContent = new Date().toLocaleTimeString('en-GB'); }
+    updateClock(); setInterval(updateClock,1000);
     console.log('%cDANESH SPIN%c Performance OS · v2.0','background:#FF4D00;color:#fff;padding:4px 10px;border-radius:4px;font-weight:700','color:#8A8781;font-size:12px');
-    console.log('%cTip:%c Press ⌘K / Ctrl+K for command palette','color:#FF4D00;font-weight:600','color:#8A8781');
   }
 })();
 </script>
 </body>
-  </html>
+   </html>
