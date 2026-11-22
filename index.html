@@ -1,1 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DANESH SPIN | Master Table Tennis</title>
+<meta name="description" content="DANESH SPIN - Premium table tennis academy for adults. Master spin, technique, tactics and equipment.">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{--bg:#070a10;--card:#111927cc;--line:#ffffff1c;--txt:#eef2f7;--mut:#9aa7ba;--org:#ff5c00;--org2:#ff8a00;--blue:#2ea8ff;--green:#22e584}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+h1,h2{font-family:Anton,sans-serif;letter-spacing:.5px;line-height:.95}
+h2{font-size:clamp(32px,5vw,58px)}
+h2 span{color:var(--org)}
+a{color:inherit;text-decoration:none}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(18px);background:#070a10cc;border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1240px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+.logo{font-family:Anton;font-size:22px;display:flex;align-items:center;gap:10px}
+.logo span{color:var(--org)}
+.logo-ball{width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,#ff8a00 40%,#ff3d00 80%);box-shadow:0 0 18px #ff5c00;display:inline-block;animation:spin 3s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.nav-links{display:flex;gap:20px;font-weight:600;font-size:14px;color:var(--mut)}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.btn{border:0;border-radius:999px;padding:12px 22px;font-weight:800;cursor:pointer;transition:.25s;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.btn.primary{background:linear-gradient(135deg,var(--org),var(--org2));color:#fff;box-shadow:0 8px 30px #ff5c0055}
+.btn.primary:hover{transform:translateY(-2px)}
+.btn.glass{background:#ffffff14;border:1px solid var(--line);color:#fff}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:#fff}
+.btn.sm{padding:9px 16px;font-size:13px}
+.btn.lg{padding:15px 28px;font-size:15px}
+.burger{display:none;background:none;border:0;flex-direction:column;gap:5px;cursor:pointer}
+.burger span{width:24px;height:2px;background:#fff;display:block}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 20px 60px;overflow:hidden}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%}
+.hero-overlay{position:absolute;inset:0;background:radial-gradient(800px 400px at 50% 20%,#ff5c0022,transparent),linear-gradient(#070a1088,#070a10)}
+.hero-content{position:relative;z-index:2;max-width:900px}
+.badge{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);background:#ffffff0f;padding:8px 16px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:1px}
+.pulse{width:9px;height:9px;background:#22e584;border-radius:50%;box-shadow:0 0 0 6px #22e58422;animation:p 1.6s infinite}
+@keyframes p{50%{box-shadow:0 0 0 10px transparent}}
+.hero h1{font-size:clamp(64px,12vw,148px);margin:18px 0}
+.outline{color:transparent;-webkit-text-stroke:2px #fff}
+.orange{color:var(--org)}
+.hero-sub{color:var(--mut);font-size:17px;max-width:640px;margin:0 auto 26px;line-height:1.7}
+.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.hero-stats{display:flex;gap:10px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+.hero-stats div{background:#ffffff0d;border:1px solid var(--line);border-radius:18px;padding:16px 24px;min-width:140px}
+.hero-stats strong{font-size:26px;display:block}
+.hero-stats span{color:var(--mut);font-size:12px}
+.marquee{background:var(--org);color:#000;font-weight:900;padding:12px 0;overflow:hidden;transform:rotate(-1deg)}
+.marquee-track{display:flex;white-space:nowrap;animation:m 18s linear infinite;font-family:Anton;font-size:20px}
+@keyframes m{to{transform:translateX(-50%)}}
+.section{max-width:1240px;margin:auto;padding:90px 20px}
+.section.dark{background:linear-gradient(#0b111b,#070a10);max-width:100%}
+.wrap{max-width:1240px;margin:auto}
+.kicker{color:var(--org);font-weight:900;letter-spacing:3px;font-size:12px;margin-bottom:10px}
+.section-head p:last-child{color:var(--mut);margin-top:12px}
+.levels-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:30px}
+.level-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;transition:.3s}
+.level-card:hover{transform:translateY(-6px);border-color:#ff5c0066}
+.level-card .lvl{font-size:12px;font-weight:900;color:var(--org);letter-spacing:2px}
+.level-card h3{margin:8px 0;font-size:20px}
+.level-card p{color:var(--mut);font-size:14px;line-height:1.6}
+.meta{display:flex;justify-content:space-between;margin:14px 0;color:var(--mut);font-size:12px}
+.mini-progress{height:8px;background:#ffffff15;border-radius:99px;overflow:hidden}
+.mini-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--org),var(--org2))}
+.dashboard-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:22px}
+.dash-card{background:#ffffff08;border:1px solid var(--line);border-radius:20px;padding:22px}
+.dash-card.highlight{background:linear-gradient(135deg,#ff5c0026,#ff8a0012);border-color:#ff5c0055}
+.progress-big{height:12px;background:#ffffff15;border-radius:99px;margin:14px 0;overflow:hidden}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--org),#ffb400);transition:1s}
+.xp-row{display:flex;justify-content:space-between;font-weight:800;font-size:13px;color:var(--org2)}
+.coach-input{display:flex;gap:8px;margin-top:12px}
+input,select{background:#00000055;border:1px solid var(--line);color:#fff;border-radius:12px;padding:12px;width:100%;outline:none}
+input:focus{border-color:var(--org)}
+.tech-layout{display:grid;grid-template-columns:320px 1fr;gap:18px;margin-top:28px}
+.tech-tabs{display:flex;flex-direction:column;gap:10px}
+.tech-tabs button{background:#ffffff08;border:1px solid var(--line);color:#fff;text-align:left;padding:14px 16px;border-radius:14px;cursor:pointer;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.tech-tabs button.active{background:linear-gradient(135deg,var(--org),var(--org2))}
+.glass-card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px}
+.tech-video{height:220px;border-radius:16px;background:linear-gradient(135deg,#1a2436ee,#0d1420ee),url(https://images.unsplash.com/photo-1534158914592-062992fbe900?w=800&q=80);background-size:cover;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;position:relative}
+.tech-video h4{position:absolute;bottom:12px;left:14px;font-family:Anton;background:#000000aa;padding:6px 12px;border-radius:8px}
+.play-btn{width:64px;height:64px;border-radius:50%;background:#fff;color:#000;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer}
+.duration{position:absolute;top:12px;right:12px;background:#000;color:#fff;font-size:12px;padding:5px 10px;border-radius:99px}
+.tech-detail h3{font-size:26px;margin:16px 0 8px}
+.tech-detail p{color:var(--mut);line-height:1.7}
+.tech-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+ol,ul{padding-left:18px;line-height:1.9;font-size:14px}
+.mistakes{color:#ff9a9a}
+.tech-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.spin-tag{background:#2ea8ff22;border:1px solid #2ea8ff55;color:#7ccbff;padding:6px 12px;border-radius:99px;font-size:12px;font-weight:800}
+.lab-grid{display:grid;grid-template-columns:320px 1fr;gap:18px;margin-top:26px}
+.lab-controls label{display:flex;justify-content:space-between;margin:14px 0 6px;font-weight:700;font-size:14px}
+input[type=range]{accent-color:var(--org);padding:0}
+.lab-btns{display:flex;gap:10px;margin-top:16px}
+.lab-readout{display:flex;gap:10px;margin-top:16px}
+.lab-readout div{background:#00000044;border:1px solid var(--line);border-radius:12px;padding:10px;flex:1;text-align:center;font-size:12px;color:var(--mut)}
+.lab-readout strong{display:block;color:#fff;font-size:15px}
+#spinCanvas{width:100%;border-radius:14px;background:radial-gradient(600px 300px at 50% 0%,#16233a,#070d18);border:1px solid var(--line)}
+.lab-legend{display:flex;gap:16px;color:var(--mut);font-size:12px;margin-top:10px;flex-wrap:wrap}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}
+.dot.orange{background:var(--org)}
+.dot.blue{background:var(--blue)}
+.dot.green{background:var(--green)}
+.equip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:26px}
+.equip-card{background:#ffffff07;border:1px solid var(--line);border-radius:20px;padding:22px}
+.equip-icon{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,var(--org),var(--org2));display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left}
+th{color:var(--mut)}
+.finder label{margin:12px 0 6px;display:block;font-size:13px;color:var(--mut)}
+.result{background:#22e58415;border:1px solid #22e58444;border-radius:12px;padding:12px;margin-top:12px;font-size:14px}
+.train-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:26px}
+.timer{font-family:Anton;font-size:64px;text-align:center;margin:10px 0}
+.timer-btns,.timer-presets{display:flex;gap:8px;justify-content:center}
+.timer-presets button{background:#ffffff12;border:1px solid var(--line);color:#fff;border-radius:99px;padding:6px 14px;cursor:pointer;margin-top:10px}
+.muted{color:var(--mut);font-size:13px;margin-top:10px;text-align:center}
+.week{list-style:none;padding:0;margin-top:12px}
+.week li{background:#ffffff08;border:1px solid var(--line);padding:10px 12px;border-radius:12px;margin-bottom:8px;font-size:13px}
+#quizOpts button{display:block;width:100%;text-align:left;margin-bottom:8px;background:#ffffff0d;border:1px solid var(--line);color:#fff;padding:10px;border-radius:10px;cursor:pointer}
+.comm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:26px}
+.board{padding-left:20px;line-height:2}
+.board li{background:#ffffff08;border:1px solid var(--line);margin-bottom:8px;padding:8px 12px;border-radius:12px;font-size:14px}
+.wall{max-height:240px;overflow:auto;display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.wall div{background:#ffffff0c;padding:10px 12px;border-radius:12px;font-size:13px}
+.testi{background:#ffffff0a;border-left:4px solid var(--org);padding:14px;border-radius:12px;font-style:italic;min-height:90px}
+.testi-btns{display:flex;gap:8px;margin:10px 0}
+.testi-btns button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:transparent;color:#fff;cursor:pointer}
+.newsletter{margin-top:14px;border-top:1px solid var(--line);padding-top:14px}
+footer{border-top:1px solid var(--line);background:#04060a;padding:40px 20px 20px}
+.foot-grid{max-width:1240px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:20px}
+.foot-grid a{display:block;color:var(--mut);margin:8px 0;font-size:14px}
+.socials{display:flex;gap:12px;font-size:20px}
+.copy{text-align:center;color:var(--mut);font-size:12px;margin-top:24px}
+.modal{position:fixed;inset:0;background:#000000aa;backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:99;padding:20px}
+.modal.open{display:flex}
+.modal-card{background:#101725;border:1px solid var(--line);border-radius:22px;padding:28px;max-width:420px;width:100%;position:relative}
+.modal-card input{margin-bottom:10px}
+.modal-card .btn{width:100%;margin-top:8px}
+.close{position:absolute;top:12px;right:16px;background:none;border:0;color:#fff;font-size:24px;cursor:pointer}
+.switch{text-align:center;margin-top:12px;color:var(--mut);font-size:13px}
+.switch a{color:var(--org);cursor:pointer;font-weight:800}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:#fff;color:#000;font-weight:700;padding:12px 22px;border-radius:99px;z-index:120;transition:.4s}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media(max-width:900px){.tech-layout,.lab-grid{grid-template-columns:1fr}.nav-links{position:fixed;top:62px;right:0;left:0;background:#0a0f18;flex-direction:column;padding:20px;display:none}.nav-links.open{display:flex}.burger{display:flex}.foot-grid{grid-template-columns:1fr 1fr}.tech-cols{grid-template-columns:1fr}}
+  </style>
+  </head>
+<body>
+<header class="navbar" id="navbar"><div class="nav-inner">
+<a href="#home" class="logo"><span class="logo-ball"></span> DANESH <span>SPIN</span></a>
+<nav class="nav-links" id="navLinks"><a href="#home" class="active">Home</a><a href="#academy">Academy</a><a href="#techniques">Techniques</a><a href="#spinlab">Spin Lab</a><a href="#equipment">Equipment</a><a href="#training">Training</a><a href="#community">Community</a></nav>
+<div style="display:flex;gap:8px;align-items:center">
+<button class="btn ghost sm" id="loginBtnTop"><i class="fa-regular fa-user"></i> <span id="authLabel">Login</span></button>
+<button class="btn primary sm" onclick="scrollToId('academy')">Start Free</button>
+<button class="burger" id="burger"><span></span><span></span><span></span></button>
+</div></div></header>
 
+<section class="hero" id="home">
+<canvas id="heroCanvas"></canvas><div class="hero-overlay"></div>
+<div class="hero-content">
+<div class="badge"><span class="pulse"></span> #1 PREMIUM TABLE TENNIS ACADEMY</div>
+<h1>MASTER<br><span class="outline">THE</span> <span class="orange">SPIN.</span></h1>
+<p class="hero-sub">From first serve to pro loop. 120+ cinematic lessons, physics-based spin simulator, personalized coaching and pro equipment lab. Built for serious adults.</p>
+<div class="hero-cta">
+<button class="btn primary lg" onclick="handleStart()"><i class="fa-solid fa-play"></i> Start Learning Free</button>
+<button class="btn glass lg" onclick="scrollToId('spinlab')"><i class="fa-solid fa-flask"></i> Try Spin Lab</button>
+</div>
+<div class="hero-stats">
+<div><strong data-count="120">0</strong><span>Pro Lessons</span></div>
+<div><strong data-count="24800">0</strong><span>Players</span></div>
+<div><strong data-count="42">0</strong><span>Master Coaches</span></div>
+<div><strong data-count="98">0</strong><span>% Satisfaction</span></div>
+</div></div></section>
+
+<div class="marquee"><div class="marquee-track"><span>TOPSPIN • BACKSPIN • SIDESPIN • FLICK • CHOP • LOOP • FOOTWORK •&nbsp;</span><span>TOPSPIN • BACKSPIN • SIDESPIN • FLICK • CHOP • LOOP • FOOTWORK •&nbsp;</span></div></div>
+
+<section class="section" id="academy"><div class="wrap">
+<div class="section-head"><p class="kicker">DANESH ACADEMY</p><h2>Your Path From Zero <span>To Pro.</span></h2><p>Create your free account to save progress, earn XP and unlock belts. 6 levels, 120 lessons.</p></div>
+<div class="levels-grid" id="levelsGrid"></div>
+<div class="dashboard-strip">
+<div class="dash-card"><h3><i class="fa-solid fa-gauge-high"></i> My Progress</h3><div class="progress-big"><div class="progress-fill" id="totalProgressFill"></div></div><p id="totalProgressText" style="color:#9aa7ba;font-size:14px">Create an account to track progress</p><div class="xp-row"><span id="xpLabel">0 XP</span><span id="beltLabel">WHITE BELT</span></div></div>
+<div class="dash-card"><h3><i class="fa-solid fa-robot"></i> AI Coach Tip</h3><p id="coachTip" style="color:#9aa7ba;font-size:14px;margin-top:8px">Tell me your level and I will build your week.</p><div class="coach-input"><input id="coachInput" placeholder="e.g. I'm intermediate, weak backhand..."><button class="btn primary sm" onclick="askCoach()">Ask</button></div></div>
+<div class="dash-card highlight"><h3><i class="fa-solid fa-crown"></i> Go Pro</h3><p style="font-size:14px">Unlock slow-mo library, personalized plans and certificate.</p><ul style="font-size:13px;margin:10px 0"><li>Unlimited Spin Lab</li><li>Pro video analysis</li><li>Official certificate</li></ul><button class="btn primary sm" onclick="goPro()">Upgrade to Pro</button></div>
+</div></div></section>
+
+<section class="section dark" id="techniques"><div class="wrap">
+<div class="section-head"><p class="kicker">TECHNIQUE VAULT</p><h2>Learn Every Shot. <span>Master Every Spin.</span></h2></div>
+<div class="tech-layout"><div class="tech-tabs" id="techTabs"></div>
+<div class="tech-detail glass-card">
+<div class="tech-video"><div class="play-btn" onclick="markLessonComplete()"><i class="fa-solid fa-play"></i></div><span class="duration" id="techDuration">12:40</span><h4 id="techVideoTitle">FOREHAND TOPSPIN</h4></div>
+<h3 id="techTitle">Forehand Topspin</h3><p id="techDesc"></p>
+<div class="tech-cols"><div><h4><i class="fa-solid fa-list-check"></i> 5 Steps</h4><ol id="techSteps"></ol></div><div><h4><i class="fa-solid fa-triangle-exclamation"></i> Mistakes</h4><ul id="techMistakes" class="mistakes"></ul></div></div>
+<div class="tech-footer"><button class="btn primary sm" onclick="markLessonComplete()"><i class="fa-solid fa-check"></i> Mark Complete +100 XP</button><span class="spin-tag" id="techSpin"></span></div>
+</div></div></div></section>
+
+<section class="section" id="spinlab"><div class="wrap">
+<div class="section-head"><p class="kicker">PRO LAB • INTERACTIVE PHYSICS</p><h2>The Spin <span>Laboratory.</span></h2><p>Drag the sliders. See Magnus effect in real time.</p></div>
+<div class="lab-grid">
+<div class="glass-card lab-controls">
+<label>Topspin <b id="topVal">60</b></label><input type="range" id="topspin" min="-100" max="100" value="60">
+<label>Sidespin <b id="sideVal">30</b></label><input type="range" id="sidespin" min="-100" max="100" value="30">
+<label>Speed <b id="speedVal">75</b></label><input type="range" id="speed" min="20" max="120" value="75">
+<label>Trail <b>length</b></label><input type="range" id="trail" min="5" max="40" value="22">
+<div class="lab-btns"><button class="btn primary sm" onclick="launchBall()">Serve Ball</button><button class="btn ghost sm" onclick="toggleAuto()" id="autoBtn">Auto: ON</button></div>
+<div class="lab-readout"><div>RPM<strong id="rpmOut">4200</strong></div><div>Curve<strong id="curveOut">Right</strong></div><div>Bounce<strong id="bounceOut">High</strong></div></div>
+</div>
+<div class="glass-card"><canvas id="spinCanvas" width="760" height="420"></canvas><div class="lab-legend"><span><i class="dot orange"></i>Topspin kicks forward</span><span><i class="dot blue"></i>Backspin stops</span><span><i class="dot green"></i>Sidespin curves</span></div></div>
+</div></div></section>
+
+<section class="section dark" id="equipment"><div class="wrap">
+<div class="section-head"><p class="kicker">GEAR LAB</p><h2>Choose Like <span>A Pro.</span></h2></div>
+<div class="equip-grid">
+<div class="equip-card"><div class="equip-icon"><i class="fa-solid fa-layer-group"></i></div><h3>Blades</h3><p style="color:#9aa7ba;font-size:14px">5-ply wood for control, carbon for power.</p><table><tr><th>Blade</th><th>Speed</th><th>Control</th></tr><tr><td>Viscaria ALC</td><td>94</td><td>78</td></tr><tr><td>Primorac OFF-</td><td>82</td><td>89</td></tr><tr><td>Appelgren ALL</td><td>68</td><td>96</td></tr></table></div>
+<div class="equip-card"><div class="equip-icon"><i class="fa-solid fa-circle-dot"></i></div><h3>Rubbers</h3><p style="color:#9aa7ba;font-size:14px">Tacky for spin, Euro for speed.</p><table><tr><th>Rubber</th><th>Spin</th><th>Speed</th></tr><tr><td>Hurricane 3</td><td>98</td><td>84</td></tr><tr><td>Tenergy 05</td><td>92</td><td>95</td></tr><tr><td>Rakza 7</td><td>88</td><td>88</td></tr></table></div>
+<div class="equip-card finder"><h3><i class="fa-solid fa-wand-magic-sparkles"></i> Finder Quiz</h3><p style="color:#9aa7ba;font-size:14px">Answer 2 questions, get setup.</p><label>Your style?</label><select id="qStyle"><option>Attacker - Loop</option><option>All-round</option><option>Defender - Chop</option></select><label>Your level?</label><select id="qLevel"><option>Beginner (0-6 mo)</option><option>Intermediate</option><option>Advanced</option></select><div style="margin-top:12px"><button class="btn primary sm" onclick="findSetup()">Find My Setup</button></div><div class="result" id="setupResult">Your pro setup will appear here.</div></div>
+</div></div></section>
+
+<section class="section" id="training"><div class="wrap">
+<div class="section-head"><p class="kicker">TRAIN LIKE A PRO</p><h2>30-Day <span>Champion Plan.</span></h2></div>
+<div class="train-grid">
+<div class="glass-card"><h3><i class="fa-solid fa-stopwatch"></i> Interval Timer</h3><div class="timer" id="timerDisplay">02:00</div><div class="timer-btns"><button class="btn primary sm" onclick="startTimer()">Start</button><button class="btn ghost sm" onclick="stopTimer()">Reset</button></div><div class="timer-presets"><button onclick="setTimer(60)">1m</button><button onclick="setTimer(120)">2m</button><button onclick="setTimer(180)">3m</button><button onclick="setTimer(300)">5m</button></div><p class="muted">Drill: Forehand multiball 2 min ON / 30s OFF x 8</p></div>
+<div class="glass-card"><h3><i class="fa-solid fa-calendar-days"></i> Weekly Generator</h3><div style="margin-top:10px"><button class="btn primary sm" onclick="genWeek()">Generate My Week</button></div><ul id="weekPlan" class="week"><li>Click generate — plan adapts to your belt.</li></ul></div>
+<div class="glass-card"><h3><i class="fa-solid fa-graduation-cap"></i> Rules Test</h3><p class="muted">Pass 80% to earn badge.</p><div id="quizBox"><p id="quizQ" style="font-weight:800;margin:12px 0">Ready?</p><div id="quizOpts"></div><div style="margin-top:10px"><button class="btn primary sm" onclick="nextQuiz()">Start Quiz</button></div></div></div>
+</div></div></section>
+
+<section class="section dark" id="community"><div class="wrap">
+<div class="section-head"><p class="kicker">CLUB DANESH</p><h2>Join 24,800 <span>Spinners.</span></h2></div>
+<div class="comm-grid">
+<div class="glass-card"><h3><i class="fa-solid fa-trophy"></i> Leaderboard</h3><ol id="leaderboard" class="board"></ol></div>
+<div class="glass-card"><h3><i class="fa-solid fa-comments"></i> Wall</h3><div class="wall" id="wall"></div><div class="coach-input"><input id="wallInput" placeholder="Share your progress..."><button class="btn primary sm" onclick="postWall()">Post</button></div></div>
+<div class="glass-card"><h3>Pro Reviews</h3><div class="testi" id="testi" style="margin-top:12px">"DANESH SPIN changed my serve completely. The Spin Lab is insane." — Sara M.</div><div class="testi-btns"><button onclick="prevTesti()">‹</button><button onclick="nextTesti()">›</button></div>
+<div class="newsletter"><h4>Get weekly drills</h4><div class="coach-input"><input id="newsMail" placeholder="Email address"><button class="btn primary sm" onclick="subscribe()">Join</button></div></div></div>
+</div></div></section>
+
+<footer><div class="foot-grid"><div><a class="logo"><span class="logo-ball"></span> DANESH <span>SPIN</span></a><p style="color:#9aa7ba;font-size:14px;margin-top:10px">Premium academy for adults. Designed in Tehran. Played worldwide.</p></div><div><h4>Academy</h4><a href="#academy">Levels</a><a href="#techniques">Techniques</a><a href="#spinlab">Spin Lab</a></div><div><h4>Support</h4><a href="#">Contact</a><a href="#">Privacy</a><a href="#">Terms</a></div><div><h4>Follow</h4><div class="socials"><i class="fa-brands fa-instagram"></i><i class="fa-brands fa-youtube"></i><i class="fa-brands fa-telegram"></i></div></div></div><p class="copy">© 2026 DANESH SPIN — Play fast, spin hard.</p></footer>
+
+<div class="modal" id="authModal"><div class="modal-card">
+<button class="close" onclick="closeAuth()">×</button>
+<h2 id="authTitle">Create your account</h2><p class="muted">Save progress, earn XP, join leaderboard.</p>
+<div style="margin-top:14px"><input id="authName" placeholder="Full name"><input id="authEmail" placeholder="Email address" type="email"><input id="authPass" placeholder="Password (min 6)" type="password">
+<button class="btn primary" onclick="handleAuth()" id="authBtn">Create Account</button>
+<p class="switch">Have an account? <a onclick="toggleAuthMode()">Login</a></p></div>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+let users=JSON.parse(localStorage.getItem('danesh_users')||'[]');
+let session=JSON.parse(localStorage.getItem('danesh_session')||'null');
+let authMode='signup';let currentTech=0;let quizIndex=-1,quizScore=0;let testiI=0;
+const LEVELS=[
+{t:'LEVEL 01 — FOUNDATION',h:'Grip, Stance & Control',d:'Shakehand vs penhold, ready position and first 50-ball rally.',lessons:18,time:'3h 20m'},
+{t:'LEVEL 02 — SPIN BASICS',h:'Topspin & Backspin',d:'Brush contact, bat angle, heavy push and slow loop.',lessons:22,time:'4h 10m'},
+{t:'LEVEL 03 — SERVES',h:'Ghost, Pendulum & Tomahawk',d:'Legal toss, deception, 12 pro serves with breakdown.',lessons:20,time:'3h 45m'},
+{t:'LEVEL 04 — FOOTWORK',h:'Side-step, Cross & Pivot',d:'Two-point, Falkenberg drill, recovery like Ma Long.',lessons:19,time:'3h 00m'},
+{t:'LEVEL 05 — TACTICS',h:'Third Ball & Receive',d:'Serve + attack patterns, receive strategy, psychology.',lessons:21,time:'4h 30m'},
+{t:'LEVEL 06 — PRO MASTER',h:'Loop Kill & Match Play',d:'Power loop, counter-topspin, competition prep.',lessons:20,time:'5h 15m'}];
+
+const TECHS=[
+{n:'Forehand Topspin',du:'12:40',spin:'TOPSPIN +4200 RPM',d:'The weapon of modern table tennis. Brush up the back of the ball with accelerated forearm snap.',s:['Side stance, weight on right leg','Backswing low, bat below knee','Brush thin at 1-2 o clock','Snap forearm + rotate hips','Finish high, recover'],m:['Hitting too flat','Standing too square','Stopping arm after contact']},
+{n:'Backhand Loop',du:'11:05',spin:'TOPSPIN +3800 RPM',d:'Compact and deadly over the table. Elbow as pivot, wrist snap at contact.',s:['Elbow in front, stable triangle','Bat closed 70 degrees','Brush forward-up','Use wrist last moment','Short follow-through'],m:['Dropping elbow','Big backswing','Late timing']},
+{n:'Pendulum Serve',du:'14:22',spin:'SIDESPIN / BACKSPIN',d:'Most deceptive serve. Same motion, 4 spins. Keep toss 16cm+ legal.',s:['Toss straight 16cm minimum','Contact low near net','Brush side-bottom','Freeze follow to hide spin','Vary long/short'],m:['Illegal toss','Tossing backward','Telegraphing spin']},
+{n:'Backhand Chop',du:'10:18',spin:'HEAVY BACKSPIN',d:'Defense that frustrates attackers. Chop down-forward from far.',s:['Far from table, low stance','Long downward stroke','Contact bottom of ball','Absorb power','Vary depth'],m:['Chopping upward','Standing too close','No variation']},
+{n:'Forehand Flick',du:'09:47',spin:'TOPSPIN OVER TABLE',d:'Attack short balls. Step in, open bat and whip over ball.',s:['Step in under table','Elbow high','Brush top of ball','Short explosive snap','Recover instantly'],m:['Lifting too much','Using shoulder','Late footwork']},
+{n:'Pivot Footwork',du:'13:02',spin:'MOVEMENT SYSTEM',d:'Run around backhand to unleash forehand. Used by pros 70% of points.',s:['Read ball early','Cross left foot behind','Pivot 120 degrees','Full power forehand','Side-shuffle recover'],m:['Pivoting too late','No recovery','Wrong selection']}];
+
+const QUIZ=[
+{q:'Legal serve toss height?',o:['Any height','At least 16cm near vertical','Over 30cm','No toss needed'],a:1},
+{q:'How many points to win a game?',o:['21','15','11 (win by 2)','7'],a:2},
+{q:'Topspin after bounce?',o:['Stops','Kicks fast forward','Slides back','No change'],a:1},
+{q:'Switch sides in decider?',o:['Never','Every 2 points','Every 5 points / at 5','Only at end'],a:2},
+{q:'Best contact for backspin serve?',o:['Hit flat center','Brush thin bottom','Hit side hard','Smash'],a:1}];
+
+const TESTIS=[
+'"DANESH SPIN changed my serve completely. The Spin Lab is insane." — Sara M., National Player',
+'"At 34 I finally learned proper topspin. +300 XP in 2 weeks!" — Daniel K., Berlin',
+'"Better than my local coach. The 30-day plan is brutal and perfect." — Amir R., Tehran',
+'"Equipment finder saved me $200. Finally right blade." — Lisa T., London'];
+
+function $(id){return document.getElementById(id)}
+function scrollToId(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+function toast(t){let e=$('toast');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2600)}
+
+function renderLevels(){
+let g=$('levelsGrid');g.innerHTML='';
+LEVELS.forEach((L,i)=>{
+let prog=getProgress(i);
+g.innerHTML+=`<div class="level-card">
+<div class="lvl">${L.t}</div>
+<h3>${L.h}</h3>
+<p>${L.d}</p>
+<div class="meta"><span>${L.lessons} lessons</span><span>${L.time}</span></div>
+<div class="mini-progress"><i style="width:${prog}%"></i></div>
+<div style="display:flex;justify-content:space-between;margin-top:12px;align-items:center">
+<span style="font-size:12px;color:#9aa7ba">${prog}% done</span>
+<button class="btn ghost sm" onclick="openLesson(${i})">${prog>0?'Continue':'Start'} →</button>
+</div></div>`;
+});
+}
+
+function getProgress(i){
+if(!session) return 0;
+let p=JSON.parse(localStorage.getItem('danesh_prog_'+session.email)||'{}');
+return p[i]||0;
+}
+
+function openLesson(i){
+if(!session){openAuth();toast('Create free account to start');return}
+let k='danesh_prog_'+session.email;
+let p=JSON.parse(localStorage.getItem(k)||'{}');
+p[i]=Math.min(100,(p[i]||0)+25);
+localStorage.setItem(k,JSON.stringify(p));
+addXP(50);
+renderLevels();
+updateDash();
+toast('Lesson saved +50 XP');
+}
+
+function addXP(n){
+if(!session) return;
+session.xp=(session.xp||0)+n;
+users=users.map(u=>u.email===session.email?{...u,xp:session.xp}:u);
+localStorage.setItem('danesh_users',JSON.stringify(users));
+localStorage.setItem('danesh_session',JSON.stringify(session));
+updateDash();
+renderBoard();
+}
+
+function belt(xp){
+if(xp>1500) return 'BLACK BELT';
+if(xp>800) return 'BROWN BELT';
+if(xp>400) return 'GREEN BELT';
+if(xp>150) return 'ORANGE BELT';
+return 'WHITE BELT';
+}
+
+function updateDash(){
+let total=0;
+for(let i=0;i<6;i++) total+=getProgress(i);
+total=Math.round(total/6);
+$('totalProgressFill').style.width=total+'%';
+if(session){
+$('totalProgressText').textContent=session.name+' — '+total+'% completed, keep spinning!';
+$('xpLabel').textContent=session.xp+' XP';
+$('beltLabel').textContent=belt(session.xp);
+$('authLabel').textContent=session.name.split(' ')[0];
+}
+}
+
+function handleStart(){
+if(session){scrollToId('academy')}
+else{openAuth()}
+}
+
+function openAuth(){$('authModal').classList.add('open')}
+function closeAuth(){$('authModal').classList.remove('open')}
+
+function toggleAuthMode(){
+authMode=authMode==='signup'?'login':'signup';
+$('authTitle').textContent=authMode==='signup'?'Create your account':'Welcome back';
+$('authBtn').textContent=authMode==='signup'?'Create Account':'Login';
+$('authName').style.display=authMode==='signup'?'block':'none';
+}
+
+function handleAuth(){
+let n=$('authName').value.trim();
+let e=$('authEmail').value.trim().toLowerCase();
+let p=$('authPass').value;
+
+if(!e||p.length<6){
+toast('Enter valid email + 6-char password');
+return;
+}
+
+if(authMode==='signup'){
+if(!n) n=e.split('@')[0];
+if(users.find(u=>u.email===e)){
+toast('Account exists, please login');
+return;
+}
+let u={name:n,email:e,pass:btoa(p),xp:0};
+users.push(u);
+localStorage.setItem('danesh_users',JSON.stringify(users));
+session={name:n,email:e,xp:0};
+localStorage.setItem('danesh_session',JSON.stringify(session));
+toast('Welcome '+n+'! +100 XP');
+}else{
+let u=users.find(u=>u.email===e&&u.pass===btoa(p));
+if(!u){toast('Wrong email or password');return}
+session={name:u.name,email:u.email,xp:u.xp||0};
+localStorage.setItem('danesh_session',JSON.stringify(session));
+toast('Welcome back '+u.name);
+}
+
+closeAuth();
+if(session&&session.xp===0) addXP(100);
+renderLevels();
+updateDash();
+renderBoard();
+}
+
+document.getElementById('loginBtnTop').onclick=()=>{
+if(session){
+if(confirm('Logout '+session.name+'?')){
+session=null;
+localStorage.removeItem('danesh_session');
+updateDash();
+renderLevels();
+$('authLabel').textContent='Login';
+}
+}else openAuth();
+};
+
+function renderTech(i){
+currentTech=i;
+let T=TECHS[i];
+let tabs=$('techTabs');
+tabs.innerHTML='';
+
+TECHS.forEach((t,j)=>{
+tabs.innerHTML+=`<button class="${j===i?'active':''}" onclick="renderTech(${j})">${t.n} <span>›</span></button>`;
+});
+
+$('techTitle').textContent=T.n;
+$('techDesc').textContent=T.d;
+$('techDuration').textContent=T.du;
+$('techSpin').textContent=T.spin;
+$('techVideoTitle').textContent=T.n.toUpperCase();
+$('techSteps').innerHTML=T.s.map(s=>`<li>${s}</li>`).join('');
+$('techMistakes').innerHTML=T.m.map(s=>`<li>${s}</li>`).join('');
+}
+
+function markLessonComplete(){
+if(!session){openAuth();return}
+addXP(100);
+toast('Technique mastered +100 XP');
+}
+
+function askCoach(){
+let q=$('coachInput').value.toLowerCase();
+let tip='Perfect. Train 4x/week: Day1 serves 30min + footwork, Day2 topspin multiball 45min, Day3 match play, Day4 rest + video review.';
+
+if(q.includes('backhand'))
+tip='Backhand fix: elbow forward, contact in front of belly, 200 reps/day against wall. Keep bat 70° closed.';
+else if(q.includes('serve'))
+tip='Serve plan: pendulum 15min daily. Same motion, vary contact: bottom=backspin, side=side, top=jump.';
+else if(q.includes('begin'))
+tip='Beginner week: grip+stance, push control, basic topspin brush, side-step. No power, only control.';
+else if(q.includes('chop')||q.includes('defen'))
+tip='Defender: stay 2m back, chop late and heavy. Vary float vs heavy to force errors.';
+
+$('coachTip').textContent=tip;
+addXP(10);
+}
+
+function goPro(){
+toast('Pro waitlist — you are in!');
+addXP(20);
+}
+
+let spinBall={x:80,y:300,vx:6,vy:-4,trail:[]};
+let auto=true;
+
+function launchBall(){
+spinBall={x:80,y:300,vx:5+($('speed').value/18),vy:-3-Math.random()*3,trail:[]};
+}
+
+function toggleAuto(){
+auto=!auto;
+$('autoBtn').textContent='Auto: '+(auto?'ON':'OFF');
+}
+
+function drawLab(){
+let c=$('spinCanvas');
+let ctx=c.getContext('2d');
+let top=+$('topspin').value;
+let side=+$('sidespin').value;
+
+$('topVal').textContent=top;
+$('sideVal').textContent=side;
+$('speedVal').textContent=$('speed').value;
+$('rpmOut').textContent=Math.abs(top*70+side*20);
+$('curveOut').textContent=side>20?'Right':side<-20?'Left':'Straight';
+$('bounceOut').textContent=top>30?'High-Kick':top<-30?'Dead-Stop':'Normal';
+
+ctx.clearRect(0,0,c.width,c.height);
+ctx.strokeStyle='#ffffff22';
+ctx.beginPath();
+ctx.moveTo(0,320);
+ctx.lineTo(c.width,320);
+ctx.stroke();
+
+ctx.fillStyle='#ffffff33';
+ctx.fillRect(c.width-70,140,8,180);
+ctx.fillStyle='#ff5c00';
+ctx.fillRect(60,140,8,180);
+
+spinBall.vy+=0.18;
+spinBall.vy+=-top*0.0025;
+spinBall.vx+=side*0.0012;
+spinBall.x+=spinBall.vx;
+spinBall.y+=spinBall.vy;
+
+if(spinBall.y>312){
+spinBall.y=312;
+spinBall.vy*=-0.72;
+if(top>0) spinBall.vx*=1.12;
+else spinBall.vx*=0.82;
+}
+
+spinBall.trail.push({x:spinBall.x,y:spinBall.y});
+if(spinBall.trail.length>+$('trail').value) spinBall.trail.shift();
+
+spinBall.trail.forEach((p,i)=>{
+ctx.beginPath();
+ctx.arc(p.x,p.y,3+i*0.35,0,7);
+ctx.fillStyle=top>=0?`rgba(255,92,0,${i/30})`:`rgba(46,168,255,${i/30})`;
+ctx.fill();
+});
+
+ctx.beginPath();
+ctx.arc(spinBall.x,spinBall.y,13,0,7);
+let g=ctx.createRadialGradient(spinBall.x-4,spinBall.y-4,2,spinBall.x,spinBall.y,13);
+g.addColorStop(0,'#fff');
+g.addColorStop(.5,'#ffb37a');
+g.addColorStop(1,'#ff4400');
+ctx.fillStyle=g;
+ctx.fill();
+
+if(spinBall.x>c.width-60||spinBall.x<0){
+if(auto) launchBall();
+}
+requestAnimationFrame(drawLab);
+}
+
+function findSetup(){
+let s=$('qStyle').value;
+let l=$('qLevel').value;
+let r='';
+
+if(l.includes('Beginner'))
+r='Appelgren ALL + 2x Rakza 7 Soft 2.0mm — max control. ~$110';
+else if(s.includes('Defender'))
+r='Defensive blade + Hurricane 3 FH / Long Pips BH. ~$140';
+else
+r='Viscaria ALC + Tenergy 05 FH / Dignics 09c BH. ~$320';
+
+$('setupResult').textContent='Recommended: '+r;
+addXP(20);
+}
+
+let tSec=120,tInt=null;
+
+function setTimer(s){
+tSec=s;
+updTimer();
+}
+
+function updTimer(){
+let m=String(Math.floor(tSec/60)).padStart(2,'0');
+let s=String(tSec%60).padStart(2,'0');
+$('timerDisplay').textContent=m+':'+s;
+}
+
+function startTimer(){
+clearInterval(tInt);
+tInt=setInterval(()=>{
+if(tSec>0){
+tSec--;
+updTimer();
+}else{
+clearInterval(tInt);
+toast('Time! Rest 30s');
+addXP(30);
+}
+},1000);
+}
+
+function stopTimer(){
+clearInterval(tInt);
+setTimer(120);
+}
+
+function genWeek(){
+let lvl=session?belt(session.xp):'WHITE BELT';
+let plans=[
+`Mon: Serves 30m (${lvl})`,
+`Tue: Topspin 200 balls`,
+`Wed: Footwork Falkenberg x10`,
+`Thu: Match + 3rd ball`,
+`Fri: Receive + flick`,
+`Sat: Video review`,
+`Sun: Rest`
+];
+
+$('weekPlan').innerHTML=plans.map(p=>`<li>${p}</li>`).join('');
+addXP(15);
+}
+
+function nextQuiz(){
+if(quizIndex===-1){
+quizIndex=0;
+quizScore=0;
+}
+showQuiz();
+}
+
+function showQuiz(){
+if(quizIndex>=QUIZ.length){
+$('quizQ').textContent=`Done! Score ${quizScore}/${QUIZ.length}`;
+$('quizOpts').innerHTML=`<button onclick="resetQuiz()">${quizScore>=4?'Claim Badge +200 XP':'Retry'}</button>`;
+if(quizScore>=4) addXP(200);
+quizIndex=-1;
+return;
+}
+
+let Q=QUIZ[quizIndex];
+$('quizQ').textContent=(quizIndex+1)+'. '+Q.q;
+$('quizOpts').innerHTML=Q.o.map((o,i)=>`<button onclick="answerQuiz(${i})">${o}</button>`).join('');
+}
+
+function answerQuiz(i){
+if(i===QUIZ[quizIndex].a){
+quizScore++;
+toast('Correct!');
+}else{
+toast('Wrong — correct: '+QUIZ[quizIndex].o[QUIZ[quizIndex].a]);
+}
+quizIndex++;
+showQuiz();
+}
+
+function resetQuiz(){
+quizIndex=0;
+quizScore=0;
+showQuiz();
+}
+
+function renderBoard(){
+let b=$('leaderboard');
+let all=[...users].sort((a,c)=>(c.xp||0)-(a.xp||0)).slice(0,6);
+if(!all.length) all=[
+{name:'Ma Long Fan',xp:2400},
+{name:'Sara M.',xp:1850},
+{name:'Amir R.',xp:1200}
+];
+
+b.innerHTML=all.map((u,i)=>`<li>${i===0?'🥇':i===1?'🥈':i===2?'🥉':'•'} ${u.name} — <b>${u.xp||0} XP</b></li>`).join('');
+}
+
+function renderWall(){
+let w=JSON.parse(localStorage.getItem('danesh_wall')||'["Just hit 100 topspins in a row!","Pendulum serve finally kicking sideways!"]');
+$('wall').innerHTML=w.slice(-6).reverse().map(t=>`<div>${t}</div>`).join('');
+}
+
+function postWall(){
+let v=$('wallInput').value.trim();
+if(!v) return;
+let w=JSON.parse(localStorage.getItem('danesh_wall')||'[]');
+w.push((session?session.name:'Guest')+': '+v);
+localStorage.setItem('danesh_wall',JSON.stringify(w));
+$('wallInput').value='';
+renderWall();
+addXP(10);
+}
+
+function subscribe(){
+let m=$('newsMail').value;
+if(!m.includes('@')){
+toast('Enter valid email');
+return;
+}
+toast('Subscribed! Check inbox');
+$('newsMail').value='';
+}
+
+function nextTesti(){
+testiI=(testiI+1)%TESTIS.length;
+$('testi').textContent=TESTIS[testiI];
+}
+
+function prevTesti(){
+testiI=(testiI-1+TESTIS.length)%TESTIS.length;
+$('testi').textContent=TESTIS[testiI];
+}
+
+$('burger').onclick=()=>$('navLinks').classList.toggle('open');
+
+(function heroAnim(){
+let c=$('heroCanvas');
+let x=c.getContext('2d');
+
+function rs(){
+c.width=c.offsetWidth;
+c.height=c.offsetHeight;
+}
+
+rs();
+window.addEventListener('resize',rs);
+
+let balls=Array.from({length:26},()=>({
+x:Math.random()*1200,
+y:Math.random()*600,
+r:Math.random()*3+1,
+s:Math.random()*1.2+.3,
+o:Math.random()*.5+.15
+}));
+
+(function loop(){
+x.clearRect(0,0,c.width,c.height);
+balls.forEach(b=>{
+b.y-=b.s;
+b.x+=Math.sin(b.y/80)*.4;
+if(b.y<0){
+b.y=c.height;
+b.x=Math.random()*c.width;
+}
+x.beginPath();
+x.arc(b.x,b.y,b.r,0,7);
+x.fillStyle=`rgba(255,110,0,${b.o})`;
+x.fill();
+});
+requestAnimationFrame(loop);
+})();
+})();
+
+(function counters(){
+let io=new IntersectionObserver(es=>es.forEach(e=>{
+if(e.isIntersecting){
+let el=e.target;
+let end=+el.dataset.count;
+let t=0;
+let iv=setInterval(()=>{
+t+=Math.ceil(end/60);
+if(t>=end){
+t=end;
+clearInterval(iv);
+}
+el.textContent=t.toLocaleString()+(end===98?'%':'+');
+},30);
+io.unobserve(el);
+}
+}));
+document.querySelectorAll('[data-count]').forEach(el=>io.observe(el));
+})();
+
+renderLevels();
+renderTech(0);
+updateDash();
+renderBoard();
+renderWall();
+updTimer();
+drawLab();
+</script>
+</body>
+</html>
