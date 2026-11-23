@@ -4,906 +4,645 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090d14">
-<meta name="description" content="DANESH SPIN — The ultimate table tennis learning and training platform.">
-<title>DANESH SPIN — The Table Tennis Universe</title>
+<meta name="theme-color" content="#090909">
+<title>DANESH SPIN — Beyond The Game</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
- --bg:#090d14;--panel:#101722;--panel2:#151f2c;--panel3:#1b2938;
- --text:#f3f6fa;--muted:#8b9aaa;--line:#ffffff12;
- --orange:#ff642d;--orange2:#ff8b45;--lime:#c7f36b;
- --blue:#55b9ff;--green:#65d6a2;--red:#ff626f;
- --radius:20px;--shadow:0 18px 60px #0005;
+--bg:#090909;
+--surface:#111;
+--surface2:#191919;
+--surface3:#222;
+--text:#f7f7f7;
+--muted:#929292;
+--line:rgba(255,255,255,.10);
+--red:#ff304d;
+--red2:#d91535;
+--white:#fff;
+--green:#baff55;
+--radius:17px;
+--shadow:0 20px 60px #0008;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:90px}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-a{color:inherit;text-decoration:none}
-::selection{background:var(--orange);color:white}
 body.light{
- --bg:#f1f4f7;--panel:#fff;--panel2:#e9eef3;--panel3:#dce5ed;
- --text:#15202b;--muted:#657587;--line:#15202b16;--shadow:0 18px 50px #20304012
+--bg:#f1f2f4;
+--surface:#fff;
+--surface2:#e8eaed;
+--surface3:#dce0e5;
+--text:#111;
+--muted:#667080;
+--line:#00000015;
+--shadow:0 15px 40px #17203312;
 }
-body.light .topbar{background:#f1f4f7eF}
-body.light .hero{background:radial-gradient(ellipse at 80% 30%,#ff642d22,transparent 45%),#f1f4f7}
-body.light .hero h1{color:#14202b}
-body.light .hero h1 span{color:transparent;-webkit-text-stroke:1px #14202b}
-body.light .hero p{color:#5d6b78}
-body.light .nav a:hover,body.light .nav a.active{color:#d94b1c}
-body.light .field,body.light input,body.light textarea,body.light select{color:var(--text)}
-body.light .modal-card{background:#fff}
-body.light .footer{background:#e6ebf0}
-body.light .table th{color:#d94b1c}
-body.light .btn.secondary{background:#e5ebf0}
-body.light .mobile-menu{background:#fff}
-body.light .hero-art{opacity:.45}
-body.light .orb{opacity:.35}
-.topbar{height:76px;position:sticky;top:0;z-index:50;background:#090d14eF;backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
-.nav-wrap{max-width:1320px;height:100%;margin:auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:22px}
-.brand{display:flex;align-items:center;gap:10px;font-family:'Barlow Condensed';font-size:27px;font-weight:900;letter-spacing:1px;white-space:nowrap}
-.brand-mark{width:34px;height:34px;border-radius:50%;background:var(--orange);display:grid;place-items:center;box-shadow:0 0 24px #ff642d55}
-.brand-mark:after{content:"";width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px #ffffff35}
-.brand span:last-child{color:var(--orange)}
-.nav{display:flex;align-items:center;gap:24px}
-.nav a{font-size:12px;font-weight:800;color:var(--muted);letter-spacing:.7px;text-transform:uppercase;transition:.2s}
-.nav a:hover,.nav a.active{color:var(--orange)}
-.nav-actions{display:flex;align-items:center;gap:9px}
-.btn{border:0;border-radius:12px;padding:12px 17px;font-weight:800;font-size:12px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
-.btn.primary{background:var(--orange);color:white;box-shadow:0 8px 24px #ff642d30}
-.btn.secondary{background:var(--panel3);color:var(--text);border:1px solid var(--line)}
-.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
-.btn.lime{background:var(--lime);color:#15200b}
-.btn.small{padding:9px 12px;font-size:11px}
-.icon-btn{width:39px;height:39px;border-radius:12px;background:var(--panel);border:1px solid var(--line);color:var(--text);font-size:16px}
-.menu-btn{display:none}
-.container{max-width:1240px;margin:auto;padding:0 26px}
-.hero{min-height:650px;position:relative;display:flex;align-items:center;overflow:hidden;background:radial-gradient(ellipse at 78% 42%,#ff642d20,transparent 42%),radial-gradient(ellipse at 12% 90%,#55b9ff10,transparent 35%),var(--bg)}
-.hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#ffffff07 1px,transparent 1px),linear-gradient(90deg,#ffffff07 1px,transparent 1px);background-size:54px 54px;mask-image:linear-gradient(to right,black,transparent)}
-.hero-content{position:relative;z-index:2;max-width:1240px;width:100%;margin:auto;padding:90px 26px 100px}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--lime);font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase}
-.live-dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime)}
-.hero h1{font-family:'Barlow Condensed';font-weight:900;font-size:clamp(70px,11vw,148px);line-height:.82;letter-spacing:-2px;margin:27px 0}
-.hero h1 span{color:transparent;-webkit-text-stroke:1.5px #f3f6fa}
-.hero h1 em{font-style:normal;color:var(--orange)}
-.hero-copy{max-width:520px;color:#9baaba;line-height:1.8;font-size:15px}
-.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.hero-stats{display:flex;gap:42px;margin-top:58px;flex-wrap:wrap}
-.stat strong{display:block;font-family:'Barlow Condensed';font-size:31px}
-.stat span{color:var(--muted);font-size:10px;letter-spacing:1px;text-transform:uppercase}
-.hero-art{position:absolute;right:5%;top:12%;width:min(47vw,590px);height:480px;display:grid;place-items:center;opacity:.92}
-.racket{width:300px;height:400px;position:relative;transform:rotate(28deg);filter:drop-shadow(0 30px 35px #0008)}
-.racket-head{position:absolute;width:250px;height:290px;left:20px;top:0;border-radius:48% 48% 44% 44%;background:repeating-linear-gradient(90deg,#ff642d 0 4px,#d94b1c 4px 7px);border:13px solid #1e2935;box-shadow:inset 0 0 0 5px #ff9b66}
-.racket-head:after{content:"";position:absolute;inset:16px;border:1px solid #ffffff44;border-radius:48%}
-.racket-handle{position:absolute;top:260px;left:116px;width:56px;height:160px;border-radius:10px 10px 20px 20px;background:linear-gradient(90deg,#8a4a27,#d58a4e,#8a4a27);border:5px solid #32251e}
-.hero-ball{position:absolute;width:72px;height:72px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff,#f4eee6 65%,#c5bdb2);box-shadow:0 0 65px #ffffff55;top:70px;right:8%;animation:float 4s ease-in-out infinite}
-.orbit{position:absolute;border:1px solid #ff642d55;border-radius:50%;width:460px;height:460px;transform:rotate(-25deg)}
-.orbit:before{content:"";position:absolute;width:9px;height:9px;background:var(--orange);border-radius:50%;top:40px;left:75px;box-shadow:0 0 20px var(--orange)}
-@keyframes float{50%{transform:translateY(-25px)}}
-.ticker{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel);padding:14px 0}
-.ticker-track{display:flex;gap:45px;white-space:nowrap;animation:marquee 32s linear infinite;width:max-content}
-.ticker span{font-family:'Barlow Condensed';font-size:17px;font-weight:800;letter-spacing:2px;color:var(--muted)}
-.ticker b{color:var(--orange);padding-right:40px}
-@keyframes marquee{to{transform:translateX(-50%)}}
-.section{padding:95px 0}
-.section.alt{background:linear-gradient(180deg,transparent,#ffffff04,transparent)}
-.section-head{margin-bottom:34px}
-.kicker{font-size:10px;letter-spacing:2.4px;color:var(--orange);font-weight:900;text-transform:uppercase;margin-bottom:12px}
-.section-title{font-family:'Barlow Condensed';font-size:clamp(38px,5vw,60px);font-weight:900;line-height:1}
-.section-title span{color:var(--orange)}
-.section-desc{color:var(--muted);font-size:13px;line-height:1.8;max-width:620px;margin-top:12px}
-.grid{display:grid;gap:16px}
-.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
-.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
-.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:23px;box-shadow:var(--shadow)}
-.card h3{font-size:16px;margin-bottom:8px}
-.card p{color:var(--muted);font-size:12px;line-height:1.8}
-.card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
-.card-icon{width:43px;height:43px;border-radius:13px;background:#ff642d18;color:var(--orange);display:grid;place-items:center;font-size:20px}
-.tag{font-size:9px;font-weight:900;letter-spacing:1px;padding:6px 9px;border-radius:20px;background:#c7f36b16;color:var(--lime);text-transform:uppercase}
-.progress-track{height:7px;background:var(--panel3);border-radius:20px;overflow:hidden;margin:13px 0}
-.progress-track i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--orange2));border-radius:20px;transition:width .5s}
-.dashboard-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:16px}
-.welcome-card{background:linear-gradient(125deg,#ff642d22,var(--panel) 65%);position:relative;overflow:hidden}
-.welcome-card:after{content:"DS";position:absolute;right:12px;bottom:-36px;font-family:'Barlow Condensed';font-size:150px;font-weight:900;color:#ffffff08}
-.welcome-card h3{font-family:'Barlow Condensed';font-size:34px}
-.big-number{font-family:'Barlow Condensed';font-size:38px;font-weight:900}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;overflow-x:hidden;transition:.25s}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+::selection{background:var(--red);color:white}
+.container{width:min(1220px,92%);margin:auto}
+.red{color:var(--red)}
 .muted{color:var(--muted)}
-.level-card{display:flex;flex-direction:column;min-height:245px;position:relative;overflow:hidden}
-.level-number{font-family:'Barlow Condensed';font-size:40px;color:#ffffff14;font-weight:900;position:absolute;right:16px;top:8px}
-.level-card h3{font-family:'Barlow Condensed';font-size:25px;margin:14px 0 7px}
-.level-card p{min-height:48px}
-.level-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;margin-top:auto;padding-top:16px}
-.level-card .btn{margin-top:14px;align-self:flex-start}
-.locked{opacity:.65}
-.lesson-layout{display:grid;grid-template-columns:280px 1fr;gap:18px}
-.lesson-list{display:flex;flex-direction:column;gap:8px}
-.lesson-item{width:100%;text-align:left;padding:13px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
-.lesson-item.active{border-color:var(--orange);background:#ff642d12}
-.lesson-item small{display:block;color:var(--muted);margin-top:5px}
-.lesson-content{min-height:390px}
-.lesson-content h3{font-family:'Barlow Condensed';font-size:34px}
-.lesson-content p{font-size:13px;line-height:1.9;color:var(--muted);margin:14px 0}
-.lesson-steps{padding-left:20px;color:var(--muted);font-size:13px;line-height:2}
-.lesson-steps li{padding-left:5px}
-.lesson-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-.spin-layout{display:grid;grid-template-columns:300px 1fr;gap:18px}
-.range-row{margin:19px 0}
-.range-row label{display:flex;justify-content:space-between;font-size:12px;font-weight:800;margin-bottom:9px}
-.range-row input{width:100%;accent-color:var(--orange)}
-canvas{width:100%;display:block;border-radius:15px;background:radial-gradient(ellipse at 50% 100%,#1d3342,#0b111a 70%)}
-.lab-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:13px}
-.lab-stat{background:var(--panel2);border-radius:12px;padding:12px;text-align:center}
-.lab-stat strong{display:block;font-family:'Barlow Condensed';font-size:22px;color:var(--orange)}
-.lab-stat span{font-size:9px;color:var(--muted);text-transform:uppercase}
-.equipment-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:11px}
-.equipment-table th,.equipment-table td{text-align:left;padding:11px 8px;border-bottom:1px solid var(--line)}
-.equipment-table th{color:var(--orange);font-size:9px;text-transform:uppercase;letter-spacing:1px}
-.equipment-table td{color:var(--muted)}
-.equipment-table td:first-child{color:var(--text);font-weight:700}
-.field{width:100%;padding:12px 14px;background:var(--panel2);border:1px solid var(--line);border-radius:11px;color:var(--text);outline:none;margin:7px 0 12px;font-size:12px}
-.field:focus{border-color:var(--orange)}
-.field-label{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
-select option{background:var(--panel);color:var(--text)}
+.eyebrow{font-size:10px;font-weight:800;letter-spacing:3px;color:var(--red);text-transform:uppercase}
+.display{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;font-weight:900;line-height:.88;letter-spacing:-1px}
+.section{padding:105px 0}
+.section-title{font:800 clamp(42px,6vw,70px)/.9 "Barlow Condensed";text-transform:uppercase;margin-top:12px}
+.section-intro{color:var(--muted);font-size:13px;line-height:1.9;max-width:510px;margin-top:14px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:38px}
+.btn{border:0;border-radius:7px;padding:13px 19px;font-size:10px;font-weight:900;letter-spacing:1px;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:.2s}
+.btn:hover{transform:translateY(-3px)}
+.btn-red{background:var(--red);color:white}
+.btn-dark{background:var(--surface3);color:var(--text);border:1px solid var(--line)}
+.btn-line{background:transparent;border:1px solid var(--line);color:var(--text)}
+.btn-small{padding:9px 12px;font-size:9px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.tag{display:inline-block;padding:6px 9px;border-radius:4px;background:#ff304d18;color:var(--red);font-size:9px;font-weight:900;letter-spacing:1.5px}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:100;background:#090909e8;backdrop-filter:blur(18px);border-bottom:1px solid #ffffff15}
+body.light .topbar{background:#ffffffeb}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:2px;font-size:17px}
+.logo-mark{width:38px;height:38px;background:var(--red);display:grid;place-items:center;color:white;font:900 23px "Barlow Condensed";transform:skew(-7deg)}
+.logo small{display:block;font-size:7px;letter-spacing:2.5px;color:var(--muted);margin-top:4px}
+.navlinks{display:flex;gap:24px;align-items:center}
+.navlinks a{font-size:9px;letter-spacing:1px;font-weight:800;color:var(--muted);transition:.2s}
+.navlinks a:hover{color:var(--red)}
+.navright{display:flex;gap:8px;align-items:center}
+.iconbtn{height:38px;width:38px;background:var(--surface);border:1px solid var(--line);color:var(--text);border-radius:8px}
+.menu-btn{display:none}
+.hero{min-height:750px;padding:145px 0 80px;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;width:750px;height:750px;right:-200px;top:-100px;background:radial-gradient(circle,#ff304d18,transparent 68%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:45px;position:relative;z-index:1}
+.hero-kicker{display:flex;align-items:center;gap:10px;font-size:9px;font-weight:900;letter-spacing:3px;color:var(--muted)}
+.hero-kicker:before{content:"";width:30px;height:2px;background:var(--red)}
+.hero h1{font:900 clamp(80px,12vw,150px)/.76 "Barlow Condensed";letter-spacing:-3px;margin:25px 0 30px}
+.hero h1 span{color:var(--red);display:block}
+.hero-copy{max-width:500px;color:var(--muted);font-size:14px;line-height:1.9}
+.hero-actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:30px}
+.hero-numbers{display:flex;gap:32px;margin-top:45px}
+.hero-numbers strong{font:800 35px "Barlow Condensed";display:block}
+.hero-numbers small{font-size:8px;letter-spacing:1.5px;color:var(--muted)}
+.hero-art{height:490px;position:relative;background:#171717;border:1px solid #ffffff18;overflow:hidden;border-radius:5px;display:grid;place-items:center}
+.hero-art:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,#ff304d24,transparent 50%),repeating-linear-gradient(135deg,transparent 0 40px,#ffffff08 41px 42px)}
+.hero-art:after{content:"DS / 001";position:absolute;top:28px;right:28px;font:700 12px "Barlow Condensed";letter-spacing:3px;color:#ffffff80}
+.art-big{position:absolute;font:900 250px/.8 "Barlow Condensed";color:#ffffff08;right:15px;bottom:10px}
+.table-art{width:80%;height:190px;background:#a81c32;border:6px solid #f5f5f5;transform:perspective(700px) rotateX(13deg);position:relative;box-shadow:0 35px 70px #000b}
+.table-art:before{content:"";position:absolute;top:0;bottom:0;left:50%;width:3px;background:white}
+.table-art:after{content:"";position:absolute;top:50%;left:0;right:0;height:3px;background:white}
+.net-art{position:absolute;z-index:2;left:-5px;right:-5px;top:47%;height:9px;background:repeating-linear-gradient(90deg,#fff 0 5px,#aaa 5px 8px)}
+.pingball{position:absolute;width:28px;height:28px;background:radial-gradient(circle at 30% 25%,white,#ddd 65%,#888);border-radius:50%;box-shadow:0 0 25px #ffffff80;animation:ballflight 3s ease-in-out infinite}
+@keyframes ballflight{0%,100%{transform:translate(-110px,-90px)}50%{transform:translate(110px,75px)}}
+.art-caption{position:absolute;bottom:27px;left:28px;font:800 23px "Barlow Condensed";letter-spacing:2px}
+.art-caption span{color:var(--red)}
+.art-side{position:absolute;left:22px;top:100px;background:#090909e8;padding:13px 17px;border-left:3px solid var(--red)}
+.art-side strong{font:800 23px "Barlow Condensed";display:block}
+.art-side small{font-size:8px;letter-spacing:1.5px;color:#aaa}
+.marquee{border-block:1px solid var(--line);background:var(--surface);overflow:hidden}
+.marquee-track{display:flex;gap:45px;padding:18px 0;white-space:nowrap;animation:move 32s linear infinite}
+.marquee-track span{font:800 20px "Barlow Condensed";letter-spacing:2px;color:var(--muted)}
+.marquee-track b{color:var(--red);margin-right:12px}
+@keyframes move{to{transform:translateX(-50%)}}
+
+/* Dashboard */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+.stat{padding:20px}
+.stat-icon{font-size:23px;margin-bottom:15px}
+.stat strong{font:800 39px "Barlow Condensed";display:block}
+.stat small{font-size:9px;color:var(--muted);letter-spacing:1px}
+.progress-card{margin-top:15px}
+.progress-top{display:flex;justify-content:space-between;font-size:10px;margin-bottom:10px}
+.progress-bar{height:6px;background:var(--surface3);border-radius:20px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:var(--red);transition:.5s}
+
+/* Academy */
+.course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.course{padding:0;overflow:hidden;transition:.25s}
+.course:hover{transform:translateY(-6px);border-color:#ff304d80}
+.course-image{height:170px;position:relative;display:grid;place-items:center;background:linear-gradient(135deg,#401a24,#171717);overflow:hidden}
+.course-image:before{content:"";position:absolute;width:180px;height:180px;border:1px solid #ffffff20;border-radius:50%}
+.course-image:after{content:"";position:absolute;width:130px;height:130px;border:1px solid #ffffff15;border-radius:50%}
+.course-image span{font-size:58px;position:relative;z-index:2}
+.course-number{position:absolute;top:15px;left:16px;font:800 13px "Barlow Condensed";color:#ffffff80}
+.course-content{padding:19px}
+.course h3{font:700 23px "Barlow Condensed";margin:12px 0 8px}
+.course p{font-size:10px;color:var(--muted);line-height:1.8;min-height:55px}
+.course-foot{display:flex;justify-content:space-between;align-items:center;margin-top:18px}
+.course-foot small{font-size:9px;color:var(--muted)}
+
+/* Feature */
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.feature-visual{min-height:330px;background:linear-gradient(145deg,#32151d,#141414);position:relative;overflow:hidden;display:grid;place-items:center}
+.feature-visual .giant{font:900 190px "Barlow Condensed";color:#ffffff0b;position:absolute}
+.feature-visual .target{width:190px;height:190px;border:1px solid #ff304d80;border-radius:50%;display:grid;place-items:center;position:relative}
+.feature-visual .target:before,.feature-visual .target:after{content:"";position:absolute;border:1px solid #ffffff30;border-radius:50%;inset:25px}
+.feature-visual .target:after{inset:55px}
+.feature-visual .target span{font-size:48px;z-index:2}
+.feature-text{display:flex;flex-direction:column;justify-content:center}
+.feature-text h3{font:800 43px/.95 "Barlow Condensed";margin:15px 0}
+.feature-text p{font-size:12px;color:var(--muted);line-height:1.9}
+.feature-text .btn{align-self:flex-start;margin-top:22px}
+
+/* Spin lab */
+.lab-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.lab-stage{min-height:350px;background:radial-gradient(circle,#352027,#121212 70%);border-radius:12px;display:grid;place-items:center;position:relative;overflow:hidden}
+.orbit{height:210px;width:210px;border:1px dashed #ff304d88;border-radius:50%;display:grid;place-items:center;position:relative}
+.lab-ball{height:75px;width:75px;border-radius:50%;background:radial-gradient(circle at 30% 25%,white,#ddd 65%,#888);box-shadow:0 0 35px #ffffff30;transition:.2s}
+.lab-line{position:absolute;width:155px;height:2px;background:var(--red);transform:rotate(-30deg)}
+.lab-controls{display:grid;gap:19px}
+.control label{display:flex;justify-content:space-between;font-size:10px;margin-bottom:10px}
+input[type=range]{width:100%;accent-color:var(--red)}
+.result{background:var(--surface2);border-radius:9px;padding:15px;font-size:11px;color:var(--muted);line-height:1.8}
+
+/* Training */
 .training-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.timer-display{font-family:'Barlow Condensed';font-size:76px;font-weight:900;text-align:center;margin:15px 0;color:var(--lime);font-variant-numeric:tabular-nums}
-.timer-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
-.preset-row{display:flex;justify-content:center;gap:7px;margin-top:16px}
-.preset-row button{background:var(--panel3);border:0;color:var(--text);border-radius:8px;padding:7px 12px;font-size:10px}
-.day-list{list-style:none;margin-top:12px}
-.day-list li{display:flex;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);font-size:12px}
-.day-list b{color:var(--orange);width:36px}
-.quiz-option{width:100%;text-align:left;background:var(--panel2);color:var(--text);border:1px solid var(--line);padding:13px;border-radius:11px;margin:6px 0;font-size:12px}
-.quiz-option:hover{border-color:var(--orange)}
-.quiz-option.correct{border-color:var(--green);background:#65d6a218}
-.quiz-option.wrong{border-color:var(--red);background:#ff626f18}
-.quiz-feedback{font-size:12px;color:var(--muted);margin-top:12px;min-height:20px}
-.journal-list{display:flex;flex-direction:column;gap:8px;max-height:280px;overflow:auto;margin-top:12px}
-.journal-entry{padding:12px;background:var(--panel2);border-radius:11px;font-size:12px}
-.journal-entry small{display:block;color:var(--muted);margin-top:5px}
-.achievement{display:flex;align-items:center;gap:12px;padding:13px;background:var(--panel2);border-radius:13px}
-.achievement-icon{width:42px;height:42px;border-radius:12px;background:#c7f36b18;display:grid;place-items:center;font-size:20px}
-.achievement strong{font-size:12px;display:block}
-.achievement small{font-size:10px;color:var(--muted)}
-.achievement.locked{filter:grayscale(1);opacity:.45}
-.footer{padding:50px 0 25px;background:#06090e;border-top:1px solid var(--line)}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
-.footer h4{font-size:12px;margin-bottom:15px}
-.footer p,.footer a{font-size:11px;color:var(--muted);line-height:2}
-.footer a{display:block}
-.footer a:hover{color:var(--orange)}
-.footer-bottom{border-top:1px solid var(--line);margin-top:35px;padding-top:20px;color:var(--muted);font-size:10px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.modal{position:fixed;inset:0;z-index:100;background:#000b;backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:18px}
-.modal.show{display:flex}
-.modal-card{width:100%;max-width:430px;background:#111a25;border:1px solid var(--line);border-radius:22px;padding:27px;position:relative;box-shadow:var(--shadow)}
-.modal-card h2{font-family:'Barlow Condensed';font-size:34px;margin-bottom:5px}
-.modal-close{position:absolute;right:15px;top:13px;background:transparent;border:0;color:var(--muted);font-size:24px}
-.modal-note{font-size:10px;color:var(--muted);line-height:1.7;margin-top:10px}
-.toast{position:fixed;z-index:150;bottom:22px;left:50%;transform:translate(-50%,100px);background:var(--lime);color:#18220e;padding:12px 20px;border-radius:30px;font-size:12px;font-weight:900;box-shadow:var(--shadow);transition:.35s;max-width:90%;text-align:center}
-.toast.show{transform:translate(-50%,0)}
-.mobile-menu{display:none}
-.empty{color:var(--muted);font-size:12px;padding:18px;text-align:center}
-@media(max-width:1000px){
- .nav{gap:12px}.nav a{font-size:10px}
- .hero-art{right:-8%;opacity:.5}
- .dashboard-grid{grid-template-columns:1fr 1fr}
- .dashboard-grid .welcome-card{grid-column:span 2}
- .grid.four{grid-template-columns:repeat(2,1fr)}
- .grid.three{grid-template-columns:repeat(2,1fr)}
+.timer{font:800 85px "Barlow Condensed";text-align:center;color:var(--red);margin:25px 0}
+.drills{display:grid;gap:10px;margin-top:17px}
+.drill{display:flex;align-items:center;gap:12px;padding:13px;background:var(--surface2);border-radius:9px}
+.drill-icon{font-size:24px}
+.drill h4{font-size:11px}
+.drill p{font-size:9px;color:var(--muted);margin-top:4px}
+.drill button{margin-left:auto}
+
+/* Quiz */
+.quiz-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:16px}
+.quiz-intro{background:linear-gradient(145deg,#35151e,#151515)}
+.quiz-question{font-size:17px;font-weight:800;line-height:1.6;margin:22px 0}
+.options{display:grid;gap:9px}
+.option{padding:13px 15px;text-align:left;background:var(--surface2);border:1px solid var(--line);border-radius:8px;color:var(--text);font-size:11px}
+.option:hover{border-color:var(--red)}
+.option.correct{border-color:#50dca1;background:#50dca115}
+.option.wrong{border-color:var(--red);background:#ff304d18}
+.quiz-feedback{min-height:32px;color:var(--muted);font-size:10px;line-height:1.7;margin-top:13px}
+.quiz-foot{display:flex;justify-content:space-between;margin-top:17px}
+
+/* Equipment */
+.equipment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.equipment{text-align:center}
+.equipment-icon{font-size:42px;margin-bottom:15px}
+.equipment h3{font:700 23px "Barlow Condensed";margin-bottom:9px}
+.equipment p{font-size:10px;color:var(--muted);line-height:1.8}
+.equipment .tag{margin-top:14px}
+
+/* Journal */
+.journal-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+input,textarea,select{width:100%;background:var(--bg);border:1px solid var(--line);padding:13px;color:var(--text);border-radius:8px;font-size:11px;outline:none}
+textarea{min-height:120px;resize:vertical;line-height:1.7}
+input:focus,textarea:focus,select:focus{border-color:var(--red)}
+.entry{background:var(--surface2);padding:13px;border-radius:9px;margin-top:9px}
+.entry strong{font-size:11px}
+.entry p{font-size:10px;color:var(--muted);line-height:1.7;margin-top:6px}
+
+/* FAQ + footer */
+.faq-list{display:grid;gap:9px;max-width:850px}
+.faq{border:1px solid var(--line);border-radius:9px;background:var(--surface);overflow:hidden}
+.faq button{width:100%;padding:17px;border:0;background:none;color:var(--text);text-align:left;display:flex;justify-content:space-between;font-size:11px;font-weight:700}
+.faq-answer{display:none;padding:0 17px 17px;font-size:10px;color:var(--muted);line-height:1.8}
+.faq.open .faq-answer{display:block}
+footer{padding:55px 0 22px;background:var(--surface);border-top:1px solid var(--line)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:35px}
+footer h4{font-size:11px;margin-bottom:15px}
+footer p,footer a{font-size:10px;color:var(--muted);line-height:2}
+.footer-links{display:grid}
+.copyright{border-top:1px solid var(--line);padding-top:18px;margin-top:30px;display:flex;justify-content:space-between;gap:15px;color:var(--muted);font-size:9px}
+
+/* Modal */
+.modal-bg{position:fixed;inset:0;background:#000c;z-index:200;display:none;place-items:center;padding:18px}
+.modal-bg.show{display:grid}
+.modal{width:min(430px,100%);padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.modal-head h3{font:800 30px "Barlow Condensed"}
+.form{display:grid;gap:12px}
+.form label{font-size:9px;color:var(--muted)}
+.form input{margin-top:6px}
+.tabs{display:flex;gap:8px;margin-bottom:16px}
+.tabs button{flex:1}
+.toast{position:fixed;right:20px;bottom:20px;z-index:300;background:var(--red);color:white;padding:13px 17px;border-radius:8px;font-size:10px;font-weight:800;transform:translateY(100px);opacity:0;transition:.3s}
+.toast.show{transform:translateY(0);opacity:1}
+.hidden{display:none!important}
+@media(max-width:900px){
+.navlinks{display:none;position:absolute;top:76px;left:0;right:0;background:var(--surface);padding:22px;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}
+.navlinks.open{display:flex}.menu-btn{display:block}
+.hero-grid{grid-template-columns:1fr}.hero{padding-top:125px}.hero-art{height:390px}
+.course-grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}
 }
-@media(max-width:760px){
- .topbar{height:66px}.nav-wrap{padding:0 16px}
- .nav{display:none}.menu-btn{display:inline-grid;place-items:center}
- .mobile-menu{position:absolute;top:66px;left:0;right:0;background:#101722;border-bottom:1px solid var(--line);padding:16px 22px;display:none;flex-direction:column;gap:16px}
- .mobile-menu.show{display:flex}
- .mobile-menu a{font-size:12px;color:var(--muted);font-weight:800}
- .nav-actions .account-label{display:none}
- .hero{min-height:610px}.hero-content{padding:75px 20px}
- .hero-art{right:-28%;top:25%;transform:scale(.75);opacity:.24}
- .hero-stats{gap:22px}
- .container{padding:0 17px}
- .section{padding:70px 0}
- .grid.two,.grid.three,.grid.four,.training-grid{grid-template-columns:1fr}
- .dashboard-grid{grid-template-columns:1fr}
- .dashboard-grid .welcome-card{grid-column:auto}
- .lesson-layout,.spin-layout{grid-template-columns:1fr}
- .lesson-list{display:grid;grid-template-columns:1fr 1fr}
- .footer-grid{grid-template-columns:1fr 1fr}
- .lab-stats{grid-template-columns:repeat(3,1fr)}
-}
-@media(max-width:430px){
- .brand{font-size:22px}.brand-mark{width:29px;height:29px}
- .hero h1{font-size:72px}
- .hero-stats{gap:17px}
- .stat strong{font-size:25px}
- .lesson-list{grid-template-columns:1fr}
- .footer-grid{grid-template-columns:1fr}
- .lab-stats{grid-template-columns:1fr 1fr}
+@media(max-width:650px){
+.section{padding:75px 0}.section-head{display:block}.hero h1{font-size:86px}.hero-art{height:310px}
+.course-grid,.feature-grid,.lab-grid,.training-grid,.quiz-grid,.equipment-grid,.journal-grid,.footer-grid{grid-template-columns:1fr}
+.feature-visual{min-height:250px}.stats{grid-template-columns:repeat(2,1fr)}
+.hero-numbers{gap:20px}.copyright{display:block;line-height:2}
 }
 </style>
 </head>
 
 <body>
 <header class="topbar">
- <div class="nav-wrap">
-  <a class="brand" href="#home"><span class="brand-mark"></span><span>DANESH</span><span>SPIN</span></a>
-  <nav class="nav" id="desktopNav">
-   <a href="#home">Home</a><a href="#dashboard">Dashboard</a><a href="#academy">Academy</a><a href="#spinlab">Spin Lab</a><a href="#training">Training</a><a href="#community">Community</a>
-  </nav>
-  <div class="nav-actions">
-   <button class="icon-btn" id="themeBtn" title="Toggle theme">☼</button>
-   <button class="btn secondary small" id="accountBtn">♙ <span class="account-label" id="accountLabel">Sign in</span></button>
-   <button class="icon-btn menu-btn" id="menuBtn">☰</button>
-  </div>
- </div>
- <nav class="mobile-menu" id="mobileMenu">
-  <a href="#home">Home</a><a href="#dashboard">Dashboard</a><a href="#academy">Academy</a><a href="#spinlab">Spin Lab</a><a href="#training">Training</a><a href="#community">Community</a>
- </nav>
+<div class="container nav">
+<a href="#home" class="logo"><span class="logo-mark">DS</span><span>DANESH SPIN<small>BEYOND THE GAME</small></span></a>
+<nav class="navlinks" id="navlinks">
+<a href="#home">HOME</a><a href="#academy">ACADEMY</a><a href="#lab">SPIN LAB</a><a href="#training">TRAINING</a><a href="#quiz">CHALLENGE</a><a href="#equipment">EQUIPMENT</a>
+</nav>
+<div class="navright">
+<button class="iconbtn" id="themeBtn" title="Change theme">◐</button>
+<button class="btn btn-red btn-small" id="accountBtn">PLAYER LOGIN</button>
+<button class="iconbtn menu-btn" id="menuBtn">☰</button>
+</div>
+</div>
 </header>
 
 <main>
 <section class="hero" id="home">
- <div class="hero-content">
-  <div class="eyebrow"><span class="live-dot"></span> THE NEXT GENERATION TABLE TENNIS PLATFORM</div>
-  <h1>OWN THE<br><span>RALLY.</span><br><em>RULE THE SPIN.</em></h1>
-  <p class="hero-copy">Train smarter. Understand the science. Build your game. Explore the ultimate table tennis learning universe — from your first grip to advanced match strategy.</p>
-  <div class="hero-actions">
-   <button class="btn primary" onclick="startLearning()">Start Your Journey ↗</button>
-   <a class="btn secondary" href="#spinlab">Explore Spin Lab ◉</a>
-  </div>
-  <div class="hero-stats">
-   <div class="stat"><strong>06</strong><span>Learning levels</span></div>
-   <div class="stat"><strong>30+</strong><span>Training topics</span></div>
-   <div class="stat"><strong>∞</strong><span>Ways to improve</span></div>
-  </div>
- </div>
- <div class="hero-art" aria-hidden="true">
-  <div class="orbit"></div><div class="racket"><div class="racket-head"></div><div class="racket-handle"></div></div><div class="hero-ball"></div>
- </div>
+<div class="container hero-grid">
+<div>
+<div class="hero-kicker">THE NEXT GENERATION OF TABLE TENNIS</div>
+<h1>BEYOND<br>THE <span>GAME.</span></h1>
+<p class="hero-copy">More than a game. A world of technique, intelligence, precision and performance. Discover the science behind every shot and build your own path to becoming a better player.</p>
+<div class="hero-actions">
+<a class="btn btn-red" href="#academy">EXPLORE THE ACADEMY ↗</a>
+<a class="btn btn-line" href="#lab">DISCOVER SPIN LAB</a>
+</div>
+<div class="hero-numbers">
+<div><strong>06</strong><small>LEARNING PATHS</small></div>
+<div><strong>360°</strong><small>PLAYER DEVELOPMENT</small></div>
+<div><strong>∞</strong><small>WAYS TO IMPROVE</small></div>
+</div>
+</div>
+<div class="hero-art">
+<div class="art-big">SPIN</div>
+<div class="art-side"><strong>CONTROL.</strong><small>READ THE GAME.</small></div>
+<div class="table-art"><div class="net-art"></div></div>
+<div class="pingball"></div>
+<div class="art-caption">OWN YOUR <span>RALLY.</span></div>
+</div>
+</div>
 </section>
 
-<div class="ticker"><div class="ticker-track">
- <span>TOPSPIN <b>✦</b> BACKSPIN <b>✦</b> SIDESPIN <b>✦</b> FOOTWORK <b>✦</b> SERVE <b>✦</b> CONTROL <b>✦</b> TACTICS <b>✦</b></span>
- <span>TOPSPIN <b>✦</b> BACKSPIN <b>✦</b> SIDESPIN <b>✦</b> FOOTWORK <b>✦</b> SERVE <b>✦</b> CONTROL <b>✦</b> TACTICS <b>✦</b></span>
+<div class="marquee"><div class="container marquee-track">
+<span><b>✦</b> TECHNIQUE</span><span><b>✦</b> PRECISION</span><span><b>✦</b> FOOTWORK</span><span><b>✦</b> STRATEGY</span><span><b>✦</b> SPIN CONTROL</span><span><b>✦</b> PERFORMANCE</span><span><b>✦</b> TECHNIQUE</span><span><b>✦</b> PRECISION</span><span><b>✦</b> FOOTWORK</span>
 </div></div>
 
 <section class="section" id="dashboard">
- <div class="container">
-  <div class="section-head"><div class="kicker">YOUR PERSONAL SPACE</div><h2 class="section-title">PLAYER <span>DASHBOARD.</span></h2><p class="section-desc">Your training journey, saved progress, achievements and personal statistics — all in one place.</p></div>
-  <div class="dashboard-grid">
-   <div class="card welcome-card">
-    <div class="kicker">WELCOME TO DANESH SPIN</div>
-    <h3 id="welcomeName">Ready to play?</h3>
-    <p id="welcomeText">Create a local profile to save your learning progress on this device.</p>
-    <div style="display:flex;gap:25px;margin-top:22px;flex-wrap:wrap">
-     <div><div class="big-number" id="dashXP">0</div><small class="muted">TOTAL XP</small></div>
-     <div><div class="big-number" id="dashBelt">01</div><small class="muted">PLAYER RANK</small></div>
-     <div><div class="big-number" id="dashLessons">0</div><small class="muted">LESSONS DONE</small></div>
-    </div>
-   </div>
-   <div class="card">
-    <div class="card-top"><div class="card-icon">◈</div><span class="tag">PROGRESS</span></div>
-    <h3>Learning progress</h3><div class="big-number" id="progressPercent">0%</div>
-    <div class="progress-track"><i id="progressBar"></i></div>
-    <p>Complete lessons to build your player profile.</p>
-   </div>
-   <div class="card">
-    <div class="card-top"><div class="card-icon">♜</div><span class="tag">CURRENT RANK</span></div>
-    <h3 id="rankName">Rookie</h3><div class="big-number" id="rankNext">0 XP</div>
-    <p id="rankHint">Earn XP by completing lessons and training activities.</p>
-   </div>
-  </div>
- </div>
+<div class="container">
+<div class="section-head"><div><div class="eyebrow">YOUR PERSONAL PLAYER SPACE</div><h2 class="section-title">PLAYER <span class="red">DASHBOARD.</span></h2></div><p class="section-intro">Track your learning, review your training and keep building your game. Your activity is saved in this browser.</p></div>
+<div class="stats">
+<div class="card stat"><div class="stat-icon">◈</div><strong id="lessonsStat">0</strong><small>PATHS COMPLETED</small></div>
+<div class="card stat"><div class="stat-icon">✦</div><strong id="scoreStat">0%</strong><small>BEST QUIZ SCORE</small></div>
+<div class="card stat"><div class="stat-icon">◷</div><strong id="minutesStat">0</strong><small>TRAINING MINUTES</small></div>
+<div class="card stat"><div class="stat-icon">▤</div><strong id="notesStat">0</strong><small>JOURNAL ENTRIES</small></div>
+</div>
+<div class="card progress-card"><div class="progress-top"><b>ACADEMY PROGRESS</b><span id="progressText">0%</span></div><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div></div>
+</div>
 </section>
 
-<section class="section alt" id="academy">
- <div class="container">
-  <div class="section-head"><div class="kicker">THE DANESH SPIN ACADEMY</div><h2 class="section-title">BUILD YOUR <span>GAME.</span></h2><p class="section-desc">Six structured learning levels. Start with fundamentals and gradually explore more advanced skills and tactics.</p></div>
-  <div class="grid three" id="levelsGrid"></div>
- </div>
+<section class="section" id="academy">
+<div class="container">
+<div class="section-head"><div><div class="eyebrow">THE DANESH SPIN ACADEMY</div><h2 class="section-title">MASTER THE <span class="red">FUNDAMENTALS.</span></h2></div><p class="section-intro">A structured collection of learning paths designed to help you understand the game from the first grip to advanced match strategy.</p></div>
+<div class="course-grid" id="courseGrid"></div>
+</div>
 </section>
 
-<section class="section" id="lessons">
- <div class="container">
-  <div class="section-head"><div class="kicker">THE TECHNIQUE LIBRARY</div><h2 class="section-title">LEARN THE <span>DETAILS.</span></h2><p class="section-desc">Explore important table tennis techniques with clear explanations, key steps and common mistakes.</p></div>
-  <div class="lesson-layout">
-   <div class="lesson-list" id="lessonList"></div>
-   <div class="card lesson-content" id="lessonContent">
-    <div class="kicker">SELECT A TECHNIQUE</div><h3>Choose your next skill.</h3><p>Pick a topic from the library to see its explanation and practice checklist.</p>
-   </div>
-  </div>
- </div>
+<section class="section">
+<div class="container">
+<div class="feature-grid">
+<div class="feature-visual card"><div class="giant">SPIN</div><div class="target"><span>🏓</span></div></div>
+<div class="feature-text">
+<div class="eyebrow">THE SCIENCE OF EVERY SHOT</div>
+<h3>SMALL DETAILS.<br><span class="red">BIG DIFFERENCE.</span></h3>
+<p>Every contact creates a new possibility. Understand how racket angle, timing, speed and spin work together. Learn to make decisions with purpose instead of simply hitting the ball.</p>
+<a href="#lab" class="btn btn-red">ENTER THE SPIN LAB ↗</a>
+</div>
+</div>
+</div>
 </section>
 
-<section class="section alt" id="spinlab">
- <div class="container">
-  <div class="section-head"><div class="kicker">INTERACTIVE TABLE TENNIS PHYSICS</div><h2 class="section-title">THE <span>SPIN LAB.</span></h2><p class="section-desc">Experiment with spin and speed. Change the controls and watch a simplified ball-flight simulation.</p></div>
-  <div class="spin-layout">
-   <div class="card">
-    <h3>Flight controls</h3>
-    <div class="range-row"><label>Topspin <b id="topValue">55</b></label><input id="topRange" type="range" min="-100" max="100" value="55"></div>
-    <div class="range-row"><label>Sidespin <b id="sideValue">25</b></label><input id="sideRange" type="range" min="-100" max="100" value="25"></div>
-    <div class="range-row"><label>Speed <b id="speedValue">65</b></label><input id="speedRange" type="range" min="20" max="100" value="65"></div>
-    <div class="range-row"><label>Trail length <b id="trailValue">18</b></label><input id="trailRange" type="range" min="5" max="35" value="18"></div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
-     <button class="btn primary small" id="launchBtn">Launch ball ↗</button><button class="btn secondary small" id="pauseBtn">Pause</button>
-    </div>
-    <div class="lab-stats">
-     <div class="lab-stat"><strong id="rpmValue">3850</strong><span>Spin index</span></div>
-     <div class="lab-stat"><strong id="curveValue">Right</strong><span>Curve</span></div>
-     <div class="lab-stat"><strong id="spinType">Topspin</strong><span>Spin type</span></div>
-    </div>
-    <p class="muted" style="font-size:10px;margin-top:13px">Educational visualization only. Real ball flight depends on many factors not represented in this simplified model.</p>
-   </div>
-   <div class="card">
-    <div class="card-top"><h3>Ball trajectory simulator</h3><span class="tag">LIVE MODEL</span></div>
-    <canvas id="spinCanvas" width="900" height="480"></canvas>
-    <p class="muted" style="font-size:10px;margin-top:12px">Orange trail = topspin · Blue trail = backspin · Green trail = sidespin influence</p>
-   </div>
-  </div>
- </div>
+<section class="section" id="lab">
+<div class="container">
+<div class="section-head"><div><div class="eyebrow">INTERACTIVE EXPERIENCE</div><h2 class="section-title">THE <span class="red">SPIN LAB.</span></h2></div><p class="section-intro">Experiment with different spin types and contact settings. This educational visual model helps explain the basic ideas behind ball rotation.</p></div>
+<div class="lab-grid">
+<div class="card"><div class="lab-stage"><div class="orbit"><div class="lab-line" id="labLine"></div><div class="lab-ball" id="labBall"></div></div></div><p class="muted" id="spinCaption" style="font-size:9px;text-align:center;margin-top:12px;letter-spacing:2px">TOPSPIN / FORWARD ROTATION</p></div>
+<div class="card lab-controls">
+<div class="control"><label>SPIN INTENSITY <b class="red" id="spinVal">65%</b></label><input type="range" id="spinRange" min="0" max="100" value="65"></div>
+<div class="control"><label>CONTACT SPEED <b class="red" id="speedVal">70%</b></label><input type="range" id="speedRange" min="0" max="100" value="70"></div>
+<div class="control"><label>RACKET ANGLE <b class="red" id="angleVal">45°</b></label><input type="range" id="angleRange" min="0" max="90" value="45"></div>
+<div class="control"><label>SPIN TYPE</label><select id="spinType"><option value="top">Topspin</option><option value="back">Backspin</option><option value="side">Sidespin</option><option value="none">No spin</option></select></div>
+<div class="result" id="spinResult">Topspin is forward rotation. It can help the ball dip onto the table after travelling forward. Explore the controls to see how the settings change.</div>
+<button class="btn btn-dark" id="resetLab">RESET EXPERIMENT ↺</button>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="training">
+<div class="container">
+<div class="section-head"><div><div class="eyebrow">DISCIPLINE BUILDS PERFORMANCE</div><h2 class="section-title">THE TRAINING <span class="red">ROOM.</span></h2></div><p class="section-intro">Plan a focused practice session, work through useful drills and build a consistent training habit.</p></div>
+<div class="training-grid">
+<div class="card">
+<span class="tag">FOCUS TIMER</span>
+<div class="timer" id="timerDisplay">15:00</div>
+<p class="muted" style="font-size:10px;text-align:center">A focused training session</p>
+<div style="max-width:200px;margin:18px auto"><select id="timerPreset"><option value="900">15 MINUTES</option><option value="600">10 MINUTES</option><option value="300">5 MINUTES</option><option value="1800">30 MINUTES</option></select></div>
+<div style="display:flex;justify-content:center;gap:9px"><button class="btn btn-red" id="timerStart">START SESSION</button><button class="btn btn-dark" id="timerReset">RESET</button></div>
+<p class="muted" id="timerStatus" style="text-align:center;font-size:10px;margin-top:17px">Ready when you are.</p>
+</div>
+<div class="card"><span class="tag">PRACTICE DRILLS</span><div class="drills" id="drills"></div></div>
+</div>
+</div>
+</section>
+
+<section class="section" id="quiz">
+<div class="container">
+<div class="section-head"><div><div class="eyebrow">TEST YOUR KNOWLEDGE</div><h2 class="section-title">THE PLAYER <span class="red">CHALLENGE.</span></h2></div><p class="section-intro">Eight questions about the rules, technique and equipment. Learn from every answer and try to beat your best score.</p></div>
+<div class="quiz-grid">
+<div class="card quiz-intro"><div class="eyebrow">KNOWLEDGE CHECK / 01</div><h3 class="display" style="font-size:48px;margin:20px 0">THINK.<br>CHOOSE.<br><span class="red">IMPROVE.</span></h3><p class="muted" style="font-size:11px;line-height:1.9">A better player is always a learning player. Take the challenge and discover what you know about table tennis.</p><span class="tag" style="margin-top:22px">8 QUESTIONS</span></div>
+<div class="card">
+<div class="progress-top"><b id="questionCount">QUESTION 1 / 8</b><span id="quizScore">SCORE: 0</span></div>
+<div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:12.5%"></div></div>
+<div class="quiz-question" id="questionText"></div>
+<div class="options" id="options"></div>
+<div class="quiz-feedback" id="feedback">Choose the best answer.</div>
+<div class="quiz-foot"><button class="btn btn-dark btn-small" id="restartQuiz">RESTART</button><button class="btn btn-red btn-small" id="nextQuestion" disabled>NEXT QUESTION →</button></div>
+</div>
+</div>
+</div>
 </section>
 
 <section class="section" id="equipment">
- <div class="container">
-  <div class="section-head"><div class="kicker">GEAR KNOWLEDGE CENTER</div><h2 class="section-title">UNDERSTAND YOUR <span>EQUIPMENT.</span></h2><p class="section-desc">Learn about blades, rubbers and equipment characteristics before choosing your setup.</p></div>
-  <div class="grid three">
-   <div class="card"><div class="card-icon">▤</div><h3>Table Tennis Blades</h3><p>Blades are commonly made from different wood combinations and may include composite materials. Their construction influences feel, speed and control.</p><table class="equipment-table"><tr><th>Type</th><th>General feel</th></tr><tr><td>Allround</td><td>Balanced</td></tr><tr><td>Offensive</td><td>Faster</td></tr><tr><td>Defensive</td><td>Control focused</td></tr><tr><td>Composite</td><td>Varies by build</td></tr></table></div>
-   <div class="card"><div class="card-icon">◉</div><h3>Rubber Types</h3><p>Rubbers influence grip, spin, speed and the way the ball leaves the racket.</p><table class="equipment-table"><tr><th>Type</th><th>Common use</th></tr><tr><td>Inverted</td><td>Attacking / allround</td></tr><tr><td>Short pips</td><td>Direct hitting</td></tr><tr><td>Long pips</td><td>Variation / defense</td></tr><tr><td>Anti-spin</td><td>Disrupting spin</td></tr></table></div>
-   <div class="card">
-    <div class="card-icon">✧</div><h3>Setup Explorer</h3><p>Choose your playing style and experience level to see a general equipment direction.</p>
-    <label class="field-label" for="styleSelect">Playing style</label>
-    <select class="field" id="styleSelect"><option value="attack">Attacking / looping</option><option value="allround">Allround</option><option value="defense">Defensive / chopping</option></select>
-    <label class="field-label" for="levelSelect">Experience</label>
-    <select class="field" id="levelSelect"><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select>
-    <button class="btn primary small" id="setupBtn">Explore my setup</button>
-    <div id="setupResult" class="journal-entry" style="margin-top:12px">Your equipment direction will appear here.</div>
-   </div>
-  </div>
- </div>
+<div class="container">
+<div class="section-head"><div><div class="eyebrow">UNDERSTAND YOUR SETUP</div><h2 class="section-title">THE EQUIPMENT <span class="red">ROOM.</span></h2></div><p class="section-intro">Get to know the essential parts of table tennis equipment and the role each one plays in your performance.</p></div>
+<div class="equipment-grid">
+<div class="card equipment"><div class="equipment-icon">🏓</div><h3>THE BLADE</h3><p>The blade is the foundation of the racket. Its construction influences speed, control, vibration and playing feel.</p><span class="tag">SPEED / CONTROL / FEEL</span></div>
+<div class="card equipment"><div class="equipment-icon">🔴</div><h3>THE RUBBER</h3><p>The rubber surface contacts the ball. Its grip and sponge characteristics influence spin, speed and response.</p><span class="tag">GRIP / SPIN / RESPONSE</span></div>
+<div class="card equipment"><div class="equipment-icon">⚪</div><h3>THE BALL</h3><p>Modern table tennis uses a 40 mm plastic ball. Consistency, quality and condition are important.</p><span class="tag">40 MM / CONSISTENCY</span></div>
+</div>
+<div class="card" style="margin-top:17px">
+<div class="eyebrow">PLAYER STYLE FINDER</div><h3 class="display" style="font-size:34px;margin:12px 0 17px">FIND YOUR PLAYING STYLE.</h3>
+<div style="display:flex;gap:10px;flex-wrap:wrap"><select id="playerStyle" style="flex:1;min-width:190px"><option value="attack">Offensive / Attacking</option><option value="allround">All-round / Balanced</option><option value="defense">Defensive / Control</option></select><button class="btn btn-red" id="styleBtn">SHOW MY GUIDE</button></div>
+<div class="result" id="styleResult" style="margin-top:13px">Select your playing style to see general equipment considerations.</div>
+</div>
+</div>
 </section>
 
-<section class="section alt" id="training">
- <div class="container">
-  <div class="section-head"><div class="kicker">TRAINING ROOM</div><h2 class="section-title">MAKE EVERY <span>SESSION COUNT.</span></h2><p class="section-desc">Use the interval timer, build a weekly routine and test your knowledge of the sport.</p></div>
-  <div class="training-grid">
-   <div class="card">
-    <div class="card-top"><h3>⏱ Interval timer</h3><span class="tag">FOCUS MODE</span></div>
-    <div class="timer-display" id="timerDisplay">02:00</div>
-    <div class="timer-actions"><button class="btn primary small" id="timerStart">Start</button><button class="btn secondary small" id="timerReset">Reset</button></div>
-    <div class="preset-row"><button data-time="60">1 min</button><button data-time="120">2 min</button><button data-time="180">3 min</button><button data-time="300">5 min</button></div>
-    <p class="muted" style="text-align:center;font-size:10px;margin-top:16px">Use the timer to structure practice blocks and rest periods.</p>
-   </div>
-   <div class="card">
-    <div class="card-top"><h3>▦ Weekly training planner</h3><span class="tag">7 DAYS</span></div>
-    <p>Generate a balanced example week and adapt it to your schedule.</p>
-    <button class="btn primary small" id="weekBtn" style="margin-top:14px">Generate my week</button>
-    <ul class="day-list" id="weekPlan"><li><b>MON</b><span>Press generate to create your week.</span></li></ul>
-   </div>
-   <div class="card">
-    <div class="card-top"><h3>✦ Rules challenge</h3><span class="tag">KNOWLEDGE TEST</span></div>
-    <div id="quizArea"><p id="quizQuestion" style="font-size:15px;font-weight:800;margin:10px 0">Ready to test your table tennis knowledge?</p><div id="quizOptions"></div><div class="quiz-feedback" id="quizFeedback"></div><button class="btn primary small" id="quizStart">Start challenge</button></div>
-   </div>
-   <div class="card">
-    <div class="card-top"><h3>♧ Training journal</h3><span class="tag">PERSONAL NOTES</span></div>
-    <label class="field-label" for="journalInput">What did you practice today?</label>
-    <textarea class="field" id="journalInput" rows="3" placeholder="Example: 15 minutes of backhand control..."></textarea>
-    <button class="btn primary small" id="journalSave">Save training note</button>
-    <div class="journal-list" id="journalList"></div>
-   </div>
-  </div>
- </div>
+<section class="section" id="journal">
+<div class="container">
+<div class="section-head"><div><div class="eyebrow">REFLECT. RECORD. IMPROVE.</div><h2 class="section-title">PLAYER <span class="red">JOURNAL.</span></h2></div><p class="section-intro">A personal space to record your sessions, remember your progress and plan what to improve next.</p></div>
+<div class="journal-grid">
+<div class="card"><span class="tag">NEW TRAINING ENTRY</span><div style="display:grid;gap:10px;margin-top:16px"><input id="noteTitle" placeholder="Session title"><select id="noteMood"><option>Productive session</option><option>Learning something new</option><option>Needs more practice</option><option>Great performance</option></select><textarea id="noteBody" placeholder="What did you practice? What improved? What will you work on next?"></textarea><button class="btn btn-red" id="saveNote">SAVE ENTRY</button></div></div>
+<div class="card"><span class="tag">YOUR HISTORY</span><div id="notesList" style="margin-top:13px"><p class="muted" style="font-size:10px">Your training notes will appear here.</p></div></div>
+</div>
+</div>
 </section>
 
-<section class="section" id="community">
- <div class="container">
-  <div class="section-head"><div class="kicker">PLAYER DEVELOPMENT</div><h2 class="section-title">COLLECT YOUR <span>ACHIEVEMENTS.</span></h2><p class="section-desc">Your milestones are a record of learning and practice. Keep building your skills one session at a time.</p></div>
-  <div class="grid three" id="achievementGrid"></div>
-  <div class="card" style="margin-top:18px">
-   <div class="card-top"><div><div class="kicker">YOUR PERSONAL ACTIVITY</div><h3>Progress leaderboard</h3></div><span class="tag">ON THIS DEVICE</span></div>
-   <div id="leaderboard"></div>
-   <p class="muted" style="font-size:10px;margin-top:12px">This is a local profile ranking, not a live global leaderboard.</p>
-  </div>
- </div>
+<section class="section" id="faq">
+<div class="container">
+<div class="section-head"><div><div class="eyebrow">THE DETAILS</div><h2 class="section-title">GOOD TO <span class="red">KNOW.</span></h2></div><p class="section-intro">A few useful answers about the DANESH SPIN platform.</p></div>
+<div class="faq-list">
+<div class="faq"><button>Is DANESH SPIN an official table tennis organization? <span>＋</span></button><div class="faq-answer">No. DANESH SPIN is an independent educational website and is not an official ITTF platform or governing body.</div></div>
+<div class="faq"><button>Can I use the website on a mobile phone? <span>＋</span></button><div class="faq-answer">Yes. The interface adapts to mobile, tablet and desktop screen sizes.</div></div>
+<div class="faq"><button>Are my account details stored online? <span>＋</span></button><div class="faq-answer">No. This standalone version stores demo account information and progress in the current browser. It does not provide secure server authentication or synchronization between devices.</div></div>
+<div class="faq"><button>Can I back up my progress? <span>＋</span></button><div class="faq-answer">Yes. Open your player profile and use the export option to download a JSON backup.</div></div>
+<div class="faq"><button>Is the Spin Lab a real physics simulator? <span>＋</span></button><div class="faq-answer">It is an educational visual model designed to explain basic spin concepts. It is not a scientific simulator or a substitute for coaching.</div></div>
+</div>
+</div>
 </section>
 </main>
 
-<footer class="footer">
- <div class="container">
-  <div class="footer-grid">
-   <div><a class="brand" href="#home"><span class="brand-mark"></span><span>DANESH</span><span>SPIN</span></a><p style="max-width:260px;margin-top:15px">A learning universe for table tennis players. Discover the game, understand the details and keep improving.</p></div>
-   <div><h4>EXPLORE</h4><a href="#academy">Academy</a><a href="#lessons">Technique library</a><a href="#spinlab">Spin Lab</a></div>
-   <div><h4>TRAIN</h4><a href="#training">Training room</a><a href="#equipment">Equipment guide</a><a href="#community">Achievements</a></div>
-   <div><h4>YOUR ACCOUNT</h4><a href="#dashboard">Dashboard</a><a href="#home" onclick="openAccount()">Sign in / Sign up</a><a href="#home" onclick="exportData()">Export my data</a></div>
-  </div>
-  <div class="footer-bottom"><span>© 2026 DANESH SPIN. ALL RIGHTS RESERVED.</span><span>PLAY SMART. TRAIN HARD. RESPECT THE GAME.</span></div>
- </div>
-</footer>
-
-<div class="modal" id="accountModal">
- <div class="modal-card">
-  <button class="modal-close" onclick="closeAccount()">×</button>
-  <div class="kicker">PLAYER PROFILE</div>
-  <h2 id="modalTitle">Join DANESH SPIN.</h2>
-  <p class="muted" style="font-size:11px;margin-bottom:15px" id="modalSubtitle">Create a profile on this device to save your progress.</p>
-  <div id="signupNameWrap"><label class="field-label">Display name</label><input class="field" id="signupName" placeholder="Your name"></div>
-  <label class="field-label">Email</label><input class="field" id="signupEmail" type="email" placeholder="you@example.com">
-  <label class="field-label">Password</label><input class="field" id="signupPassword" type="password" placeholder="At least 6 characters">
-  <button class="btn primary" style="width:100%;margin-top:5px" id="authSubmit">Create local profile</button>
-  <p class="modal-note">Demo account storage only: your profile stays in this browser. Do not use a real or reused password. This is not a secure online authentication system.</p>
-  <p style="font-size:11px;text-align:center;margin-top:15px;color:var(--muted)"><span id="switchText">Already have a profile?</span> <a href="#" id="switchAuth" style="color:var(--orange);font-weight:800">Sign in</a></p>
- </div>
+<footer><div class="container">
+<div class="footer-grid">
+<div><a class="logo" href="#home"><span class="logo-mark">DS</span><span>DANESH SPIN<small>BEYOND THE GAME</small></span></a><p style="max-width:330px;margin-top:17px">A digital home for players who want to understand the game, train with purpose and keep improving.</p></div>
+<div><h4>EXPLORE</h4><div class="footer-links"><a href="#academy">Academy</a><a href="#lab">Spin Lab</a><a href="#training">Training Room</a><a href="#quiz">Player Challenge</a></div></div>
+<div><h4>PLAYER SPACE</h4><div class="footer-links"><a href="#dashboard">Dashboard</a><a href="#equipment">Equipment Room</a><a href="#journal">Player Journal</a><a href="#faq">Help & FAQ</a></div></div>
 </div>
+<div class="copyright"><span>© 2026 DANESH SPIN. ALL RIGHTS RESERVED.</span><span>LEARN. TRAIN. PERFORM.</span></div>
+</div></footer>
+
+<div class="modal-bg" id="modalBg"><div class="modal">
+<div class="modal-head"><h3 id="modalTitle">PLAYER ACCOUNT</h3><button class="iconbtn" id="closeModal">✕</button></div>
+<div id="authPanel">
+<div class="tabs"><button class="btn btn-red" id="loginTab">SIGN IN</button><button class="btn btn-dark" id="registerTab">CREATE ACCOUNT</button></div>
+<form class="form" id="authForm">
+<label>USERNAME<input id="username" required minlength="3" placeholder="Your player name"></label>
+<label id="emailWrap" class="hidden">EMAIL<input id="email" type="email" placeholder="name@example.com"></label>
+<label>PASSWORD<input id="password" type="password" required minlength="4" placeholder="At least 4 characters"></label>
+<button class="btn btn-red" type="submit" id="authSubmit">SIGN IN</button>
+</form>
+<p class="muted" style="font-size:9px;line-height:1.7;margin-top:14px">Demo-only local account. Do not use a real password. This version does not provide secure online authentication.</p>
+</div>
+<div id="profilePanel" class="hidden">
+<p id="welcome" style="font-size:12px;margin-bottom:15px"></p>
+<div style="display:grid;gap:10px">
+<button class="btn btn-dark" id="exportData">EXPORT PROGRESS BACKUP</button>
+<label class="btn btn-dark" for="importData" style="text-align:center;cursor:pointer">IMPORT PROGRESS BACKUP</label>
+<input class="hidden" type="file" id="importData" accept="application/json">
+<button class="btn btn-line" id="logout">SIGN OUT</button>
+</div>
+</div>
+</div></div>
 <div class="toast" id="toast"></div>
 
 <script>
-"use strict";
+const $=s=>document.querySelector(s);
+const KEY="danesh_spin_premium_v1";
+const blank={user:null,completed:[],best:0,minutes:0,notes:[],theme:"dark"};
+let data={...blank,...JSON.parse(localStorage.getItem(KEY)||"{}")};
+function save(){localStorage.setItem(KEY,JSON.stringify(data));dashboard()}
+function notify(t){let x=$("#toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),2500)}
+function safe(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 
-/* DANESH SPIN — local single-file learning platform */
+const courses=[
+["01","🏓","The Fundamentals","Learn the table, racket grip, ready position and basic rally principles.","FOUNDATION","6 LESSONS"],
+["02","⚡","Spin & Ball Control","Explore topspin, backspin, sidespin and the importance of contact.","TECHNIQUE","8 LESSONS"],
+["03","👟","Footwork & Movement","Understand balance, efficient movement and recovery after each shot.","MOVEMENT","5 LESSONS"],
+["04","🎯","Serving & Returning","Study serve placement, variation, legal service and return decisions.","TACTICS","7 LESSONS"],
+["05","🧠","Match Strategy","Build better point construction, shot selection and game awareness.","STRATEGY","6 LESSONS"],
+["06","🏆","Competition Ready","Explore warm-up routines, focus, match preparation and reflection.","PERFORMANCE","5 LESSONS"]
+];
 
-const $ = id => document.getElementById(id);
-const STORE = {
- users:"ds_users_v2",
- session:"ds_session_v2",
- theme:"ds_theme_v2",
- journal:"ds_journal_v2"
+function renderCourses(){
+$("#courseGrid").innerHTML=courses.map(c=>{
+let done=data.completed.includes(c[0]);
+return `<article class="card course"><div class="course-image"><b class="course-number">${c[0]} / 06</b><span>${c[1]}</span></div><div class="course-content"><span class="tag">${c[4]}</span><h3>${c[2]}</h3><p>${c[3]}</p><div class="course-foot"><small>${c[5]}</small><button class="btn ${done?"btn-dark":"btn-red"} btn-small" data-course="${c[0]}">${done?"✓ COMPLETED":"MARK COMPLETE"}</button></div></div></article>`;
+}).join("");
+document.querySelectorAll("[data-course]").forEach(b=>b.onclick=()=>{
+let id=b.dataset.course;
+data.completed=data.completed.includes(id)?data.completed.filter(x=>x!==id):[...data.completed,id];
+save();renderCourses();notify("Learning progress updated");
+});
+}
+function dashboard(){
+$("#lessonsStat").textContent=data.completed.length;
+$("#scoreStat").textContent=data.best+"%";
+$("#minutesStat").textContent=data.minutes;
+$("#notesStat").textContent=data.notes.length;
+let p=Math.round(data.completed.length/courses.length*100);
+$("#progressText").textContent=p+"%";
+$("#progressFill").style.width=p+"%";
+}
+function renderNotes(){
+if(!data.notes.length){$("#notesList").innerHTML='<p class="muted" style="font-size:10px">Your training notes will appear here.</p>';return}
+$("#notesList").innerHTML=data.notes.slice().reverse().map(n=>`<div class="entry"><strong>${safe(n.title)} <span class="red">· ${safe(n.mood)}</span></strong><p>${safe(n.body).replace(/\n/g,"<br>")}</p><small class="muted">${safe(n.date)}</small></div>`).join("");
+}
+renderCourses();dashboard();renderNotes();
+
+/* Theme */
+function setTheme(t){data.theme=t;document.body.classList.toggle("light",t==="light");save()}
+$("#themeBtn").onclick=()=>setTheme(document.body.classList.contains("light")?"dark":"light");
+if(data.theme==="light")document.body.classList.add("light");
+
+/* Mobile navigation */
+$("#menuBtn").onclick=()=>$("#navlinks").classList.toggle("open");
+document.querySelectorAll("#navlinks a").forEach(a=>a.onclick=()=>$("#navlinks").classList.remove("open"));
+
+/* Local demo account */
+let mode="login";
+function accountOpen(){renderAccount();$("#modalBg").classList.add("show")}
+function renderAccount(){
+let signed=!!data.user;
+$("#authPanel").classList.toggle("hidden",signed);
+$("#profilePanel").classList.toggle("hidden",!signed);
+$("#modalTitle").textContent=signed?"PLAYER PROFILE":"PLAYER ACCOUNT";
+if(signed)$("#welcome").textContent="Welcome, "+data.user.name+". Your local player profile is active.";
+}
+$("#accountBtn").onclick=accountOpen;
+$("#closeModal").onclick=()=>$("#modalBg").classList.remove("show");
+$("#modalBg").onclick=e=>{if(e.target.id==="modalBg")$("#modalBg").classList.remove("show")};
+function setMode(m){
+mode=m;
+$("#loginTab").className="btn "+(m==="login"?"btn-red":"btn-dark");
+$("#registerTab").className="btn "+(m==="register"?"btn-red":"btn-dark");
+$("#emailWrap").classList.toggle("hidden",m!=="register");
+$("#authSubmit").textContent=m==="login"?"SIGN IN":"CREATE ACCOUNT";
+}
+$("#loginTab").onclick=()=>setMode("login");
+$("#registerTab").onclick=()=>setMode("register");
+$("#authForm").onsubmit=e=>{
+e.preventDefault();
+let name=$("#username").value.trim(),pass=$("#password").value,email=$("#email").value.trim();
+let accounts=JSON.parse(localStorage.getItem("danesh_demo_accounts")||"{}");
+if(mode==="register"){
+if(accounts[name]){notify("Username already exists");return}
+accounts[name]={pass,email};
+localStorage.setItem("danesh_demo_accounts",JSON.stringify(accounts));
+}else if(!accounts[name]||accounts[name].pass!==pass){notify("Incorrect username or password");return}
+data.user={name};save();renderAccount();$("#modalBg").classList.remove("show");notify("Welcome to DANESH SPIN");
+};
+$("#logout").onclick=()=>{data.user=null;save();renderAccount();notify("Signed out")};
+$("#exportData").onclick=()=>{
+let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+let url=URL.createObjectURL(blob),a=document.createElement("a");
+a.href=url;a.download="danesh-spin-backup.json";a.click();URL.revokeObjectURL(url);notify("Backup exported");
+};
+$("#importData").onchange=async e=>{
+let f=e.target.files[0];if(!f)return;
+try{let d=JSON.parse(await f.text());if(!Array.isArray(d.completed)||!Array.isArray(d.notes))throw 0;data={...blank,...d};save();renderCourses();renderNotes();renderAccount();notify("Backup imported")}catch{notify("Invalid backup file")}
+e.target.value="";
 };
 
-const LEVELS = [
- {name:"The Foundations",subtitle:"Build the basics",desc:"Learn the grip, ready position, stance, ball control and essential table tennis vocabulary.",lessons:5,xp:100,topics:["Grip and racket control","Ready position","Basic stance","Forehand and backhand drive","Rally consistency"]},
- {name:"Spin Fundamentals",subtitle:"Understand the ball",desc:"Discover topspin, backspin and sidespin. Learn how racket angle and contact influence the ball.",lessons:5,xp:150,topics:["Understanding topspin","Understanding backspin","Sidespin basics","Brush contact","Reading spin"]},
- {name:"Serve Specialist",subtitle:"Start every point well",desc:"Explore legal serving technique, placement, variation and the connection between serve and next shot.",lessons:5,xp:150,topics:["The legal serve","Pendulum serve","Backspin serve","Short and long placement","Serve and third ball"]},
- {name:"Footwork & Movement",subtitle:"Reach the ball",desc:"Improve balance, recovery, movement patterns and positioning around the table.",lessons:5,xp:175,topics:["Ready position and recovery","Side-step movement","Crossover movement","Forehand pivot","Movement combinations"]},
- {name:"Tactics & Match IQ",subtitle:"Think ahead",desc:"Build smarter point construction, shot selection, serve receive and match awareness.",lessons:5,xp:200,topics:["Serve receive basics","Placement and direction","Changing rhythm","Playing to strengths","Match analysis"]},
- {name:"Advanced Performance",subtitle:"Put it together",desc:"Connect technique, movement and tactics in advanced rally patterns and match preparation.",lessons:5,xp:250,topics:["Counter-topspin concept","Opening against backspin","Transition play","Pressure management","Competition preparation"]}
-];
-
-const LESSONS = [
- {title:"Shakehand Grip",level:"Foundations",time:"6 min",desc:"The shakehand grip is a common way to hold a table tennis racket. The handle sits in the space between your thumb and index finger, while the remaining fingers wrap naturally around the handle.",steps:["Hold the handle comfortably without squeezing too tightly.","Keep the index finger relaxed along the backhand side.","Place the thumb naturally on the forehand side.","Check that the racket face feels stable during small movements."],mistakes:["Holding the handle too tightly.","Changing the grip angle unintentionally.","Using a grip that makes the wrist uncomfortable."]},
- {title:"Ready Position",level:"Foundations",time:"5 min",desc:"A balanced ready position helps you react to the next shot. Stay relaxed, keep your knees slightly bent and prepare to move in either direction.",steps:["Stand at a comfortable distance from the table.","Keep your feet around shoulder width apart.","Lean forward slightly while staying balanced.","Hold the racket in front of your body.","Recover to a ready position after each shot."],mistakes:["Standing too upright.","Keeping your weight too far back.","Leaving the racket low between shots."]},
- {title:"Forehand Drive",level:"Foundations",time:"8 min",desc:"The forehand drive is a basic attacking stroke. It introduces timing, body rotation and controlled forward contact.",steps:["Start with a balanced side-on position.","Move the racket back in a comfortable range.","Rotate your body as the ball approaches.","Contact the ball in front of your body.","Follow through naturally and recover."],mistakes:["Using only the arm.","Contacting the ball too late.","Swinging too hard before control is consistent."]},
- {title:"Backhand Drive",level:"Foundations",time:"8 min",desc:"The backhand drive is a compact stroke played in front of the body. Good timing and a stable racket angle are important.",steps:["Keep your elbow comfortably in front.","Prepare the racket near your body.","Move forward as the ball arrives.","Contact the ball in front of your body.","Return to the ready position."],mistakes:["Letting the elbow move too far behind.","Making the swing unnecessarily large.","Losing balance during contact."]},
- {title:"Rally Consistency",level:"Foundations",time:"10 min",desc:"Consistency means controlling the ball repeatedly with reliable placement. Begin with a comfortable pace and build accuracy before speed.",steps:["Choose a clear target area.","Start with a comfortable rally speed.","Focus on a stable contact point.","Recover after every stroke.","Increase pace only when control is steady."],mistakes:["Trying to hit winners too early.","Ignoring recovery position.","Changing technique on every ball."]},
- {title:"Topspin Basics",level:"Spin Fundamentals",time:"9 min",desc:"Topspin is forward rotation of the ball. A brushing contact helps create rotation and changes how the ball behaves after bouncing.",steps:["Recognize the direction of the incoming ball.","Use a suitable racket angle.","Brush the ball in an upward-forward direction.","Keep the stroke controlled.","Observe the ball after it bounces."],mistakes:["Trying to create spin with force alone.","Contacting the ball too flat.","Ignoring the incoming spin." ]},
- {title:"Backspin Basics",level:"Spin Fundamentals",time:"8 min",desc:"Backspin rotates the ball in the opposite direction to topspin. It affects the ball's bounce and the way an opponent needs to make contact.",steps:["Observe the incoming ball carefully.","Use a more open racket angle when appropriate.","Make a controlled brushing contact.","Keep the ball low and consistent.","Adjust your next shot to the return."],mistakes:["Using the same racket angle for every ball.","Overusing wrist movement.","Misreading the incoming rotation."]},
- {title:"Sidespin Basics",level:"Spin Fundamentals",time:"8 min",desc:"Sidespin causes the ball to curve sideways through the air and can influence its direction after bouncing.",steps:["Understand the direction of the spin.","Adjust racket angle to the incoming ball.","Use a controlled sideways brushing action.","Watch the ball's curved flight.","Practice reading sidespin from the opponent."],mistakes:["Assuming every sidespin ball curves the same way.","Ignoring the opponent's contact direction.","Changing the racket angle too late."]},
- {title:"Brush Contact",level:"Spin Fundamentals",time:"7 min",desc:"Brush contact means grazing the ball rather than striking through its center. The balance between brushing and forward contact affects speed and spin.",steps:["Use a relaxed but stable grip.","Choose a suitable contact point.","Accelerate smoothly through contact.","Avoid forcing the stroke.","Observe the resulting ball trajectory."],mistakes:["Making contact too thin to control.","Hitting too flat when spin is needed.","Tensing the arm unnecessarily."]},
- {title:"Reading Spin",level:"Spin Fundamentals",time:"8 min",desc:"Reading spin is a skill built by observing racket movement, contact and the ball's flight. Combine visual clues rather than relying on one signal.",steps:["Watch the opponent's racket at contact.","Notice the direction of the racket movement.","Observe the ball's flight and bounce.","Adjust your racket angle before contact.","Review what happened after the return."],mistakes:["Watching only the ball.","Guessing spin from the serve name.","Making late adjustments."]},
- {title:"Legal Serve",level:"Serve Specialist",time:"7 min",desc:"A legal serve begins with the ball resting freely on the open palm. The ball must be tossed near vertically at least 16 cm without imparting spin, then struck as it descends.",steps:["Start with the ball resting on your open palm.","Toss the ball near vertically at least 16 cm.","Keep the ball visible to the receiver.","Strike the ball as it descends.","Make sure the ball first touches your court, then the receiver's court."],mistakes:["Hiding the ball from the receiver.","Tossing the ball with spin.","Serving before the ball descends."]},
- {title:"Pendulum Serve Concept",level:"Serve Specialist",time:"9 min",desc:"The pendulum serve uses a swinging racket action to create different spin and placement possibilities. Focus on a repeatable motion and legal contact.",steps:["Begin from a balanced serving position.","Use a consistent ball toss.","Practice controlled racket movement.","Vary contact and placement in training.","Check that the serve remains legal."],mistakes:["Making the toss inconsistent.","Showing the intended placement too early.","Prioritizing deception over legality."]},
- {title:"Short and Long Placement",level:"Serve Specialist",time:"6 min",desc:"Serve placement changes the time and space available to the receiver. A useful practice goal is to develop both short and long options.",steps:["Choose a target area before serving.","Practice a short bounce pattern.","Practice a deeper placement.","Keep the toss and preparation consistent.","Record which placements are most reliable."],mistakes:["Serving to the same location every time.","Losing control while trying to serve long.","Ignoring the next-ball position."]},
- {title:"Serve and Third Ball",level:"Serve Specialist",time:"8 min",desc:"The third ball is your first shot after the serve and the receiver's return. Plan your recovery and next position before serving.",steps:["Choose a serve that creates a predictable return.","Recover to a balanced position.","Read the receiver's contact.","Select a controlled third-ball option.","Review the whole serve sequence."],mistakes:["Watching the serve instead of recovering.","Planning only the first ball.","Forcing an attack from a poor position."]},
- {title:"Movement & Recovery",level:"Footwork",time:"7 min",desc:"Good movement is not only reaching the ball. It also includes returning to a balanced position for the next shot.",steps:["Start from a balanced ready position.","Move toward the ball with small controlled steps.","Keep your body stable at contact.","Recover toward a useful central position.","Prepare for the next direction."],mistakes:["Taking unnecessarily large steps.","Crossing feet without control.","Forgetting recovery after the shot."]},
- {title:"Side-step Movement",level:"Footwork",time:"6 min",desc:"Side-step movement helps players cover nearby balls while maintaining balance and readiness.",steps:["Keep your knees comfortably bent.","Move the foot closest to the direction first.","Bring the other foot back to a balanced stance.","Avoid crossing your feet during a basic side-step.","Return to your ready position."],mistakes:["Standing too tall.","Moving the feet too close together.","Leaning without moving the base."]},
- {title:"Forehand Pivot",level:"Footwork",time:"8 min",desc:"A forehand pivot is a movement used to create space for a forehand from the backhand side. It requires early reading and a quick recovery.",steps:["Read the incoming ball early.","Move your feet to create space.","Keep your balance during the turn.","Play a controlled forehand.","Recover to cover the next shot."],mistakes:["Starting the movement too late.","Turning without creating enough space.","Not recovering after the forehand."]},
- {title:"Serve Receive",level:"Tactics",time:"9 min",desc:"Serve receive begins with reading the toss, contact and likely spin. Good decisions are often more important than trying to attack every serve.",steps:["Watch the opponent's preparation.","Read racket contact and ball flight.","Choose a safe racket angle.","Select a suitable return placement.","Recover quickly for the next ball."],mistakes:["Committing before reading the ball.","Trying to attack every serve.","Returning without a plan."]},
- {title:"Placement & Direction",level:"Tactics",time:"7 min",desc:"Placement can make a controlled shot difficult to return. Use direction, depth and variation rather than relying only on speed.",steps:["Identify open space on the table.","Choose a target before contact.","Keep the stroke controlled.","Change direction when appropriate.","Recover for the next shot."],mistakes:["Aiming too close to the lines without control.","Repeating the same direction.","Hitting harder instead of placing better."]},
- {title:"Match Analysis",level:"Advanced",time:"10 min",desc:"Match analysis helps identify patterns in your own game and your opponent's game. Review decisions, not only the final score.",steps:["Identify your most reliable shots.","Notice where points are often lost.","Look for repeated opponent patterns.","Choose one adjustment to test.","Review whether the adjustment helped."],mistakes:["Changing too many things at once.","Focusing only on winning or losing.","Ignoring patterns across several points."]}
-];
-
-const QUIZ = [
- {q:"How many points are normally played in a table tennis game?",o:["7","11","15","21"],a:1,why:"A game is normally played to 11 points, and a player must win by at least two points."},
- {q:"What is the minimum legal serve toss height?",o:["5 cm","10 cm","16 cm","30 cm"],a:2,why:"The ball must be tossed near vertically at least 16 cm after leaving the open palm."},
- {q:"How many points are played before service changes in singles?",o:["Every point","Every 2 points","Every 5 points","Every 10 points"],a:1,why:"Service changes every two points, except when players reach 10–10."},
- {q:"What happens at 10–10?",o:["Game ends","Service changes every point","Players change ends","A new game starts"],a:1,why:"At 10–10, service changes after every point until one player leads by two."},
- {q:"How many times may the ball bounce on your side during a rally?",o:["Once","Twice","Three times","As many as you like"],a:0,why:"During a rally, the ball must be returned after one bounce on your side."},
- {q:"Which spin generally makes the ball kick forward after bouncing?",o:["Backspin","Topspin","No spin","Only sidespin"],a:1,why:"Topspin generally makes the ball dip in flight and kick forward after the bounce."},
- {q:"What is the standard table length?",o:["2.00 m","2.44 m","2.74 m","3.00 m"],a:2,why:"The standard table is 2.74 metres long."},
- {q:"In a doubles game, where must a legal serve travel?",o:["Anywhere","Right half to right half","Left half to left half","Only cross-court"],a:1,why:"In doubles, the serve must travel from the server's right half-court to the receiver's right half-court."}
-];
-
-let state = {
- user:null,
- authMode:"signup",
- activeLesson:0,
- quizIndex:-1,
- quizScore:0,
- quizAnswered:false,
- timerSeconds:120,
- timerInterval:null,
- spinPaused:false,
- ball:{x:90,y:180,vx:5,vy:-2,trail:[]},
- journal:[],
- users:[]
+/* Spin lab */
+function updateLab(){
+let spin=+$("#spinRange").value,speed=+$("#speedRange").value,angle=+$("#angleRange").value,type=$("#spinType").value;
+$("#spinVal").textContent=spin+"%";$("#speedVal").textContent=speed+"%";$("#angleVal").textContent=angle+"°";
+$("#labBall").style.transform=`rotate(${spin*3.6}deg)`;
+$("#labLine").style.transform=`rotate(${angle-45}deg) scaleX(${.4+spin/100})`;
+let info={
+top:"Topspin uses forward rotation. It can help the ball dip onto the table. Brush the ball with a controlled forward action.",
+back:"Backspin uses backward rotation. It can make the ball behave differently after bouncing and often requires an adjusted racket angle.",
+side:"Sidespin uses lateral rotation. It can influence the ball's sideways movement and the direction of its bounce.",
+none:"With little or no spin, focus on clean contact, placement, timing and controlling the depth of the shot."
 };
+$("#spinCaption").textContent=type.toUpperCase()+" / "+(type==="top"?"FORWARD ROTATION":type==="back"?"BACKWARD ROTATION":type==="side"?"LATERAL ROTATION":"MINIMAL ROTATION");
+$("#spinResult").textContent=info[type]+` Current settings: ${spin}% spin, ${speed}% contact speed and ${angle}° racket angle. This is a conceptual model, not a measured ball-flight prediction.`;
+}
+["spinRange","speedRange","angleRange","spinType"].forEach(id=>$("#"+id).addEventListener("input",updateLab));
+$("#resetLab").onclick=()=>{$("#spinRange").value=65;$("#speedRange").value=70;$("#angleRange").value=45;$("#spinType").value="top";updateLab();notify("Experiment reset")};
+updateLab();
 
-function readJSON(key,fallback){
- try{return JSON.parse(localStorage.getItem(key)) ?? fallback}
- catch{return fallback}
-}
-function saveJSON(key,value){localStorage.setItem(key,JSON.stringify(value))}
-function getUserProgress(){
- if(!state.user)return {completed:[],xp:0};
- return state.user.progress || {completed:[],xp:0}
-}
-function saveUser(){
- if(!state.user)return;
- const idx=state.users.findIndex(u=>u.email===state.user.email);
- if(idx>=0)state.users[idx]=state.user;
- saveJSON(STORE.users,state.users);
- saveJSON(STORE.session,state.user);
-}
-function notify(message){
- const t=$("toast");t.textContent=message;t.classList.add("show");
- clearTimeout(notify.timeout);notify.timeout=setTimeout(()=>t.classList.remove("show"),2600);
-}
-function openAccount(){
- $("accountModal").classList.add("show");
-}
-function closeAccount(){$("accountModal").classList.remove("show")}
-function setAuthMode(mode){
- state.authMode=mode;
- const signup=mode==="signup";
- $("modalTitle").textContent=signup?"Join DANESH SPIN.":"Welcome back.";
- $("modalSubtitle").textContent=signup?"Create a local profile to save your progress.":"Sign in to your profile on this browser.";
- $("signupNameWrap").style.display=signup?"block":"none";
- $("authSubmit").textContent=signup?"Create local profile":"Sign in";
- $("switchText").textContent=signup?"Already have a profile?":"New to DANESH SPIN?";
- $("switchAuth").textContent=signup?"Sign in":"Create profile";
-}
-function handleAuth(){
- const email=$("signupEmail").value.trim().toLowerCase();
- const password=$("signupPassword").value;
- const name=$("signupName").value.trim() || email.split("@")[0];
- if(!email.includes("@")||password.length<6){notify("Enter a valid email and a password with at least 6 characters.");return}
- if(state.authMode==="signup"){
-  if(state.users.some(u=>u.email===email)){notify("A profile with this email already exists.");return}
-  state.user={name,email,password,progress:{completed:[],xp:0},createdAt:new Date().toISOString()};
-  state.users.push(state.user);
-  notify("Your local profile is ready!");
- }else{
-  const found=state.users.find(u=>u.email===email&&u.password===password);
-  if(!found){notify("Profile not found or password does not match.");return}
-  state.user=found;
-  notify("Welcome back, "+state.user.name+"!");
- }
- saveUser();closeAccount();renderAll();
-}
-function logout(){
- if(!state.user)return;
- state.user=null;localStorage.removeItem(STORE.session);renderAll();notify("Signed out on this device.");
-}
-function openAuthForAction(){if(!state.user){openAccount();return false}return true}
-function awardXP(amount){
- if(!state.user){notify("Create a local profile to save XP.");return}
- state.user.progress.xp=(state.user.progress.xp||0)+amount;
- saveUser();renderDashboard();renderAchievements();renderLeaderboard();
-}
-function completeLesson(index){
- if(!openAuthForAction())return;
- const progress=getUserProgress();
- if(!progress.completed.includes(index)){
-  progress.completed.push(index);
-  progress.xp=(progress.xp||0)+25;
-  state.user.progress=progress;saveUser();
-  notify("Lesson completed! +25 XP");
- }else notify("You have already completed this lesson.");
- renderAll();
-}
-function rankFromXP(xp){
- if(xp>=1200)return {name:"Elite Player",next:"MAX RANK",number:"06"};
- if(xp>=750)return {name:"Advanced Player",next:"1200 XP",number:"05"};
- if(xp>=400)return {name:"Club Player",next:"750 XP",number:"04"};
- if(xp>=200)return {name:"Rising Player",next:"400 XP",number:"03"};
- if(xp>=75)return {name:"Developing Player",next:"200 XP",number:"02"};
- return {name:"Rookie",next:"75 XP",number:"01"};
-}
-function renderDashboard(){
- const p=getUserProgress(),done=p.completed.length,xp=p.xp||0;
- const pct=Math.round(done/LESSONS.length*100);
- $("welcomeName").textContent=state.user?"Welcome, "+state.user.name+"!":"Ready to play?";
- $("welcomeText").textContent=state.user?"Your training journey is saved in this browser. Keep learning and build your game.":"Create a local profile to save your learning progress on this device.";
- $("dashXP").textContent=xp;
- $("dashBelt").textContent=rankFromXP(xp).number;
- $("dashLessons").textContent=done;
- $("progressPercent").textContent=pct+"%";
- $("progressBar").style.width=pct+"%";
- $("rankName").textContent=rankFromXP(xp).name;
- $("rankNext").textContent=rankFromXP(xp).next;
- $("rankHint").textContent=state.user?"Keep completing lessons to reach the next rank.":"Your rank will appear after you create a profile.";
- $("accountLabel").textContent=state.user?state.user.name.split(" ")[0]:"Sign in";
-}
-function renderLevels(){
- const p=getUserProgress();
- $("levelsGrid").innerHTML=LEVELS.map((l,i)=>{
-  const start=i*5;
-  const count=p.completed.filter(n=>n>=start&&n<start+5).length;
-  const percent=count/5*100;
-  return `<article class="card level-card">
-   <div class="level-number">0${i+1}</div><span class="tag">${l.subtitle}</span>
-   <h3>${l.name}</h3><p>${l.desc}</p>
-   <div class="progress-track"><i style="width:${percent}%"></i></div>
-   <div class="level-meta"><span>${count}/5 lessons</span><span>${l.xp} XP available</span></div>
-   <button class="btn secondary small" onclick="openLevel(${i})">Explore level ↗</button>
-  </article>`
- }).join("");
-}
-function openLevel(index){
- const first=index*5;
- const lesson=LESSONS[first];
- const target=LESSONS.findIndex(l=>l.level.toLowerCase().includes(LEVELS[index].name.split(" ")[0].toLowerCase()));
- const actual=target>=0?target:first;
- renderLessonList(actual);
- $("lessons").scrollIntoView({behavior:"smooth"});
-}
-function renderLessonList(selected=state.activeLesson){
- state.activeLesson=selected;
- $("lessonList").innerHTML=LESSONS.map((l,i)=>`<button class="lesson-item ${i===selected?"active":""}" onclick="renderLessonList(${i})">
- <strong>${String(i+1).padStart(2,"0")} · ${l.title}</strong>
- <small>${l.level} · ${l.time}</small>
- </button>`).join("");
- const l=LESSONS[selected];
- const completed=getUserProgress().completed.includes(selected);
- $("lessonContent").innerHTML=`
-  <div class="card-top"><span class="tag">${l.level}</span><span class="muted" style="font-size:10px">${l.time} READ</span></div>
-  <h3>${l.title}</h3><p>${l.desc}</p>
-  <h4 style="margin:20px 0 8px">Practice checklist</h4>
-  <ol class="lesson-steps">${l.steps.map(s=>`<li>${s}</li>`).join("")}</ol>
-  <h4 style="margin:20px 0 8px;color:var(--red)">Common mistakes to watch</h4>
-  <ul class="lesson-steps">${l.mistakes.map(s=>`<li>${s}</li>`).join("")}</ul>
-  <div class="lesson-actions"><button class="btn primary small" onclick="completeLesson(${selected})">${completed?"✓ Completed":"Mark as completed +25 XP"}</button><button class="btn secondary small" onclick="nextLesson()">Next lesson →</button></div>`;
-}
-function nextLesson(){renderLessonList((state.activeLesson+1)%LESSONS.length)}
-function renderAchievements(){
- const p=getUserProgress(),xp=p.xp||0,done=p.completed.length;
- const items=[
-  ["First Step","Complete your first lesson",done>=1,"◉"],
-  ["Curious Player","Complete 5 lessons",done>=5,"✦"],
-  ["Technique Explorer","Complete 10 lessons",done>=10,"⌁"],
-  ["Academy Graduate","Complete all 20 lessons",done>=20,"♜"],
-  ["XP Collector","Earn 100 XP",xp>=100,"◆"],
-  ["Dedicated Player","Earn 500 XP",xp>=500,"★"]
- ];
- $("achievementGrid").innerHTML=items.map(a=>`<div class="achievement ${a[2]?"":"locked"}"><div class="achievement-icon">${a[3]}</div><div><strong>${a[0]}</strong><small>${a[1]} · ${a[2]?"Unlocked":"Locked"}</small></div></div>`).join("");
-}
-function renderLeaderboard(){
- if(!state.user){$("leaderboard").innerHTML='<div class="empty">Sign in to see your local player ranking.</div>';return}
- const rows=[...state.users].sort((a,b)=>(b.progress?.xp||0)-(a.progress?.xp||0));
- $("leaderboard").innerHTML=rows.map((u,i)=>`<div class="day-list"><li><b>#${i+1}</b><span>${escapeHTML(u.name)} — ${u.progress?.xp||0} XP ${u.email===state.user.email?"(YOU)":""}</span></li></div>`).join("");
-}
-function escapeHTML(s){
- return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-}
+/* Training timer */
+let remaining=900,interval=null,running=false;
+function showTime(){let m=Math.floor(remaining/60),s=remaining%60;$("#timerDisplay").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
+function pauseTimer(){clearInterval(interval);interval=null;running=false;$("#timerStart").textContent="RESUME SESSION"}
+$("#timerPreset").onchange=()=>{pauseTimer();remaining=+$("#timerPreset").value;showTime();$("#timerStatus").textContent="Ready when you are.";$("#timerStart").textContent="START SESSION"};
+$("#timerStart").onclick=()=>{
+if(running){pauseTimer();$("#timerStatus").textContent="Session paused.";return}
+running=true;$("#timerStart").textContent="PAUSE SESSION";$("#timerStatus").textContent="Stay focused. One point at a time.";
+interval=setInterval(()=>{
+remaining--;showTime();
+if(remaining<=0){pauseTimer();let mins=Math.round(+$("#timerPreset").value/60);data.minutes+=mins;save();$("#timerStatus").textContent="Session completed. Great work!";$("#timerStart").textContent="START AGAIN";notify("Training session complete")}
+},1000);
+};
+$("#timerReset").onclick=()=>{pauseTimer();remaining=+$("#timerPreset").value;showTime();$("#timerStatus").textContent="Timer reset.";$("#timerStart").textContent="START SESSION"};
+showTime();
 
-/* Spin simulator */
-let spinCtx=null,spinFrame=null;
-function resetBall(){
- const speed=+$("speedRange").value;
- state.ball={x:90,y:250,vx:3+speed*.065,vy:-2,trail:[]};
-}
-function updateSpinLabels(){
- const top=+$("topRange").value,side=+$("sideRange").value,speed=+$("speedRange").value;
- $("topValue").textContent=top;$("sideValue").textContent=side;$("speedValue").textContent=speed;$("trailValue").textContent=$("trailRange").value;
- $("rpmValue").textContent=Math.round(Math.abs(top)*42+Math.abs(side)*22);
- $("curveValue").textContent=side>15?"Right":side< -15?"Left":"Straight";
- $("spinType").textContent=top>15?"Topspin":top< -15?"Backspin":Math.abs(side)>15?"Sidespin":"Low spin";
-}
-function drawSpin(){
- const c=$("spinCanvas"),ctx=spinCtx;
- if(!ctx)return;
- const w=c.width,h=c.height;
- ctx.clearRect(0,0,w,h);
- ctx.strokeStyle="#ffffff20";ctx.lineWidth=2;
- ctx.beginPath();ctx.moveTo(0,h*.78);ctx.lineTo(w,h*.78);ctx.stroke();
- ctx.strokeStyle="#ffffff18";ctx.setLineDash([8,8]);ctx.beginPath();ctx.moveTo(w*.5,h*.2);ctx.lineTo(w*.5,h*.78);ctx.stroke();ctx.setLineDash([]);
- ctx.fillStyle="#ff642d";ctx.fillRect(w*.82,h*.42,8,h*.36);
- ctx.fillStyle="#ffffff55";ctx.fillRect(w*.5-5,h*.68,10,h*.1);
- if(!state.spinPaused){
-  const top=+$("topRange").value,side=+$("sideRange").value,speed=+$("speedRange").value;
-  const b=state.ball;
-  b.vy+=.11-(top*.0012);
-  b.vx+=side*.0008;
-  b.x+=b.vx*(speed/65);b.y+=b.vy;
-  if(b.y>h*.76){b.y=h*.76;b.vy=-Math.max(1.2,Math.abs(b.vy)*.65);b.vx*=top>=0?1.025:.98}
-  if(b.x>w-50||b.x<35){resetBall()}
-  b.trail.push({x:b.x,y:b.y});
-  if(b.trail.length>+$("trailRange").value)b.trail.shift();
- }
- const top=+$("topRange").value,side=+$("sideRange").value;
- const trailColor=side>20?"#65d6a2":top< -15?"#55b9ff":"#ff642d";
- state.ball.trail.forEach((p,i)=>{
-  ctx.beginPath();ctx.arc(p.x,p.y,2+i*.22,0,Math.PI*2);
-  ctx.fillStyle=trailColor;ctx.globalAlpha=.08+i/state.ball.trail.length*.55;ctx.fill();ctx.globalAlpha=1;
- });
- const b=state.ball;
- const grad=ctx.createRadialGradient(b.x-5,b.y-5,2,b.x,b.y,15);
- grad.addColorStop(0,"#fff");grad.addColorStop(.6,"#f5eee4");grad.addColorStop(1,"#b9b0a5");
- ctx.beginPath();ctx.arc(b.x,b.y,14,0,Math.PI*2);ctx.fillStyle=grad;ctx.fill();
- spinFrame=requestAnimationFrame(drawSpin);
-}
-function launchSpin(){resetBall();state.spinPaused=false;$("pauseBtn").textContent="Pause"}
-function toggleSpin(){
- state.spinPaused=!state.spinPaused;
- $("pauseBtn").textContent=state.spinPaused?"Resume":"Pause";
-}
-
-/* Timer */
-function formatTime(sec){return String(Math.floor(sec/60)).padStart(2,"0")+":"+String(sec%60).padStart(2,"0")}
-function renderTimer(){$("timerDisplay").textContent=formatTime(state.timerSeconds)}
-function startTimer(){
- if(state.timerInterval){clearInterval(state.timerInterval);state.timerInterval=null;$("timerStart").textContent="Start";return}
- $("timerStart").textContent="Pause";
- state.timerInterval=setInterval(()=>{
-  if(state.timerSeconds>0){state.timerSeconds--;renderTimer()}
-  else{clearInterval(state.timerInterval);state.timerInterval=null;$("timerStart").textContent="Start";notify("Training interval complete!")}
- },1000);
-}
-function resetTimer(){
- clearInterval(state.timerInterval);state.timerInterval=null;state.timerSeconds=120;
- $("timerStart").textContent="Start";renderTimer();
-}
-
-/* Weekly planner */
-const WEEK=[
- ["MON","Serve control + short placement"],
- ["TUE","Forehand and backhand consistency"],
- ["WED","Footwork and recovery practice"],
- ["THU","Spin reading and serve receive"],
- ["FRI","Controlled match play"],
- ["SAT","Review one technique and take notes"],
- ["SUN","Rest and reflect on progress"]
+let drills=[
+["🎯","Forehand consistency","Practice controlled forehand rallies.","8 MIN"],
+["👟","Side-to-side movement","Move efficiently and recover your balance.","6 MIN"],
+["🔄","Serve variation","Work on legal serves and placement variation.","10 MIN"],
+["🧠","Target placement","Aim for different areas of the table.","8 MIN"]
 ];
-function generateWeek(){
- $("weekPlan").innerHTML=WEEK.map(d=>`<li><b>${d[0]}</b><span>${d[1]}</span></li>`).join("");
-}
+$("#drills").innerHTML=drills.map(d=>`<div class="drill"><div class="drill-icon">${d[0]}</div><div><h4>${d[1]}</h4><p>${d[2]}</p></div><button class="btn btn-dark btn-small" data-drill="${d[1]}">${d[3]}</button></div>`).join("");
+document.querySelectorAll("[data-drill]").forEach(b=>b.onclick=()=>{notify("Practice focus: "+b.dataset.drill);$("#timerPreset").value="600";$("#timerPreset").dispatchEvent(new Event("change"))});
 
 /* Quiz */
-function startQuiz(){
- state.quizIndex=0;state.quizScore=0;state.quizAnswered=false;showQuestion();
- $("quizStart").style.display="none";
+const questions=[
+["How many points are normally needed to win a standard game?",["7","11","15","21"],1,"A standard game is played to 11 points. A player must lead by two points."],
+["How many points are played before service changes?",["One","Two","Three","Five"],1,"Service normally changes after every two points. At 10–10, it changes after every point."],
+["What is forward rotation called?",["Backspin","Sidespin","Topspin","No-spin"],2,"Topspin is forward rotation."],
+["What is the standard table length?",["2.74 m","2.00 m","3.00 m","1.52 m"],0,"The standard table is 2.74 metres long."],
+["What should a player do after playing a shot?",["Stand still","Recover to ready position","Turn away","Drop the racket"],1,"Recovering to a balanced ready position prepares you for the next shot."],
+["What is the standard ball diameter?",["38 mm","40 mm","44 mm","50 mm"],1,"Modern table tennis uses a 40 mm ball."],
+["At 10–10, how do you win?",["One point","Lead by two points","Three serves","A time-out"],1,"At deuce, a player needs a two-point lead."],
+["Which racket surface contacts the ball?",["Handle","Blade edge","Rubber","Wrist"],2,"The rubber surface contacts the ball."]
+];
+let qIndex=0,points=0,answered=false,finished=false;
+function drawQuestion(){
+answered=false;finished=false;let q=questions[qIndex];
+$("#questionCount").textContent=`QUESTION ${qIndex+1} / ${questions.length}`;
+$("#quizScore").textContent="SCORE: "+points;
+$("#quizProgress").style.width=((qIndex+1)/questions.length*100)+"%";
+$("#questionText").textContent=q[0];$("#feedback").textContent="Choose the best answer.";
+$("#nextQuestion").disabled=true;$("#nextQuestion").textContent=qIndex===questions.length-1?"FINISH QUIZ":"NEXT QUESTION →";
+$("#options").innerHTML=q[1].map((v,i)=>`<button class="option" data-option="${i}">${String.fromCharCode(65+i)}. ${v}</button>`).join("");
+document.querySelectorAll("[data-option]").forEach(b=>b.onclick=()=>answer(+b.dataset.option));
 }
-function showQuestion(){
- const q=QUIZ[state.quizIndex];
- if(!q){
-  $("quizQuestion").textContent=`Challenge complete: ${state.quizScore}/${QUIZ.length}`;
-  $("quizOptions").innerHTML="";
-  $("quizFeedback").textContent=state.quizScore>=6?"Great work! You have a strong rules foundation.":"Good effort. Review the explanations and try again.";
-  $("quizStart").textContent="Try again";$("quizStart").style.display="inline-flex";
-  if(state.quizScore>=6)awardXP(20);
-  return;
- }
- state.quizAnswered=false;
- $("quizQuestion").textContent=`Question ${state.quizIndex+1} of ${QUIZ.length}: ${q.q}`;
- $("quizFeedback").textContent="";
- $("quizOptions").innerHTML=q.o.map((o,i)=>`<button class="quiz-option" onclick="answerQuestion(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join("");
+function answer(i){
+if(answered)return;answered=true;let q=questions[qIndex],ok=i===q[2];if(ok)points++;
+document.querySelectorAll("[data-option]").forEach((b,j)=>{b.disabled=true;if(j===q[2])b.classList.add("correct");else if(j===i)b.classList.add("wrong")});
+$("#quizScore").textContent="SCORE: "+points;$("#feedback").textContent=(ok?"Correct! ":"Not quite. ")+q[3];$("#nextQuestion").disabled=false;
 }
-function answerQuestion(index){
- if(state.quizAnswered)return;
- state.quizAnswered=true;
- const q=QUIZ[state.quizIndex];
- const buttons=[...$("quizOptions").querySelectorAll("button")];
- buttons.forEach((b,i)=>{
-  b.disabled=true;
-  if(i===q.a)b.classList.add("correct");
-  if(i===index&&i!==q.a)b.classList.add("wrong");
- });
- if(index===q.a)state.quizScore++;
- $("quizFeedback").textContent=(index===q.a?"Correct! ":"Not quite. ")+q.why;
- const next=document.createElement("button");
- next.className="btn primary small";next.style.marginTop="12px";next.textContent=state.quizIndex===QUIZ.length-1?"See result":"Next question";
- next.onclick=()=>{state.quizIndex++;showQuestion()};
- $("quizOptions").appendChild(next);
+function finishQuiz(){
+finished=true;let percent=Math.round(points/questions.length*100);data.best=Math.max(data.best,percent);save();
+$("#questionCount").textContent="CHALLENGE COMPLETE";$("#questionText").textContent=`YOUR RESULT: ${percent}%`;
+$("#options").innerHTML=`<div class="result">You answered ${points} out of ${questions.length} questions correctly. ${percent>=80?"Excellent work. Keep developing your game!":"Good effort. Review the explanations and try again."}</div>`;
+$("#feedback").textContent="Your best result has been saved to your dashboard.";
+$("#nextQuestion").textContent="PLAY AGAIN";$("#nextQuestion").disabled=false;
 }
+function restartQuiz(){qIndex=0;points=0;drawQuestion()}
+$("#nextQuestion").onclick=()=>{if(finished){restartQuiz();return}if(!answered)return;if(qIndex<questions.length-1){qIndex++;drawQuestion()}else finishQuiz()};
+$("#restartQuiz").onclick=restartQuiz;
+drawQuestion();
 
-/* Training journal */
-function renderJournal(){
- $("journalList").innerHTML=state.journal.length?state.journal.slice().reverse().map(j=>`<div class="journal-entry">${escapeHTML(j.text)}<small>${new Date(j.date).toLocaleString()}</small></div>`).join(""):'<div class="empty">Your saved training notes will appear here.</div>';
-}
-function saveJournal(){
- const text=$("journalInput").value.trim();
- if(!text){notify("Write a short training note first.");return}
- state.journal.push({text,date:new Date().toISOString()});
- saveJSON(STORE.journal,state.journal);
- $("journalInput").value="";renderJournal();notify("Training note saved.");
-}
+/* Player style finder */
+$("#styleBtn").onclick=()=>{
+let guides={
+attack:"ATTACKING PLAYER: Look for a setup that gives you confidence when opening attacks and generating spin. Balance speed with control. Faster equipment is not automatically better.",
+allround:"ALL-ROUND PLAYER: A balanced setup can support controlled blocks, reliable placement and attacking opportunities. Prioritize consistency and a comfortable feel.",
+defense:"DEFENSIVE PLAYER: Control, placement and variation are important considerations. Choose equipment that supports your defensive technique and gives you confidence in active shots."
+};
+$("#styleResult").textContent=guides[$("#playerStyle").value];
+};
 
-/* Equipment guide */
-function exploreSetup(){
- const style=$("styleSelect").value,level=$("levelSelect").value;
- let result="";
- if(level==="beginner"){
-  result="General direction: a controllable allround blade with suitable beginner-friendly inverted rubbers. Prioritize technique, comfort and control.";
- }else if(style==="defense"){
-  result="General direction: explore defensive or allround blades and rubbers that match your chopping and variation style. Test equipment with a coach before buying.";
- }else if(style==="allround"){
-  result="General direction: a balanced allround blade and medium-speed inverted rubbers can offer a useful mix of control and attacking options.";
- }else{
-  result="General direction: consider an offensive blade and grippy inverted rubbers suited to looping. Choose speed only when your technique can control it.";
- }
- $("setupResult").textContent=result;
-}
+/* Journal */
+$("#saveNote").onclick=()=>{
+let title=$("#noteTitle").value.trim(),body=$("#noteBody").value.trim();
+if(!title||!body){notify("Please add a title and note");return}
+data.notes.push({title,body,mood:$("#noteMood").value,date:new Date().toLocaleDateString()});
+save();renderNotes();$("#noteTitle").value="";$("#noteBody").value="";notify("Journal entry saved");
+};
 
-/* Theme and data export */
-function toggleTheme(){
- document.body.classList.toggle("light");
- localStorage.setItem(STORE.theme,document.body.classList.contains("light")?"light":"dark");
- $("themeBtn").textContent=document.body.classList.contains("light")?"☾":"☼";
-}
-function exportData(){
- const data={profile:state.user,journal:state.journal,exportedAt:new Date().toISOString()};
- const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
- const url=URL.createObjectURL(blob);
- const a=document.createElement("a");a.href=url;a.download="danesh-spin-player-data.json";a.click();
- URL.revokeObjectURL(url);notify("Your local data export is ready.");
-}
-function importDataFile(file){
- const reader=new FileReader();
- reader.onload=()=>{
-  try{
-   const data=JSON.parse(reader.result);
-   if(data.profile&&data.profile.email){
-    const idx=state.users.findIndex(u=>u.email===data.profile.email);
-    if(idx>=0)state.users[idx]=data.profile;else state.users.push(data.profile);
-    state.user=data.profile;saveUser();
-   }
-   if(Array.isArray(data.journal)){state.journal=data.journal;saveJSON(STORE.journal,state.journal)}
-   renderAll();notify("Data imported.");
-  }catch{notify("That file could not be imported.")}
- };
- reader.readAsText(file);
-}
-function renderAll(){
- renderDashboard();renderLevels();renderLessonList(state.activeLesson);
- renderAchievements();renderLeaderboard();renderJournal();
-}
-
-/* Navigation and startup */
-$("accountBtn").addEventListener("click",()=>{
- if(state.user){
-  if(confirm("Sign out of this local profile?"))logout();
- }else openAccount();
+/* FAQ */
+document.querySelectorAll(".faq button").forEach(b=>b.onclick=()=>{
+let item=b.parentElement;item.classList.toggle("open");
+b.querySelector("span").textContent=item.classList.contains("open")?"−":"＋";
 });
-$("authSubmit").addEventListener("click",handleAuth);
-$("switchAuth").addEventListener("click",e=>{
- e.preventDefault();setAuthMode(state.authMode==="signup"?"login":"signup");
-});
-$("themeBtn").addEventListener("click",toggleTheme);
-$("menuBtn").addEventListener("click",()=>$("mobileMenu").classList.toggle("show"));
-$("mobileMenu").querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>$("mobileMenu").classList.remove("show")));
-$("topRange").addEventListener("input",updateSpinLabels);
-$("sideRange").addEventListener("input",updateSpinLabels);
-$("speedRange").addEventListener("input",updateSpinLabels);
-$("trailRange").addEventListener("input",updateSpinLabels);
-$("launchBtn").addEventListener("click",launchSpin);
-$("pauseBtn").addEventListener("click",toggleSpin);
-$("timerStart").addEventListener("click",startTimer);
-$("timerReset").addEventListener("click",resetTimer);
-document.querySelectorAll("[data-time]").forEach(b=>b.addEventListener("click",()=>{
- resetTimer();state.timerSeconds=Number(b.dataset.time);renderTimer();
-}));
-$("weekBtn").addEventListener("click",generateWeek);
-$("quizStart").addEventListener("click",startQuiz);
-$("journalSave").addEventListener("click",saveJournal);
-$("setupBtn").addEventListener("click",exploreSetup);
-$("accountModal").addEventListener("click",e=>{if(e.target===$("accountModal"))closeAccount()});
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAccount()});
-
-function startLearning(){
- if(!state.user)openAccount();
- else $("academy").scrollIntoView({behavior:"smooth"});
-}
-
-function init(){
- state.users=readJSON(STORE.users,[]);
- state.user=readJSON(STORE.session,null);
- state.journal=readJSON(STORE.journal,[]);
- if(state.user&&!state.users.some(u=>u.email===state.user.email)){
-  state.users.push(state.user);saveJSON(STORE.users,state.users);
- }
- if(localStorage.getItem(STORE.theme)==="light"){
-  document.body.classList.add("light");$("themeBtn").textContent="☾";
- }
- setAuthMode("signup");
- renderAll();renderTimer();updateSpinLabels();generateWeek();exploreSetup();
- spinCtx=$("spinCanvas").getContext("2d");resetBall();drawSpin();
-}
-init();
 </script>
 </body>
 </html>
