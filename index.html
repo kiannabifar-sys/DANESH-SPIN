@@ -3,1180 +3,914 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101113">
-<title>DANESH SPIN — Elite Performance Club</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101512">
+<title>DANESH SPIN — Table Tennis Performance Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
---bg:#101113;--surface:#191b1f;--surface2:#22252a;--line:#34373d;
---text:#f3f0e9;--muted:#9b9b9b;--accent:#ff653b;--accent2:#ff986f;
---gold:#e9c878;--green:#b8e986;--blue:#80c9e8;
---radius:17px;--shadow:0 18px 50px #0005;
+  --bg:#101512;
+  --panel:#171f1a;
+  --panel2:#1d2821;
+  --line:#2a362e;
+  --text:#f1f5ef;
+  --muted:#89968c;
+  --accent:#c4f16b;
+  --accent2:#a8d94e;
+  --danger:#f17c71;
+  --blue:#8ab7f4;
+  --gold:#e8c77a;
+  --radius:17px;
+  --shadow:0 15px 45px rgba(0,0,0,.18);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:100px}
-body{margin:0;background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif}
-body.light{
---bg:#eeece7;--surface:#fffefa;--surface2:#e9e6df;--line:#d5d0c7;
---text:#191a1b;--muted:#77756f;--shadow:0 15px 40px #29251a12
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:'DM Sans',sans-serif;font-size:14px;
 }
-button,input,select,textarea{font:inherit}
+button,input,textarea,select{font:inherit}
 button{cursor:pointer}
-a{text-decoration:none;color:inherit}
-::selection{background:var(--accent);color:white}
-.top-accent{height:4px;background:linear-gradient(90deg,var(--accent),#e9c878,#b8e986)}
-header{
-position:sticky;top:0;z-index:100;background:#101113ed;
-backdrop-filter:blur(18px);border-bottom:1px solid #ffffff13
+a{color:inherit;text-decoration:none}
+.app{min-height:100vh}
+.sidebar{
+  width:250px;position:fixed;inset:0 auto 0 0;
+  background:#131a15;border-right:1px solid var(--line);
+  padding:25px 17px;display:flex;flex-direction:column;
+  z-index:20;transition:.25s;
 }
-body.light header{background:#eeece7ed;border-color:#0001}
-.nav{max-width:1500px;margin:auto;padding:13px 4%;display:flex;align-items:center;gap:28px}
-.brand{display:flex;align-items:center;gap:10px;min-width:205px}
+.brand{display:flex;align-items:center;gap:12px;padding:0 9px 28px}
 .brand-mark{
-width:39px;height:39px;background:var(--accent);color:#171717;
-display:grid;place-items:center;font:900 25px "Barlow Condensed";
-transform:skew(-7deg)
+  width:42px;height:42px;border-radius:13px;background:var(--accent);
+  color:#11180f;display:grid;place-items:center;font-weight:900;
+  font-size:21px;letter-spacing:-2px;
 }
-.brand-name{font:900 25px "Barlow Condensed";letter-spacing:1px}
-.brand-name span{color:var(--accent)}
-.brand-sub{font-size:8px;letter-spacing:2px;color:var(--muted)}
-.navlinks{display:flex;align-items:center;gap:20px;margin:auto}
-.navlinks a{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:.6px}
-.navlinks a:hover{color:var(--accent)}
-.nav-actions{display:flex;gap:8px;align-items:center}
-.btn,.icon-btn{
-border:1px solid var(--line);background:var(--surface);color:var(--text);
-padding:10px 14px;border-radius:9px;font-size:11px;font-weight:800;
-transition:.2s
+.brand-name{font-family:Manrope,sans-serif;font-size:17px;font-weight:800;letter-spacing:1.5px}
+.brand-sub{font-size:9px;color:var(--muted);letter-spacing:2px;margin-top:3px}
+.nav-label{font-size:10px;color:#67756b;letter-spacing:1.7px;font-weight:800;padding:18px 12px 9px}
+.nav{
+  width:100%;border:0;background:transparent;color:#9aa79d;
+  display:flex;align-items:center;gap:12px;text-align:left;
+  padding:11px 12px;border-radius:10px;margin:2px 0;
+  transition:.2s;font-size:13px;font-weight:600;
 }
-.btn:hover,.icon-btn:hover{border-color:var(--accent);transform:translateY(-1px)}
-.btn.primary{background:var(--accent);color:#161616;border-color:var(--accent)}
-.btn.gold{background:var(--gold);color:#171717;border-color:var(--gold)}
-.btn.green{background:var(--green);color:#171717;border-color:var(--green)}
-.btn.small{padding:8px 11px;font-size:10px}
-.menu-btn{display:none}
-main{max-width:1500px;margin:auto;padding:0 4% 90px}
+.nav:hover,.nav.active{background:#253128;color:var(--accent)}
+.nav .ico{width:19px;text-align:center;font-size:16px}
+.nav.active{box-shadow:inset 3px 0 var(--accent)}
+.sidebar-bottom{margin-top:auto}
+.profile-mini{border-top:1px solid var(--line);padding:17px 5px 0;display:flex;align-items:center;gap:10px}
+.avatar{width:36px;height:36px;border-radius:50%;background:#344538;color:var(--accent);display:grid;place-items:center;font-weight:800}
+.profile-name{font-size:12px;font-weight:700}
+.profile-role{font-size:10px;color:var(--muted);margin-top:3px}
+.main{margin-left:250px;min-height:100vh}
+.topbar{
+  height:74px;border-bottom:1px solid var(--line);display:flex;
+  align-items:center;justify-content:space-between;padding:0 36px;
+  background:rgba(16,21,18,.88);position:sticky;top:0;z-index:10;
+  backdrop-filter:blur(16px);
+}
+.breadcrumb{font-size:12px;color:var(--muted)}
+.breadcrumb strong{color:var(--text);font-weight:700}
+.top-actions{display:flex;align-items:center;gap:10px}
+.icon-btn{
+  border:1px solid var(--line);background:var(--panel);color:var(--text);
+  border-radius:10px;width:37px;height:37px;display:grid;place-items:center;
+}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+.search-wrap{position:relative}
+.search-wrap input{
+  width:205px;background:var(--panel);border:1px solid var(--line);
+  color:var(--text);padding:10px 13px;border-radius:10px;outline:none;
+}
+.search-wrap input:focus{border-color:var(--accent)}
+.content{max-width:1500px;margin:auto;padding:32px 36px 60px}
+.page{display:none;animation:appear .3s ease}
+.page.active{display:block}
+@keyframes appear{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.page-heading{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:25px;gap:15px}
+.eyebrow{font-size:10px;color:var(--accent);font-weight:800;letter-spacing:2px;text-transform:uppercase}
+h1{font-family:Manrope,sans-serif;font-size:29px;letter-spacing:-1px;margin:7px 0 5px}
+.subtitle{color:var(--muted);font-size:13px;line-height:1.6}
+.btn{
+  border:1px solid var(--line);border-radius:9px;background:var(--panel2);
+  color:var(--text);padding:10px 15px;font-weight:700;font-size:12px;
+}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:#15200e;border-color:var(--accent)}
+.btn.primary:hover{background:#d2ff7e}
+.btn.danger{color:var(--danger)}
+.grid{display:grid;gap:16px}
+.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}
+.card{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);padding:19px;box-shadow:var(--shadow);
+}
+.stat-top{display:flex;justify-content:space-between;align-items:center}
+.stat-label{font-size:11px;color:var(--muted);font-weight:600}
+.stat-icon{width:33px;height:33px;border-radius:10px;background:#29362c;display:grid;place-items:center}
+.stat-value{font-family:Manrope,sans-serif;font-size:29px;font-weight:800;margin:14px 0 5px;letter-spacing:-1px}
+.stat-foot{font-size:10px;color:var(--muted)}
+.positive{color:var(--accent)}
+.dashboard-grid{grid-template-columns:1.6fr 1fr;align-items:stretch}
+.section-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.section-title h3{font-size:14px;margin:0;font-weight:800}
+.section-title span{font-size:10px;color:var(--muted)}
 .hero{
-min-height:590px;display:grid;grid-template-columns:1.05fr .95fr;
-align-items:center;gap:35px;padding:60px 0 50px;position:relative
+  min-height:220px;position:relative;overflow:hidden;
+  background:linear-gradient(110deg,#26392b,#18251d 60%,#1d2b22);
+  border:1px solid #394a39;border-radius:var(--radius);padding:27px;
+  display:flex;align-items:center;margin-bottom:18px;
 }
 .hero:after{
-content:"DS";position:absolute;right:0;top:30px;font:900 300px/.8 "Barlow Condensed";
-color:#ffffff05;pointer-events:none
+  content:"";position:absolute;width:290px;height:290px;border-radius:50%;
+  border:1px solid rgba(196,241,107,.14);right:7%;top:-90px;
+  box-shadow:0 0 0 30px rgba(196,241,107,.025),0 0 0 65px rgba(196,241,107,.02);
 }
-.overline{font-size:10px;letter-spacing:3px;color:var(--accent);font-weight:900}
-.hero h1{font:900 clamp(75px,10vw,145px)/.77 "Barlow Condensed";margin:25px 0;letter-spacing:-2px}
-.hero h1 span{display:block;color:var(--accent)}
-.hero-copy{font-size:13px;line-height:2;color:var(--muted);max-width:500px}
-.hero-buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}
-.hero-stats{display:flex;gap:35px;margin-top:42px;flex-wrap:wrap}
-.hero-stat strong{display:block;font:800 30px "Barlow Condensed"}
-.hero-stat span{font-size:9px;color:var(--muted);letter-spacing:1.5px}
-.hero-visual{min-height:440px;display:grid;place-items:center;position:relative}
-.hero-circle{
-width:min(390px,80vw);aspect-ratio:1;border-radius:50%;
-border:1px solid #ffffff22;position:absolute;
-box-shadow:0 0 0 25px #ffffff04,0 0 0 55px #ffffff03
+.hero-content{max-width:500px;position:relative;z-index:1}
+.hero-tag{font-size:10px;letter-spacing:2px;color:var(--accent);font-weight:800}
+.hero h2{font-family:Manrope;font-size:28px;line-height:1.2;margin:13px 0 9px;max-width:410px}
+.hero p{color:#b3c0b4;line-height:1.7;font-size:12px;max-width:430px}
+.hero .btn{margin-top:12px}
+.hero-art{position:absolute;right:12%;font-size:100px;opacity:.22;transform:rotate(-15deg)}
+.progress-line{height:6px;background:#2b372e;border-radius:20px;overflow:hidden;margin:12px 0}
+.progress-line span{display:block;height:100%;background:var(--accent);border-radius:20px}
+.activity-list{display:flex;flex-direction:column;gap:14px}
+.activity{display:flex;align-items:center;gap:12px}
+.activity-icon{width:37px;height:37px;border-radius:11px;background:#27342b;display:grid;place-items:center}
+.activity-info{flex:1}
+.activity-info b{font-size:12px;display:block}
+.activity-info small{color:var(--muted);font-size:10px}
+.activity-time{font-size:10px;color:var(--muted)}
+.course-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.course-card{transition:.2s;cursor:pointer}
+.course-card:hover{transform:translateY(-3px);border-color:#627b4c}
+.course-cover{height:115px;border-radius:11px;margin-bottom:15px;display:flex;align-items:center;justify-content:center;font-size:44px;position:relative;overflow:hidden}
+.cover-a{background:linear-gradient(135deg,#2a4934,#18271e)}
+.cover-b{background:linear-gradient(135deg,#3c3c30,#22271d)}
+.cover-c{background:linear-gradient(135deg,#273b4b,#1b252c)}
+.cover-d{background:linear-gradient(135deg,#4a3330,#281e1d)}
+.cover-e{background:linear-gradient(135deg,#39314a,#231f2c)}
+.cover-f{background:linear-gradient(135deg,#34433c,#202c25)}
+.course-card h3{font-size:14px;margin:0 0 7px}
+.course-card p{font-size:11px;color:var(--muted);line-height:1.6;min-height:35px}
+.course-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;margin-top:13px}
+.two-col{grid-template-columns:1fr 1fr}
+.three-col{grid-template-columns:repeat(3,1fr)}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+.field{display:flex;flex-direction:column;gap:7px;margin-bottom:13px}
+.field label{font-size:11px;color:var(--muted);font-weight:700}
+.field input,.field select,.field textarea{
+  width:100%;background:#101713;border:1px solid var(--line);border-radius:9px;
+  color:var(--text);padding:11px 12px;outline:none;
 }
-.hero-circle:before{content:"";position:absolute;width:13px;height:13px;background:var(--accent);border-radius:50%;top:12%;right:17%;box-shadow:0 0 30px var(--accent)}
-.hero-circle:after{content:"";position:absolute;width:8px;height:8px;background:var(--gold);border-radius:50%;bottom:13%;left:17%}
-.racket-scene{width:320px;height:350px;position:relative;transform:rotate(-23deg)}
-.racket-head{
-position:absolute;width:185px;height:220px;border-radius:48% 48% 45% 45%;
-background:repeating-linear-gradient(45deg,#f7f0e5 0 2px,#242629 2px 4px);
-border:13px solid var(--accent);top:0;left:67px;
-box-shadow:inset 0 0 0 7px #222,0 22px 45px #0008
-}
-.racket-head:after{content:"";position:absolute;inset:0;background:radial-gradient(circle,#ff653b 0 3%,transparent 4% 100%);opacity:.4}
-.racket-handle{position:absolute;top:205px;left:140px;width:40px;height:150px;background:linear-gradient(90deg,#a36b43,#e4b17c,#75452e);border-radius:0 0 12px 12px;box-shadow:0 20px 30px #0008}
-.hero-ball{position:absolute;width:35px;height:35px;border-radius:50%;background:radial-gradient(circle at 30% 25%,white,#e5e5e5 50%,#999);top:18%;right:7%;box-shadow:0 0 40px #ffffff55;animation:float 3s ease-in-out infinite}
-@keyframes float{50%{transform:translate(-28px,-22px)}}
-.floating-label{
-position:absolute;padding:13px 16px;background:var(--surface);
-border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);
-font-size:9px;letter-spacing:1px
-}
-.floating-label strong{display:block;font:800 23px "Barlow Condensed"}
-.label-a{top:12%;left:0}.label-b{bottom:12%;right:0}
-.marquee{border-block:1px solid var(--line);padding:15px 0;overflow:hidden;margin-bottom:55px}
-.marquee-track{width:max-content;display:flex;gap:38px;animation:scroll 28s linear infinite;font:700 16px "Barlow Condensed";letter-spacing:2px;color:var(--muted)}
-.marquee-track span:before{content:"✦";color:var(--accent);margin-right:35px}
-@keyframes scroll{to{transform:translateX(-50%)}}
-.section{padding:45px 0;scroll-margin-top:85px}
-.section-heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:23px}
-.section-kicker{font-size:9px;color:var(--accent);letter-spacing:3px;font-weight:900}
-.section h2{font:800 clamp(38px,5vw,58px)/.9 "Barlow Condensed";margin:9px 0}
-.section-heading p{max-width:430px;color:var(--muted);font-size:11px;line-height:1.9}
-.grid{display:grid;gap:14px}
-.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
-.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
-.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
-.card{
-background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
-padding:21px;position:relative;overflow:hidden;transition:.23s
-}
-.card:hover{border-color:#ff653b88;transform:translateY(-3px)}
-.card h3{font:700 24px "Barlow Condensed";margin:9px 0}
-.card p{font-size:11px;line-height:1.9;color:var(--muted)}
-.card-icon{width:42px;height:42px;border-radius:11px;background:#ff653b18;color:var(--accent);display:grid;place-items:center;font-size:20px}
+.field textarea{min-height:90px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent)}
 .muted{color:var(--muted)}
-.small-label{font-size:9px;color:var(--muted);letter-spacing:1.4px}
-.big-number{font:800 46px "Barlow Condensed";margin:10px 0 0}
-.stat-card{min-height:132px}
-.stat-card .change{font-size:9px;color:var(--green)}
-.dashboard-grid{display:grid;grid-template-columns:1.4fr .6fr;gap:14px;margin-top:14px}
-.progress{height:7px;background:var(--surface2);border-radius:10px;overflow:hidden;margin:12px 0}
-.progress span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:10px}
-.activity{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:11px}
-.activity:last-child{border:0}
-.activity-dot{width:7px;height:7px;border-radius:50%;background:var(--green);margin-top:5px;flex:none}
-.activity small{display:block;color:var(--muted);margin-top:4px}
-input,select,textarea{
-width:100%;background:var(--surface2);color:var(--text);
-border:1px solid var(--line);border-radius:9px;padding:11px;
-outline:none;font-size:11px
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:500px}
+th{text-align:left;font-size:10px;color:var(--muted);font-weight:700;padding:12px;border-bottom:1px solid var(--line)}
+td{font-size:11px;padding:14px 12px;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+.pill{padding:5px 8px;border-radius:20px;background:#2b3a2d;color:var(--accent);font-size:9px;font-weight:800}
+.timer-display{font-family:Manrope;font-size:65px;font-weight:800;text-align:center;letter-spacing:2px;margin:28px 0}
+.timer-controls{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}
+.timer-presets{display:flex;justify-content:center;gap:8px;margin-top:18px}
+.timer-presets button{font-size:10px}
+.quiz-option{
+  display:block;width:100%;text-align:left;padding:13px;margin:8px 0;
+  background:#111813;border:1px solid var(--line);border-radius:10px;color:var(--text);
 }
-input:focus,select:focus,textarea:focus{border-color:var(--accent)}
-textarea{resize:vertical;min-height:75px}
-label{font-size:10px;color:var(--muted)}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
-.form-stack{display:grid;gap:10px}
-.path-card{min-height:220px;display:flex;flex-direction:column;justify-content:space-between}
-.path-number{position:absolute;right:12px;top:0;font:900 85px "Barlow Condensed";color:#ffffff08}
-.path-tag{font-size:9px;color:var(--gold);letter-spacing:2px}
-.path-card button{align-self:flex-start}
-.tool-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.spin-display{min-height:280px;display:grid;place-items:center;position:relative;border-radius:14px;background:radial-gradient(circle,#373b40,#17191d 68%);overflow:hidden}
-.spin-ball{width:100px;height:100px;border-radius:50%;background:radial-gradient(circle at 30% 25%,white,#ddd 48%,#888);box-shadow:0 0 55px #ffffff33;position:relative}
-.spin-ball:after{content:"";position:absolute;inset:9px;border:2px solid #555;border-radius:50%;transform:scaleX(.48) rotate(35deg)}
-.spin-ball.play{animation:ballspin 1s linear infinite}
-@keyframes ballspin{to{transform:rotate(360deg)}}
-.spin-caption{position:absolute;bottom:15px;font-size:9px;color:#bbb;letter-spacing:2px}
-.range-row{margin:17px 0}
-.range-row>div{display:flex;justify-content:space-between;margin-bottom:8px;font-size:10px;color:var(--muted)}
-input[type=range]{padding:0;accent-color:var(--accent)}
-.timer{font:900 clamp(60px,9vw,100px)/1 "Barlow Condensed";text-align:center;margin:25px 0;letter-spacing:3px}
-.center{text-align:center}
-.drill-row{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding:13px 0}
-.drill-row:last-child{border:0}
-.drill-index{font:800 27px "Barlow Condensed";color:var(--accent)}
-.drill-copy{flex:1}.drill-copy strong{font-size:11px}.drill-copy small{display:block;color:var(--muted);font-size:9px;margin-top:4px}
-.quiz-option{display:block;width:100%;text-align:left;padding:13px;background:var(--surface2);color:var(--text);border:1px solid var(--line);border-radius:9px;margin:8px 0;font-size:11px}
 .quiz-option:hover{border-color:var(--accent)}
-.quiz-option.correct{border-color:var(--green);background:#b8e98615}
-.quiz-option.wrong{border-color:var(--accent);background:#ff653b15}
-.history-row{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:12px 0;font-size:11px;gap:10px}
-.history-row:last-child{border:0}
-.win{color:var(--green)}.loss{color:var(--accent)}
-.tag{display:inline-block;font-size:9px;letter-spacing:1px;color:var(--gold);background:#e9c87814;padding:5px 8px;border-radius:5px}
+.quiz-option.correct{border-color:var(--accent);background:#263a28}
+.quiz-option.wrong{border-color:var(--danger);background:#392725}
 .flashcard{
-min-height:180px;display:grid;place-items:center;text-align:center;
-background:linear-gradient(135deg,#292d33,#17191d);border:1px solid var(--line);
-border-radius:14px;padding:25px;cursor:pointer
+  min-height:190px;display:grid;place-items:center;text-align:center;
+  border-radius:15px;background:linear-gradient(140deg,#293a2d,#18221b);
+  border:1px solid #40513d;padding:25px;cursor:pointer;
 }
-.flashcard strong{font:800 38px "Barlow Condensed"}
-.flashcard p{font-size:12px;color:var(--muted)}
-.board{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;max-width:420px;margin:18px auto}
-.board-cell{aspect-ratio:1;background:var(--surface2);border:1px solid var(--line);border-radius:5px;color:var(--muted);font-size:17px}
-.board-cell.marked{background:var(--accent);color:#151515;border-color:var(--accent)}
-.equipment-item{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);font-size:11px}
-.equipment-item:last-child{border:0}
-.equipment-item input{width:auto}
-.bracket{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.bracket-match{background:var(--surface2);border-radius:10px;padding:13px;font-size:10px}
-.bracket-match strong{display:block;margin-bottom:9px}
-.bracket-match input{margin:3px 0;padding:7px}
-.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:15px}
-.calendar-cell{min-height:55px;border:1px solid var(--line);border-radius:7px;padding:7px;font-size:10px;color:var(--muted)}
-.calendar-cell.today{border-color:var(--accent);color:var(--text)}
-.calendar-cell.event{background:#ff653b16}
-.faq details{border-bottom:1px solid var(--line);padding:16px 0}
-.faq summary{font-size:12px;font-weight:700;cursor:pointer}
-.faq details p{font-size:11px;color:var(--muted);line-height:1.8}
-.search-results{display:grid;gap:7px;margin-top:10px}
-.search-result{padding:10px;border:1px solid var(--line);border-radius:8px;font-size:11px}
-.hidden{display:none!important}
-footer{border-top:1px solid var(--line);padding:35px 4%;text-align:center;color:var(--muted);font-size:10px}
-footer strong{font:900 30px "Barlow Condensed";color:var(--text)}
-.modal{position:fixed;inset:0;background:#000c;z-index:300;display:none;place-items:center;padding:18px}
-.modal.show{display:grid}
-.modal-box{width:min(100%,450px);background:var(--surface);border:1px solid var(--line);border-radius:17px;padding:24px;box-shadow:var(--shadow)}
-.modal-box h2{font:800 38px "Barlow Condensed"}
-.toast{position:fixed;right:20px;bottom:20px;z-index:500;background:var(--gold);color:#171717;padding:13px 17px;border-radius:9px;font-size:11px;font-weight:800;transform:translateY(100px);transition:.3s}
-.toast.show{transform:translateY(0)}
-.command{position:fixed;inset:0;background:#000b;z-index:250;display:none;place-items:start center;padding:15vh 15px}
-.command.show{display:grid}
-.command-box{width:min(600px,100%);background:var(--surface);padding:15px;border:1px solid var(--line);border-radius:15px}
-.command-box input{font-size:15px}
-@media(max-width:1050px){
-.navlinks{display:none;position:absolute;top:65px;left:0;right:0;background:var(--surface);padding:20px;flex-direction:column;align-items:start;border-bottom:1px solid var(--line)}
-.navlinks.open{display:flex}.menu-btn{display:block}
-.hero{grid-template-columns:1fr}.hero-visual{min-height:350px}
-.grid.four{grid-template-columns:repeat(2,1fr)}
+.flashcard strong{font-size:23px;font-family:Manrope}
+.flashcard small{color:var(--muted);margin-top:10px}
+.court{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:5px;
+  background:#315d4b;padding:12px;border-radius:12px;max-width:480px;
 }
-@media(max-width:650px){
-main{padding-inline:4%}.nav{padding-inline:4%;gap:10px}
-.brand{min-width:0}.brand-name{font-size:21px}.brand-sub{font-size:7px}
-.hero{padding-top:45px;min-height:unset}.hero h1{font-size:88px}
-.hero-visual{min-height:300px}.racket-scene{transform:scale(.82) rotate(-23deg)}
-.section{padding:32px 0}.section-heading{align-items:start;flex-direction:column}
-.grid.two,.grid.three,.grid.four,.dashboard-grid{grid-template-columns:1fr}
-.form-row{grid-template-columns:1fr}
-.bracket{grid-template-columns:1fr}
-.hero-stats{gap:20px}
+.court button{
+  aspect-ratio:1.2;border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.07);border-radius:4px;color:white;
+}
+.court button.selected{background:var(--accent);color:#15200e}
+.bar-chart{height:160px;display:flex;align-items:flex-end;gap:12px;padding-top:20px}
+.bar{flex:1;background:#344536;border-radius:6px 6px 0 0;position:relative;min-width:12px}
+.bar.active{background:var(--accent)}
+.bar small{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--muted)}
+.bar span{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--muted)}
+.toast{
+  position:fixed;right:25px;bottom:25px;background:#26372b;color:var(--text);
+  padding:14px 18px;border:1px solid #536d45;border-radius:11px;
+  box-shadow:var(--shadow);z-index:99;opacity:0;transform:translateY(15px);
+  transition:.25s;pointer-events:none;font-size:12px;
+}
+.toast.show{opacity:1;transform:translateY(0)}
+.mobile-menu{display:none}
+.empty{text-align:center;padding:30px;color:var(--muted);font-size:12px}
+.footer{text-align:center;color:#657168;font-size:10px;padding:35px 0 0}
+.light{
+  --bg:#edf0e9;--panel:#fff;--panel2:#f4f6f1;--line:#dce2d8;
+  --text:#1c2820;--muted:#718075;--shadow:0 10px 30px rgba(20,40,20,.05);
+}
+.light .sidebar{background:#f8faf6}
+.light .topbar{background:rgba(237,240,233,.9)}
+.light .field input,.light .field select,.light .field textarea,
+.light .quiz-option{background:#f7f9f5;color:var(--text)}
+.light .hero{color:white}
+.light .hero p{color:#d2dfd3}
+.light .nav{color:#657268}
+.light .nav.active,.light .nav:hover{color:#40552c}
+.light .stat-icon,.light .activity-icon{background:#eaf0e4}
+.light .progress-line{background:#e3e9df}
+.light .flashcard{color:white}
+@media(max-width:1100px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .course-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  .sidebar{transform:translateX(-100%);width:260px}
+  .sidebar.open{transform:translateX(0);box-shadow:20px 0 60px #0008}
+  .main{margin-left:0}
+  .topbar{padding:0 16px;height:64px}
+  .content{padding:24px 16px 45px}
+  .mobile-menu{display:grid}
+  .search-wrap input{width:125px}
+  .dashboard-grid,.two-col{grid-template-columns:1fr}
+  .three-col{grid-template-columns:1fr 1fr}
+  .course-grid{grid-template-columns:1fr}
+  .page-heading{align-items:flex-start;flex-direction:column}
+  h1{font-size:25px}
+  .hero h2{font-size:23px}
+  .hero-art{right:0;font-size:75px}
+}
+@media(max-width:430px){
+  .stats{grid-template-columns:1fr 1fr;gap:9px}
+  .card{padding:14px}
+  .stat-value{font-size:24px}
+  .search-wrap{display:none}
+  .form-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
-<div class="top-accent"></div>
-<header>
-<nav class="nav">
-<a class="brand" href="#">
-<div class="brand-mark">D</div>
-<div><div class="brand-name">DANESH<span>SPIN</span></div><div class="brand-sub">ELITE PERFORMANCE CLUB</div></div>
-</a>
-<div class="navlinks" id="navlinks">
-<a href="#dashboard">DASHBOARD</a>
-<a href="#academy">ACADEMY</a>
-<a href="#training">TRAINING</a>
-<a href="#matches">MATCHES</a>
-<a href="#tools">TOOLS</a>
-<a href="#equipment">EQUIPMENT</a>
-</div>
-<div class="nav-actions">
-<button class="icon-btn" onclick="toggleTheme()" title="Theme">◐</button>
-<button class="btn small" onclick="openProfile()">PROFILE</button>
-<button class="icon-btn menu-btn" onclick="toggleMenu()">☰</button>
-</div>
-</nav>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <div class="brand-mark">DS</div>
+    <div><div class="brand-name">DANESH SPIN</div><div class="brand-sub">PERFORMANCE ACADEMY</div></div>
+  </div>
+  <div class="nav-label">WORKSPACE</div>
+  <button class="nav active" data-page="dashboard"><span class="ico">▦</span> Overview</button>
+  <button class="nav" data-page="academy"><span class="ico">◫</span> Academy</button>
+  <button class="nav" data-page="training"><span class="ico">◷</span> Training Center</button>
+  <button class="nav" data-page="analytics"><span class="ico">▥</span> Performance Analytics</button>
+  <div class="nav-label">COMPETITION</div>
+  <button class="nav" data-page="matches"><span class="ico">⚑</span> Match Center</button>
+  <button class="nav" data-page="tactics"><span class="ico">⌖</span> Tactics Lab</button>
+  <button class="nav" data-page="rules"><span class="ico">◎</span> Rules & Strategy</button>
+  <div class="nav-label">RESOURCES</div>
+  <button class="nav" data-page="equipment"><span class="ico">◈</span> Equipment Studio</button>
+  <button class="nav" data-page="library"><span class="ico">▤</span> Knowledge Library</button>
+  <button class="nav" data-page="profile"><span class="ico">◉</span> My Profile</button>
+  <div class="sidebar-bottom">
+    <button class="nav" id="themeBtn"><span class="ico">◐</span> Switch Appearance</button>
+    <button class="nav" id="exportBtn"><span class="ico">⇩</span> Export My Data</button>
+    <div class="profile-mini">
+      <div class="avatar" id="avatarMini">A</div>
+      <div><div class="profile-name" id="miniName">Athlete</div><div class="profile-role">PLAYER ACCOUNT</div></div>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+  <div style="display:flex;align-items:center;gap:13px">
+    <button class="icon-btn mobile-menu" id="menuBtn">☰</button>
+    <div class="breadcrumb">DANESH SPIN <span style="color:#536157"> / </span> <strong id="crumb">Overview</strong></div>
+  </div>
+  <div class="top-actions">
+    <div class="search-wrap"><input id="globalSearch" placeholder="Search the academy..."></div>
+    <button class="icon-btn" id="quickTheme" title="Appearance">◐</button>
+    <button class="icon-btn" id="quickProfile" title="Profile">◉</button>
+  </div>
 </header>
 
-<main>
-<!-- HERO -->
-<section class="hero">
-<div>
-<div class="overline">THE ART OF PRECISION · EST. 2026</div>
-<h1>PLAY<span>BEYOND.</span></h1>
-<p class="hero-copy">A new home for table tennis players. Learn the science, sharpen your technique, plan your training and build your own performance history. Every detail matters. Every point counts.</p>
-<div class="hero-buttons">
-<a href="#academy" class="btn primary">ENTER THE ACADEMY ↗</a>
-<a href="#dashboard" class="btn">MY PERFORMANCE</a>
-</div>
-<div class="hero-stats">
-<div class="hero-stat"><strong>30</strong><span>PLAYER TOOLS</span></div>
-<div class="hero-stat"><strong>06</strong><span>ACADEMY PATHS</span></div>
-<div class="hero-stat"><strong>∞</strong><span>ROOM TO GROW</span></div>
-</div>
-</div>
-<div class="hero-visual">
-<div class="hero-circle"></div>
-<div class="racket-scene"><div class="racket-head"></div><div class="racket-handle"></div></div>
-<div class="hero-ball"></div>
-<div class="floating-label label-a"><strong>01 / FOCUS</strong>Precision first</div>
-<div class="floating-label label-b"><strong>02 / PROGRESS</strong>One point at a time</div>
-</div>
-</section>
-
-<div class="marquee"><div class="marquee-track">
-<span>TECHNIQUE</span><span>PRECISION</span><span>SPIN</span><span>FOOTWORK</span><span>STRATEGY</span><span>PERFORMANCE</span><span>TECHNIQUE</span><span>PRECISION</span><span>SPIN</span><span>FOOTWORK</span><span>STRATEGY</span><span>PERFORMANCE</span>
-</div></div>
+<div class="content">
 
 <!-- DASHBOARD -->
-<section class="section" id="dashboard">
-<div class="section-heading"><div><div class="section-kicker">01 — YOUR PERFORMANCE</div><h2>PLAYER DASHBOARD</h2></div><p>Your training overview, personal records and progress. Your activity is stored locally in this browser.</p></div>
-<div class="grid four">
-<div class="card stat-card"><div class="small-label">TRAINING SESSIONS</div><div class="big-number" id="statSessions">0</div><div class="change">Recorded sessions</div></div>
-<div class="card stat-card"><div class="small-label">PRACTICE MINUTES</div><div class="big-number" id="statMinutes">0</div><div class="change">Total recorded time</div></div>
-<div class="card stat-card"><div class="small-label">MATCHES PLAYED</div><div class="big-number" id="statMatches">0</div><div class="change">Personal match log</div></div>
-<div class="card stat-card"><div class="small-label">WIN RATE</div><div class="big-number" id="statWin">—</div><div class="change">Based on recorded matches</div></div>
-</div>
-<div class="dashboard-grid">
-<div class="card">
-<div class="tool-head"><div><div class="section-kicker">WEEKLY CHALLENGE</div><h3>Build your consistency.</h3></div><span class="tag">PLAYER GOAL</span></div>
-<p>Set your target and keep your training routine moving.</p>
-<div style="display:flex;justify-content:space-between;font-size:10px"><span>Progress</span><strong><span id="goalDone">0</span> / <span id="goalTarget">180</span> min</strong></div>
-<div class="progress"><span id="goalBar" style="width:0%"></span></div>
-<div class="form-row"><input id="goalInput" type="number" min="30" max="3000" value="180"><button class="btn primary" onclick="saveGoal()">UPDATE GOAL</button></div>
-<div class="small-label">TRAINING STREAK</div><div class="big-number" id="streak">0 DAYS</div>
-</div>
-<div class="card"><div class="section-kicker">RECENT ACTIVITY</div><h3>Latest movements</h3><div id="activityList"><p class="muted">Your activity will appear here.</p></div></div>
-</div>
+<section class="page active" id="dashboard">
+  <div class="page-heading">
+    <div><div class="eyebrow">PERFORMANCE OVERVIEW</div><h1>Good to see you, <span id="welcomeName">Athlete</span>.</h1><div class="subtitle">Your training environment. Your progress. Your next level.</div></div>
+    <button class="btn primary" onclick="showPage('training')">＋ Log a Training Session</button>
+  </div>
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">THE PERFORMANCE MINDSET</div>
+      <h2>Train with purpose.<br>Compete with confidence.</h2>
+      <p>Build better technique, understand the game and develop a smarter approach to every point.</p>
+      <button class="btn primary" onclick="showPage('academy')">Explore the Academy →</button>
+    </div>
+    <div class="hero-art">🏓</div>
+  </div>
+  <div class="grid stats">
+    <div class="card"><div class="stat-top"><span class="stat-label">TOTAL TRAINING</span><span class="stat-icon">◷</span></div><div class="stat-value" id="statHours">0h</div><div class="stat-foot">Recorded practice time</div></div>
+    <div class="card"><div class="stat-top"><span class="stat-label">SESSIONS</span><span class="stat-icon">▤</span></div><div class="stat-value" id="statSessions">0</div><div class="stat-foot">Training sessions logged</div></div>
+    <div class="card"><div class="stat-top"><span class="stat-label">MATCHES PLAYED</span><span class="stat-icon">⚑</span></div><div class="stat-value" id="statMatches">0</div><div class="stat-foot">Tracked match records</div></div>
+    <div class="card"><div class="stat-top"><span class="stat-label">WIN RATE</span><span class="stat-icon">↗</span></div><div class="stat-value" id="statWin">—</div><div class="stat-foot">Based on your match records</div></div>
+  </div>
+  <div class="grid dashboard-grid">
+    <div class="card">
+      <div class="section-title"><h3>Weekly Training Target</h3><span id="weeklyLabel">0 / 5 sessions</span></div>
+      <div style="display:flex;align-items:center;gap:18px">
+        <div style="flex:1"><div style="font-size:23px;font-weight:800" id="weeklyPercent">0%</div><div class="muted" style="font-size:11px">Weekly completion</div><div class="progress-line"><span id="weeklyBar" style="width:0%"></span></div><div class="muted" style="font-size:10px">Target: 5 sessions per week</div></div>
+        <div style="font-size:48px">🎯</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-title"><h3>Quick Access</h3><span>TOOLS</span></div>
+      <div class="grid two-col" style="gap:9px">
+        <button class="btn" onclick="showPage('training')">◷ Practice Timer</button>
+        <button class="btn" onclick="showPage('matches')">⚑ New Match</button>
+        <button class="btn" onclick="showPage('tactics')">⌖ Tactics Board</button>
+        <button class="btn" onclick="showPage('academy')">◫ Take a Lesson</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-title"><h3>Recent Activity</h3><span>YOUR LOG</span></div>
+      <div id="recentActivity" class="activity-list"><div class="empty">Your activity will appear here.</div></div>
+    </div>
+    <div class="card">
+      <div class="section-title"><h3>Training Consistency</h3><span>LAST 7 DAYS</span></div>
+      <div class="bar-chart" id="weekChart"></div>
+      <div class="muted" style="font-size:10px;margin-top:25px">Sessions recorded by day</div>
+    </div>
+  </div>
 </section>
 
 <!-- ACADEMY -->
-<section class="section" id="academy">
-<div class="section-heading"><div><div class="section-kicker">02 — LEARN THE GAME</div><h2>THE ACADEMY</h2></div><p>Structured learning paths from the first rally to advanced match strategy.</p></div>
-<div class="grid three">
-<div class="card path-card"><span class="path-number">01</span><div><div class="path-tag">FOUNDATION</div><div class="card-icon">🏓</div><h3>THE FUNDAMENTALS</h3><p>Table, equipment, rules, scoring and the structure of a rally.</p></div><button class="btn small" onclick="lesson('basics')">EXPLORE LESSON ↗</button></div>
-<div class="card path-card"><span class="path-number">02</span><div><div class="path-tag">TECHNIQUE</div><div class="card-icon">🎯</div><h3>STROKES & CONTROL</h3><p>Forehand, backhand, block, push, loop and control.</p></div><button class="btn small" onclick="lesson('strokes')">EXPLORE LESSON ↗</button></div>
-<div class="card path-card"><span class="path-number">03</span><div><div class="path-tag">MOVEMENT</div><div class="card-icon">👟</div><h3>FOOTWORK</h3><p>Ready position, balance, recovery and movement patterns.</p></div><button class="btn small" onclick="lesson('footwork')">EXPLORE LESSON ↗</button></div>
-<div class="card path-card"><span class="path-number">04</span><div><div class="path-tag">ADVANCED</div><div class="card-icon">🌀</div><h3>SPIN & SERVE</h3><p>Topspin, backspin, sidespin and service variation.</p></div><button class="btn small" onclick="lesson('spin')">EXPLORE LESSON ↗</button></div>
-<div class="card path-card"><span class="path-number">05</span><div><div class="path-tag">GAME IQ</div><div class="card-icon">♟</div><h3>TACTICAL PLAY</h3><p>Placement, anticipation, variation and point construction.</p></div><button class="btn small" onclick="lesson('tactics')">EXPLORE LESSON ↗</button></div>
-<div class="card path-card"><span class="path-number">06</span><div><div class="path-tag">PERFORMANCE</div><div class="card-icon">🏆</div><h3>MATCH PREPARATION</h3><p>Warm-up, focus, routines and post-match reflection.</p></div><button class="btn small" onclick="lesson('match')">EXPLORE LESSON ↗</button></div>
-</div>
-<div class="card hidden" id="lessonPanel" style="margin-top:15px">
-<div class="tool-head"><div><div class="section-kicker">LEARNING MODULE</div><h3 id="lessonTitle"></h3></div><button class="icon-btn" onclick="$('lessonPanel').classList.add('hidden')">✕</button></div>
-<div id="lessonBody"></div>
-<button class="btn primary small" onclick="completeLesson()">MARK AS COMPLETED ✓</button>
-</div>
-</section>
-
-<!-- SEARCH + BOOKMARKS -->
-<section class="section" id="discover">
-<div class="section-heading"><div><div class="section-kicker">03 — DISCOVER</div><h2>KNOWLEDGE CENTER</h2></div><p>Search the learning library, save useful lessons and explore the table tennis glossary.</p></div>
-<div class="grid two">
-<div class="card">
-<div class="section-kicker">01 / SMART SEARCH</div><h3>Find a topic</h3>
-<input id="searchInput" placeholder="Search: topspin, footwork, service..." oninput="searchLibrary()">
-<div id="searchResults" class="search-results"><p class="muted">Start typing to search the library.</p></div>
-</div>
-<div class="card">
-<div class="section-kicker">02 / BOOKMARKS</div><h3>Your saved topics</h3>
-<div id="bookmarks"><p class="muted">Save topics from search results.</p></div>
-</div>
-</div>
-<div class="card" style="margin-top:14px">
-<div class="section-kicker">03 / GLOSSARY</div><h3>Table tennis language</h3>
-<div class="grid three" id="glossary"></div>
-</div>
-</section>
-
-<!-- SPIN LAB -->
-<section class="section" id="spinlab">
-<div class="section-heading"><div><div class="section-kicker">04 — BALL SCIENCE</div><h2>THE SPIN LAB</h2></div><p>Explore spin types and learn how rotation can influence flight and bounce.</p></div>
-<div class="grid two">
-<div class="card">
-<div class="section-kicker">SPIN CONTROL PANEL</div><h3>Configure the spin</h3>
-<label>SPIN TYPE</label><select id="spinType" onchange="updateSpin()"><option value="top">Topspin</option><option value="back">Backspin</option><option value="side">Sidespin</option><option value="none">No spin</option></select>
-<div class="range-row"><div><span>INTENSITY</span><strong id="spinValue">65%</strong></div><input id="spinRange" type="range" min="0" max="100" value="65" oninput="updateSpin()"></div>
-<div class="range-row"><div><span>LEARNING NOTE</span></div><p id="spinNote">Topspin creates forward rotation and generally makes the ball dip more quickly.</p></div>
-<button class="btn primary" onclick="toggleSpin()">PLAY / PAUSE VISUAL</button>
-</div>
-<div class="spin-display"><div class="spin-ball" id="spinBall"></div><div class="spin-caption" id="spinCaption">TOPSPIN — VISUAL STUDY</div></div>
-</div>
+<section class="page" id="academy">
+  <div class="page-heading"><div><div class="eyebrow">EDUCATION & DEVELOPMENT</div><h1>Table Tennis Academy</h1><div class="subtitle">Structured learning paths for every part of your game.</div></div><span class="pill">6 LEARNING PATHS</span></div>
+  <div class="grid course-grid" id="courseGrid">
+    <div class="card course-card" data-search="grip racket ready position fundamentals"><div class="course-cover cover-a">🏓</div><span class="eyebrow">FOUNDATION</span><h3>Fundamentals & Grip</h3><p>Understand grip, stance, balance and the ready position.</p><div class="course-meta"><span>6 TOPICS</span><span>BEGINNER</span></div><button class="btn" style="width:100%;margin-top:14px" onclick="openLesson('Fundamentals & Grip')">Open Learning Path →</button></div>
+    <div class="card course-card" data-search="forehand backhand strokes technique"><div class="course-cover cover-b">↗</div><span class="eyebrow">TECHNIQUE</span><h3>Stroke Development</h3><p>Build reliable forehand and backhand techniques.</p><div class="course-meta"><span>8 TOPICS</span><span>ALL LEVELS</span></div><button class="btn" style="width:100%;margin-top:14px" onclick="openLesson('Stroke Development')">Open Learning Path →</button></div>
+    <div class="card course-card" data-search="spin topspin backspin sidespin"><div class="course-cover cover-c">⟳</div><span class="eyebrow">ADVANCED SKILLS</span><h3>Spin Mechanics</h3><p>Learn how spin changes the flight and bounce of the ball.</p><div class="course-meta"><span>7 TOPICS</span><span>INTERMEDIATE</span></div><button class="btn" style="width:100%;margin-top:14px" onclick="openLesson('Spin Mechanics')">Open Learning Path →</button></div>
+    <div class="card course-card" data-search="serve service return receive"><div class="course-cover cover-d">⌁</div><span class="eyebrow">TACTICAL SKILLS</span><h3>Serve & Receive</h3><p>Develop purposeful serves and confident returns.</p><div class="course-meta"><span>9 TOPICS</span><span>ALL LEVELS</span></div><button class="btn" style="width:100%;margin-top:14px" onclick="openLesson('Serve & Receive')">Open Learning Path →</button></div>
+    <div class="card course-card" data-search="footwork movement positioning"><div class="course-cover cover-e">↔</div><span class="eyebrow">MOVEMENT</span><h3>Footwork & Positioning</h3><p>Improve movement efficiency and court coverage.</p><div class="course-meta"><span>5 TOPICS</span><span>INTERMEDIATE</span></div><button class="btn" style="width:100%;margin-top:14px" onclick="openLesson('Footwork & Positioning')">Open Learning Path →</button></div>
+    <div class="card course-card" data-search="strategy mental game match psychology"><div class="course-cover cover-f">◉</div><span class="eyebrow">COMPETITION</span><h3>Match Intelligence</h3><p>Make smarter decisions under competitive pressure.</p><div class="course-meta"><span>6 TOPICS</span><span>ADVANCED</span></div><button class="btn" style="width:100%;margin-top:14px" onclick="openLesson('Match Intelligence')">Open Learning Path →</button></div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <div class="section-title"><h3>Lesson Workspace</h3><span>YOUR LEARNING SPACE</span></div>
+    <div id="lessonContent" class="muted" style="line-height:1.9">Select a learning path to open its lesson overview and study notes.</div>
+  </div>
 </section>
 
 <!-- TRAINING -->
-<section class="section" id="training">
-<div class="section-heading"><div><div class="section-kicker">05 — TRAIN WITH PURPOSE</div><h2>TRAINING CENTER</h2></div><p>Choose a drill, use the focus timer, generate a practice idea and record your work.</p></div>
-<div class="grid two">
-<div class="card">
-<div class="section-kicker">DRILL LIBRARY</div><h3>Choose your practice</h3>
-<div id="drillList"></div>
-<button class="btn small" onclick="randomDrill()">🎲 RANDOM DRILL</button>
-</div>
-<div class="card">
-<div class="section-kicker">FOCUS TIMER</div><h3 id="timerName">Free practice</h3>
-<div class="timer" id="timerDisplay">10:00</div>
-<div class="center">
-<div class="form-row"><input type="number" id="timerMinutes" min="1" max="120" value="10"><button class="btn" onclick="setTimer()">SET MINUTES</button></div>
-<button class="btn primary" onclick="startTimer()">START</button>
-<button class="btn" onclick="pauseTimer()">PAUSE</button>
-<button class="btn" onclick="resetTimer()">RESET</button>
-</div>
-<div class="progress"><span id="timerProgress" style="width:0%"></span></div>
-<p class="center muted" id="timerStatus">Ready when you are.</p>
-<button class="btn green" style="width:100%" onclick="saveTraining()">SAVE TRAINING SESSION</button>
-</div>
-</div>
+<section class="page" id="training">
+  <div class="page-heading"><div><div class="eyebrow">PRACTICE MANAGEMENT</div><h1>Training Center</h1><div class="subtitle">Plan sessions, track consistency and make every practice count.</div></div></div>
+  <div class="grid two-col">
+    <div class="card">
+      <div class="section-title"><h3>Practice Interval Timer</h3><span>FOCUS TOOL</span></div>
+      <div class="timer-display" id="timerDisplay">05:00</div>
+      <div class="timer-controls"><button class="btn primary" id="timerStart">Start</button><button class="btn" id="timerPause">Pause</button><button class="btn" id="timerReset">Reset</button></div>
+      <div class="timer-presets"><button class="btn" data-min="1">1 MIN</button><button class="btn" data-min="5">5 MIN</button><button class="btn" data-min="10">10 MIN</button><button class="btn" data-min="15">15 MIN</button></div>
+      <p class="muted" style="font-size:10px;text-align:center;margin-top:17px">Use the timer for focused drills, recovery periods and practice intervals.</p>
+    </div>
+    <div class="card">
+      <div class="section-title"><h3>Log a Training Session</h3><span>PERSONAL JOURNAL</span></div>
+      <div class="field"><label>SESSION TYPE</label><select id="trainType"><option>Technical Training</option><option>Footwork & Movement</option><option>Serve Practice</option><option>Match Practice</option><option>Physical Preparation</option><option>Multiball Training</option></select></div>
+      <div class="form-grid">
+        <div class="field"><label>DURATION (MINUTES)</label><input type="number" id="trainDuration" min="1" max="600" value="60"></div>
+        <div class="field"><label>INTENSITY</label><select id="trainIntensity"><option>Moderate</option><option>Light</option><option>High</option></select></div>
+      </div>
+      <div class="field"><label>SESSION NOTES</label><textarea id="trainNotes" placeholder="What did you work on today?"></textarea></div>
+      <button class="btn primary" id="saveTraining">Save Training Session</button>
+    </div>
+  </div>
+  <div class="grid two-col" style="margin-top:16px">
+    <div class="card">
+      <div class="section-title"><h3>Random Drill Generator</h3><span>QUICK PRACTICE</span></div>
+      <div style="font-size:18px;font-weight:800;margin:20px 0" id="drillName">Ready for a new challenge?</div>
+      <p class="muted" id="drillDesc" style="line-height:1.7;font-size:12px">Generate a practice drill based on common table-tennis training methods.</p>
+      <button class="btn primary" id="newDrill">Generate Drill ↻</button>
+    </div>
+    <div class="card">
+      <div class="section-title"><h3>Training Routine</h3><span>SESSION STRUCTURE</span></div>
+      <div class="activity-list">
+        <div class="activity"><div class="activity-icon">🔥</div><div class="activity-info"><b>Warm-up</b><small>10 minutes · Mobility and light movement</small></div></div>
+        <div class="activity"><div class="activity-icon">🏓</div><div class="activity-info"><b>Technical drills</b><small>20 minutes · Controlled stroke practice</small></div></div>
+        <div class="activity"><div class="activity-icon">↔</div><div class="activity-info"><b>Movement training</b><small>15 minutes · Footwork and positioning</small></div></div>
+        <div class="activity"><div class="activity-icon">⚑</div><div class="activity-info"><b>Match simulation</b><small>15 minutes · Tactical application</small></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="section-title"><h3>Training History</h3><span>YOUR RECORDS</span></div>
+    <div class="table-wrap"><table><thead><tr><th>DATE</th><th>SESSION</th><th>DURATION</th><th>INTENSITY</th><th>NOTES</th><th></th></tr></thead><tbody id="trainingRows"></tbody></table></div>
+  </div>
 </section>
 
-<!-- TRAINING JOURNAL -->
-<section class="section" id="journal">
-<div class="section-heading"><div><div class="section-kicker">06 — REFLECT & IMPROVE</div><h2>TRAINING JOURNAL</h2></div><p>Keep a record of your training and identify what you want to improve next.</p></div>
-<div class="grid two">
-<div class="card">
-<div class="section-kicker">NEW ENTRY</div><h3>Record a session</h3>
-<div class="form-stack">
-<input id="journalTitle" placeholder="Session title">
-<div class="form-row"><select id="journalType"><option>Technique</option><option>Footwork</option><option>Serve</option><option>Match</option><option>Fitness</option><option>Other</option></select><input id="journalDuration" type="number" min="0" placeholder="Minutes"></div>
-<textarea id="journalNote" placeholder="What did you practise? What went well? What can improve?"></textarea>
-<button class="btn primary" onclick="saveJournal()">SAVE JOURNAL ENTRY</button>
-</div>
-</div>
-<div class="card"><div class="section-kicker">YOUR HISTORY</div><h3>Recent journal entries</h3><div id="journalList"><p class="muted">No entries yet.</p></div></div>
-</div>
+<!-- ANALYTICS -->
+<section class="page" id="analytics">
+  <div class="page-heading"><div><div class="eyebrow">DATA & INSIGHTS</div><h1>Performance Analytics</h1><div class="subtitle">Understand your development through your own recorded data.</div></div></div>
+  <div class="grid stats">
+    <div class="card"><div class="stat-label">TOTAL PRACTICE MINUTES</div><div class="stat-value" id="analyticsMinutes">0</div></div>
+    <div class="card"><div class="stat-label">AVERAGE SESSION</div><div class="stat-value" id="averageSession">0m</div></div>
+    <div class="card"><div class="stat-label">MATCH WIN RATE</div><div class="stat-value" id="analyticsWin">—</div></div>
+    <div class="card"><div class="stat-label">SAVED LESSONS</div><div class="stat-value" id="savedCount">0</div></div>
+  </div>
+  <div class="grid two-col">
+    <div class="card"><div class="section-title"><h3>Weekly Practice Activity</h3><span>LAST 7 DAYS</span></div><div class="bar-chart" id="analyticsChart"></div></div>
+    <div class="card"><div class="section-title"><h3>Match Results</h3><span>WIN / LOSS</span></div><div id="matchSummary" style="font-size:13px;line-height:2.2">No match data yet.</div></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="section-title"><h3>Performance Reflection</h3><span>SELF-ASSESSMENT</span></div>
+    <p class="muted" style="font-size:12px;line-height:1.8">Use these questions to evaluate your progress. Your answers are saved locally on this device.</p>
+    <div class="field"><label>WHAT IS YOUR BIGGEST STRENGTH RIGHT NOW?</label><textarea id="strengthInput" placeholder="Describe your strongest part of the game..."></textarea></div>
+    <div class="field"><label>WHAT WOULD YOU LIKE TO IMPROVE NEXT?</label><textarea id="improveInput" placeholder="Identify one area to focus on..."></textarea></div>
+    <button class="btn primary" id="saveReflection">Save Reflection</button>
+  </div>
 </section>
 
-<!-- MATCH TRACKER -->
-<section class="section" id="matches">
-<div class="section-heading"><div><div class="section-kicker">07 — COMPETE SMARTER</div><h2>MATCH TRACKER</h2></div><p>Record results, follow your match history and learn from every game.</p></div>
-<div class="grid two">
-<div class="card">
-<div class="section-kicker">NEW RESULT</div><h3>Record a match</h3>
-<div class="form-stack">
-<input id="opponent" placeholder="Opponent name">
-<div class="form-row"><input type="date" id="matchDate"><select id="matchResult"><option>Win</option><option>Loss</option></select></div>
-<input id="matchScore" placeholder="Score (e.g. 3–1)">
-<textarea id="matchNote" placeholder="Match notes and lessons learned"></textarea>
-<button class="btn primary" onclick="saveMatch()">SAVE MATCH RESULT</button>
-</div>
-</div>
-<div class="card"><div class="section-kicker">MATCH HISTORY</div><h3>Recorded matches</h3><div id="matchList"><p class="muted">No matches recorded.</p></div></div>
-</div>
+<!-- MATCHES -->
+<section class="page" id="matches">
+  <div class="page-heading"><div><div class="eyebrow">COMPETITIVE PERFORMANCE</div><h1>Match Center</h1><div class="subtitle">Record results and build a personal competition history.</div></div><button class="btn primary" onclick="document.getElementById('matchOpponent').focus()">＋ Add Match</button></div>
+  <div class="grid two-col">
+    <div class="card">
+      <div class="section-title"><h3>Record a Match</h3><span>MATCH LOG</span></div>
+      <div class="field"><label>OPPONENT</label><input id="matchOpponent" placeholder="Opponent name"></div>
+      <div class="form-grid">
+        <div class="field"><label>YOUR SCORE</label><input type="number" id="myScore" min="0" value="3"></div>
+        <div class="field"><label>OPPONENT SCORE</label><input type="number" id="oppScore" min="0" value="1"></div>
+      </div>
+      <div class="field"><label>MATCH FORMAT</label><select id="matchFormat"><option>Best of 5</option><option>Best of 7</option><option>Best of 3</option><option>Friendly Match</option></select></div>
+      <div class="field"><label>NOTES</label><textarea id="matchNotes" placeholder="Key moments, tactics and lessons..."></textarea></div>
+      <button class="btn primary" id="saveMatch">Save Match Result</button>
+    </div>
+    <div class="card">
+      <div class="section-title"><h3>Match Statistics</h3><span>CAREER RECORD</span></div>
+      <div class="grid two-col">
+        <div><div class="muted" style="font-size:10px">WINS</div><div class="stat-value positive" id="winsNum">0</div></div>
+        <div><div class="muted" style="font-size:10px">LOSSES</div><div class="stat-value" id="lossNum">0</div></div>
+      </div>
+      <div class="progress-line" style="height:10px;margin-top:15px"><span id="winBar" style="width:0%"></span></div>
+      <p class="muted" style="font-size:10px">Win percentage calculated from saved match results.</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="section-title"><h3>Match History</h3><span>ALL RECORDED MATCHES</span></div>
+    <div class="table-wrap"><table><thead><tr><th>DATE</th><th>OPPONENT</th><th>SCORE</th><th>FORMAT</th><th>RESULT</th><th></th></tr></thead><tbody id="matchRows"></tbody></table></div>
+  </div>
 </section>
 
-<!-- OPPONENT SCOUT -->
-<section class="section" id="scouting">
-<div class="section-heading"><div><div class="section-kicker">08 — GAME INTELLIGENCE</div><h2>OPPONENT NOTES</h2></div><p>Keep neutral observations about playing patterns to help you prepare for future matches.</p></div>
-<div class="grid two">
-<div class="card">
-<h3>New scouting note</h3>
-<div class="form-stack">
-<input id="scoutName" placeholder="Player / opponent name">
-<select id="scoutStyle"><option>Attacking</option><option>Defensive</option><option>All-round</option><option>Spin-oriented</option><option>Not sure yet</option></select>
-<textarea id="scoutNote" placeholder="Observed playing patterns, strengths and areas to prepare for"></textarea>
-<button class="btn primary" onclick="saveScout()">SAVE OBSERVATION</button>
-</div>
-</div>
-<div class="card"><h3>Scouting notebook</h3><div id="scoutList"><p class="muted">No notes yet.</p></div></div>
-</div>
+<!-- TACTICS -->
+<section class="page" id="tactics">
+  <div class="page-heading"><div><div class="eyebrow">TACTICAL DEVELOPMENT</div><h1>Tactics Lab</h1><div class="subtitle">Explore court positioning and plan your next tactical pattern.</div></div></div>
+  <div class="grid two-col">
+    <div class="card">
+      <div class="section-title"><h3>Table Positioning Board</h3><span>INTERACTIVE COURT</span></div>
+      <p class="muted" style="font-size:11px;line-height:1.7">Select a zone to mark your intended ball placement or tactical target.</p>
+      <div class="court" id="court">
+        <button data-zone="Backhand wide">1</button><button data-zone="Backhand middle">2</button><button data-zone="Center">3</button><button data-zone="Forehand middle">4</button><button data-zone="Forehand wide">5</button><button data-zone="Wide angle">6</button>
+        <button data-zone="Short backhand">7</button><button data-zone="Short middle">8</button><button data-zone="Short center">9</button><button data-zone="Short forehand">10</button><button data-zone="Deep forehand">11</button><button data-zone="Deep backhand">12</button>
+        <button data-zone="Left transition">13</button><button data-zone="Central transition">14</button><button data-zone="Right transition">15</button><button data-zone="Body position">16</button><button data-zone="Recovery area">17</button><button data-zone="Open angle">18</button>
+      </div>
+      <p id="zoneInfo" class="muted" style="font-size:11px;margin-top:14px">No zone selected.</p>
+    </div>
+    <div class="card">
+      <div class="section-title"><h3>Tactical Notes</h3><span>STRATEGY PLANNER</span></div>
+      <div class="field"><label>TACTICAL SCENARIO</label><select id="tacticScenario"><option>Against an aggressive attacker</option><option>Against a defensive player</option><option>Against a strong server</option><option>When receiving short serves</option><option>When under pressure</option></select></div>
+      <div class="field"><label>YOUR PLAN</label><textarea id="tacticNotes" placeholder="Write your tactical plan..."></textarea></div>
+      <button class="btn primary" id="saveTactic">Save Tactical Note</button>
+      <div id="tacticList" style="margin-top:15px"></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="section-title"><h3>Serve Planner</h3><span>SERVICE STRATEGY</span></div>
+    <div class="grid three-col">
+      <div class="field"><label>SPIN TYPE</label><select id="serveSpin"><option>Backspin</option><option>Topspin</option><option>Sidespin</option><option>No-spin</option><option>Mixed spin</option></select></div>
+      <div class="field"><label>PLACEMENT</label><select id="servePlace"><option>Short to forehand</option><option>Short to backhand</option><option>Long to backhand</option><option>Long to forehand</option><option>Wide to the body</option></select></div>
+      <div class="field"><label>INTENDED OUTCOME</label><select id="serveGoal"><option>Force a weak return</option><option>Limit attacking options</option><option>Create an opening</option><option>Take initiative</option></select></div>
+    </div>
+    <button class="btn primary" id="saveServe">Save Serve Pattern</button>
+    <div id="serveList" class="muted" style="font-size:11px;margin-top:15px"></div>
+  </div>
 </section>
 
-<!-- SCORE TOOL -->
-<section class="section" id="score">
-<div class="section-heading"><div><div class="section-kicker">09 — MATCH DESK</div><h2>SCORE & RULES TOOLS</h2></div><p>Use a simple point counter and review important match rules.</p></div>
-<div class="grid two">
-<div class="card center">
-<div class="section-kicker">LIVE SCOREBOARD</div><h3>Practice score counter</h3>
-<div class="grid two">
-<div><div class="small-label">PLAYER A</div><div class="big-number" id="scoreA">0</div><button class="btn primary" onclick="addPoint('A')">+ POINT</button></div>
-<div><div class="small-label">PLAYER B</div><div class="big-number" id="scoreB">0</div><button class="btn" onclick="addPoint('B')">+ POINT</button></div>
-</div>
-<p id="scoreStatus" class="muted">First to 11, win by 2.</p>
-<button class="btn small" onclick="resetScore()">RESET SCORE</button>
-</div>
-<div class="card">
-<div class="section-kicker">RULES QUICK GUIDE</div><h3>Essential rules</h3>
-<div class="activity"><span class="activity-dot"></span><div>Games are normally played to 11 points.</div></div>
-<div class="activity"><span class="activity-dot"></span><div>A player must win by at least two points.</div></div>
-<div class="activity"><span class="activity-dot"></span><div>Service changes every two points, then every point at 10–10.</div></div>
-<div class="activity"><span class="activity-dot"></span><div>The serve must begin with the ball resting on the open palm.</div></div>
-<div class="activity"><span class="activity-dot"></span><div>In singles, the serve can go to any part of the opponent's court.</div></div>
-</div>
-</div>
-</section>
-
-<!-- QUIZ -->
-<section class="section" id="quiz">
-<div class="section-heading"><div><div class="section-kicker">10 — KNOWLEDGE TEST</div><h2>THE CHAMPION QUIZ</h2></div><p>Test your understanding of table tennis technique, rules and strategy.</p></div>
-<div class="card">
-<div class="tool-head"><div class="section-kicker" id="quizProgress">QUESTION 01 / 10</div><div class="tag" id="quizScore">SCORE: 0</div></div>
-<div class="progress"><span id="quizBar" style="width:10%"></span></div>
-<h3 id="quizQuestion" style="font-size:28px;margin-top:22px"></h3>
-<div id="quizOptions"></div>
-<p id="quizFeedback" class="muted"></p>
-<div class="tool-head"><button class="btn small" onclick="restartQuiz()">RESTART</button><button class="btn primary" id="quizNext" onclick="nextQuestion()" disabled>NEXT →</button></div>
-</div>
-</section>
-
-<!-- FLASHCARDS -->
-<section class="section" id="flashcards">
-<div class="section-heading"><div><div class="section-kicker">11 — QUICK LEARNING</div><h2>FLASHCARD STUDIO</h2></div><p>Tap a card to reveal its definition. Use the cards to revise key terms.</p></div>
-<div class="grid two">
-<div class="card">
-<div class="flashcard" onclick="flipFlashcard()"><div><div class="small-label" id="flashLabel">TAP TO REVEAL</div><strong id="flashTerm">Topspin</strong><p id="flashDefinition">A type of forward rotation.</p></div></div>
-<div class="tool-head" style="margin-top:13px"><button class="btn" onclick="previousFlash()">← PREVIOUS</button><span class="small-label" id="flashCount">1 / 8</span><button class="btn primary" onclick="nextFlash()">NEXT →</button></div>
-</div>
-<div class="card"><div class="section-kicker">REVISION TIP</div><h3>Learn a little every day.</h3><p>Try to explain each term in your own words. Understanding a concept is more useful than simply memorising its name.</p><button class="btn" onclick="flipFlashcard()">REVEAL CURRENT CARD</button></div>
-</div>
-</section>
-
-<!-- REACTION -->
-<section class="section" id="reaction">
-<div class="section-heading"><div><div class="section-kicker">12 — FOCUS & ATTENTION</div><h2>REACTION CHALLENGE</h2></div><p>A simple browser-based reaction-time game. It is a fun attention exercise, not a professional sports assessment.</p></div>
-<div class="card center">
-<div class="small-label">REACTION TEST</div>
-<h3 id="reactionTitle">Ready to test your reaction?</h3>
-<div id="reactionArea" style="min-height:160px;display:grid;place-items:center;background:var(--surface2);border-radius:12px;margin:15px 0;padding:20px">
-<button class="btn primary" onclick="startReaction()">START TEST</button>
-</div>
-<div class="big-number" id="reactionResult">—</div>
-<p class="muted" id="reactionBest">Your best result will appear here.</p>
-</div>
-</section>
-
-<!-- TACTICS BOARD -->
-<section class="section" id="tactics">
-<div class="section-heading"><div><div class="section-kicker">13 — THINK AHEAD</div><h2>TACTICAL BOARD</h2></div><p>Use the simple court grid to mark possible placements and discuss your ideas.</p></div>
-<div class="grid two">
-<div class="card center">
-<div class="section-kicker">PLACEMENT PLANNER</div><h3>Tap a zone to mark it</h3>
-<div class="board" id="tacticsBoard"></div>
-<div class="tool-head"><button class="btn small" onclick="clearBoard()">CLEAR BOARD</button><button class="btn primary small" onclick="randomBoard()">RANDOM IDEA</button></div>
-</div>
-<div class="card"><div class="section-kicker">TACTICAL NOTES</div><h3>Think about placement</h3><p>Try to explore different target areas and consider how placement can influence your opponent's next shot.</p><textarea id="tacticNote" placeholder="Write your tactical idea here..."></textarea><button class="btn primary" style="margin-top:10px" onclick="saveTactic()">SAVE TACTICAL NOTE</button><div id="tacticHistory"></div></div>
-</div>
-</section>
-
-<!-- SERVE PLANNER -->
-<section class="section" id="serve">
-<div class="section-heading"><div><div class="section-kicker">14 — SERVICE DESIGN</div><h2>SERVE PLANNER</h2></div><p>Build a practice plan for service variety and consistency.</p></div>
-<div class="grid two">
-<div class="card">
-<h3>Create a serve routine</h3>
-<div class="form-stack">
-<select id="serveType"><option>Short backspin</option><option>Long topspin</option><option>Sidespin</option><option>No-spin variation</option><option>Mixed placement</option></select>
-<select id="serveTarget"><option>Wide forehand</option><option>Middle / elbow</option><option>Wide backhand</option><option>Short middle</option></select>
-<input id="serveReps" type="number" min="1" max="500" value="20" placeholder="Repetitions">
-<button class="btn primary" onclick="addServePlan()">ADD TO PRACTICE PLAN</button>
-</div>
-</div>
-<div class="card"><h3>My service practice plan</h3><div id="servePlans"><p class="muted">No service plans yet.</p></div></div>
-</div>
+<!-- RULES -->
+<section class="page" id="rules">
+  <div class="page-heading"><div><div class="eyebrow">GAME KNOWLEDGE</div><h1>Rules & Strategy</h1><div class="subtitle">A practical reference for understanding competitive table tennis.</div></div></div>
+  <div class="grid two-col">
+    <div class="card"><div class="eyebrow">01 / SCORING</div><h3>How scoring works</h3><p class="muted" style="line-height:1.9;font-size:12px">A standard game is played to 11 points. A player must win by at least two points. At 10–10, play continues until one player leads by two points.</p></div>
+    <div class="card"><div class="eyebrow">02 / SERVICE</div><h3>Legal service</h3><p class="muted" style="line-height:1.9;font-size:12px">The ball must rest freely on the open palm of the stationary free hand. It is thrown nearly vertically upward and struck as it falls.</p></div>
+    <div class="card"><div class="eyebrow">03 / ALTERNATION</div><h3>Service rotation</h3><p class="muted" style="line-height:1.9;font-size:12px">Service changes every two points. When the score reaches 10–10, service changes after every point.</p></div>
+    <div class="card"><div class="eyebrow">04 / LET</div><h3>Let and replay</h3><p class="muted" style="line-height:1.9;font-size:12px">A rally may be replayed when a qualifying interruption occurs, such as a serve touching the net and otherwise being legal.</p></div>
+    <div class="card"><div class="eyebrow">05 / DOUBLES</div><h3>Doubles rotation</h3><p class="muted" style="line-height:1.9;font-size:12px">In doubles, players serve diagonally and teammates must alternate strokes during a rally.</p></div>
+    <div class="card"><div class="eyebrow">06 / EQUIPMENT</div><h3>Racket requirements</h3><p class="muted" style="line-height:1.9;font-size:12px">The racket must have a flat, rigid blade. Its covering must meet the applicable competition regulations.</p></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="section-title"><h3>Knowledge Check</h3><span>INTERACTIVE QUIZ</span></div>
+    <div id="quizArea">
+      <div class="muted" style="font-size:11px;margin-bottom:12px" id="quizProgress">QUESTION 1 OF 5</div>
+      <h3 id="quizQuestion">How many points are normally required to win a game?</h3>
+      <div id="quizOptions"></div>
+      <div id="quizFeedback" class="muted" style="font-size:11px;margin:12px 0"></div>
+      <button class="btn primary" id="nextQuestion">Next Question →</button>
+    </div>
+  </div>
 </section>
 
 <!-- EQUIPMENT -->
-<section class="section" id="equipment">
-<div class="section-heading"><div><div class="section-kicker">15 — YOUR SETUP</div><h2>EQUIPMENT ROOM</h2></div><p>Keep an inventory of your equipment and learn what each component does.</p></div>
-<div class="grid two">
-<div class="card">
-<div class="section-kicker">EQUIPMENT CHECKLIST</div><h3>My gear</h3>
-<div id="gearChecklist"></div>
-</div>
-<div class="card">
-<div class="section-kicker">EQUIPMENT NOTES</div><h3>My racket setup</h3>
-<div class="form-stack">
-<input id="bladeName" placeholder="Blade model">
-<input id="forehandRubber" placeholder="Forehand rubber">
-<input id="backhandRubber" placeholder="Backhand rubber">
-<textarea id="gearNote" placeholder="Notes about your setup"></textarea>
-<button class="btn primary" onclick="saveGear()">SAVE MY SETUP</button>
-</div>
-<div id="gearSummary"></div>
-</div>
-</div>
-<div class="grid three" style="margin-top:14px">
-<div class="card"><div class="card-icon">🏓</div><h3>BLADES</h3><p>The blade is the racket's base. Construction influences feel, speed and control.</p></div>
-<div class="card"><div class="card-icon">🔴</div><h3>RUBBERS</h3><p>Rubber surfaces influence grip, spin, speed and the feel of contact.</p></div>
-<div class="card"><div class="card-icon">👟</div><h3>FOOTWEAR</h3><p>Comfortable shoes with suitable indoor grip support movement and balance.</p></div>
-</div>
+<section class="page" id="equipment">
+  <div class="page-heading"><div><div class="eyebrow">GEAR & MATERIALS</div><h1>Equipment Studio</h1><div class="subtitle">Understand the components that shape your playing experience.</div></div></div>
+  <div class="grid course-grid">
+    <div class="card"><div class="course-cover cover-a">🏓</div><h3>Table Tennis Blades</h3><p class="muted">Blades differ in speed, control, stiffness, composition and feel.</p><span class="pill">BLADE</span></div>
+    <div class="card"><div class="course-cover cover-b">◉</div><h3>Inverted Rubbers</h3><p class="muted">The most common rubber type, suitable for a wide range of playing styles.</p><span class="pill">RUBBER</span></div>
+    <div class="card"><div class="course-cover cover-c">〰</div><h3>Short Pips & Long Pips</h3><p class="muted">Different surface characteristics create different ball interactions.</p><span class="pill">RUBBER</span></div>
+    <div class="card"><div class="course-cover cover-d">⚪</div><h3>Competition Balls</h3><p class="muted">Ball quality, consistency and rating are important considerations.</p><span class="pill">BALLS</span></div>
+    <div class="card"><div class="course-cover cover-e">👟</div><h3>Footwear</h3><p class="muted">Court shoes should provide suitable grip, stability and comfort.</p><span class="pill">FOOTWEAR</span></div>
+    <div class="card"><div class="course-cover cover-f">🧴</div><h3>Maintenance</h3><p class="muted">Proper cleaning and storage can help maintain equipment condition.</p><span class="pill">CARE</span></div>
+  </div>
+  <div class="grid two-col" style="margin-top:16px">
+    <div class="card">
+      <div class="section-title"><h3>My Equipment Inventory</h3><span>PERSONAL GEAR</span></div>
+      <div class="field"><label>ITEM NAME</label><input id="gearName" placeholder="e.g. Table tennis blade"></div>
+      <div class="form-grid">
+        <div class="field"><label>CATEGORY</label><select id="gearCategory"><option>Blade</option><option>Rubber</option><option>Ball</option><option>Shoes</option><option>Accessories</option></select></div>
+        <div class="field"><label>BRAND / MODEL</label><input id="gearModel" placeholder="Brand or model"></div>
+      </div>
+      <button class="btn primary" id="addGear">Add Equipment</button>
+      <div id="gearList" style="margin-top:14px"></div>
+    </div>
+    <div class="card">
+      <div class="section-title"><h3>Playing Style Selector</h3><span>PLAYER PROFILE</span></div>
+      <div class="field"><label>YOUR PREFERRED STYLE</label><select id="playingStyle"><option>All-round player</option><option>Close-to-table attacker</option><option>Two-wing looper</option><option>Defensive player</option><option>Counter-attacker</option></select></div>
+      <div class="field"><label>YOUR MAIN PRIORITY</label><select id="playingPriority"><option>Control</option><option>Speed</option><option>Spin</option><option>Consistency</option></select></div>
+      <button class="btn primary" id="saveStyle">Save Playing Profile</button>
+      <p id="styleSaved" class="muted" style="font-size:11px;margin-top:12px"></p>
+    </div>
+  </div>
 </section>
 
-<!-- COMPARISON -->
-<section class="section" id="compare">
-<div class="section-heading"><div><div class="section-kicker">16 — EQUIPMENT KNOWLEDGE</div><h2>GEAR COMPARISON</h2></div><p>Compare general equipment characteristics. This is an educational guide, not a product ranking.</p></div>
-<div class="card">
-<div class="form-row">
-<select id="compareA"><option>Offensive blade</option><option>All-round blade</option><option>Defensive blade</option><option>Inverted rubber</option><option>Short pips rubber</option><option>Long pips rubber</option></select>
-<select id="compareB"><option>All-round blade</option><option>Offensive blade</option><option>Defensive blade</option><option>Inverted rubber</option><option>Short pips rubber</option><option>Long pips rubber</option></select>
-</div>
-<button class="btn primary" onclick="compareGear()">COMPARE</button>
-<div id="compareResult" style="margin-top:15px"></div>
-</div>
-</section>
-
-<!-- TOURNAMENT -->
-<section class="section" id="tournament">
-<div class="section-heading"><div><div class="section-kicker">17 — COMPETITION DESK</div><h2>TOURNAMENT BRACKET</h2></div><p>Create a simple local four-player bracket and enter the results of each match.</p></div>
-<div class="card">
-<div class="form-row"><input id="player1" placeholder="Player 1"><input id="player2" placeholder="Player 2"></div>
-<div class="form-row"><input id="player3" placeholder="Player 3"><input id="player4" placeholder="Player 4"></div>
-<button class="btn primary" onclick="createBracket()">GENERATE BRACKET</button>
-<div id="bracket" style="margin-top:18px"></div>
-</div>
-</section>
-
-<!-- CALENDAR -->
-<section class="section" id="planner">
-<div class="section-heading"><div><div class="section-kicker">18 — ORGANISE YOUR WEEK</div><h2>TRAINING PLANNER</h2></div><p>Plan a session, choose a date and keep a simple training calendar.</p></div>
-<div class="grid two">
-<div class="card">
-<h3>Schedule a practice</h3>
-<div class="form-stack">
-<input id="planDate" type="date">
-<input id="planTitle" placeholder="Practice title">
-<select id="planCategory"><option>Technique</option><option>Footwork</option><option>Serve</option><option>Match practice</option><option>Equipment</option></select>
-<button class="btn primary" onclick="addPlan()">ADD TO CALENDAR</button>
-</div>
-</div>
-<div class="card"><h3>Upcoming plans</h3><div id="planList"><p class="muted">No planned sessions.</p></div></div>
-</div>
-</section>
-
-<!-- GOAL SETTING -->
-<section class="section" id="goals">
-<div class="section-heading"><div><div class="section-kicker">19 — PERSONAL DEVELOPMENT</div><h2>GOAL STUDIO</h2></div><p>Set specific goals and check them off as you make progress.</p></div>
-<div class="grid two">
-<div class="card">
-<h3>New goal</h3>
-<div class="form-stack"><input id="goalTitle" placeholder="Example: Improve backhand consistency"><input id="goalDeadline" type="date"><button class="btn primary" onclick="addGoal()">CREATE GOAL</button></div>
-</div>
-<div class="card"><h3>My goals</h3><div id="goalList"><p class="muted">No goals yet.</p></div></div>
-</div>
+<!-- LIBRARY -->
+<section class="page" id="library">
+  <div class="page-heading"><div><div class="eyebrow">PERSONAL KNOWLEDGE BASE</div><h1>Knowledge Library</h1><div class="subtitle">Save important ideas, review key concepts and test your memory.</div></div></div>
+  <div class="grid two-col">
+    <div class="card">
+      <div class="section-title"><h3>Table Tennis Glossary</h3><span>QUICK REFERENCE</span></div>
+      <div class="field"><input id="glossarySearch" placeholder="Search terms..."></div>
+      <div id="glossaryList" class="activity-list"></div>
+    </div>
+    <div class="card">
+      <div class="section-title"><h3>Flashcards</h3><span>MEMORY TRAINING</span></div>
+      <div class="flashcard" id="flashcard"><div><strong id="flashTerm">Topspin</strong><br><small id="flashDefinition">Tap the card to reveal the definition.</small></div></div>
+      <div style="display:flex;justify-content:center;gap:8px;margin-top:14px"><button class="btn" id="prevFlash">← Previous</button><button class="btn primary" id="flipFlash">Flip Card</button><button class="btn" id="nextFlash">Next →</button></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="section-title"><h3>My Saved Learning Paths</h3><span>BOOKMARKS</span></div>
+    <div id="savedLessons" class="muted" style="font-size:12px">No saved learning paths yet.</div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="section-title"><h3>Personal Notes</h3><span>PRIVATE ON THIS DEVICE</span></div>
+    <div class="field"><label>NOTE TITLE</label><input id="noteTitle" placeholder="Give your note a title"></div>
+    <div class="field"><label>YOUR NOTE</label><textarea id="noteBody" placeholder="Write down an idea, technique or lesson..."></textarea></div>
+    <button class="btn primary" id="saveNote">Save Note</button>
+    <div id="notesList" style="margin-top:15px"></div>
+  </div>
 </section>
 
 <!-- PROFILE -->
-<section class="section" id="profile">
-<div class="section-heading"><div><div class="section-kicker">20 — PLAYER IDENTITY</div><h2>PLAYER PROFILE</h2></div><p>Personalise your local profile and keep your preferences on this device.</p></div>
-<div class="grid two">
-<div class="card">
-<div class="card-icon">👤</div><h3 id="profileName">Guest Player</h3>
-<p id="profileDetails">Create a local player profile to personalise your experience.</p>
-<button class="btn primary" onclick="openProfile()">EDIT PROFILE</button>
-</div>
-<div class="card"><div class="section-kicker">PLAYER PREFERENCES</div><h3>Playing identity</h3>
-<div class="form-stack">
-<select id="playingHand"><option>Right-handed</option><option>Left-handed</option><option>Both / adapting</option></select>
-<select id="playingStyle"><option>Offensive</option><option>Defensive</option><option>All-round</option><option>Spin-oriented</option></select>
-<button class="btn" onclick="savePreferences()">SAVE PREFERENCES</button>
-</div>
-</div>
-</div>
+<section class="page" id="profile">
+  <div class="page-heading"><div><div class="eyebrow">PERSONAL SETTINGS</div><h1>My Profile</h1><div class="subtitle">Manage your player profile and personal training preferences.</div></div></div>
+  <div class="grid two-col">
+    <div class="card">
+      <div class="section-title"><h3>Player Information</h3><span>PROFILE</span></div>
+      <div class="field"><label>DISPLAY NAME</label><input id="profileName" placeholder="Your name"></div>
+      <div class="field"><label>PLAYER LEVEL</label><select id="profileLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>Competitive</option></select></div>
+      <div class="field"><label>YEARS PLAYING</label><input id="profileYears" type="number" min="0" max="80" value="1"></div>
+      <div class="field"><label>MAIN GOAL</label><textarea id="profileGoal" placeholder="What do you want to achieve?"></textarea></div>
+      <button class="btn primary" id="saveProfile">Save Profile</button>
+    </div>
+    <div class="card">
+      <div class="section-title"><h3>Data & Privacy</h3><span>YOUR CONTROL</span></div>
+      <p class="muted" style="font-size:12px;line-height:1.9">Your profile, practice records and saved notes are stored in this browser using local storage. They are not automatically uploaded to a server.</p>
+      <button class="btn" style="width:100%;margin:7px 0" id="profileExport">Export Backup (JSON)</button>
+      <button class="btn" style="width:100%;margin:7px 0" id="importBtn">Import Backup</button>
+      <input type="file" id="importFile" accept=".json,application/json" hidden>
+      <button class="btn danger" style="width:100%;margin:7px 0" id="clearData">Clear All Local Data</button>
+      <div class="muted" style="font-size:10px;margin-top:15px">DANESH SPIN · Personal training workspace</div>
+    </div>
+  </div>
 </section>
 
-<!-- NOTIFICATIONS -->
-<section class="section" id="notifications">
-<div class="section-heading"><div><div class="section-kicker">21 — YOUR REMINDERS</div><h2>NOTIFICATION CENTER</h2></div><p>Review your saved reminders and personal activity notices.</p></div>
-<div class="card"><div class="tool-head"><h3>Activity notifications</h3><button class="btn small" onclick="clearNotifications()">CLEAR</button></div><div id="notificationList"><p class="muted">No notifications.</p></div></div>
-</section>
-
-<!-- QUICK CALCULATOR -->
-<section class="section" id="calculator">
-<div class="section-heading"><div><div class="section-kicker">22 — MATCH MATHEMATICS</div><h2>SCORE CALCULATOR</h2></div><p>Check whether a score meets the standard game-winning condition.</p></div>
-<div class="card">
-<div class="form-row"><input id="calcA" type="number" min="0" placeholder="Player A score"><input id="calcB" type="number" min="0" placeholder="Player B score"></div>
-<button class="btn primary" onclick="calculateScore()">CHECK RESULT</button>
-<h3 id="calcResult"></h3>
+<div class="footer">DANESH SPIN · TABLE TENNIS PERFORMANCE ACADEMY · BUILT FOR BETTER PLAY</div>
 </div>
-</section>
-
-<!-- FAQ -->
-<section class="section faq" id="faq">
-<div class="section-heading"><div><div class="section-kicker">23 — HELP DESK</div><h2>FREQUENT QUESTIONS</h2></div></div>
-<details><summary>Does the website have real online player accounts?</summary><p>This version saves a local profile in your browser. Real accounts and cloud synchronisation require a backend and database.</p></details>
-<details><summary>Can I access my records on another device?</summary><p>Use the export backup feature on the data management section and import the file on another device. Automatic cloud sync is not included.</p></details>
-<details><summary>Does the reaction test measure professional reaction ability?</summary><p>No. It is a simple browser interaction. Screen refresh rate, input device and browser performance can affect the result.</p></details>
-<details><summary>Can I use this website on a phone?</summary><p>Yes. The layout is responsive and adapts to smaller screens.</p></details>
-<details><summary>Are the training drills personalised coaching?</summary><p>They are general educational practice ideas. A qualified coach can adapt exercises to your individual technique and needs.</p></details>
-</section>
-
-<!-- BACKUP -->
-<section class="section" id="backup">
-<div class="section-heading"><div><div class="section-kicker">24 — DATA MANAGEMENT</div><h2>BACKUP CENTER</h2></div><p>Keep your records safe by exporting your local data. Restore it whenever you need.</p></div>
-<div class="grid two">
-<div class="card"><div class="card-icon">⬇</div><h3>Export your data</h3><p>Download your profile, sessions, matches, notes, goals and plans as a JSON file.</p><button class="btn primary" onclick="exportBackup()">DOWNLOAD BACKUP</button></div>
-<div class="card"><div class="card-icon">⬆</div><h3>Restore your data</h3><p>Import a backup file created by DANESH SPIN.</p><label class="btn" for="importBackup" style="display:inline-block;cursor:pointer">CHOOSE BACKUP FILE</label><input id="importBackup" class="hidden" type="file" accept=".json,application/json" onchange="importBackupFile(event)"></div>
-</div>
-</section>
-
-<!-- ABOUT -->
-<section class="section" id="about">
-<div class="section-heading"><div><div class="section-kicker">25 — THE PROJECT</div><h2>ABOUT DANESH SPIN</h2></div></div>
-<div class="card"><h3>More than a table tennis website.</h3><p>DANESH SPIN is an educational performance platform created to make table tennis knowledge more accessible. It brings learning, practice organisation, personal records and interactive tools into one place.</p><div class="tag">LEARN · PRACTISE · REFLECT · IMPROVE</div></div>
-</section>
-
-<!-- QUICK LINKS -->
-<section class="section" id="quick">
-<div class="section-heading"><div><div class="section-kicker">26 — NAVIGATION</div><h2>QUICK ACCESS</h2></div><p>Jump straight to the tools you use most.</p></div>
-<div class="grid four">
-<a class="card" href="#spinlab"><div class="card-icon">🌀</div><h3>Spin Lab</h3><p>Explore spin types.</p></a>
-<a class="card" href="#training"><div class="card-icon">⏱</div><h3>Focus Timer</h3><p>Start a practice session.</p></a>
-<a class="card" href="#matches"><div class="card-icon">🏆</div><h3>Match Tracker</h3><p>Record your results.</p></a>
-<a class="card" href="#quiz"><div class="card-icon">🧠</div><h3>Knowledge Quiz</h3><p>Test your knowledge.</p></a>
-</div>
-</section>
-
-<!-- ACCESSIBILITY -->
-<section class="section" id="accessibility">
-<div class="section-heading"><div><div class="section-kicker">27 — YOUR EXPERIENCE</div><h2>DISPLAY SETTINGS</h2></div><p>Adjust the reading experience to your preference.</p></div>
-<div class="card">
-<div class="tool-head"><div><h3>Reading size</h3><p>Change the interface text size.</p></div><div style="display:flex;gap:8px"><button class="btn" onclick="changeFont(-1)">A−</button><button class="btn" onclick="changeFont(1)">A+</button><button class="btn" onclick="resetFont()">RESET</button></div></div>
-</div>
-</section>
-
-<!-- KEYBOARD SHORTCUTS -->
-<section class="section" id="shortcuts">
-<div class="section-heading"><div><div class="section-kicker">28 — POWER USER</div><h2>KEYBOARD SHORTCUTS</h2></div></div>
-<div class="grid three">
-<div class="card"><span class="tag">CTRL / ⌘ + K</span><h3>Quick Search</h3><p>Open the quick navigation menu.</p></div>
-<div class="card"><span class="tag">ESC</span><h3>Close Panels</h3><p>Close the active search or profile panel.</p></div>
-<div class="card"><span class="tag">T</span><h3>Theme</h3><p>Switch between light and dark themes when not typing.</p></div>
-</div>
-</section>
-
-<!-- COMMAND MENU -->
-<section class="section" id="command">
-<div class="section-heading"><div><div class="section-kicker">29 — NAVIGATION SYSTEM</div><h2>COMMAND CENTER</h2></div><p>Use quick navigation to reach the main tools instantly.</p></div>
-<div class="card center"><h3>Everything within reach.</h3><p>Open the command palette with Ctrl + K or the button below.</p><button class="btn primary" onclick="openCommand()">OPEN COMMAND PALETTE</button></div>
-</section>
-
-<!-- PRIVACY / LOCAL -->
-<section class="section" id="privacy">
-<div class="section-heading"><div><div class="section-kicker">30 — YOUR DATA</div><h2>PRIVACY & CONTROL</h2></div></div>
-<div class="card">
-<div class="section-kicker">LOCAL-FIRST PLATFORM</div>
-<h3>Your records stay in this browser.</h3>
-<p>Profile details, practice records and personal notes are stored in local browser storage. This static website does not send them to a remote server. If you clear browser storage, your local records may be lost. Export a backup regularly.</p>
-<button class="btn" onclick="resetAll()">RESET ALL LOCAL DATA</button>
-</div>
-</section>
 </main>
-
-<footer>
-<strong>DANESH<span style="color:var(--accent)">SPIN</span></strong>
-<p>ELITE PERFORMANCE CLUB · LEARN THE GAME. OWN YOUR PROGRESS.</p>
-<p>© 2026 DANESH SPIN. EDUCATIONAL TABLE TENNIS PLATFORM.</p>
-</footer>
-
-<div class="modal" id="profileModal">
-<div class="modal-box">
-<div class="tool-head"><div class="section-kicker">PLAYER PROFILE</div><button class="icon-btn" onclick="closeProfile()">✕</button></div>
-<h2>WELCOME TO THE CLUB.</h2>
-<p class="muted">Create a local player profile on this device.</p>
-<div class="form-stack"><input id="profileInput" placeholder="Your display name"><input id="profileEmail" type="email" placeholder="Email (optional)"><button class="btn primary" onclick="saveProfile()">SAVE PROFILE</button><button class="btn" onclick="closeProfile()">CLOSE</button></div>
-</div>
-</div>
-
-<div class="command" id="commandModal">
-<div class="command-box">
-<div class="tool-head"><div class="section-kicker">COMMAND PALETTE</div><button class="icon-btn" onclick="closeCommand()">✕</button></div>
-<input id="commandInput" placeholder="Type a section name..." oninput="filterCommands(this.value)">
-<div class="search-results" id="commandResults"></div>
-</div>
 </div>
 <div class="toast" id="toast"></div>
 
 <script>
-const $=id=>document.getElementById(id);
-const STORE="danesh_spin_elite_2026";
-const defaults={
- profile:null,preferences:{},sessions:[],matches:[],journal:[],scouts:[],
- bookmarks:[],goals:[],plans:[],serves:[],tactics:[],notifications:[],
- gear:{},goal:180,theme:"dark",font:100,completedLessons:[],reactionBest:null
+const $ = id => document.getElementById(id);
+const KEY = "daneshSpinPro_v2";
+const defaults = {
+  profile:{name:"Athlete",level:"Intermediate",years:1,goal:""},
+  trainings:[],matches:[],gear:[],notes:[],tactics:[],serves:[],
+  saved:[],reflection:{strength:"",improve:""},style:{}
 };
-let data;
-try{data={...defaults,...JSON.parse(localStorage.getItem(STORE)||"{}")}}
-catch(e){data={...defaults}}
-function persist(){localStorage.setItem(STORE,JSON.stringify(data));renderAll()}
-function safe(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function toast(msg){let t=$("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2400)}
-function notice(msg){data.notifications.unshift({text:msg,date:new Date().toLocaleString()});data.notifications=data.notifications.slice(0,30);persist()}
-function toggleTheme(){document.body.classList.toggle("light");data.theme=document.body.classList.contains("light")?"light":"dark";persist()}
-if(data.theme==="light")document.body.classList.add("light");
-function toggleMenu(){$("navlinks").classList.toggle("open")}
-document.querySelectorAll(".navlinks a").forEach(a=>a.addEventListener("click",()=>$("navlinks").classList.remove("open")));
-
-/* 01 — Dashboard statistics */
-/* 02 — Profile */
-function openProfile(){$("profileModal").classList.add("show");$("profileInput").value=data.profile?.name||"";$("profileEmail").value=data.profile?.email||""}
-function closeProfile(){$("profileModal").classList.remove("show")}
-function saveProfile(){
-let name=$("profileInput").value.trim();if(!name){toast("Enter your display name.");return}
-data.profile={name,email:$("profileEmail").value.trim()};persist();closeProfile();notice("Player profile updated.");toast("Profile saved.");
+let data = loadData();
+function loadData(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(KEY));
+    return saved?{...structuredClone(defaults),...saved}:structuredClone(defaults);
+  }catch(e){return structuredClone(defaults)}
 }
-/* 03 — Theme */
-if(data.theme==="light")document.body.classList.add("light");
-
-/* 04 — Search */
-/* 05 — Academy */
-/* 06 — Bookmarks */
-/* 07 — Glossary */
-const library=[
-["Topspin","Forward rotation that generally makes the ball dip more quickly."],
-["Backspin","Backward rotation that influences the ball's flight and bounce."],
-["Sidespin","Sideways rotation that can influence the direction of the bounce."],
-["Forehand","A stroke played on the racket-hand side of the body."],
-["Backhand","A stroke played across the front of the body."],
-["Loop","An attacking topspin stroke."],
-["Push","A controlled stroke commonly used against backspin."],
-["Block","A stroke used to redirect an incoming attacking shot."],
-["Ready position","A balanced stance that prepares a player for the next shot."],
-["Recovery","Returning toward a balanced position after playing a stroke."],
-["Rally","A sequence of shots exchanged during a point."],
-["Deuce","A score of 10–10, when a two-point winning margin is needed."]
-];
-function searchLibrary(){
-let q=$("searchInput").value.toLowerCase().trim();
-if(!q){$("searchResults").innerHTML='<p class="muted">Start typing to search the library.</p>';return}
-let found=library.filter(x=>(x[0]+" "+x[1]).toLowerCase().includes(q));
-$("searchResults").innerHTML=found.length?found.map(x=>`<div class="search-result"><strong>${safe(x[0])}</strong><p>${safe(x[1])}</p><button class="btn small" onclick="bookmark('${safe(x[0])}')">☆ SAVE TOPIC</button></div>`).join(""):"<p class='muted'>No matching topic found.</p>";
+function persist(){localStorage.setItem(KEY,JSON.stringify(data));renderAll()}
+function toast(message){
+  const t=$("toast");t.textContent=message;t.classList.add("show");
+  clearTimeout(window.toastTimeout);
+  window.toastTimeout=setTimeout(()=>t.classList.remove("show"),2600);
 }
-function bookmark(term){if(!data.bookmarks.includes(term))data.bookmarks.push(term);persist();toast("Topic bookmarked.")}
-function removeBookmark(term){data.bookmarks=data.bookmarks.filter(x=>x!==term);persist()}
-function renderGlossary(){
-$("glossary").innerHTML=library.slice(0,9).map(x=>`<div class="card"><strong>${safe(x[0])}</strong><p>${safe(x[1])}</p></div>`).join("");
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));
+  document.querySelectorAll(".nav[data-page]").forEach(n=>n.classList.toggle("active",n.dataset.page===id));
+  const nav=document.querySelector('.nav[data-page="'+id+'"]');
+  $("crumb").textContent=nav?nav.textContent.trim():id;
+  $("sidebar").classList.remove("open");
+  window.scrollTo({top:0,behavior:"smooth"});
+  if(id==="analytics")renderAnalytics();
 }
+document.querySelectorAll(".nav[data-page]").forEach(n=>n.addEventListener("click",()=>showPage(n.dataset.page)));
+$("menuBtn").onclick=()=>$("sidebar").classList.toggle("open");
+function toggleTheme(){document.body.classList.toggle("light");localStorage.setItem("dsTheme",document.body.classList.contains("light")?"light":"dark")}
+$("themeBtn").onclick=toggleTheme;$("quickTheme").onclick=toggleTheme;
+if(localStorage.getItem("dsTheme")==="light")document.body.classList.add("light");
+$("quickProfile").onclick=()=>showPage("profile");
 
-/* 08 — Spin Lab */
-const spinInfo={
-top:["Topspin","Topspin creates forward rotation. It generally makes the ball dip more quickly during flight."],
-back:["Backspin","Backspin creates backward rotation and can affect the ball's bounce."],
-side:["Sidespin","Sidespin creates sideways rotation and can influence the direction of the bounce."],
-none:["No spin","A ball with little rotation is commonly described as a no-spin ball."]
+function renderAll(){
+  const p=data.profile;
+  $("welcomeName").textContent=p.name||"Athlete";
+  $("miniName").textContent=p.name||"Athlete";
+  $("avatarMini").textContent=(p.name||"A").charAt(0).toUpperCase();
+  const mins=data.trainings.reduce((s,x)=>s+Number(x.duration||0),0);
+  $("statHours").textContent=(mins/60).toFixed(1)+"h";
+  $("statSessions").textContent=data.trainings.length;
+  $("statMatches").textContent=data.matches.length;
+  const wins=data.matches.filter(m=>m.result==="WIN").length;
+  const losses=data.matches.length-wins;
+  const rate=data.matches.length?Math.round(wins/data.matches.length*100):null;
+  $("statWin").textContent=rate===null?"—":rate+"%";
+  $("winsNum").textContent=wins;$("lossNum").textContent=losses;
+  $("winBar").style.width=(rate||0)+"%";
+  const week=weeklyCount();
+  $("weeklyLabel").textContent=week+" / 5 sessions";
+  $("weeklyPercent").textContent=Math.min(100,Math.round(week/5*100))+"%";
+  $("weeklyBar").style.width=Math.min(100,week/5*100)+"%";
+  renderActivity();renderChart("weekChart");renderTraining();renderMatches();
+  renderGear();renderNotes();renderTactics();renderServes();renderSaved();
+  renderAnalytics();
+}
+function weeklyCount(){
+  const now=new Date();const start=new Date(now);start.setDate(now.getDate()-6);start.setHours(0,0,0,0);
+  return data.trainings.filter(t=>new Date(t.date)>=start).length;
+}
+function renderActivity(){
+  const items=[
+    ...data.trainings.map(x=>({date:x.date,title:x.type,sub:x.duration+" minutes · Training",icon:"◷"})),
+    ...data.matches.map(x=>({date:x.date,title:"Match vs "+x.opponent,sub:x.score+" · "+x.result,icon:"⚑"}))
+  ].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5);
+  $("recentActivity").innerHTML=items.length?items.map(x=>`<div class="activity"><div class="activity-icon">${x.icon}</div><div class="activity-info"><b>${esc(x.title)}</b><small>${esc(x.sub)}</small></div><span class="activity-time">${new Date(x.date).toLocaleDateString()}</span></div>`).join(""):'<div class="empty">No activity recorded yet.</div>';
+}
+function renderChart(target){
+  const days=[];
+  for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push(d)}
+  const counts=days.map(d=>data.trainings.filter(t=>new Date(t.date).toDateString()===d.toDateString()).length);
+  const max=Math.max(1,...counts);
+  $(target).innerHTML=counts.map((n,i)=>`<div class="bar ${i===6?'active':''}" style="height:${Math.max(5,n/max*100)}%"><span>${n}</span><small>${days[i].toLocaleDateString("en",{weekday:"short"})}</small></div>`).join("");
+}
+function renderTraining(){
+  $("trainingRows").innerHTML=data.trainings.length?data.trainings.slice().reverse().map((t,i)=>`<tr><td>${new Date(t.date).toLocaleDateString()}</td><td>${esc(t.type)}</td><td>${t.duration} min</td><td>${esc(t.intensity)}</td><td>${esc(t.notes||"—")}</td><td><button class="btn danger" onclick="deleteItem('trainings',${data.trainings.length-1-i})">×</button></td></tr>`).join(""):'<tr><td colspan="6" class="empty">No training sessions recorded.</td></tr>';
+}
+function renderMatches(){
+  $("matchRows").innerHTML=data.matches.length?data.matches.slice().reverse().map((m,i)=>`<tr><td>${new Date(m.date).toLocaleDateString()}</td><td>${esc(m.opponent)}</td><td>${m.score}</td><td>${esc(m.format)}</td><td><span class="pill" style="${m.result==="LOSS"?"color:#f17c71;background:#3a2926":""}">${m.result}</span></td><td><button class="btn danger" onclick="deleteItem('matches',${data.matches.length-1-i})">×</button></td></tr>`).join(""):'<tr><td colspan="6" class="empty">No match records yet.</td></tr>';
+}
+function renderGear(){
+  $("gearList").innerHTML=data.gear.length?data.gear.map((g,i)=>`<div class="activity" style="padding:8px 0;border-bottom:1px solid var(--line)"><div class="activity-icon">◈</div><div class="activity-info"><b>${esc(g.name)}</b><small>${esc(g.category)} · ${esc(g.model||"No model")}</small></div><button class="btn danger" onclick="deleteItem('gear',${i})">×</button></div>`).join(""):'<p class="muted" style="font-size:11px">Your equipment inventory is empty.</p>';
+}
+function renderNotes(){
+  $("notesList").innerHTML=data.notes.length?data.notes.map((n,i)=>`<div class="card" style="padding:13px;margin-top:9px;background:var(--panel2)"><div style="display:flex;justify-content:space-between"><b>${esc(n.title)}</b><button class="btn danger" onclick="deleteItem('notes',${i})">×</button></div><p class="muted" style="font-size:11px;white-space:pre-wrap">${esc(n.body)}</p></div>`).join(""):'<p class="muted" style="font-size:11px">No personal notes yet.</p>';
+}
+function renderTactics(){
+  $("tacticList").innerHTML=data.tactics.map((t,i)=>`<div class="activity" style="padding:8px 0"><div class="activity-info"><b>${esc(t.scenario)}</b><small>${esc(t.notes)}</small></div><button class="btn danger" onclick="deleteItem('tactics',${i})">×</button></div>`).join("");
+}
+function renderServes(){
+  $("serveList").innerHTML=data.serves.map((s,i)=>`<div class="activity" style="padding:7px 0"><div class="activity-info"><b>${esc(s.spin)} · ${esc(s.place)}</b><small>${esc(s.goal)}</small></div><button class="btn danger" onclick="deleteItem('serves',${i})">×</button></div>`).join("");
+}
+function renderSaved(){
+  $("savedLessons").innerHTML=data.saved.length?data.saved.map((s,i)=>`<div class="activity" style="padding:9px 0"><div class="activity-icon">★</div><div class="activity-info"><b>${esc(s)}</b><small>Saved learning path</small></div><button class="btn danger" onclick="removeSaved(${i})">Remove</button></div>`).join(""):'No saved learning paths yet.';
+  $("savedCount").textContent=data.saved.length;
+}
+function renderAnalytics(){
+  if(!$("analyticsMinutes"))return;
+  const mins=data.trainings.reduce((s,t)=>s+Number(t.duration),0);
+  $("analyticsMinutes").textContent=mins;
+  $("averageSession").textContent=(data.trainings.length?Math.round(mins/data.trainings.length):0)+"m";
+  const wins=data.matches.filter(m=>m.result==="WIN").length;
+  $("analyticsWin").textContent=data.matches.length?Math.round(wins/data.matches.length*100)+"%":"—";
+  $("matchSummary").innerHTML=`<div>Matches played: <b>${data.matches.length}</b></div><div>Wins: <b class="positive">${wins}</b></div><div>Losses: <b style="color:var(--danger)">${data.matches.length-wins}</b></div><div>Win rate: <b>${data.matches.length?Math.round(wins/data.matches.length*100)+"%":"—"}</b></div>`;
+  renderChart("analyticsChart");
+}
+function deleteItem(type,index){if(!confirm("Delete this record?"))return;data[type].splice(index,1);persist();toast("Record deleted.");}
+function removeSaved(i){data.saved.splice(i,1);persist();toast("Bookmark removed.");}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
+$("saveTraining").onclick=()=>{
+  const duration=Number($("trainDuration").value);
+  if(!duration||duration<1||duration>600)return toast("Enter a valid duration.");
+  data.trainings.push({type:$("trainType").value,duration,intensity:$("trainIntensity").value,notes:$("trainNotes").value,date:new Date().toISOString()});
+  $("trainNotes").value="";persist();toast("Training session saved.");
 };
-function updateSpin(){
-let t=$("spinType").value,v=+$("spinRange").value;
-$("spinValue").textContent=v+"%";$("spinNote").textContent=spinInfo[t][1];
-$("spinCaption").textContent=spinInfo[t][0].toUpperCase()+" — "+v+"%";
-$("spinBall").style.animationDuration=Math.max(.3,2.5-v*.02)+"s";
-}
-function toggleSpin(){$("spinBall").classList.toggle("play")}
-updateSpin();
+$("saveMatch").onclick=()=>{
+  const opponent=$("matchOpponent").value.trim(),a=Number($("myScore").value),b=Number($("oppScore").value);
+  if(!opponent)return toast("Enter the opponent's name.");
+  if(a===b)return toast("A match cannot end in a tie.");
+  if(a<0||b<0)return toast("Enter valid scores.");
+  data.matches.push({opponent,score:a+" - "+b,format:$("matchFormat").value,result:a>b?"WIN":"LOSS",notes:$("matchNotes").value,date:new Date().toISOString()});
+  $("matchOpponent").value="";$("matchNotes").value="";persist();toast("Match result saved.");
+};
+$("saveNote").onclick=()=>{
+  const title=$("noteTitle").value.trim(),body=$("noteBody").value.trim();
+  if(!title||!body)return toast("Enter a title and note.");
+  data.notes.push({title,body,date:new Date().toISOString()});$("noteTitle").value="";$("noteBody").value="";persist();toast("Note saved.");
+};
+$("addGear").onclick=()=>{
+  const name=$("gearName").value.trim();if(!name)return toast("Enter an equipment name.");
+  data.gear.push({name,category:$("gearCategory").value,model:$("gearModel").value});
+  $("gearName").value="";$("gearModel").value="";persist();toast("Equipment added.");
+};
+$("saveTactic").onclick=()=>{
+  const notes=$("tacticNotes").value.trim();if(!notes)return toast("Write your tactical plan first.");
+  data.tactics.push({scenario:$("tacticScenario").value,notes});$("tacticNotes").value="";persist();toast("Tactical note saved.");
+};
+$("saveServe").onclick=()=>{
+  data.serves.push({spin:$("serveSpin").value,place:$("servePlace").value,goal:$("serveGoal").value});persist();toast("Serve pattern saved.");
+};
+$("saveProfile").onclick=()=>{
+  data.profile={name:$("profileName").value.trim()||"Athlete",level:$("profileLevel").value,years:$("profileYears").value,goal:$("profileGoal").value};
+  persist();toast("Profile updated.");
+};
+$("saveReflection").onclick=()=>{
+  data.reflection={strength:$("strengthInput").value,improve:$("improveInput").value};persist();toast("Reflection saved.");
+};
+$("saveStyle").onclick=()=>{
+  data.style={style:$("playingStyle").value,priority:$("playingPriority").value};
+  persist();$("styleSaved").textContent="Profile saved: "+data.style.style+" · Priority: "+data.style.priority;toast("Playing profile saved.");
+};
 
-/* 09 — Training timer */
-/* 10 — Practice routines */
-/* 11 — Random drill */
+function openLesson(name){
+  $("lessonContent").innerHTML=`<div class="eyebrow">LEARNING PATH</div><h2 style="font-size:21px">${esc(name)}</h2><p class="muted" style="font-size:12px;line-height:1.9">This learning path is designed to help you understand the principles, practice the fundamentals and apply the concepts during real rallies.</p><h3>Recommended study structure</h3><ol class="muted" style="font-size:12px;line-height:2.2"><li>Understand the key concepts and terminology.</li><li>Observe the technique and identify its main components.</li><li>Practice slowly with an emphasis on consistency.</li><li>Increase variation and difficulty progressively.</li><li>Apply the skill in match-like situations.</li></ol><button class="btn primary" id="bookmarkLesson">☆ Save This Learning Path</button>`;
+  $("bookmarkLesson").onclick=()=>{
+    if(!data.saved.includes(name)){data.saved.push(name);persist();toast("Learning path bookmarked.");}
+    else toast("This path is already saved.");
+  };
+}
 const drills=[
-["Forehand consistency","10 min","Build control and repeatable contact."],
-["Backhand control","10 min","Focus on timing and compact movement."],
-["Footwork patterns","8 min","Practise controlled side-to-side movement."],
-["Serve variation","8 min","Work on placement and consistency."],
-["Short game control","8 min","Practise touch and controlled placement."],
-["Block and recovery","10 min","Focus on balance after each block."],
-["Multiball rhythm","12 min","Practise a steady rhythm with a coach or partner."],
-["Placement practice","10 min","Explore different target areas."]
+  ["Forehand consistency","Rally diagonally using controlled forehand strokes. Focus on a consistent contact point."],
+  ["Backhand placement","Practice backhand control and aim for different areas of the table."],
+  ["Serve variation","Alternate between different legal serve lengths and spin variations."],
+  ["Footwork sequence","Practice moving between forehand and backhand positions while maintaining balance."],
+  ["Short-ball control","Practice controlled short touches and accurate placement."],
+  ["Counterattack practice","Practice responding to moderate topspin with controlled counterattacks."]
 ];
-let timerTotal=600,timerLeft=600,timerInterval=null,currentDrill="Free practice";
-function renderDrills(){
-$("drillList").innerHTML=drills.map((d,i)=>`<div class="drill-row"><div class="drill-index">${String(i+1).padStart(2,"0")}</div><div class="drill-copy"><strong>${safe(d[0])}</strong><small>${safe(d[1])} · ${safe(d[2])}</small></div><button class="btn small" onclick="selectDrill(${i})">SELECT</button></div>`).join("");
-}
-function selectDrill(i){
-currentDrill=drills[i][0];timerTotal=parseInt(drills[i][1])*60;timerLeft=timerTotal;
-$("timerName").textContent=currentDrill;updateTimerDisplay();$("timerStatus").textContent="Drill selected.";toast(currentDrill+" selected.");
-}
-function randomDrill(){selectDrill(Math.floor(Math.random()*drills.length))}
-function setTimer(){
-let n=Math.max(1,Math.min(120,Number($("timerMinutes").value)||10));
-pauseTimer();timerTotal=n*60;timerLeft=timerTotal;currentDrill="Free practice";$("timerName").textContent=currentDrill;updateTimerDisplay();
-}
-function updateTimerDisplay(){
-let m=Math.floor(timerLeft/60),s=timerLeft%60;
-$("timerDisplay").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
-$("timerProgress").style.width=((timerTotal-timerLeft)/timerTotal*100)+"%";
-}
-function startTimer(){
-if(timerInterval)return;
-if(timerLeft<=0)timerLeft=timerTotal;
-$("timerStatus").textContent="Focus session running.";
-timerInterval=setInterval(()=>{
-timerLeft--;updateTimerDisplay();
-if(timerLeft<=0){pauseTimer();$("timerStatus").textContent="Time is up. Save your session.";toast("Timer completed.");}
-},1000);
-}
-function pauseTimer(){clearInterval(timerInterval);timerInterval=null}
-function resetTimer(){pauseTimer();timerLeft=timerTotal;updateTimerDisplay();$("timerStatus").textContent="Timer reset."}
-function saveTraining(){
-pauseTimer();let mins=Math.max(1,Math.round((timerTotal-timerLeft)/60)||Math.round(timerTotal/60));
-data.sessions.unshift({name:currentDrill,minutes:mins,date:new Date().toLocaleDateString(),stamp:Date.now()});
-persist();timerLeft=timerTotal;updateTimerDisplay();$("timerStatus").textContent="Session saved.";notice("Training session recorded.");toast("Training saved.");
-}
-
-/* 12 — Training journal */
-function saveJournal(){
-let title=$("journalTitle").value.trim();if(!title){toast("Enter a title.");return}
-data.journal.unshift({title,type:$("journalType").value,minutes:+$("journalDuration").value||0,note:$("journalNote").value.trim(),date:new Date().toLocaleDateString()});
-["journalTitle","journalDuration","journalNote"].forEach(id=>$(id).value="");
-persist();notice("Journal entry saved.");toast("Journal entry saved.");
-}
-
-/* 13 — Weekly goal */
-/* 14 — Training streak */
-function saveGoal(){
-data.goal=Math.max(30,Math.min(3000,+$("goalInput").value||180));persist();toast("Weekly goal updated.");
-}
-function calculateStreak(){
-let days=[...new Set(data.sessions.map(s=>new Date(s.stamp||Date.now()).toDateString()))];
-let count=0,now=new Date();
-for(let i=0;i<days.length;i++){
-let d=new Date(now);d.setDate(now.getDate()-i);
-if(days.includes(d.toDateString()))count++;else if(i>0)break;
-}
-return count;
-}
-
-/* 15 — Match tracker */
-/* 16 — Win rate */
-function saveMatch(){
-let opponent=$("opponent").value.trim();if(!opponent){toast("Enter an opponent.");return}
-data.matches.unshift({opponent,date:$("matchDate").value||new Date().toISOString().slice(0,10),result:$("matchResult").value,score:$("matchScore").value.trim(),note:$("matchNote").value.trim()});
-["opponent","matchScore","matchNote"].forEach(id=>$(id).value="");
-persist();notice("Match result recorded.");toast("Match saved.");
-}
-
-/* 17 — Opponent scouting */
-function saveScout(){
-let name=$("scoutName").value.trim();if(!name){toast("Enter a player name.");return}
-data.scouts.unshift({name,style:$("scoutStyle").value,note:$("scoutNote").value.trim(),date:new Date().toLocaleDateString()});
-["scoutName","scoutNote"].forEach(id=>$(id).value="");persist();toast("Scouting note saved.");
-}
-
-/* 18 — Scoreboard */
-/* 19 — Rules guide */
-let scoreA=0,scoreB=0;
-function addPoint(p){
-if(scoreA>=11||scoreB>=11){toast("Reset the scoreboard for a new game.");return}
-if(p==="A")scoreA++;else scoreB++;
-$("scoreA").textContent=scoreA;$("scoreB").textContent=scoreB;
-let winner=scoreA>=11&&scoreA-scoreB>=2?"PLAYER A":scoreB>=11&&scoreB-scoreA>=2?"PLAYER B":null;
-$("scoreStatus").textContent=winner?winner+" WINS!":scoreA===10&&scoreB===10?"Deuce — service alternates every point.":"First to 11, win by 2.";
-}
-function resetScore(){scoreA=0;scoreB=0;$("scoreA").textContent=0;$("scoreB").textContent=0;$("scoreStatus").textContent="First to 11, win by 2."}
-
-/* 20 — Quiz */
-const questions=[
-["How many points are normally needed to win a game?",["7","9","11","15"],2,"A standard game is played to 11 points."],
-["What is topspin?",["Backward rotation","Forward rotation","No rotation","Sideways rotation"],1,"Topspin is forward rotation."],
-["At 10–10, how often does service change?",["Every point","Every two points","Every three points","It does not change"],0,"At deuce, service alternates every point."],
-["What is the purpose of a ready position?",["Stand still","Prepare for the next shot","Serve faster","End a rally"],1,"A balanced ready position helps you respond."],
-["Which stroke is commonly associated with backspin?",["Push","Smash","Counterloop","Flat hit"],0,"A push is commonly used to return backspin."],
-["What does footwork help a player do?",["Change rules","Reach the ball in balance","Change the net","Stop a rally"],1,"Footwork helps you reach the ball in balance."],
-["What does a block usually do?",["Redirect an attack","Start every point","Change the ball","Stop a match"],0,"A block redirects an incoming attacking shot."],
-["What does ITTF stand for?",["International Table Tennis Federation","International Tennis Training Forum","Indoor Table Tennis Foundation","International Team Tournament Federation"],0,"ITTF is the International Table Tennis Federation."],
-["How many points are needed to win by two?",["Always exactly 11","At least 11 and a two-point lead","Exactly 15","Exactly 21"],1,"A player needs at least 11 and a two-point margin."],
-["What is recovery in table tennis?",["Changing equipment","Returning to a balanced position","Taking a break","Starting a serve"],1,"Recovery prepares you for the next shot."]
-];
-let qi=0,qs=0,qAnswered=false;
-function renderQuiz(){
-let q=questions[qi];qAnswered=false;
-$("quizProgress").textContent=`QUESTION ${qi+1} / ${questions.length}`;
-$("quizScore").textContent="SCORE: "+qs;
-$("quizBar").style.width=((qi+1)/questions.length*100)+"%";
-$("quizQuestion").textContent=q[0];$("quizFeedback").textContent="";
-$("quizNext").disabled=true;$("quizNext").textContent=qi===questions.length-1?"RESULT":"NEXT →";
-$("quizOptions").innerHTML=q[1].map((v,i)=>`<button class="quiz-option" onclick="answerQuiz(${i},this)">${String.fromCharCode(65+i)}. ${safe(v)}</button>`).join("");
-}
-function answerQuiz(i,btn){
-if(qAnswered)return;qAnswered=true;
-let q=questions[qi];
-[...$("quizOptions").children].forEach((b,j)=>{b.disabled=true;if(j===q[2])b.classList.add("correct")});
-if(i===q[2])qs++;else btn.classList.add("wrong");
-$("quizScore").textContent="SCORE: "+qs;
-$("quizFeedback").textContent=(i===q[2]?"Correct! ":"Not quite. ")+q[3];
-$("quizNext").disabled=false;
-}
-function nextQuestion(){
-if(!qAnswered)return;
-if(qi<questions.length-1){qi++;renderQuiz();return}
-$("quizQuestion").textContent="QUIZ COMPLETED";
-$("quizOptions").innerHTML="";$("quizFeedback").textContent=`Your result: ${qs} / ${questions.length}.`;
-$("quizNext").textContent="TRY AGAIN";$("quizNext").disabled=false;
-$("quizNext").onclick=()=>{restartQuiz();$("quizNext").onclick=nextQuestion};
-}
-function restartQuiz(){qi=0;qs=0;renderQuiz()}
-
-/* 21 — Flashcards */
-const flashcards=[
-["Topspin","Forward rotation that generally makes the ball dip more quickly."],
-["Backspin","Backward rotation that influences flight and bounce."],
-["Sidespin","Sideways rotation that can influence bounce direction."],
-["Loop","An attacking topspin stroke."],
-["Push","A controlled stroke often used against backspin."],
-["Block","A stroke that redirects an incoming attack."],
-["Rally","A sequence of shots exchanged during a point."],
-["Deuce","A score of 10–10."]
-];
-let fi=0,flipped=false;
-function renderFlash(){ $("flashTerm").textContent=flashcards[fi][0];$("flashDefinition").textContent=flipped?flashcards[fi][1]:"Tap the card to reveal the definition.";$("flashLabel").textContent=flipped?"DEFINITION":"TAP TO REVEAL";$("flashCount").textContent=(fi+1)+" / "+flashcards.length}
-function flipFlashcard(){flipped=!flipped;renderFlash()}
-function nextFlash(){fi=(fi+1)%flashcards.length;flipped=false;renderFlash()}
-function previousFlash(){fi=(fi-1+flashcards.length)%flashcards.length;flipped=false;renderFlash()}
-
-/* 22 — Reaction test */
-let reactionTimeout=null,reactionStart=0,reactionState="idle";
-function startReaction(){
-clearTimeout(reactionTimeout);reactionState="waiting";
-$("reactionTitle").textContent="Wait for the signal...";
-$("reactionArea").innerHTML='<div style="font:800 24px Barlow Condensed;color:var(--gold)">WAIT...</div>';
-reactionTimeout=setTimeout(()=>{
-if(reactionState!=="waiting")return;
-reactionState="ready";reactionStart=performance.now();
-$("reactionArea").innerHTML='<button class="btn green" style="font-size:20px;padding:25px 45px" onclick="reactionClick()">CLICK NOW!</button>';
-},1200+Math.random()*2800);
-}
-function reactionClick(){
-if(reactionState==="waiting"){clearTimeout(reactionTimeout);reactionState="idle";$("reactionArea").innerHTML='<button class="btn primary" onclick="startReaction()">TRY AGAIN</button>';$("reactionTitle").textContent="Too early! Wait for the signal.";return}
-if(reactionState!=="ready")return;
-let ms=Math.round(performance.now()-reactionStart);reactionState="done";
-$("reactionResult").textContent=ms+" ms";
-if(data.reactionBest===null||ms<data.reactionBest)data.reactionBest=ms;
-$("reactionBest").textContent="Best result on this device: "+data.reactionBest+" ms";
-$("reactionTitle").textContent="Test completed!";
-$("reactionArea").innerHTML='<button class="btn primary" onclick="startReaction()">TRY AGAIN</button>';
-persist();
-}
-
-/* 23 — Tactics board */
-function buildBoard(){
-$("tacticsBoard").innerHTML=Array.from({length:24},(_,i)=>`<button class="board-cell" data-i="${i}" onclick="this.classList.toggle('marked');this.textContent=this.classList.contains('marked')?'●':''"></button>`).join("");
-}
-function clearBoard(){$("tacticsBoard").querySelectorAll("button").forEach(b=>{b.classList.remove("marked");b.textContent=""})}
-function randomBoard(){clearBoard();let cells=[...$("tacticsBoard").children];for(let i=0;i<4;i++){let c=cells[Math.floor(Math.random()*cells.length)];c.classList.add("marked");c.textContent="●"}}
-function saveTactic(){
-let note=$("tacticNote").value.trim();if(!note){toast("Write a tactical idea.");return}
-data.tactics.unshift({note,date:new Date().toLocaleDateString()});$("tacticNote").value="";persist();toast("Tactical note saved.");
-}
-
-/* 24 — Serve planner */
-function addServePlan(){
-let plan={type:$("serveType").value,target:$("serveTarget").value,reps:+$("serveReps").value||20};
-data.serves.unshift(plan);persist();toast("Serve plan added.");
-}
-
-/* 25 — Equipment checklist */
-const gearItems=["Racket","Racket case","Table tennis balls","Indoor shoes","Sports clothing","Towel","Water bottle"];
-function renderGearChecklist(){
-$("gearChecklist").innerHTML=gearItems.map(g=>`<div class="equipment-item"><span>${g}</span><input type="checkbox" ${data.gear[g]?"checked":""} onchange="toggleGear('${g}',this.checked)"></div>`).join("");
-}
-function toggleGear(g,v){data.gear[g]=v;persist()}
-function saveGear(){
-data.gear.setup={blade:$("bladeName").value,fh:$("forehandRubber").value,bh:$("backhandRubber").value,note:$("gearNote").value};
-persist();toast("Equipment setup saved.");
-}
-function renderGearSummary(){
-let g=data.gear.setup||{};
-$("gearSummary").innerHTML=g.blade||g.fh||g.bh?`<p><strong>Blade:</strong> ${safe(g.blade||"Not entered")}<br><strong>Forehand:</strong> ${safe(g.fh||"Not entered")}<br><strong>Backhand:</strong> ${safe(g.bh||"Not entered")}</p>`:"";
-if(g.blade)$("bladeName").value=g.blade;
-if(g.fh)$("forehandRubber").value=g.fh;
-if(g.bh)$("backhandRubber").value=g.bh;
-if(g.note)$("gearNote").value=g.note;
-}
-
-/* 26 — Gear comparison */
-const gearDescriptions={
-"Offensive blade":"Usually designed for attacking play and faster response. Feel and control vary by construction.",
-"All-round blade":"A balanced category intended to combine control and attacking possibilities.",
-"Defensive blade":"Often designed to support controlled defensive play and variation.",
-"Inverted rubber":"A smooth rubber surface commonly used for spin and varied strokes.",
-"Short pips rubber":"A pimpled surface that can support direct, compact hitting.",
-"Long pips rubber":"A pimpled surface often used for variation and disruptive returns."
+$("newDrill").onclick=()=>{const d=drills[Math.floor(Math.random()*drills.length)];$("drillName").textContent=d[0];$("drillDesc").textContent=d[1]};
+let timerSeconds=300,timerInterval=null;
+function updateTimer(){$("timerDisplay").textContent=String(Math.floor(timerSeconds/60)).padStart(2,"0")+":"+String(timerSeconds%60).padStart(2,"0")}
+$("timerStart").onclick=()=>{
+  if(timerInterval)return;
+  if(timerSeconds<=0)timerSeconds=300;
+  timerInterval=setInterval(()=>{timerSeconds--;updateTimer();if(timerSeconds<=0){clearInterval(timerInterval);timerInterval=null;toast("Practice interval completed.");}},1000);
 };
-function compareGear(){
-let a=$("compareA").value,b=$("compareB").value;
-$("compareResult").innerHTML=`<div class="grid two"><div class="card"><span class="tag">OPTION A</span><h3>${safe(a)}</h3><p>${safe(gearDescriptions[a])}</p></div><div class="card"><span class="tag">OPTION B</span><h3>${safe(b)}</h3><p>${safe(gearDescriptions[b])}</p></div></div><p class="muted">Actual performance depends on the specific model, player technique and personal preference.</p>`;
-}
+$("timerPause").onclick=()=>{clearInterval(timerInterval);timerInterval=null};
+$("timerReset").onclick=()=>{clearInterval(timerInterval);timerInterval=null;timerSeconds=300;updateTimer()};
+document.querySelectorAll("[data-min]").forEach(b=>b.onclick=()=>{clearInterval(timerInterval);timerInterval=null;timerSeconds=Number(b.dataset.min)*60;updateTimer()});
 
-/* 27 — Tournament bracket */
-function createBracket(){
-let names=[1,2,3,4].map(i=>$("player"+i).value.trim()||"Player "+i);
-$("bracket").innerHTML=`<div class="bracket"><div class="bracket-match"><strong>SEMIFINAL 1</strong><div>${safe(names[0])}</div><div>${safe(names[1])}</div><input placeholder="Winner name" id="winner1"></div><div class="bracket-match"><strong>SEMIFINAL 2</strong><div>${safe(names[2])}</div><div>${safe(names[3])}</div><input placeholder="Winner name" id="winner2"></div></div><div class="bracket-match" style="margin-top:10px"><strong>FINAL</strong><div id="finalPlayers">Enter the semifinal winners above.</div><input id="champion" placeholder="Champion"><button class="btn primary small" style="margin-top:8px" onclick="saveChampion()">SAVE CHAMPION</button></div>`;
-}
-function saveChampion(){let c=$("champion").value.trim();if(!c){toast("Enter the champion.");return}notice("Tournament champion: "+c);toast(c+" saved as champion.");}
-
-/* 28 — Planner */
-function addPlan(){
-let date=$("planDate").value,title=$("planTitle").value.trim();if(!date||!title){toast("Add a date and title.");return}
-data.plans.push({date,title,category:$("planCategory").value});data.plans.sort((a,b)=>a.date.localeCompare(b.date));
-$("planTitle").value="";persist();toast("Practice scheduled.");
-}
-
-/* 29 — Goals */
-function addGoal(){
-let title=$("goalTitle").value.trim();if(!title){toast("Enter a goal.");return}
-data.goals.unshift({title,deadline:$("goalDeadline").value,done:false});$("goalTitle").value="";persist();toast("Goal created.");
-}
-function toggleGoal(i){data.goals[i].done=!data.goals[i].done;persist()}
-function deleteGoal(i){data.goals.splice(i,1);persist()}
-
-/* 30 — Notifications and backup */
-/* Notification list */
-function clearNotifications(){data.notifications=[];persist();toast("Notifications cleared.")}
-
-/* Score calculator */
-function calculateScore(){
-let a=+$("calcA").value,b=+$("calcB").value;
-if(a<0||b<0||!Number.isFinite(a)||!Number.isFinite(b)){$("calcResult").textContent="Enter valid scores.";return}
-let msg="The game is still in progress.";
-if(a>=11&&a-b>=2)msg="Player A wins.";
-else if(b>=11&&b-a>=2)msg="Player B wins.";
-else if(a===b&&a>=10)msg="Deuce.";
-$("calcResult").textContent=msg;
-}
-
-/* Font scaling */
-function changeFont(n){data.font=Math.max(85,Math.min(120,(data.font||100)+n*5));document.documentElement.style.fontSize=data.font+"%";persist()}
-function resetFont(){data.font=100;document.documentElement.style.fontSize="100%";persist()}
-
-/* Quick command palette */
-const commands=[["Dashboard","#dashboard"],["Academy","#academy"],["Knowledge Center","#discover"],["Spin Lab","#spinlab"],["Training Center","#training"],["Journal","#journal"],["Match Tracker","#matches"],["Opponent Notes","#scouting"],["Scoreboard","#score"],["Quiz","#quiz"],["Flashcards","#flashcards"],["Reaction Challenge","#reaction"],["Tactics Board","#tactics"],["Serve Planner","#serve"],["Equipment Room","#equipment"],["Gear Comparison","#compare"],["Tournament Bracket","#tournament"],["Training Planner","#planner"],["Goals","#goals"],["Profile","#profile"],["Notifications","#notifications"],["Score Calculator","#calculator"],["Backup Center","#backup"]];
-function openCommand(){$("commandModal").classList.add("show");$("commandInput").value="";filterCommands("");$("commandInput").focus()}
-function closeCommand(){$("commandModal").classList.remove("show")}
-function filterCommands(q){
-let list=commands.filter(c=>c[0].toLowerCase().includes(q.toLowerCase()));
-$("commandResults").innerHTML=list.map(c=>`<a class="search-result" href="${c[1]}" onclick="closeCommand()">${safe(c[0])} ↗</a>`).join("")||"<p class='muted'>No matching section.</p>";
-}
-document.addEventListener("keydown",e=>{
-if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();openCommand()}
-if(e.key==="Escape"){closeCommand();closeProfile()}
-if(e.key.toLowerCase()==="t"&&!["INPUT","TEXTAREA","SELECT"].includes(document.activeElement.tagName))toggleTheme();
+document.querySelectorAll("#court button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("#court button").forEach(x=>x.classList.remove("selected"));
+  b.classList.add("selected");$("zoneInfo").textContent="Selected tactical zone: "+b.dataset.zone;
 });
 
-/* Backup export / import */
-function exportBackup(){
-let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
-let url=URL.createObjectURL(blob),a=document.createElement("a");
-a.href=url;a.download="danesh-spin-backup.json";a.click();URL.revokeObjectURL(url);toast("Backup downloaded.");
+const questions=[
+  {q:"How many points are normally required to win a game?",o:["7 points","11 points","15 points","21 points"],a:1,e:"A standard game is played to 11 points, with a two-point winning margin."},
+  {q:"How often does service normally change?",o:["Every point","Every two points","Every five points","Every three points"],a:1,e:"Service changes every two points, except at 10–10."},
+  {q:"What is topspin?",o:["Forward rotation","Backward rotation","No rotation","Sideways movement only"],a:0,e:"Topspin is forward rotation that influences the ball's flight and bounce."},
+  {q:"What is the purpose of a ready position?",o:["To rest","To prepare for the next shot","To serve","To finish a rally"],a:1,e:"A balanced ready position helps a player respond efficiently."},
+  {q:"What happens at 10–10?",o:["Game ends","Service changes every point","Only one more point is played","Players change rackets"],a:1,e:"At deuce, service changes after every point and a two-point lead is needed."}
+];
+let qIndex=0,qAnswered=false,qScore=0;
+function renderQuiz(){
+  const q=questions[qIndex];qAnswered=false;
+  $("quizProgress").textContent=`QUESTION ${qIndex+1} OF ${questions.length} · SCORE ${qScore}`;
+  $("quizQuestion").textContent=q.q;$("quizFeedback").textContent="";
+  $("nextQuestion").textContent=qIndex===questions.length-1?"Restart Quiz ↻":"Next Question →";
+  $("quizOptions").innerHTML=q.o.map((o,i)=>`<button class="quiz-option" data-answer="${i}">${String.fromCharCode(65+i)}. ${o}</button>`).join("");
+  document.querySelectorAll(".quiz-option").forEach(b=>b.onclick=()=>{
+    if(qAnswered)return;qAnswered=true;
+    const chosen=Number(b.dataset.answer);
+    if(chosen===q.a){qScore++;b.classList.add("correct");$("quizFeedback").textContent="Correct. "+q.e;}
+    else{b.classList.add("wrong");document.querySelectorAll(".quiz-option")[q.a].classList.add("correct");$("quizFeedback").textContent="Not quite. "+q.e;}
+  });
 }
-function importBackupFile(e){
-let file=e.target.files[0];if(!file)return;
-let r=new FileReader();
-r.onload=()=>{
-try{
-let parsed=JSON.parse(r.result);
-if(!parsed||typeof parsed!=="object")throw Error("Invalid");
-data={...defaults,...parsed};persist();toast("Backup restored.");
-}catch(err){toast("Invalid backup file.")}
-e.target.value="";
-};r.readAsText(file);
-}
-function resetAll(){
-if(!confirm("Delete all locally saved DANESH SPIN data? Export a backup first if you want to keep it."))return;
-data={...defaults};persist();toast("Local data reset.");
-}
+$("nextQuestion").onclick=()=>{
+  if(!qAnswered)return toast("Choose an answer first.");
+  if(qIndex===questions.length-1){toast("Quiz completed. Score: "+qScore+"/"+questions.length);qIndex=0;qScore=0;}
+  else qIndex++;
+  renderQuiz();
+};renderQuiz();
 
-/* Academy lessons */
-const lessons={
-basics:["THE FUNDAMENTALS",`<h3>The playing area</h3><p>A standard table is 2.74 metres long, 1.525 metres wide and 76 centimetres high. A net divides it into two courts.</p><h3>Scoring</h3><p>A standard game is played to 11 points, with a two-point winning margin.</p><h3>The rally</h3><p>Players alternate striking the ball after it bounces on their side.</p>`],
-strokes:["STROKES & CONTROL",`<h3>Forehand</h3><p>A stroke played on the racket-hand side. Focus on timing, balance and a controlled swing.</p><h3>Backhand</h3><p>A stroke played across the front of the body. A compact movement can help with consistency.</p><h3>Block, push and loop</h3><p>A block redirects an incoming attack. A push is often used against backspin. A loop is an attacking topspin stroke.</p>`],
-footwork:["FOOTWORK",`<h3>Ready position</h3><p>Stay balanced and ready to move in either direction.</p><h3>Movement</h3><p>Use controlled steps and small adjustments to reach the ball while maintaining balance.</p><h3>Recovery</h3><p>After playing a stroke, return toward a balanced position to prepare for the next shot.</p>`],
-spin:["SPIN & SERVE",`<h3>Topspin</h3><p>Forward rotation created by brushing the ball from low to high.</p><h3>Backspin</h3><p>Backward rotation created by brushing underneath the ball.</p><h3>Sidespin</h3><p>Sideways rotation created by brushing across the ball.</p><h3>Service</h3><p>The ball must rest freely on the open palm before being tossed upward.</p>`],
-tactics:["TACTICAL PLAY",`<h3>Placement</h3><p>Changing direction and depth can make it harder for an opponent to settle into a rhythm.</p><h3>Variation</h3><p>Mixing speed, spin and placement can help prevent predictable rallies.</p><h3>Point construction</h3><p>Think about the next shot and choose a response that fits the situation.</p>`],
-match:["MATCH PREPARATION",`<h3>Before a match</h3><p>Check your equipment and use a comfortable warm-up routine.</p><h3>During a match</h3><p>Focus on one point at a time and keep your between-point routine consistent.</p><h3>After a match</h3><p>Record what worked and identify one specific practice goal.</p>`]
+const terms=[
+ ["Topspin","Forward rotation that creates a dipping trajectory and a forward bounce."],
+ ["Backspin","Backward rotation that can make the ball slow down or stay low after bouncing."],
+ ["Sidespin","Rotation around a vertical axis that makes the ball curve sideways."],
+ ["Loop","An attacking topspin stroke with a brushing contact."],
+ ["Block","A controlled response to an opponent's attacking shot."],
+ ["Push","A controlled stroke commonly used to return backspin."],
+ ["Chop","A defensive backspin stroke, often played away from the table."],
+ ["Rally","A sequence of play between the start of a point and its conclusion."],
+ ["Let","A rally that is stopped and replayed under specific rules."],
+ ["Deuce","A tied score of 10–10 in a game."]
+];
+function renderGlossary(filter=""){
+  $("glossaryList").innerHTML=terms.filter(t=>(t[0]+" "+t[1]).toLowerCase().includes(filter.toLowerCase())).map(t=>`<div class="activity" style="padding:9px 0;border-bottom:1px solid var(--line)"><div class="activity-icon">◈</div><div class="activity-info"><b>${esc(t[0])}</b><small>${esc(t[1])}</small></div></div>`).join("")||'<div class="empty">No matching terms.</div>';
+}
+$("glossarySearch").oninput=e=>renderGlossary(e.target.value);
+renderGlossary();
+
+let flashIndex=0,flashBack=false;
+function renderFlash(){
+  $("flashTerm").textContent=terms[flashIndex][0];
+  $("flashDefinition").textContent=flashBack?terms[flashIndex][1]:"Tap Flip Card to reveal the definition.";
+}
+function flip(){flashBack=!flashBack;renderFlash()}
+$("flashcard").onclick=flip;$("flipFlash").onclick=flip;
+$("nextFlash").onclick=()=>{flashIndex=(flashIndex+1)%terms.length;flashBack=false;renderFlash()};
+$("prevFlash").onclick=()=>{flashIndex=(flashIndex-1+terms.length)%terms.length;flashBack=false;renderFlash()};
+
+$("globalSearch").oninput=e=>{
+  const value=e.target.value.toLowerCase().trim();
+  if(!value)return;
+  const pageMap={
+    "academy":["academy"],"lesson":["academy"],"training":["training"],"timer":["training"],
+    "analytics":["analytics"],"performance":["analytics"],"match":["matches"],"score":["matches"],
+    "tactic":["tactics"],"serve":["tactics"],"rule":["rules"],"equipment":["equipment"],
+    "gear":["equipment"],"library":["library"],"glossary":["library"],"profile":["profile"]
+  };
+  const found=Object.keys(pageMap).find(k=>k.includes(value)||value.includes(k));
+  if(found)showPage(pageMap[found][0]);
+  else{
+    const cards=[...document.querySelectorAll(".course-card")];
+    if($("academy").classList.contains("active"))cards.forEach(c=>c.style.display=c.innerText.toLowerCase().includes(value)?"":"none");
+  }
 };
-let activeLesson="";
-function lesson(k){
-activeLesson=k;$("lessonTitle").textContent=lessons[k][0];$("lessonBody").innerHTML=lessons[k][1];
-$("lessonPanel").classList.remove("hidden");$("lessonPanel").scrollIntoView({behavior:"smooth",block:"center"});
-}
-function completeLesson(){
-if(!activeLesson)return;
-if(!data.completedLessons.includes(activeLesson))data.completedLessons.push(activeLesson);
-persist();toast("Lesson marked complete.");
-}
 
-/* Render saved information */
-function renderAll(){
-$("statSessions").textContent=data.sessions.length;
-let mins=data.sessions.reduce((a,s)=>a+(s.minutes||0),0);
-$("statMinutes").textContent=mins;
-$("statMatches").textContent=data.matches.length;
-let wins=data.matches.filter(m=>m.result==="Win").length;
-$("statWin").textContent=data.matches.length?Math.round(wins/data.matches.length*100)+"%":"—";
-$("goalInput").value=data.goal;$("goalTarget").textContent=data.goal;$("goalDone").textContent=mins;
-$("goalBar").style.width=Math.min(100,mins/data.goal*100)+"%";
-$("streak").textContent=calculateStreak()+" DAYS";
-$("activityList").innerHTML=data.sessions.length?data.sessions.slice(0,5).map(s=>`<div class="activity"><span class="activity-dot"></span><div><strong>${safe(s.name)}</strong><small>${s.minutes} min · ${safe(s.date)}</small></div></div>`).join(""):'<p class="muted">No recent activity yet.</p>';
-$("journalList").innerHTML=data.journal.length?data.journal.slice(0,6).map(j=>`<div class="history-row"><div><strong>${safe(j.title)}</strong><br><span class="muted">${safe(j.type)} · ${j.minutes} min</span><p>${safe(j.note)}</p></div><small>${safe(j.date)}</small></div>`).join(""):'<p class="muted">No entries yet.</p>';
-$("matchList").innerHTML=data.matches.length?data.matches.slice(0,8).map(m=>`<div class="history-row"><div><strong>${safe(m.opponent)}</strong><br><span class="muted">${safe(m.date)} · ${safe(m.score||"No score")}</span></div><strong class="${m.result==="Win"?"win":"loss"}">${safe(m.result).toUpperCase()}</strong></div>`).join(""):'<p class="muted">No matches recorded.</p>';
-$("scoutList").innerHTML=data.scouts.length?data.scouts.map(s=>`<div class="history-row"><div><strong>${safe(s.name)}</strong><br><span class="muted">${safe(s.style)} · ${safe(s.date)}</span><p>${safe(s.note)}</p></div></div>`).join(""):'<p class="muted">No notes yet.</p>';
-$("bookmarks").innerHTML=data.bookmarks.length?data.bookmarks.map(b=>`<div class="history-row"><strong>${safe(b)}</strong><button class="btn small" onclick="removeBookmark('${safe(b)}')">REMOVE</button></div>`).join(""):'<p class="muted">No saved topics yet.</p>';
-$("servePlans").innerHTML=data.serves.length?data.serves.map(s=>`<div class="history-row"><div><strong>${safe(s.type)}</strong><br><span class="muted">${safe(s.target)}</span></div><span>${s.reps} reps</span></div>`).join(""):'<p class="muted">No plans yet.</p>';
-$("planList").innerHTML=data.plans.length?data.plans.map(p=>`<div class="history-row"><div><strong>${safe(p.title)}</strong><br><span class="muted">${safe(p.category)}</span></div><strong>${safe(p.date)}</strong></div>`).join(""):'<p class="muted">No planned sessions.</p>';
-$("goalList").innerHTML=data.goals.length?data.goals.map((g,i)=>`<div class="history-row"><label><input type="checkbox" ${g.done?"checked":""} onchange="toggleGoal(${i})" style="width:auto"> <strong style="${g.done?"text-decoration:line-through":""}">${safe(g.title)}</strong><br><small>${safe(g.deadline||"No deadline")}</small></label><button class="btn small" onclick="deleteGoal(${i})">×</button></div>`).join(""):'<p class="muted">No goals yet.</p>';
-$("notificationList").innerHTML=data.notifications.length?data.notifications.map(n=>`<div class="history-row"><span>${safe(n.text)}</span><small>${safe(n.date)}</small></div>`).join(""):'<p class="muted">No notifications.</p>';
-$("profileName").textContent=data.profile?.name||"Guest Player";
-$("profileDetails").textContent=data.profile?("Local player profile · "+(data.profile.email||"No email added")):"Create a local profile to personalise your experience.";
-if(data.preferences.hand)$("playingHand").value=data.preferences.hand;
-if(data.preferences.style)$("playingStyle").value=data.preferences.style;
-renderGearChecklist();renderGearSummary();
+function exportData(){
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="danesh-spin-backup.json";a.click();URL.revokeObjectURL(url);
+  toast("Backup file prepared.");
 }
-function savePreferences(){data.preferences={hand:$("playingHand").value,style:$("playingStyle").value};persist();toast("Preferences saved.");}
-function saveTactic(){/* handled above */}
-renderDrills();renderGlossary();buildBoard();renderFlash();renderQuiz();renderAll();
-$("matchDate").value=new Date().toISOString().slice(0,10);
+$("exportBtn").onclick=exportData;$("profileExport").onclick=exportData;
+$("importBtn").onclick=()=>$("importFile").click();
+$("importFile").onchange=async e=>{
+  const file=e.target.files[0];if(!file)return;
+  try{
+    const imported=JSON.parse(await file.text());
+    if(!imported.profile||!Array.isArray(imported.trainings)||!Array.isArray(imported.matches))throw new Error("Invalid backup");
+    data={...structuredClone(defaults),...imported};persist();toast("Backup imported successfully.");
+  }catch(err){toast("Could not read this backup file.");}
+  e.target.value="";
+};
+$("clearData").onclick=()=>{
+  if(!confirm("This will permanently clear all DANESH SPIN data stored in this browser. Continue?"))return;
+  data=structuredClone(defaults);persist();toast("Local data cleared.");
+};
+function fillProfile(){
+  $("profileName").value=data.profile.name||"";
+  $("profileLevel").value=data.profile.level||"Intermediate";
+  $("profileYears").value=data.profile.years||0;
+  $("profileGoal").value=data.profile.goal||"";
+  $("strengthInput").value=data.reflection.strength||"";
+  $("improveInput").value=data.reflection.improve||"";
+  if(data.style.style){$("playingStyle").value=data.style.style;$("playingPriority").value=data.style.priority}
+  $("styleSaved").textContent=data.style.style?"Saved: "+data.style.style:"";
+}
+renderAll();fillProfile();renderFlash();
 </script>
 </body>
 </html>
